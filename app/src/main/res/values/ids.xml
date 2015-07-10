@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="key_data" type="id"/>
+    <item name="key_slug" type="id"/>
+    <item name="key_name" type="id"/>
+
+    <item name="menu_search" type="id"/>
+    <item name="menu_all_people" type="id"/>
+    <item name="menu_recent_news" type="id"/>
+</resources>

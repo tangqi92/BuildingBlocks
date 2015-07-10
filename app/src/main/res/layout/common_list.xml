@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ListView
+        android:layout_width="match_parent"
+        android:id="@+id/list_view"
+        android:visibility="gone"
+        android:background="@color/feed_bg"
+        android:divider="@null"
+        android:layout_height="match_parent"/>
+    <me.itangqi.testproj.view.circularprogress.CircularLoadingView
+        android:layout_width="@dimen/loading_view_size"
+        android:layout_height="@dimen/loading_view_size"
+        android:layout_gravity="center"
+        android:id="@+id/v_loading"/>
+</FrameLayout>

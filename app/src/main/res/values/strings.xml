@@ -1,0 +1,59 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="app_name">TestProj</string>
+
+    <string name="action_settings">Preference</string>
+    <string name="news_preview_image">Image Preview</string>
+    <string name="auto_refresh_summary">Auto refresh when this app is launched?</string>
+    <string name="auto_refresh">Auto Refresh</string>
+    <string name="settings_settings">General Settings</string>
+    <string name="settings_others">Others</string>
+    <string name="settings_others_about">About Me</string>
+    <string name="licences_header">Zhihu Daily Purify is built based on the open source projects list down below:</string>
+    <string name="licenses_subheader">Every project is licensed under the Apache License, Version 2.0, which follows:</string>
+    <string name="apache_license" translatable="false" tools:ignore="TypographyOther,MissingTranslation">"Apache License</string>
+    <string name="action_pick_date">Pick a Date</string>
+    <string name="using_client">Open Link Using Zhihu Client</string>
+    <string name="network_error">Network Error！</string>
+    <string name="no_browser"><![CDATA[No Browser Installed~ >_<]]></string>
+    <string name="not_coming"><![CDATA[That day has not come yet! >_<]]></string>
+    <string name="not_born"><![CDATA[Zhihu Daily not born that day! >_<]]></string>
+    <string name="open_using_client">Open Link Using Zhihu\'s Official Client</string>
+    <string name="action_forward">The Day After</string>
+    <string name="action_back">The Day Before</string>
+    <string name="this_is_today">This is today, no content for tomorrow!</string>
+    <string name="this_is_birthday">This is birthday, no content before it!</string>
+    <string name="using_accelerate_server">Using accelerate serverCode?</string>
+    <string name="using_accelerate_server_summary">Check this to browse old news faster</string>
+    <string name="settings_network_settings">Network Settings</string>
+    <string name="action_search">Search</string>
+    <string name="no_result_found">No result found</string>
+    <string name="searching">Searching</string>
+    <string name="display_format">EEE, MMM d</string>
+    <string name="which_accelerate_server_title">Which accelerate serverCode?</string>
+    <string name="accelerate_server_dialog_title">Please select one accelerate serverCode</string>
+    <string name="accelerate_server_hint_dialog_title">Do you want to use the accelerate serverCode?</string>
+    <string name="accelerate_server_hint_dialog_message">The serverCode will save your data budget and bring you faster speed when browsing old days\' news.</string>
+    <string name="action_share_url">Share</string>
+    <string name="share_to">Share to…</string>
+    <string name="pull_to_refresh" translatable="false">下拉可以刷新</string>
+    <string name="release_to_refresh" translatable="false">释放立即刷新</string>
+    <string name="refreshing" translatable="false">正在刷新…</string>
+    <string name="not_updated_yet" translatable="false">暂未更新过</string>
+    <string name="updated_at" translatable="false">上次更新于%1$s前</string>
+    <string name="updated_just_now" translatable="false">刚刚更新</string>
+    <string name="time_error" translatable="false">时间有问题</string>
+    <string name="title_activity_about" translatable="false">AboutActivity</string>
+    <string name="hello_world" translatable="false">Hello world!</string>
+    <string name="bxbxbai">bxbxbai</string>
+    <string name="comment_count">%d comments</string>
+    <string name="all_people">All People</string>
+    <string name="days_ago">%d days ago</string>
+    <string name="follower">%d flowers</string>
+    <string name="post_count" translatable="false">%d 文</string>
+    <string name="user_count">%d专栏</string>
+    <string name="like_count">%d Likes</string>
+    <string name="origin_web_page">Origin Web Page</string>
+    <string name="recent_news">Article of last week</string>
+    <string name="toast_test">Toast Test </string>
+</resources>

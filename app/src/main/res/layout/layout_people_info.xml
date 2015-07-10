@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <me.itangqi.testproj.view.RippleRelativeLayout
+        android:id="@+id/ripple_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_8dp"
+        android:background="@drawable/bg_parent_rounded_corner"
+        app:rv_color="#ccc"
+        app:rv_rippleDuration="200"
+        app:rv_type="rectangle">
+
+        <me.itangqi.testproj.view.CircleImageView
+            android:id="@+id/avatar"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_4dp"
+            android:layout_marginRight="@dimen/margin_16dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/avatar"
+            android:text="Qi Tang"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_follower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@id/avatar"
+            android:text="128人关注"
+            android:textColor="#9d9e9f"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_separator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@id/tv_follower"
+            android:text=" · "
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_post_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@id/tv_separator"
+            android:text="12 专栏"
+            android:textColor="#9d9e9f"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_follower"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@id/avatar"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="给您不一样的看日本的视角，带您体会不一样的日本文化，让您的日本之旅更有意境。"
+            android:textSize="14sp" />
+    </me.itangqi.testproj.view.RippleRelativeLayout>
+
+</FrameLayout>

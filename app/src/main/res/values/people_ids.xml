@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="people_ids">
+        <item>limiao</item>
+        <item>100offer</item>
+        <item>andlib</item>
+        <item>travelacrossjapan</item>
+        <item>qinchao</item>
+        <item>haoqishiyanshi</item>
+        <item>loveyou</item>
+        <item>chenyuz</item>
+        <item>youxia</item>
+        <item>invest</item>
+        <item>shizheng</item>
+        <item>newpie</item>
+        <item>daily</item>
+        <item>majin</item>
+        <item>workandlife</item>
+        <item>iamcaoz</item>
+        <item>FrontendMagazine</item>
+        <item>lizhigang</item>
+        <item>pandemic</item>
+        <item>nordenbox</item>
+        <item>footballs</item>
+        <item>adapt</item>
+        <item>rosicky311</item>
+        <item>zuimei</item>
+        <item>xiepanda</item>
+        <item>anzhuo</item>
+        <item>wooyun</item>
+        <item>toureet</item>
+        <item>betterme</item>
+        <item>mactalk</item>
+        <item>zhangjiawei</item>
+        <item>Weekly</item>
+        <item>Tweet</item>
+        <item>imike</item>
+        <item>prattle</item>
+        <item>codesign</item>
+        <item>taosay</item>
+        <item>TLA42</item>
+        <item>happy</item>
+        <item>girlslovebreakfast</item>
+        <item>ibuick</item>
+        <item>japan-talk</item>
+        <item>alan13tdk</item>
+        <item>shanghai</item>
+        <item>agBJB</item>
+    </string-array>
+</resources>
