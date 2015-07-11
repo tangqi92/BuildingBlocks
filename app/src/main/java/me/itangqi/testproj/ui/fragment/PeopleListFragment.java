@@ -23,7 +23,6 @@ import me.itangqi.testproj.utils.ZhuanLanApi;
 import me.itangqi.testproj.view.circularprogress.CircularLoadingView;
 
 /**
- *
  * @author bxbxbai
  */
 public class PeopleListFragment extends Fragment {

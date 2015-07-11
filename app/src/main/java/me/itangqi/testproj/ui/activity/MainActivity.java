@@ -22,7 +22,7 @@ public class MainActivity extends BaseActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AllPeopleActivity.start(MainActivity.this);
+                NewsListActivity.start(MainActivity.this);
 
             }
         });

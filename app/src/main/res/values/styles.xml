@@ -26,4 +26,52 @@
         <item name="android:clipToPadding">false</item>
     </style>
 
+    <style name="baseLayoutParam">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="commonListViewStyle" parent="baseLayoutParam">
+        <item name="android:drawSelectorOnTop">false</item>
+    </style>
+
+    <style name="cardStyle" parent="baseLayoutParam">
+
+    </style>
+
+    <style name="cardRelativeLayoutStyle" parent="baseLayoutParam">
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+    <style name="cardImageViewStyle">
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_height">95dp</item>
+        <item name="android:layout_width">95dp</item>
+    </style>
+
+    <style name="baseCardTextStyle" parent="baseLayoutParam">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_toLeftOf">@id/card_share_overflow</item>
+        <item name="android:layout_toRightOf">@id/thumbnail_image</item>
+        <item name="android:layout_below">@id/question_title</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textIsSelectable">false</item>
+    </style>
+
+    <style name="cardQuestionTitleStyle" parent="baseCardTextStyle">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="cardOverflowIconStyle">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:src">@mipmap/ic_card_overflow</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
 </resources>

@@ -48,6 +48,7 @@
     <string name="bxbxbai">bxbxbai</string>
     <string name="comment_count">%d comments</string>
     <string name="all_people">All People</string>
+    <string name="news_list">News List</string>
     <string name="days_ago">%d days ago</string>
     <string name="follower">%d flowers</string>
     <string name="post_count" translatable="false">%d 文</string>
@@ -55,5 +56,8 @@
     <string name="like_count">%d Likes</string>
     <string name="origin_web_page">Origin Web Page</string>
     <string name="recent_news">Article of last week</string>
-    <string name="toast_test">Toast Test </string>
+    <string name="toast_test">Toast Test</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
