@@ -23,7 +23,7 @@ public class NewsListActivity extends BaseActivity {
         getSupportActionBar().setTitle(R.string.news_list);
 
         getSupportFragmentManager().beginTransaction().add(R.id.container,
-                NewsListFragment.newInstance("aaa","bbb")).commit();
+                NewsListFragment.newInstance()).commit();
     }
 
     public static void start(Activity activity) {
