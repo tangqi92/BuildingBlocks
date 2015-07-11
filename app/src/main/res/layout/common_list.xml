@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ListView
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/cardList"
         android:layout_width="match_parent"
-        android:id="@+id/list_view"
-        android:visibility="gone"
-        android:background="@color/feed_bg"
-        android:divider="@null"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
+
     <me.itangqi.testproj.view.circularprogress.CircularLoadingView
+        android:id="@+id/v_loading"
         android:layout_width="@dimen/loading_view_size"
         android:layout_height="@dimen/loading_view_size"
-        android:layout_gravity="center"
-        android:id="@+id/v_loading"/>
+        android:layout_gravity="center" />
 </FrameLayout>
