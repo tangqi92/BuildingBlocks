@@ -16,22 +16,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.itangqi.testproj.R;
-import me.itangqi.testproj.adapter.NewsListAdapter;
+import me.itangqi.testproj.adapter.PeopleListAdapter;
 import me.itangqi.testproj.bean.User;
 import me.itangqi.testproj.data.GsonRequest;
 import me.itangqi.testproj.data.RequestManager;
 import me.itangqi.testproj.utils.ZhuanLanApi;
 import me.itangqi.testproj.view.circularprogress.CircularLoadingView;
 
-public class NewsListFragment extends Fragment {
+public class PeopleListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private List<User> newsList = new ArrayList<>();
-    private NewsListAdapter mAdapter;
+    private PeopleListAdapter mAdapter;
     private CircularLoadingView mLoadingView;
 
 
-    public static NewsListFragment newInstance() {
-        NewsListFragment fragment = new NewsListFragment();
+    public static PeopleListFragment newInstance() {
+        PeopleListFragment fragment = new PeopleListFragment();
         return fragment;
     }
 
@@ -48,7 +48,7 @@ public class NewsListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.common_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_people_list, container, false);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.cardList);
         mRecyclerView.setHasFixedSize(true);
@@ -62,7 +62,7 @@ public class NewsListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mAdapter = new NewsListAdapter(newsList);
+        mAdapter = new PeopleListAdapter(newsList);
         mRecyclerView.setAdapter(mAdapter);
 
         String[] ids = getActivity().getResources().getStringArray(R.array.people_ids);

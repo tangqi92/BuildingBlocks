@@ -3,7 +3,7 @@ package me.itangqi.testproj.ui.activity;
 import android.os.Bundle;
 
 import me.itangqi.testproj.R;
-import me.itangqi.testproj.ui.fragment.NewsListFragment;
+import me.itangqi.testproj.ui.fragment.PeopleListFragment;
 
 
 /**
@@ -11,7 +11,7 @@ import me.itangqi.testproj.ui.fragment.NewsListFragment;
  *
  * @author bxbxbai
  */
-public class NewsListActivity extends BaseActivity {
+public class PeopleListActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +21,6 @@ public class NewsListActivity extends BaseActivity {
         getSupportActionBar().setTitle(R.string.news_list);
 
         getSupportFragmentManager().beginTransaction().add(R.id.container,
-                NewsListFragment.newInstance()).commit();
+                PeopleListFragment.newInstance()).commit();
     }
 }

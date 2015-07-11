@@ -10,9 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        card_view:cardCornerRadius="4dp"
-        card_view:cardElevation="4dp"
-        card_view:contentPadding="16dp">
+        card_view:cardCornerRadius="@dimen/margin_4dp"
+        card_view:cardElevation="@dimen/margin_4dp">
 
         <RelativeLayout
             style="@style/cardRelativeLayoutStyle"
