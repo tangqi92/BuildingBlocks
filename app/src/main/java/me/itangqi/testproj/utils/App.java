@@ -6,7 +6,6 @@ import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
-import me.itangqi.testproj.db.ZhuanlanDataSource;
 
 /**
  *
@@ -14,9 +13,6 @@ import me.itangqi.testproj.db.ZhuanlanDataSource;
  */
 public class App extends Application {
     private static App mContext;
-
-    public static final String PACKAGE_NAME = "io.bxbxbai.zhuanlan";
-
     private RefWatcher mRefWatcher;
     /**
      * 开发测试模式
@@ -28,11 +24,8 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = this;
-
         mRefWatcher = LeakCanary.install(this);
 
-        ZhuanlanDataSource dataSource = new ZhuanlanDataSource(getApplicationContext());
-        dataSource.open();
 
 //        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
 //        .detectDiskReads()
