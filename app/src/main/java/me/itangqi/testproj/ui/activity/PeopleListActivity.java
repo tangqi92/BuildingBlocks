@@ -18,7 +18,7 @@ public class PeopleListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_people);
         initToolBar();
-        getSupportActionBar().setTitle(R.string.news_list);
+        getSupportActionBar().setTitle(R.string.all_people);
 
         getSupportFragmentManager().beginTransaction().add(R.id.container,
                 PeopleListFragment.newInstance()).commit();

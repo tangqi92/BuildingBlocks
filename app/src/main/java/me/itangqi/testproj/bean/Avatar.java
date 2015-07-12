@@ -56,6 +56,7 @@ public class Avatar implements Parcelable {
         this.template = in.readString();
     }
 
+    //Interface that must be implemented and provided as a public CREATOR field that generates instances of your Parcelable class from a Parcel.
     public static final Parcelable.Creator<Avatar> CREATOR = new Parcelable.Creator<Avatar>() {
         public Avatar createFromParcel(Parcel source) {
             return new Avatar(source);

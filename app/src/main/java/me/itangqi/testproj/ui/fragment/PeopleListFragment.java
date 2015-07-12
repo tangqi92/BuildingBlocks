@@ -25,10 +25,10 @@ import me.itangqi.testproj.view.circularprogress.CircularLoadingView;
 
 public class PeopleListFragment extends Fragment {
     private RecyclerView mRecyclerView;
-    private List<User> newsList = new ArrayList<>();
+    private List<User> peopleList = new ArrayList<>();
     private PeopleListAdapter mAdapter;
     private CircularLoadingView mLoadingView;
-
+    private RecyclerView.LayoutManager mLayoutManager;
 
     public static PeopleListFragment newInstance() {
         PeopleListFragment fragment = new PeopleListFragment();
@@ -49,12 +49,16 @@ public class PeopleListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_people_list, container, false);
-
         mRecyclerView = (RecyclerView) view.findViewById(R.id.cardList);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(llm);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
         mLoadingView = (CircularLoadingView) view.findViewById(R.id.v_loading);
         return view;
     }
@@ -62,7 +66,8 @@ public class PeopleListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mAdapter = new PeopleListAdapter(newsList);
+        // specify an adapter
+        mAdapter = new PeopleListAdapter(peopleList);
         mRecyclerView.setAdapter(mAdapter);
 
         String[] ids = getActivity().getResources().getStringArray(R.array.people_ids);
@@ -117,6 +122,4 @@ public class PeopleListFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
     }
-
-
 }
