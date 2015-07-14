@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/margin_4dp"
-    android:paddingLeft="@dimen/margin_4dp"
-    android:paddingRight="@dimen/margin_4dp"
-    android:paddingTop="@dimen/margin_4dp">
+    android:padding="@dimen/margin_4dp">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/cardList"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
-    <me.itangqi.testproj.view.circularprogress.CircularLoadingView
-        android:id="@+id/v_loading"
-        android:layout_width="@dimen/loading_view_size"
-        android:layout_height="@dimen/loading_view_size"
-        android:layout_gravity="center" />
-</FrameLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/cardList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <me.itangqi.testproj.view.circularprogress.CircularLoadingView
+            android:id="@+id/v_loading"
+            android:layout_width="@dimen/loading_view_size"
+            android:layout_height="@dimen/loading_view_size"
+            android:layout_gravity="center" />
+    </FrameLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

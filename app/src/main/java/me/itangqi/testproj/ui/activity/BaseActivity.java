@@ -44,20 +44,18 @@ public abstract class BaseActivity extends ActionBarActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_fragment);
 
         FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment =fm.findFragmentById(R.id.id_fragment_container);
+        Fragment fragment = fm.findFragmentById(R.id.id_fragment_container);
 
-        if(fragment == null )
-        {
-            fragment = createFragment() ;
+        if (fragment == null) {
+            fragment = createFragment();
 
-            fm.beginTransaction().add(R.id.id_fragment_container,fragment).commit();
+            fm.beginTransaction().add(R.id.id_fragment_container, fragment).commit();
         }
     }
 
@@ -99,4 +97,5 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
 }

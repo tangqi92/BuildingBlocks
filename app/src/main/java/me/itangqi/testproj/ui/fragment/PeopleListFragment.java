@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,15 +24,17 @@ import me.itangqi.testproj.data.RequestManager;
 import me.itangqi.testproj.utils.ZhuanLanApi;
 import me.itangqi.testproj.view.circularprogress.CircularLoadingView;
 
-public class PeopleListFragment extends Fragment {
+public class PeopleListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
     private List<User> peopleList = new ArrayList<>();
     private PeopleListAdapter mAdapter;
     private CircularLoadingView mLoadingView;
     private RecyclerView.LayoutManager mLayoutManager;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     public static PeopleListFragment newInstance() {
         PeopleListFragment fragment = new PeopleListFragment();
+        // you can use bundle to transfer data
         return fragment;
     }
 
@@ -60,6 +63,9 @@ public class PeopleListFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mLoadingView = (CircularLoadingView) view.findViewById(R.id.v_loading);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.primary);
         return view;
     }
 
@@ -121,5 +127,20 @@ public class PeopleListFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+    }
+
+    @Override
+    public void onRefresh() {
+        mSwipeRefreshLayout.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        }, 3000);
     }
 }
