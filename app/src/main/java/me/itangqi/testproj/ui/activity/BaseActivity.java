@@ -4,6 +4,8 @@ import android.annotation.TargetApi;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -22,7 +24,9 @@ import me.itangqi.testproj.R;
  *
  * @author bxbxbai
  */
-public class BaseActivity extends ActionBarActivity {
+public abstract class BaseActivity extends ActionBarActivity {
+
+    protected abstract Fragment createFragment();
 
     protected Toolbar toolbar;
     protected MaterialMenuIconToolbar materialMenu;
@@ -37,6 +41,24 @@ public class BaseActivity extends ActionBarActivity {
 //        mTintManager.setNavigationBarTintEnabled(true);
 
         mTintManager.setTintColor(getResources().getColor(R.color.primary));
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_single_fragment);
+
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment =fm.findFragmentById(R.id.id_fragment_container);
+
+        if(fragment == null )
+        {
+            fragment = createFragment() ;
+
+            fm.beginTransaction().add(R.id.id_fragment_container,fragment).commit();
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)

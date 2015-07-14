@@ -1,6 +1,6 @@
 package me.itangqi.testproj.ui.activity;
 
-import android.os.Bundle;
+import android.support.v4.app.Fragment;
 
 import me.itangqi.testproj.R;
 import me.itangqi.testproj.ui.fragment.PeopleListFragment;
@@ -13,14 +13,13 @@ import me.itangqi.testproj.ui.fragment.PeopleListFragment;
  */
 public class PeopleListActivity extends BaseActivity {
 
+    private PeopleListFragment mPeopleListFragment;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_people);
+    protected Fragment createFragment() {
         initToolBar();
         getSupportActionBar().setTitle(R.string.all_people);
-
-        getSupportFragmentManager().beginTransaction().add(R.id.container,
-                PeopleListFragment.newInstance()).commit();
+        mPeopleListFragment = PeopleListFragment.newInstance();
+        return mPeopleListFragment;
     }
+
 }
