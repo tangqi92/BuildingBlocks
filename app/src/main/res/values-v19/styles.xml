@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
     <style name="FloatProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
         <item name="android:indeterminateOnly">false</item>
         <item name="android:progressDrawable">@drawable/float_progressbar</item>
@@ -28,7 +27,6 @@
     <style name="MatchWidth" parent="Match">
         <item name="android:layout_height">wrap_content</item>
     </style>
-
 
 
 </resources>
