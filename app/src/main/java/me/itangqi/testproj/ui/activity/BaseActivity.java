@@ -1,8 +1,6 @@
 package me.itangqi.testproj.ui.activity;
 
 import android.annotation.TargetApi;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,7 +12,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 
-import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.balysv.materialmenu.extras.toolbar.MaterialMenuIconToolbar;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -23,9 +20,11 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -54,12 +53,12 @@ public abstract class BaseActivity extends ActionBarActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        mTintManager = new SystemBarTintManager(this);
-
-        mTintManager.setStatusBarTintEnabled(true);
-//        mTintManager.setNavigationBarTintEnabled(true);
-
-        mTintManager.setTintColor(getResources().getColor(R.color.primary));
+//        mTintManager = new SystemBarTintManager(this);
+//
+//        mTintManager.setStatusBarTintEnabled(true);
+////        mTintManager.setNavigationBarTintEnabled(true);
+//
+//        mTintManager.setTintColor(getResources().getColor(R.color.primary));
     }
 
     @Override
@@ -79,33 +78,24 @@ public abstract class BaseActivity extends ActionBarActivity {
 
         toolbar = ButterKnife.findById(this, R.id.toolbar);
         setSupportActionBar(toolbar);
-        materialMenu = new MaterialMenuIconToolbar(this, Color.WHITE, MaterialMenuDrawable.Stroke.REGULAR) {
-            @Override
-            public int getToolbarViewId() {
-                return R.id.toolbar;
-            }
-        };
-        materialMenu.setState(MaterialMenuDrawable.IconState.ARROW);
+
+//        materialMenu = new MaterialMenuIconToolbar(this, Color.WHITE, MaterialMenuDrawable.Stroke.REGULAR) {
+//            @Override
+//            public int getToolbarViewId() {
+//                return R.id.toolbar;
+//            }
+//        };
+//        materialMenu.setState(MaterialMenuDrawable.IconState.ARROW);
 
         // Create a few sample profile
         // NOTE you have to define the loader logic too. See the CustomApplication for more details
         final IProfile profile = new ProfileDrawerItem().withName("Mike Penz").withEmail("mikepenz@gmail.com").withIcon("https://avatars3.githubusercontent.com/u/1476232?v=3&s=460");
-        final IProfile profile2 = new ProfileDrawerItem().withName("Bernat Borras").withEmail("alorma@github.com").withIcon(Uri.parse("https://avatars3.githubusercontent.com/u/887462?v=3&s=460"));
-        final IProfile profile3 = new ProfileDrawerItem().withName("Max Muster").withEmail("max.mustermann@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile2));
-        final IProfile profile4 = new ProfileDrawerItem().withName("Felix House").withEmail("felix.house@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile3));
-        final IProfile profile5 = new ProfileDrawerItem().withName("Mr. X").withEmail("mister.x.super@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile4)).withIdentifier(4);
-        final IProfile profile6 = new ProfileDrawerItem().withName("Batman").withEmail("batman@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile5));
         // Create the AccountHeader
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.header)
                 .addProfiles(
                         profile,
-                        profile2,
-                        profile3,
-                        profile4,
-                        profile5,
-                        profile6,
                         //don't ask but google uses 14dp for the add account icon in gmail but 20dp for the normal icons (like manage account)
                         new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new GitHub Account").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_add).actionBarSize().paddingDp(5).colorRes(R.color.material_drawer_primary_text)).withIdentifier(PROFILE_SETTING),
                         new ProfileSettingDrawerItem().withName("Manage Account").withIcon(GoogleMaterial.Icon.gmd_settings)
@@ -139,9 +129,8 @@ public abstract class BaseActivity extends ActionBarActivity {
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName("Test").withIcon(GoogleMaterial.Icon.gmd_wb_sunny).withIdentifier(1).withCheckable(false),
-                        new PrimaryDrawerItem().withName("Test").withIcon(FontAwesome.Icon.faw_home).withIdentifier(2).withCheckable(false),
-                        new PrimaryDrawerItem().withName("Test").withIcon(FontAwesome.Icon.faw_gamepad).withIdentifier(3).withCheckable(false),
-                        new PrimaryDrawerItem().withName("Test").withIcon(FontAwesome.Icon.faw_eye).withIdentifier(4).withCheckable(false)
+                        new DividerDrawerItem(),
+                        new SecondaryDrawerItem().withName("Test").withIcon(FontAwesome.Icon.faw_eye).withIdentifier(4).withCheckable(false)
                         ) // add the items we want to use with our Drawer
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -164,7 +153,7 @@ public abstract class BaseActivity extends ActionBarActivity {
             result.setSelectionByIdentifier(11, false);
 
             //set the active profile
-            headerResult.setActiveProfile(profile3);
+            headerResult.setActiveProfile(profile);
         }
     }
 
