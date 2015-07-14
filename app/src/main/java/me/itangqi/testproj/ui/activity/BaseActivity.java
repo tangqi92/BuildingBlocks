@@ -1,18 +1,14 @@
 package me.itangqi.testproj.ui.activity;
 
-import android.annotation.TargetApi;
-import android.os.Build;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 
-import com.balysv.materialmenu.extras.toolbar.MaterialMenuIconToolbar;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.iconics.typeface.FontAwesome;
@@ -27,7 +23,6 @@ import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import butterknife.ButterKnife;
 import me.itangqi.testproj.R;
@@ -38,58 +33,35 @@ import me.itangqi.testproj.R;
  * @author bxbxbai
  */
 public abstract class BaseActivity extends ActionBarActivity {
+    protected abstract Fragment createFragment();
 
     private static final int PROFILE_SETTING = 1;
-
     //save our header or result
     private AccountHeader headerResult = null;
     private Drawer result = null;
-    protected abstract Fragment createFragment();
-
-    protected Toolbar toolbar;
-    protected MaterialMenuIconToolbar materialMenu;
-    protected SystemBarTintManager mTintManager;
+    protected Toolbar toolbar = null;
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-//        mTintManager = new SystemBarTintManager(this);
-//
-//        mTintManager.setStatusBarTintEnabled(true);
-////        mTintManager.setNavigationBarTintEnabled(true);
-//
-//        mTintManager.setTintColor(getResources().getColor(R.color.primary));
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_fragment);
-
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.id_fragment_container);
-
         if (fragment == null) {
             fragment = createFragment();
-
             fm.beginTransaction().add(R.id.id_fragment_container, fragment).commit();
         }
-
         toolbar = ButterKnife.findById(this, R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        materialMenu = new MaterialMenuIconToolbar(this, Color.WHITE, MaterialMenuDrawable.Stroke.REGULAR) {
-//            @Override
-//            public int getToolbarViewId() {
-//                return R.id.toolbar;
-//            }
-//        };
-//        materialMenu.setState(MaterialMenuDrawable.IconState.ARROW);
-
         // Create a few sample profile
         // NOTE you have to define the loader logic too. See the CustomApplication for more details
-        final IProfile profile = new ProfileDrawerItem().withName("Mike Penz").withEmail("mikepenz@gmail.com").withIcon("https://avatars3.githubusercontent.com/u/1476232?v=3&s=460");
+        final IProfile profile = new ProfileDrawerItem().withName("Tang Qi").withEmail("imtangqi@gmail.com").withIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_avatar_tangqi));
         // Create the AccountHeader
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
@@ -106,7 +78,7 @@ public abstract class BaseActivity extends ActionBarActivity {
                         //sample usage of the onProfileChanged listener
                         //if the clicked item has the identifier 1 add a new profile ;)
                         if (profile instanceof IDrawerItem && ((IDrawerItem) profile).getIdentifier() == PROFILE_SETTING) {
-                            IProfile newProfile = new ProfileDrawerItem().withNameShown(true).withName("Batman").withEmail("batman@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile5));
+                            IProfile newProfile = new ProfileDrawerItem().withNameShown(true).withName("Batman").withEmail("batman@gmail.com").withIcon(getResources().getDrawable(R.drawable.ic_avatar_tangqi));
                             if (headerResult.getProfiles() != null) {
                                 //we know that there are 2 setting elements. set the new profile above them ;)
                                 headerResult.addProfile(newProfile, headerResult.getProfiles().size() - 2);
@@ -114,7 +86,6 @@ public abstract class BaseActivity extends ActionBarActivity {
                                 headerResult.addProfiles(newProfile);
                             }
                         }
-
                         //false if you have not consumed the event and it should close the drawer
                         return false;
                     }
@@ -131,7 +102,7 @@ public abstract class BaseActivity extends ActionBarActivity {
                         new PrimaryDrawerItem().withName("Test").withIcon(GoogleMaterial.Icon.gmd_wb_sunny).withIdentifier(1).withCheckable(false),
                         new DividerDrawerItem(),
                         new SecondaryDrawerItem().withName("Test").withIcon(FontAwesome.Icon.faw_eye).withIdentifier(4).withCheckable(false)
-                        ) // add the items we want to use with our Drawer
+                ) // add the items we want to use with our Drawer
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
@@ -156,23 +127,6 @@ public abstract class BaseActivity extends ActionBarActivity {
             headerResult.setActiveProfile(profile);
         }
     }
-
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    private void setTranslucentStatus(boolean on) {
-        Window w = getWindow();
-        WindowManager.LayoutParams params = w.getAttributes();
-
-        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-
-        if (on) {
-            params.flags |= bits;
-        } else {
-            params.flags &= ~bits;
-        }
-        w.setAttributes(params);
-    }
-
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
