@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.volley.Response;
-import com.melnykov.fab.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +32,7 @@ public class PeopleListFragment extends Fragment implements SwipeRefreshLayout.O
     private CircularLoadingView mLoadingView;
     private RecyclerView.LayoutManager mLayoutManager;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private FloatingActionButton btnFab;
-
+    private FloatingActionButton mFloatingActionButton;
 
     public static PeopleListFragment newInstance() {
         PeopleListFragment fragment = new PeopleListFragment();
@@ -70,11 +69,8 @@ public class PeopleListFragment extends Fragment implements SwipeRefreshLayout.O
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.primary);
 
-        btnFab = (FloatingActionButton) view.findViewById(R.id.fab);
-        btnFab.setColorNormal(R.color.colorPrimaryLight);
-        btnFab.setColorPressed(R.color.colorPrimaryDark);
-        btnFab.setColorRipple(R.color.corner_shadow);
-        btnFab.show();
+        mFloatingActionButton = new FloatingActionButton(getActivity());
+
         return view;
     }
 
