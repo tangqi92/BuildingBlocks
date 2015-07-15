@@ -1,5 +1,6 @@
 package me.itangqi.testproj.ui.activity;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.github.mrengineer13.snackbar.SnackBar;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.iconics.typeface.FontAwesome;
@@ -107,11 +107,8 @@ public abstract class BaseActivity extends ActionBarActivity {
                         //--> click on the header
                         //--> click on the footer
                         //those items don't contain a drawerItem
-                        // it's a sample to use snackbar
-                        new SnackBar.Builder(BaseActivity.this)
-                                .withMessage("This library is awesome!") // OR
-                                .withActionMessage("Action") // OR
-                                .show();
+                        Intent intent = new Intent(BaseActivity.this, ToolbarControlRecyclerViewActivity.class);
+                        startActivity(intent);
                         return true;
                     }
                 })
