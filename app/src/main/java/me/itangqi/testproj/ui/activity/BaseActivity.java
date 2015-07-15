@@ -31,7 +31,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.itangqi.testproj.R;
-import me.itangqi.testproj.ui.fragment.SuperAwesomeCardFragment;
+import me.itangqi.testproj.ui.fragment.PeopleListFragment;
 
 /**
  * Created by baia on 15/3/14.
@@ -187,7 +187,7 @@ public abstract class BaseActivity extends ActionBarActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return SuperAwesomeCardFragment.newInstance(position);
+            return PeopleListFragment.newInstance();
         }
 
     }

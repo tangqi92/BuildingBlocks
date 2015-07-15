@@ -17,8 +17,7 @@
         android:layout_height="48dp"
         android:background="@color/colorPrimary"
         android:textColor="@android:color/white"
-        app:pstsIndicatorColor="#FFFFFF"
-        app:pstsTextAllCaps="false" />
+        app:pstsIndicatorColor="#FFFFFF" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
