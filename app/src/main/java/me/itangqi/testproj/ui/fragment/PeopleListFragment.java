@@ -13,10 +13,14 @@ import android.view.ViewGroup;
 
 import com.android.volley.Response;
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.github.mrengineer13.snackbar.SnackBar;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import me.itangqi.testproj.R;
 import me.itangqi.testproj.adapter.PeopleListAdapter;
 import me.itangqi.testproj.bean.User;
@@ -26,13 +30,27 @@ import me.itangqi.testproj.utils.ZhuanLanApi;
 import me.itangqi.testproj.view.circularprogress.CircularLoadingView;
 
 public class PeopleListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-    private RecyclerView mRecyclerView;
+    //    private RecyclerView mRecyclerView;
     private List<User> peopleList = new ArrayList<>();
     private PeopleListAdapter mAdapter;
-    private CircularLoadingView mLoadingView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private FloatingActionButton mFloatingActionButton;
+
+    @Bind(R.id.cardList)
+    RecyclerView mRecyclerView;
+    @Bind(R.id.v_loading)
+    CircularLoadingView mLoadingView;
+    @Bind(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+    @Bind(R.id.feed_floating_actionButton)
+    FloatingActionButton mFloatingActionButton;
+
+    @OnClick(R.id.feed_floating_actionButton)
+    void feed_multiple_actions() {
+        new SnackBar.Builder(getActivity())
+                .withMessage("This library is awesome!") // OR
+                .withActionMessage("Action") // OR
+                .show();
+    }
 
     public static PeopleListFragment newInstance() {
         PeopleListFragment fragment = new PeopleListFragment();
@@ -54,7 +72,7 @@ public class PeopleListFragment extends Fragment implements SwipeRefreshLayout.O
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_people_list, container, false);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.cardList);
+        ButterKnife.bind(this, view);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -64,12 +82,8 @@ public class PeopleListFragment extends Fragment implements SwipeRefreshLayout.O
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mLoadingView = (CircularLoadingView) view.findViewById(R.id.v_loading);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.primary);
-
-        mFloatingActionButton = new FloatingActionButton(getActivity());
 
         return view;
     }
@@ -89,6 +103,7 @@ public class PeopleListFragment extends Fragment implements SwipeRefreshLayout.O
                 @Override
                 public void onResponse(User response) {
                     mRecyclerView.setVisibility(View.VISIBLE);
+                    // Bug ? : It does seem to no use
                     mLoadingView.setVisibility(View.GONE);
                     mAdapter.add(response);
                 }

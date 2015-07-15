@@ -21,7 +21,6 @@
             android:layout_height="@dimen/loading_view_size"
             android:layout_gravity="center" />
 
-
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <RelativeLayout
@@ -29,7 +28,7 @@
         android:layout_height="wrap_content">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/stream_multiple_actions"
+            android:id="@+id/feed_floating_actionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

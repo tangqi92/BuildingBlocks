@@ -25,6 +25,7 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.itangqi.testproj.R;
 
@@ -37,10 +38,11 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected abstract Fragment createFragment();
 
     private static final int PROFILE_SETTING = 1;
-    //save our header or result
+    // save our header or result
     private AccountHeader headerResult = null;
     private Drawer result = null;
-    protected Toolbar toolbar = null;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -51,15 +53,9 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_fragment);
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.id_fragment_container);
-        if (fragment == null) {
-            fragment = createFragment();
-            fm.beginTransaction().add(R.id.id_fragment_container, fragment).commit();
-        }
-        toolbar = ButterKnife.findById(this, R.id.toolbar);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-
+        beginTransaction();
         // Create a few sample profile
         // NOTE you have to define the loader logic too. See the CustomApplication for more details
         final IProfile profile = new ProfileDrawerItem().withName("Tang Qi").withEmail("imtangqi@gmail.com").withIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_avatar_tangqi));
@@ -93,7 +89,6 @@ public abstract class BaseActivity extends ActionBarActivity {
                 })
                 .withSavedInstance(savedInstanceState)
                 .build();
-
         //Create the drawer
         result = new DrawerBuilder()
                 .withActivity(this)
@@ -112,7 +107,7 @@ public abstract class BaseActivity extends ActionBarActivity {
                         //--> click on the header
                         //--> click on the footer
                         //those items don't contain a drawerItem
-                        // use snackbar it's a sample
+                        // it's a sample to use snackbar
                         new SnackBar.Builder(BaseActivity.this)
                                 .withMessage("This library is awesome!") // OR
                                 .withActionMessage("Action") // OR
@@ -150,6 +145,15 @@ public abstract class BaseActivity extends ActionBarActivity {
             result.closeDrawer();
         } else {
             super.onBackPressed();
+        }
+    }
+
+    public void beginTransaction() {
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentById(R.id.id_fragment_container);
+        if (fragment == null) {
+            fragment = createFragment();
+            fm.beginTransaction().add(R.id.id_fragment_container, fragment).commit();
         }
     }
 }

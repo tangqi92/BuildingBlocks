@@ -15,9 +15,7 @@ public class PeopleListActivity extends BaseActivity {
     private PeopleListFragment mPeopleListFragment;
     @Override
     protected Fragment createFragment() {
-        // TODO I'm not sure the logic is right
-        mPeopleListFragment = PeopleListFragment.newInstance();
-        return mPeopleListFragment;
+        return PeopleListFragment.newInstance();
     }
 
 }
