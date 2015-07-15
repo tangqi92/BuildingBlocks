@@ -5,11 +5,14 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.iconics.typeface.FontAwesome;
@@ -28,6 +31,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.itangqi.testproj.R;
+import me.itangqi.testproj.ui.fragment.SuperAwesomeCardFragment;
 
 /**
  * Created by baia on 15/3/14.
@@ -56,6 +60,14 @@ public abstract class BaseActivity extends ActionBarActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         beginTransaction();
+        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.main_pager_tabs);
+        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        pager.setOffscreenPageLimit(7);
+
+        MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
+        pager.setAdapter(adapter);
+        tabs.setViewPager(pager);
+
         // Create a few sample profile
         // NOTE you have to define the loader logic too. See the CustomApplication for more details
         final IProfile profile = new ProfileDrawerItem().withName("Tang Qi").withEmail("imtangqi@gmail.com").withIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_avatar_tangqi));
@@ -153,4 +165,31 @@ public abstract class BaseActivity extends ActionBarActivity {
             fm.beginTransaction().add(R.id.id_fragment_container, fragment).commit();
         }
     }
+
+    public class MyPagerAdapter extends FragmentPagerAdapter {
+
+        private final String[] TITLES = { "Categories", "Home", "Top Paid", "Top Free", "Top Grossing", "Top New Paid",
+                "Top New Free", "Trending" };
+
+        public MyPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return TITLES[position];
+        }
+
+        @Override
+        public int getCount() {
+            return TITLES.length;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return SuperAwesomeCardFragment.newInstance(position);
+        }
+
+    }
+
 }
