@@ -35,4 +35,9 @@
         <item name="android:src">@mipmap/ic_card_overflow</item>
         <item name="android:layout_alignParentRight">true</item>
     </style>
+
+    <style name="menu_labels_style">
+        <item name="android:background">@drawable/fab_label_background</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>

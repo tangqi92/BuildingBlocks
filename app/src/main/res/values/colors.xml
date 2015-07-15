@@ -20,7 +20,6 @@
     <color name="list_row_hover_start_color">#ebddf0</color>
     <color name="list_row_hover_end_color">#ebeef0</color>
 
-    <color name="white">#ffffff</color>
     <color name="feed_bg">#f5f5f5</color>
     <color name="feed_item_bg">#ffffff</color>
     <color name="feed_item_border">#c2c3c8</color>
@@ -42,5 +41,15 @@
 
     <color name="bt_accent">#00B8D4</color>
     <color name="drawer_header_background">@color/colorPrimaryDark</color>
+
+    <color name="black_semi_transparent">#B2000000</color>
+    <color name="background">#e5e5e5</color>
+    <color name="half_black">#808080</color>
+    <color name="white">#fafafa</color>
+    <color name="white_pressed">#f1f1f1</color>
+    <color name="pink">#e91e63</color>
+    <color name="pink_pressed">#ec407a</color>
+    <color name="blue_semi_transparent">#805677fc</color>
+    <color name="blue_semi_transparent_pressed">#80738ffe</color>
 
 </resources>
