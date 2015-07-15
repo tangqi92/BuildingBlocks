@@ -30,7 +30,7 @@ import com.nineoldandroids.view.ViewHelper;
 
 import me.itangqi.testproj.R;
 
-public abstract class ToolbarControlBaseActivity<S extends Scrollable> extends BaseActivityTwo implements ObservableScrollViewCallbacks {
+public abstract class ToolbarControlBaseActivity<S extends Scrollable> extends ToolbarBaseActivity implements ObservableScrollViewCallbacks {
 
     private Toolbar mToolbar;
     private S mScrollable;
