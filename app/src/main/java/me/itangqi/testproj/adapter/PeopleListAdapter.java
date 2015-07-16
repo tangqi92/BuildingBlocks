@@ -33,7 +33,7 @@ public class PeopleListAdapter extends RecyclerView.Adapter<PeopleListAdapter.Ca
         mContext = parent.getContext();
         View itemView = LayoutInflater
                 .from(mContext)
-                .inflate(R.layout.layout_people_info, parent, false);
+                .inflate(R.layout.item_people_info, parent, false);
         CardViewHolder cardViewHolder = new CardViewHolder(itemView);
         return cardViewHolder;
     }

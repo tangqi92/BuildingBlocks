@@ -27,7 +27,6 @@ import me.itangqi.testproj.bean.User;
 import me.itangqi.testproj.data.GsonRequest;
 import me.itangqi.testproj.data.RequestManager;
 import me.itangqi.testproj.utils.ZhuanLanApi;
-import me.itangqi.testproj.view.circularprogress.CircularLoadingView;
 
 public class PeopleListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     //    private RecyclerView mRecyclerView;
@@ -37,8 +36,6 @@ public class PeopleListFragment extends Fragment implements SwipeRefreshLayout.O
 
     @Bind(R.id.cardList)
     RecyclerView mRecyclerView;
-    @Bind(R.id.v_loading)
-    CircularLoadingView mLoadingView;
     @Bind(R.id.swipe_refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
     @Bind(R.id.feed_floating_actionButton)
@@ -103,8 +100,6 @@ public class PeopleListFragment extends Fragment implements SwipeRefreshLayout.O
                 @Override
                 public void onResponse(User response) {
                     mRecyclerView.setVisibility(View.VISIBLE);
-                    // Bug ? : It does seem to no use
-                    mLoadingView.setVisibility(View.GONE);
                     mAdapter.add(response);
                 }
             });

@@ -34,7 +34,6 @@
     <color name="colorPrimary">#6570da</color>
     <color name="colorPrimaryDark">#4b529c</color>
 
-
     <color name="text_color">#414141</color>
     <color name="ldrawer_color">#FFFFFF</color>
     <color name="transparent">#00000000</color>
@@ -52,4 +51,10 @@
     <color name="blue_semi_transparent">#805677fc</color>
     <color name="blue_semi_transparent_pressed">#80738ffe</color>
 
+    <color name="blue">#303F9F</color>
+
+    <color name="accent_color">@color/blue</color>
+    <color name="statusBarColor">@color/blue</color>
+    <color name="navigationBarColor">@android:color/black</color>
+    <color name="drawerArrowColor">@android:color/white</color>
 </resources>

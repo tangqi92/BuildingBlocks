@@ -4,12 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/id_fragment_container"
-    style="@style/FitSystemWindows"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar" />
+    <include layout="@layout/widget_toolbar" />
 
     <com.astuetz.PagerSlidingTabStrip
         android:id="@+id/main_pager_tabs"
@@ -25,5 +26,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".ui.activity.BaseActivity" />
-
 </LinearLayout>

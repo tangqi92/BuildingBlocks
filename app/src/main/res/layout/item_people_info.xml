@@ -14,7 +14,9 @@
         card_view:cardElevation="@dimen/margin_4dp">
 
         <RelativeLayout
-            style="@style/cardRelativeLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_4dp"
             tools:ignore="UselessParent">
 
             <me.itangqi.testproj.view.CircleImageView

@@ -64,10 +64,10 @@ public abstract class BaseActivity extends ActionBarActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         beginTransaction();
+
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.main_pager_tabs);
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setOffscreenPageLimit(PAGE_COUNT);
-
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(adapter);
         tabs.setViewPager(pager);
@@ -203,7 +203,7 @@ public abstract class BaseActivity extends ActionBarActivity {
             Calendar displayDate = Calendar.getInstance();
             displayDate.add(Calendar.DAY_OF_YEAR, -position);
 
-            return (position == 0 ? "zhihu_daily_today" + " " : "")
+            return (position == 0 ? "Zhihu Daily Today" + " " : "")
                     + DateFormat.getDateInstance().format(displayDate.getTime());
         }
     }
