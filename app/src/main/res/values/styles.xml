@@ -53,7 +53,8 @@
         <item name="colorAccent">@color/accent</item>
 
         <item name="android:spinnerItemStyle">@style/AppTheme.SpinnerItemStyle</item>
-        <item name="android:spinnerDropDownItemStyle">@style/AppTheme.SpinnerDropDownItemStyle</item>
+        <item name="android:spinnerDropDownItemStyle">@style/AppTheme.SpinnerDropDownItemStyle
+        </item>
     </style>
 
     <style name="Toolbar" parent="Theme.AppCompat">

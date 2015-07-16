@@ -5,7 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -28,10 +28,14 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.itangqi.testproj.R;
 import me.itangqi.testproj.ui.fragment.PeopleListFragment;
+import me.itangqi.testproj.utils.Constants;
 
 /**
  * Created by baia on 15/3/14.
@@ -40,7 +44,7 @@ import me.itangqi.testproj.ui.fragment.PeopleListFragment;
  */
 public abstract class BaseActivity extends ActionBarActivity {
     protected abstract Fragment createFragment();
-
+    private static final int PAGE_COUNT = 7;
     private static final int PROFILE_SETTING = 1;
     // save our header or result
     private AccountHeader headerResult = null;
@@ -62,7 +66,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         beginTransaction();
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.main_pager_tabs);
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
-        pager.setOffscreenPageLimit(7);
+        pager.setOffscreenPageLimit(PAGE_COUNT);
 
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(adapter);
@@ -166,30 +170,42 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
     }
 
-    public class MyPagerAdapter extends FragmentPagerAdapter {
 
-        private final String[] TITLES = { "Categories", "Home", "Top Paid", "Top Free", "Top Grossing", "Top New Paid",
-                "Top New Free", "Trending" };
-
+    private class MyPagerAdapter extends FragmentStatePagerAdapter {
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
-        public CharSequence getPageTitle(int position) {
-            return TITLES[position];
+        public Fragment getItem(int i) {
+            Bundle bundle = new Bundle();
+            Fragment newFragment = new PeopleListFragment();
+
+            Calendar dateToGetUrl = Calendar.getInstance();
+            dateToGetUrl.add(Calendar.DAY_OF_YEAR, 1 - i);
+            String date = Constants.Date.simpleDateFormat.format(dateToGetUrl.getTime());
+
+            bundle.putBoolean("first_page?", i == 0);
+            bundle.putBoolean("single?", false);
+            bundle.putString("date", date);
+
+            newFragment.setArguments(bundle);
+            return newFragment;
         }
 
         @Override
         public int getCount() {
-            return TITLES.length;
+            return PAGE_COUNT;
         }
 
         @Override
-        public Fragment getItem(int position) {
-            return PeopleListFragment.newInstance();
-        }
+        public CharSequence getPageTitle(int position) {
+            Calendar displayDate = Calendar.getInstance();
+            displayDate.add(Calendar.DAY_OF_YEAR, -position);
 
+            return (position == 0 ? "zhihu_daily_today" + " " : "")
+                    + DateFormat.getDateInstance().format(displayDate.getTime());
+        }
     }
 
 }
