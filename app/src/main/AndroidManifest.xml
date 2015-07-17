@@ -23,8 +23,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activity.ToolbarControlRecyclerViewActivity"
-            android:theme="@style/AppTheme.Toolbar"/>
+        <activity
+            android:name=".ui.activity.ToolbarControlRecyclerViewActivity"
+            android:theme="@style/AppTheme.Toolbar" />
+
+        <activity android:name=".ui.activity.AboutMeActivity" />
 
     </application>
 </manifest>
