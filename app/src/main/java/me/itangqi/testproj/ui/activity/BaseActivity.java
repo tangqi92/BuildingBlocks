@@ -9,10 +9,13 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.github.mrengineer13.snackbar.SnackBar;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.iconics.typeface.FontAwesome;
@@ -44,6 +47,7 @@ import me.itangqi.testproj.utils.Constants;
  */
 public abstract class BaseActivity extends ActionBarActivity {
     protected abstract Fragment createFragment();
+
     private static final int PAGE_COUNT = 7;
     private static final int PROFILE_SETTING = 1;
     // save our header or result
@@ -143,6 +147,28 @@ public abstract class BaseActivity extends ActionBarActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                showSnackBar();
+                break;
+            case R.id.action_pick_date:
+                showSnackBar();
+                break;
+            case R.id.action_go_to_search:
+                showSnackBar();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         //add the values which need to be saved from the drawer to the bundle
         outState = result.saveInstanceState(outState);
@@ -206,6 +232,15 @@ public abstract class BaseActivity extends ActionBarActivity {
             return (position == 0 ? "Zhihu Daily Today" + " " : "")
                     + DateFormat.getDateInstance().format(displayDate.getTime());
         }
+
+
+    }
+
+    public void showSnackBar() {
+        new SnackBar.Builder(BaseActivity.this)
+                .withMessage("This library is awesome!") // OR
+                .withActionMessage("Action") // OR
+                .show();
     }
 
 }

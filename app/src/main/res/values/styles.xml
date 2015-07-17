@@ -23,7 +23,6 @@
         </item>
         <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="21">true</item>
 
-
     </style>
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">

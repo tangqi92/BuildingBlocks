@@ -1,6 +1,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_go_to_search"
+        android:icon="@drawable/ic_action_search"
+        android:orderInCategory="100"
+        android:title="@string/action_search"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_pick_date"
+        android:icon="@drawable/ic_action_go_to_date"
+        android:orderInCategory="100"
+        android:title="@string/action_pick_date"
+        app:showAsAction="always" />
 </menu>
