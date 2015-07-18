@@ -46,8 +46,8 @@ public class PeopleListAdapter extends RecyclerView.Adapter<PeopleListAdapter.Ca
                 id, ZhuanLanApi.PIC_SIZE_XL);
         holder.imageView.setImageUrl(picUrl, RequestManager.getImageLoader());
         holder.name.setText(user.getName());
-        holder.follower.setText(mContext.getString(R.string.follower, user.getFollowerCount()));
-        holder.postCount.setText(mContext.getString(R.string.post_count, user.getPostCount()));
+        holder.follower.setText(mContext.getString(R.string.people_list_follower, user.getFollowerCount()));
+        holder.postCount.setText(mContext.getString(R.string.people_list_post_count, user.getPostCount()));
         holder.description.setText(user.getDescription());
     }
 

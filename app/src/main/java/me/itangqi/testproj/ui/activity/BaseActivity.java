@@ -155,14 +155,14 @@ public abstract class BaseActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
+            case R.id.menu_action_about:
                 Intent intent = new Intent(BaseActivity.this, AboutMeActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.action_pick_date:
+            case R.id.menu_action_pick_date:
                 showSnackBar();
                 break;
-            case R.id.action_go_to_search:
+            case R.id.menu_action_go_to_search:
                 showSnackBar();
                 break;
         }

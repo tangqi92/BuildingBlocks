@@ -66,7 +66,7 @@ public final class ZhuanLanApi {
         return new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                ToastUtils.showLong(R.string.network_error);
+                ToastUtils.showLong(R.string.api_network_error);
             }
         };
     }
