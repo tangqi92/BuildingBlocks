@@ -29,45 +29,45 @@ import android.widget.TextView;
 
 public class SuperAwesomeCardFragment extends Fragment {
 
-	private static final String ARG_POSITION = "position";
+    private static final String ARG_POSITION = "position";
 
-	private int position;
+    private int position;
 
-	public static SuperAwesomeCardFragment newInstance(int position) {
-		SuperAwesomeCardFragment f = new SuperAwesomeCardFragment();
-		Bundle b = new Bundle();
-		b.putInt(ARG_POSITION, position);
-		f.setArguments(b);
-		return f;
-	}
+    public static SuperAwesomeCardFragment newInstance(int position) {
+        SuperAwesomeCardFragment f = new SuperAwesomeCardFragment();
+        Bundle b = new Bundle();
+        b.putInt(ARG_POSITION, position);
+        f.setArguments(b);
+        return f;
+    }
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		position = getArguments().getInt(ARG_POSITION);
-	}
+        position = getArguments().getInt(ARG_POSITION);
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 
-		FrameLayout fl = new FrameLayout(getActivity());
-		fl.setLayoutParams(params);
+        FrameLayout fl = new FrameLayout(getActivity());
+        fl.setLayoutParams(params);
 
-		final int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources()
-				.getDisplayMetrics());
+        final int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources()
+                .getDisplayMetrics());
 
-		TextView v = new TextView(getActivity());
-		params.setMargins(margin, margin, margin, margin);
-		v.setLayoutParams(params);
-		v.setLayoutParams(params);
-		v.setGravity(Gravity.CENTER);
-		v.setText("CARD " + (position + 1));
+        TextView v = new TextView(getActivity());
+        params.setMargins(margin, margin, margin, margin);
+        v.setLayoutParams(params);
+        v.setLayoutParams(params);
+        v.setGravity(Gravity.CENTER);
+        v.setText("CARD " + (position + 1));
 
-		fl.addView(v);
-		return fl;
-	}
+        fl.addView(v);
+        return fl;
+    }
 
 }

@@ -233,8 +233,6 @@ public abstract class BaseActivity extends ActionBarActivity {
             return (position == 0 ? "Zhihu Daily Today" + " " : "")
                     + DateFormat.getDateInstance().format(displayDate.getTime());
         }
-
-
     }
 
     public void showSnackBar() {

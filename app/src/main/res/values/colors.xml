@@ -47,7 +47,6 @@
 
     <color name="blue">#303F9F</color>
 
-    <color name="accent_color">@color/blue</color>
     <color name="statusBarColor">@color/blue</color>
     <color name="navigationBarColor">@android:color/black</color>
     <color name="drawerArrowColor">@android:color/white</color>
