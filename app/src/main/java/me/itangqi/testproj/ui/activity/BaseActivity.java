@@ -39,6 +39,7 @@ import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 import me.itangqi.testproj.R;
 import me.itangqi.testproj.ui.fragment.PeopleListFragment;
+import me.itangqi.testproj.utils.App;
 import me.itangqi.testproj.utils.Constants;
 
 /**
@@ -242,6 +243,12 @@ public abstract class BaseActivity extends ActionBarActivity {
                 .withMessage("This library is awesome!") // OR
                 .withActionMessage("Action") // OR
                 .show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        App.getRefWatcher().watch(this);
     }
 
 }

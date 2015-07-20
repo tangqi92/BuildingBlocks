@@ -2,13 +2,15 @@ package me.itangqi.testproj.utils;
 
 import android.app.Application;
 
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
+
 /**
- *
- * @author bxbxbai
+ * Created by tangqi on 7/20/15.
  */
 public class App extends Application {
     private static App mContext;
-//    private RefWatcher mRefWatcher;
+    private RefWatcher mRefWatcher;
     /**
      * 开发测试模式
      */
@@ -19,37 +21,13 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = this;
-//        mRefWatcher = LeakCanary.install(this);
 
-
-//        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-//        .detectDiskReads()
-//        .detectDiskWrites()
-//        .detectNetwork()
-//        .penaltyLog()
-//        .build());
-//
-//        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-//        .detectActivityLeaks()
-//        .detectLeakedSqlLiteObjects()
-//        .penaltyLog()
-//        .penaltyDeath()
-//        .build());
-
-//        initStetho();
-
+        mRefWatcher = LeakCanary.install(this);
     }
 
-//    public static RefWatcher getRefWatcher() {
-//        return getInstance().mRefWatcher;
-//    }
-
-//    private void initStetho() {
-//        Stetho.initialize(Stetho.newInitializerBuilder(this)
-//                .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
-//                .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
-//                .build());
-//    }
+    public static RefWatcher getRefWatcher() {
+        return getInstance().mRefWatcher;
+    }
 
     public static App getInstance() {
         return mContext;

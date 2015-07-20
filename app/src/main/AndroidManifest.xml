@@ -14,8 +14,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.activity.PeopleListActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleTask">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,7 +28,7 @@
 
         <activity android:name=".ui.activity.AboutMeActivity" />
 
-        <activity android:name=".ui.activity.TestActivity"/>
+        <activity android:name=".ui.activity.TestActivity" />
 
     </application>
 </manifest>
