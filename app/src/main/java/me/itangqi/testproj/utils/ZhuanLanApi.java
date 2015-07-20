@@ -2,10 +2,10 @@ package me.itangqi.testproj.utils;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
-import me.itangqi.testproj.R;
 import me.itangqi.testproj.bean.Post;
 import me.itangqi.testproj.bean.User;
 import me.itangqi.testproj.data.GsonRequest;
@@ -66,7 +66,7 @@ public final class ZhuanLanApi {
         return new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                ToastUtils.showLong(R.string.api_network_error);
+                Logger.e(error, "error");
             }
         };
     }
