@@ -19,27 +19,8 @@
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    <fr.castorflex.android.circularprogressbar.CircularProgressBar
-        android:id="@+id/cir_progress"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_gravity="center"
-        android:indeterminate="true"
-        app:cpb_color="@color/primary"
-        app:cpb_max_sweep_angle="300"
-        app:cpb_min_sweep_angle="10"
-        app:cpb_rotation_speed="1.0"
-        app:cpb_stroke_width="4dp"
-        app:cpb_sweep_speed="1.0" />
+    <include layout="@layout/widget_circular_progressbar" />
 
-    <!--<include layout="@layout/widget_floating_action_button" />-->
-    <com.melnykov.fab.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_refresh_light"
-        fab:fab_colorNormal="@color/accent"
-        fab:fab_colorRipple="@color/ripple"/>
+    <include layout="@layout/widget_floating_action_button" />
+
 </FrameLayout>

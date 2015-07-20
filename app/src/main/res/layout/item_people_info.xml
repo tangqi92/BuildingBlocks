@@ -19,14 +19,9 @@
             android:layout_margin="@dimen/margin_4dp"
             tools:ignore="UselessParent">
 
-            <me.itangqi.testproj.view.CircleImageView
+            <include
                 android:id="@+id/avatar"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/margin_4dp"
-                android:layout_marginRight="@dimen/margin_16dp"
-                android:src="@mipmap/ic_launcher" />
+                layout="@layout/widget_circle_imageview" />
 
             <TextView
                 android:id="@+id/tv_name"

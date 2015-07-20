@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.getbase.floatingactionbutton.FloatingActionButton xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/feed_floating_actionButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="end|bottom"
-    android:layout_marginBottom="16dp"
-    android:layout_marginEnd="16dp"
-    android:layout_marginRight="16dp"
-    fab:fab_addButtonColorNormal="@color/primary"
-    fab:fab_addButtonColorPressed="@color/primary_dark"
-    fab:fab_addButtonPlusIconColor="#808080"
-    fab:fab_icon="@drawable/ic_refresh_light" />
+<fr.castorflex.android.circularprogressbar.CircularProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cir_progress"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:layout_gravity="center"
+    android:indeterminate="true"
+    app:cpb_color="@color/primary"
+    app:cpb_max_sweep_angle="300"
+    app:cpb_min_sweep_angle="10"
+    app:cpb_rotation_speed="1.0"
+    app:cpb_stroke_width="4dp"
+    app:cpb_sweep_speed="1.0" />
+
