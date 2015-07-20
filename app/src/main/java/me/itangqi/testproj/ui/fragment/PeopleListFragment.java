@@ -12,8 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.volley.Response;
-import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.github.mrengineer13.snackbar.SnackBar;
+import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,12 +39,12 @@ public class PeopleListFragment extends Fragment implements SwipeRefreshLayout.O
     RecyclerView mRecyclerView;
     @Bind(R.id.swipe_refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
-    @Bind(R.id.feed_floating_actionButton)
+    @Bind(R.id.fab)
     FloatingActionButton mFloatingActionButton;
     @Bind(R.id.cir_progress)
     CircularProgressBar progressBar;
 
-    @OnClick(R.id.feed_floating_actionButton)
+    @OnClick(R.id.fab)
     void feed_multiple_actions() {
         new SnackBar.Builder(getActivity())
                 .withMessage("This library is awesome!") // OR
@@ -84,6 +84,8 @@ public class PeopleListFragment extends Fragment implements SwipeRefreshLayout.O
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.primary);
+
+        mFloatingActionButton.attachToRecyclerView(mRecyclerView);
 
         return view;
     }
