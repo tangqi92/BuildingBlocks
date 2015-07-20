@@ -36,6 +36,7 @@ import java.util.Calendar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 import me.itangqi.testproj.R;
 import me.itangqi.testproj.ui.fragment.PeopleListFragment;
 import me.itangqi.testproj.utils.Constants;
@@ -66,6 +67,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_fragment);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
         setSupportActionBar(toolbar);
         beginTransaction();
 

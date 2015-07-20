@@ -17,23 +17,36 @@ package me.itangqi.testproj.ui.activity;/*
 
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 import me.itangqi.testproj.R;
+import me.itangqi.testproj.event.TestEvent;
 import me.itangqi.testproj.utils.Cheeses;
 
 
 public class AboutMeActivity extends AppCompatActivity {
 
+    @Bind(R.id.fab)
+    FloatingActionButton floatingActionButton;
+    @OnClick(R.id.fab)
+    void setFloatingActionButton() {
+        EventBus.getDefault().post(new TestEvent("This is a test message"));
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_me);
-
+        ButterKnife.bind(this);
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
