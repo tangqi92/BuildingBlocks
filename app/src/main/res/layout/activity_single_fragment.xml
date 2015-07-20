@@ -16,7 +16,7 @@
         android:id="@+id/main_pager_tabs"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/primary"
         android:textColor="@android:color/white"
         app:pstsIndicatorColor="#FFFFFF"
         app:pstsTextAllCaps="false" />

@@ -2,18 +2,13 @@ package me.itangqi.testproj.utils;
 
 import android.app.Application;
 
-import com.facebook.stetho.Stetho;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
-
-
 /**
  *
  * @author bxbxbai
  */
 public class App extends Application {
     private static App mContext;
-    private RefWatcher mRefWatcher;
+//    private RefWatcher mRefWatcher;
     /**
      * 开发测试模式
      */
@@ -24,7 +19,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = this;
-        mRefWatcher = LeakCanary.install(this);
+//        mRefWatcher = LeakCanary.install(this);
 
 
 //        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -41,19 +36,20 @@ public class App extends Application {
 //        .penaltyDeath()
 //        .build());
 
-        initStetho();
+//        initStetho();
+
     }
 
-    public static RefWatcher getRefWatcher() {
-        return getInstance().mRefWatcher;
-    }
+//    public static RefWatcher getRefWatcher() {
+//        return getInstance().mRefWatcher;
+//    }
 
-    private void initStetho() {
-        Stetho.initialize(Stetho.newInitializerBuilder(this)
-                .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
-                .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
-                .build());
-    }
+//    private void initStetho() {
+//        Stetho.initialize(Stetho.newInitializerBuilder(this)
+//                .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+//                .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+//                .build());
+//    }
 
     public static App getInstance() {
         return mContext;

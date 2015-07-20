@@ -33,7 +33,6 @@
     <color name="transparent">#00000000</color>
 
     <color name="bt_accent">#00B8D4</color>
-    <color name="drawer_header_background">@color/colorPrimaryDark</color>
 
     <color name="black_semi_transparent">#B2000000</color>
     <color name="background">#e5e5e5</color>
