@@ -21,6 +21,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 import me.itangqi.testproj.R;
 import me.itangqi.testproj.adapter.PeopleListAdapter;
 import me.itangqi.testproj.bean.User;
@@ -40,6 +41,8 @@ public class PeopleListFragment extends Fragment implements SwipeRefreshLayout.O
     SwipeRefreshLayout mSwipeRefreshLayout;
     @Bind(R.id.feed_floating_actionButton)
     FloatingActionButton mFloatingActionButton;
+    @Bind(R.id.cir_progress)
+    CircularProgressBar progressBar;
 
     @OnClick(R.id.feed_floating_actionButton)
     void feed_multiple_actions() {
@@ -100,6 +103,7 @@ public class PeopleListFragment extends Fragment implements SwipeRefreshLayout.O
                 @Override
                 public void onResponse(User response) {
                     mRecyclerView.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
                     mAdapter.add(response);
                 }
             });
