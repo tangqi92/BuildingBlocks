@@ -166,7 +166,8 @@ public abstract class BaseActivity extends ActionBarActivity {
                 showSnackBar();
                 break;
             case R.id.menu_action_go_to_search:
-                showSnackBar();
+                Intent intent1 = new Intent(BaseActivity.this, SettingsActivity.class);
+                startActivity(intent1);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -248,6 +249,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        // watch  memory leak
         App.getRefWatcher().watch(this);
     }
 

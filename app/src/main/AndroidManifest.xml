@@ -30,5 +30,8 @@
 
         <activity android:name=".ui.activity.TestActivity" />
 
+        <activity android:name=".ui.activity.SettingsActivity"
+            android:theme="@style/MaterialSettingsTheme"/>
+
     </application>
 </manifest>
