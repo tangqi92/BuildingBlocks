@@ -16,7 +16,6 @@ import me.itangqi.testproj.ui.fragment.PeopleListFragment;
  */
 public class PeopleListActivity extends BaseActivity {
 
-    private PeopleListFragment mPeopleListFragment;
     @Override
     protected Fragment createFragment() {
         return PeopleListFragment.newInstance();

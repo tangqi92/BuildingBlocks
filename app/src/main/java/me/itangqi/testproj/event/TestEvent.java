@@ -2,6 +2,7 @@ package me.itangqi.testproj.event;
 
 /**
  * Created by tangqi on 7/20/15.
+ * @Description: Event Model
  */
 public class TestEvent {
     private String mMsg;

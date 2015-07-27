@@ -1,4 +1,5 @@
-package me.itangqi.testproj.ui.activity;/*
+package me.itangqi.testproj.ui.activity;
+/*
  * Copyright (C) 2015 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,13 +18,11 @@ package me.itangqi.testproj.ui.activity;/*
 
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.orhanobut.logger.Logger;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -35,13 +34,13 @@ import me.itangqi.testproj.utils.Cheeses;
 
 
 public class AboutMeActivity extends AppCompatActivity {
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
 
-    @Bind(R.id.fab)
-    FloatingActionButton floatingActionButton;
     @OnClick(R.id.fab)
     void setFloatingActionButton() {
+        // Test using eventbus
         EventBus.getDefault().post(new TestEvent("This is a test message"));
-        Logger.d("hello");
     }
 
     @Override
@@ -49,13 +48,12 @@ public class AboutMeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_me);
         ButterKnife.bind(this);
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle("Tang Qi");
+        collapsingToolbar.setTitle(this.getResources().getString(R.string.collapsing_toolbar_title));
 
         loadBackdrop();
     }

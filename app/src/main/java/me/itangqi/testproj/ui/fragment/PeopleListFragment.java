@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.volley.Response;
-import com.github.mrengineer13.snackbar.SnackBar;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -46,10 +45,7 @@ public class PeopleListFragment extends Fragment implements SwipeRefreshLayout.O
 
     @OnClick(R.id.fab)
     void feed_multiple_actions() {
-        new SnackBar.Builder(getActivity())
-                .withMessage("This library is awesome!") // OR
-                .withActionMessage("Action") // OR
-                .show();
+
     }
 
     public static PeopleListFragment newInstance() {

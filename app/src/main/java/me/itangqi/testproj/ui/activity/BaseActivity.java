@@ -57,6 +57,10 @@ public abstract class BaseActivity extends ActionBarActivity {
     private Drawer result = null;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
+    @Bind(R.id.main_pager_tabs)
+    PagerSlidingTabStrip tabs;
+    @Bind(R.id.pager)
+    ViewPager pager;
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -72,8 +76,6 @@ public abstract class BaseActivity extends ActionBarActivity {
         setSupportActionBar(toolbar);
         beginTransaction();
 
-        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.main_pager_tabs);
-        ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setOffscreenPageLimit(PAGE_COUNT);
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(adapter);
@@ -163,7 +165,8 @@ public abstract class BaseActivity extends ActionBarActivity {
                 startActivity(intent);
                 break;
             case R.id.menu_action_pick_date:
-                showSnackBar();
+                Intent intent2 = new Intent(BaseActivity.this, PickPhotoActivity.class);
+                startActivity(intent2);
                 break;
             case R.id.menu_action_go_to_search:
                 Intent intent1 = new Intent(BaseActivity.this, SettingsActivity.class);
@@ -234,7 +237,7 @@ public abstract class BaseActivity extends ActionBarActivity {
             Calendar displayDate = Calendar.getInstance();
             displayDate.add(Calendar.DAY_OF_YEAR, -position);
 
-            return (position == 0 ? "Zhihu Daily Today" + " " : "")
+            return (position == 0 ? getResources().getString(R.string.app_name) + " " : "")
                     + DateFormat.getDateInstance().format(displayDate.getTime());
         }
     }
