@@ -164,11 +164,11 @@ public abstract class BaseActivity extends ActionBarActivity {
                 Intent intent = new Intent(BaseActivity.this, AboutMeActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.menu_action_pick_date:
+            case R.id.menu_action_pick_photo:
                 Intent intent2 = new Intent(BaseActivity.this, PickPhotoActivity.class);
                 startActivity(intent2);
                 break;
-            case R.id.menu_action_go_to_search:
+            case R.id.menu_action_settings:
                 Intent intent1 = new Intent(BaseActivity.this, SettingsActivity.class);
                 startActivity(intent1);
                 break;

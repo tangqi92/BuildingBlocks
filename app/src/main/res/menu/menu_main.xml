@@ -1,22 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/menu_action_settings"
+        android:title="@string/menu_action_settings" />
+
+    <item
+        android:id="@+id/menu_action_pick_photo"
+        android:title="@string/men_action_pick_photo" />
+
     <item
         android:id="@+id/menu_action_about"
-        android:orderInCategory="100"
-        android:title="@string/menu_action_about"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/menu_action_go_to_search"
-        android:icon="@drawable/ic_action_search"
-        android:orderInCategory="100"
-        android:title="@string/menu_action_search"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/menu_action_pick_date"
-        android:icon="@drawable/ic_action_go_to_date"
-        android:orderInCategory="100"
-        android:title="@string/men_action_pick_date"
-        app:showAsAction="always" />
+        android:title="@string/menu_action_about" />
 </menu>

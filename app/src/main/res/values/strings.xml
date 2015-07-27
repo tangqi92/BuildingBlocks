@@ -3,7 +3,9 @@
     <string name="app_name">知乎</string>
     <string name="menu_action_about">About Me</string>
     <string name="menu_action_search">Search</string>
+    <string name="menu_action_settings">Settings</string>
     <string name="men_action_pick_date">Pick Date</string>
+    <string name="men_action_pick_photo">Pick Photo</string>
     <string name="people_list_follower">flowers</string>
     <string name="people_list_post_count">posts</string>
     <string name="api_network_error">Network Error</string>
