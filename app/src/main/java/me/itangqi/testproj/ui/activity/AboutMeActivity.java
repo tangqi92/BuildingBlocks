@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -30,7 +31,6 @@ import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 import me.itangqi.testproj.R;
 import me.itangqi.testproj.event.TestEvent;
-import me.itangqi.testproj.utils.Cheeses;
 
 
 public class AboutMeActivity extends AppCompatActivity {
@@ -60,6 +60,18 @@ public class AboutMeActivity extends AppCompatActivity {
 
     private void loadBackdrop() {
         final ImageView imageView = (ImageView) findViewById(R.id.backdrop);
-        Glide.with(this).load(Cheeses.getRandomCheeseDrawable()).centerCrop().into(imageView);
+        Glide.with(this).load(R.drawable.ic_about_me).centerCrop().into(imageView);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return false;
     }
 }
