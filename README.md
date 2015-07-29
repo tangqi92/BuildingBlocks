@@ -11,7 +11,7 @@ MZhihu
 
 - Weibo：[@汤奇V](http://weibo.com/qiktang)
 - Gmail：[imtangqi#gmail.com](mailto:imtangqi@gmail.com "欢迎与我联系")
-- Blog: [http://itangqi.me/](http://itangqi.me)  
+- Blog: [http://itangqi.me](http://itangqi.me)
 
 # License
 

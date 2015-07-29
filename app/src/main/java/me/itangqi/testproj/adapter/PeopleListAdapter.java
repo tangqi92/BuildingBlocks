@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
+
 import java.util.List;
 
 import me.itangqi.testproj.R;
@@ -34,7 +36,17 @@ public class PeopleListAdapter extends RecyclerView.Adapter<PeopleListAdapter.Ca
         View itemView = LayoutInflater
                 .from(mContext)
                 .inflate(R.layout.item_people_info, parent, false);
-        CardViewHolder cardViewHolder = new CardViewHolder(itemView);
+        CardViewHolder cardViewHolder = new CardViewHolder(itemView, new CardViewHolder.IMyViewHolderClicks() {
+            @Override
+            public void onPotato(View caller) {
+                Logger.d("Poh-tah-tos");
+            }
+
+            @Override
+            public void onTomato(TextView name) {
+                Logger.d("To-m8-tohs");
+            }
+        });
         return cardViewHolder;
     }
 
@@ -61,20 +73,38 @@ public class PeopleListAdapter extends RecyclerView.Adapter<PeopleListAdapter.Ca
         return mDatas.size();
     }
 
-    public static class CardViewHolder extends RecyclerView.ViewHolder {
+    public static class CardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public CircleImageView imageView;
         public TextView name;
         public TextView follower;
         public TextView postCount;
         public TextView description;
+        public IMyViewHolderClicks mListener;
 
-        public CardViewHolder(View v) {
+        public CardViewHolder(View v, IMyViewHolderClicks listener) {
             super(v);
+            mListener = listener;
             imageView = (CircleImageView) v.findViewById(R.id.avatar);
             name = (TextView) v.findViewById(R.id.tv_name);
             follower = (TextView) v.findViewById(R.id.tv_follower);
             postCount = (TextView) v.findViewById(R.id.tv_post_count);
             description = (TextView) v.findViewById(R.id.tv_description);
+            v.setOnClickListener(this);
+            name.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (view instanceof TextView) {
+                mListener.onTomato((TextView) view);
+            } else {
+                mListener.onPotato(view);
+            }
+        }
+
+        interface IMyViewHolderClicks {
+            void onPotato(View caller);
+            void onTomato(TextView name);
         }
     }
 }
