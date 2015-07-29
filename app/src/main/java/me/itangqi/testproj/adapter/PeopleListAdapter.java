@@ -38,13 +38,8 @@ public class PeopleListAdapter extends RecyclerView.Adapter<PeopleListAdapter.Ca
                 .inflate(R.layout.item_people_info, parent, false);
         CardViewHolder cardViewHolder = new CardViewHolder(itemView, new CardViewHolder.IMyViewHolderClicks() {
             @Override
-            public void onPotato(View caller) {
-                Logger.d("Poh-tah-tos");
-            }
-
-            @Override
-            public void onTomato(TextView name) {
-                Logger.d("To-m8-tohs");
+            public void onPotato(View caller, int position) {
+                Logger.d("Poh-tah-tos" + position);
             }
         });
         return cardViewHolder;
@@ -95,16 +90,11 @@ public class PeopleListAdapter extends RecyclerView.Adapter<PeopleListAdapter.Ca
 
         @Override
         public void onClick(View view) {
-            if (view instanceof TextView) {
-                mListener.onTomato((TextView) view);
-            } else {
-                mListener.onPotato(view);
-            }
+            mListener.onPotato(view, getPosition());
         }
 
         interface IMyViewHolderClicks {
-            void onPotato(View caller);
-            void onTomato(TextView name);
+            void onPotato(View caller, int position);
         }
     }
 }
