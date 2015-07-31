@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.View;
@@ -38,6 +39,8 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import me.itangqi.testproj.R;
 import me.itangqi.testproj.logger.Log;
 import me.itangqi.testproj.ui.activity.SampleActivityBase;
@@ -62,6 +65,8 @@ public class PlaceAutocompleteActivity extends SampleActivityBase
     private static final LatLngBounds BOUNDS_GREATER_SYDNEY = new LatLngBounds(
             new LatLng(-34.041458, 150.790100), new LatLng(-33.682247, 151.383362));
 
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +82,9 @@ public class PlaceAutocompleteActivity extends SampleActivityBase
                 .build();
 
         setContentView(R.layout.activity_place_auto_complete);
+        ButterKnife.bind(this);
+        toolbar.setTitle(getResources().getString(R.string.men_action_pick_place));
+        this.setSupportActionBar(this.toolbar);
 
         // Retrieve the AutoCompleteTextView that will display Place suggestions.
         mAutocompleteView = (AutoCompleteTextView)

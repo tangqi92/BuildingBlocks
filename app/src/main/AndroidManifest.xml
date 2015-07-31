@@ -44,7 +44,8 @@
 
         <activity
             android:name=".placepicker.PlaceAutocompleteActivity"
-            android:theme="@style/AppTheme.Toolbar" />
+            android:theme="@style/MaterialSettingsTheme" />
+
 
         <activity
             android:name=".ui.activity.PickPhotoActivity"
