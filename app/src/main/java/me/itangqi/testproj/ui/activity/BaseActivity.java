@@ -162,16 +162,20 @@ public abstract class BaseActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_action_about:
-                Intent intent = new Intent(BaseActivity.this, AboutMeActivity.class);
-                startActivity(intent);
+                Intent itToAboutMe = new Intent(BaseActivity.this, AboutMeActivity.class);
+                startActivity(itToAboutMe);
                 break;
             case R.id.menu_action_pick_photo:
-                Intent intent2 = new Intent(BaseActivity.this, PlaceAutocompleteActivity.class);
-                startActivity(intent2);
+                Intent itToPhoto = new Intent(BaseActivity.this, PickPhotoActivity.class);
+                startActivity(itToPhoto);
+                break;
+            case R.id.menu_action_pick_place:
+                Intent itToPlace = new Intent(BaseActivity.this, PlaceAutocompleteActivity.class);
+                startActivity(itToPlace);
                 break;
             case R.id.menu_action_settings:
-                Intent intent1 = new Intent(BaseActivity.this, SettingsActivity.class);
-                startActivity(intent1);
+                Intent itToSettings = new Intent(BaseActivity.this, SettingsActivity.class);
+                startActivity(itToSettings);
                 break;
         }
         return super.onOptionsItemSelected(item);

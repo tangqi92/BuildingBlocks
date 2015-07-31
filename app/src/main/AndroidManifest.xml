@@ -42,7 +42,9 @@
 
         <activity android:name=".ui.activity.AboutMeActivity" />
 
-        <activity android:name=".placepicker.PlaceAutocompleteActivity" />
+        <activity
+            android:name=".placepicker.PlaceAutocompleteActivity"
+            android:theme="@style/AppTheme.Toolbar" />
 
         <activity
             android:name=".ui.activity.PickPhotoActivity"
