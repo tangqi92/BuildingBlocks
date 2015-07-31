@@ -1,4 +1,4 @@
-/*
+package me.itangqi.testproj.placepicker;/*
  * Copyright (C) 2015 Google Inc. All Rights Reserved.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  *  limitations under the License.
  */
 
-package me.itangqi.testproj.placecomplete;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;
@@ -36,6 +35,7 @@ import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 import me.itangqi.testproj.logger.Log;
+
 
 public class PlaceAutocompleteAdapter
         extends ArrayAdapter<PlaceAutocompleteAdapter.PlaceAutocomplete> implements Filterable {
@@ -64,10 +64,10 @@ public class PlaceAutocompleteAdapter
     /**
      * Initializes with a resource for text rows and autocomplete query bounds.
      *
-     * @see android.widget.ArrayAdapter#ArrayAdapter(android.content.Context, int)
+     * @see ArrayAdapter#ArrayAdapter(Context, int)
      */
     public PlaceAutocompleteAdapter(Context context, int resource, GoogleApiClient googleApiClient,
-            LatLngBounds bounds, AutocompleteFilter filter) {
+                                    LatLngBounds bounds, AutocompleteFilter filter) {
         super(context, resource);
         mGoogleApiClient = googleApiClient;
         mBounds = bounds;

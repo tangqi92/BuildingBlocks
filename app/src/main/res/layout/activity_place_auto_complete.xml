@@ -13,16 +13,17 @@
    See the License for the specific language governing permissions and
    limitations under the License.
   -->
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/ms_gray"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/ms_white"
         android:orientation="vertical">
-
 
         <AutoCompleteTextView
             android:id="@+id/autocomplete_places"
@@ -30,42 +31,37 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:hint="@string/autocomplete_hint"
-            android:textColor="@android:color/primary_text_light" />
+            android:textColor="@color/ms_black"
+            android:textColorHint="@color/hint_text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_current_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/ms_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/margin_8dp">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:src="@drawable/powered_by_google_light" />
-
-        <Button
-            android:id="@+id/button_clear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/clear_text" />
+            android:src="@drawable/ic_location" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/selected_place"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/place_details"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:autoLink="all"
-            android:text=""
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/place_attribution"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:autoLink="all"
-            android:paddingTop="16dp"
-            android:text=""
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/margin_8dp"
+            android:text="Current Loaction"
+            android:textColor="@color/ms_black" />
     </LinearLayout>
-</ScrollView>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:src="@drawable/powered_by_google_light" />
+
+</LinearLayout>

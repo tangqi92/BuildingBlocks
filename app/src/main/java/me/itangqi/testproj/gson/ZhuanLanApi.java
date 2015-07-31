@@ -1,4 +1,4 @@
-package me.itangqi.testproj.utils;
+package me.itangqi.testproj.gson;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -60,7 +60,6 @@ public final class ZhuanLanApi {
         return new GsonRequest<User>(String.format(API_BASE, id), User.class,
                 null, buildDefaultErrorListener());
     }
-
 
     private static Response.ErrorListener buildDefaultErrorListener() {
         return new Response.ErrorListener() {

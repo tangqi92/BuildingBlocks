@@ -38,6 +38,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 import me.itangqi.testproj.R;
+import me.itangqi.testproj.placepicker.PlaceAutocompleteActivity;
 import me.itangqi.testproj.ui.fragment.PeopleListFragment;
 import me.itangqi.testproj.utils.App;
 import me.itangqi.testproj.utils.Constants;
@@ -165,7 +166,7 @@ public abstract class BaseActivity extends ActionBarActivity {
                 startActivity(intent);
                 break;
             case R.id.menu_action_pick_photo:
-                Intent intent2 = new Intent(BaseActivity.this, PickPhotoActivity.class);
+                Intent intent2 = new Intent(BaseActivity.this, PlaceAutocompleteActivity.class);
                 startActivity(intent2);
                 break;
             case R.id.menu_action_settings:

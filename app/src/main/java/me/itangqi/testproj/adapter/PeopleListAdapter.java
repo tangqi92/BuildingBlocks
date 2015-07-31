@@ -15,7 +15,7 @@ import me.itangqi.testproj.R;
 import me.itangqi.testproj.bean.User;
 import me.itangqi.testproj.data.RequestManager;
 import me.itangqi.testproj.utils.Utils;
-import me.itangqi.testproj.utils.ZhuanLanApi;
+import me.itangqi.testproj.gson.ZhuanLanApi;
 import me.itangqi.testproj.view.CircleImageView;
 
 /**
@@ -49,6 +49,7 @@ public class PeopleListAdapter extends RecyclerView.Adapter<PeopleListAdapter.Ca
     public void onBindViewHolder(CardViewHolder holder, int position) {
         User user = mDatas.get(position);
         String id = user.getAuthor().getAvatar().getId();
+        // Using volley to load avator image
         String picUrl = Utils.getAuthorAvatarUrl(user.getAuthor().getAvatar().getTemplate(),
                 id, ZhuanLanApi.PIC_SIZE_XL);
         holder.imageView.setImageUrl(picUrl, RequestManager.getImageLoader());

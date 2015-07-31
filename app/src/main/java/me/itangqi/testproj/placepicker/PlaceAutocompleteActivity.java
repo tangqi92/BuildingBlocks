@@ -14,8 +14,9 @@
  *  limitations under the License.
  */
 
-package me.itangqi.testproj.placecomplete;
+package me.itangqi.testproj.placepicker;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,16 +25,15 @@ import android.text.Spanned;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
+import com.google.android.gms.location.places.PlaceLikelihoodBuffer;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -42,22 +42,22 @@ import me.itangqi.testproj.R;
 import me.itangqi.testproj.logger.Log;
 import me.itangqi.testproj.ui.activity.SampleActivityBase;
 
+
 public class PlaceAutocompleteActivity extends SampleActivityBase
         implements GoogleApiClient.OnConnectionFailedListener {
-
     /**
      * GoogleApiClient wraps our service connection to Google Play Services and provides access
      * to the user's sign in state as well as the Google's APIs.
      */
+    private static final int GOOGLE_API_CLIENT_ID = 0;
+
     protected GoogleApiClient mGoogleApiClient;
 
     private PlaceAutocompleteAdapter mAdapter;
 
     private AutoCompleteTextView mAutocompleteView;
 
-    private TextView mPlaceDetailsText;
-
-    private TextView mPlaceDetailsAttribution;
+    private LinearLayout mCurrentLocation;
 
     private static final LatLngBounds BOUNDS_GREATER_SYDNEY = new LatLngBounds(
             new LatLng(-34.041458, 150.790100), new LatLng(-33.682247, 151.383362));
@@ -71,8 +71,9 @@ public class PlaceAutocompleteActivity extends SampleActivityBase
         // events. If your activity does not extend FragmentActivity, make sure to call connect()
         // and disconnect() explicitly.
         mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, 0 /* clientId */, this)
+                .enableAutoManage(this, GOOGLE_API_CLIENT_ID /* clientId */, this)
                 .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
                 .build();
 
         setContentView(R.layout.activity_place_auto_complete);
@@ -84,25 +85,42 @@ public class PlaceAutocompleteActivity extends SampleActivityBase
         // Register a listener that receives callbacks when a suggestion has been selected
         mAutocompleteView.setOnItemClickListener(mAutocompleteClickListener);
 
-        // Retrieve the TextViews that will display details and attributions of the selected place.
-        mPlaceDetailsText = (TextView) findViewById(R.id.place_details);
-        mPlaceDetailsAttribution = (TextView) findViewById(R.id.place_attribution);
+        // CurrentLocation
+        mCurrentLocation = (LinearLayout) findViewById(R.id.ll_current_location);
+        mCurrentLocation.setOnClickListener(mOnClickListener);
 
         // Set up the adapter that will retrieve suggestions from the Places Geo Data API that cover
         // the entire world.
         mAdapter = new PlaceAutocompleteAdapter(this, android.R.layout.simple_list_item_1,
                 mGoogleApiClient, BOUNDS_GREATER_SYDNEY, null);
         mAutocompleteView.setAdapter(mAdapter);
-
-        // Set up the 'clear text' button that clears the text in the autocomplete view
-        Button clearButton = (Button) findViewById(R.id.button_clear);
-        clearButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAutocompleteView.setText("");
-            }
-        });
     }
+
+    private View.OnClickListener mOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            PendingResult<PlaceLikelihoodBuffer> result = Places.PlaceDetectionApi
+                    .getCurrentPlace(mGoogleApiClient, null);
+            result.setResultCallback(new ResultCallback<PlaceLikelihoodBuffer>() {
+                @Override
+                public void onResult(PlaceLikelihoodBuffer likelyPlaces) {
+                    if (!likelyPlaces.getStatus().isSuccess()) {
+                        // Request did not complete successfully
+                        Log.e(TAG, "Place query did not complete. Error: " + likelyPlaces.getStatus().toString());
+                        likelyPlaces.release();
+                        return;
+                    }
+                    String placename = String.format("%s", likelyPlaces.get(0).getPlace().getName());
+                    Intent intent = new Intent();
+                    intent.putExtra("location", placename);
+                    PlaceAutocompleteActivity.this.setResult(RESULT_OK, intent);
+                    PlaceAutocompleteActivity.this.finish();
+                    likelyPlaces.release();
+                }
+            });
+        }
+    };
+
 
     /**
      * Listener that handles selections from suggestions from the AutoCompleteTextView that
@@ -133,9 +151,10 @@ public class PlaceAutocompleteActivity extends SampleActivityBase
             PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
                     .getPlaceById(mGoogleApiClient, placeId);
             placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
-
-            Toast.makeText(getApplicationContext(), "Clicked: " + item.description,
-                    Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent();
+            intent.putExtra("location", item.description);
+            PlaceAutocompleteActivity.this.setResult(RESULT_OK, intent);
+            PlaceAutocompleteActivity.this.finish();
             Log.i(TAG, "Called getPlaceById to get Place details for " + item.placeId);
         }
     };
@@ -154,36 +173,16 @@ public class PlaceAutocompleteActivity extends SampleActivityBase
                 places.release();
                 return;
             }
-            // Get the Place object from the buffer.
-            final Place place = places.get(0);
-
-            // Format details of the place for display and show it in a TextView.
-            mPlaceDetailsText.setText(formatPlaceDetails(getResources(), place.getName(),
-                    place.getId(), place.getAddress(), place.getPhoneNumber(),
-                    place.getWebsiteUri()));
-
-            // Display the third party attributions if set.
-            final CharSequence thirdPartyAttribution = places.getAttributions();
-            if (thirdPartyAttribution == null) {
-                mPlaceDetailsAttribution.setVisibility(View.GONE);
-            } else {
-                mPlaceDetailsAttribution.setVisibility(View.VISIBLE);
-                mPlaceDetailsAttribution.setText(Html.fromHtml(thirdPartyAttribution.toString()));
-            }
-
-            Log.i(TAG, "Place details received: " + place.getName());
-
             places.release();
         }
     };
 
     private static Spanned formatPlaceDetails(Resources res, CharSequence name, String id,
-            CharSequence address, CharSequence phoneNumber, Uri websiteUri) {
+                                              CharSequence address, CharSequence phoneNumber, Uri websiteUri) {
         Log.e(TAG, res.getString(R.string.place_details, name, id, address, phoneNumber,
                 websiteUri));
         return Html.fromHtml(res.getString(R.string.place_details, name, id, address, phoneNumber,
                 websiteUri));
-
     }
 
     /**
@@ -204,5 +203,4 @@ public class PlaceAutocompleteActivity extends SampleActivityBase
                 "Could not connect to Google API Client: Error " + connectionResult.getErrorCode(),
                 Toast.LENGTH_SHORT).show();
     }
-
 }

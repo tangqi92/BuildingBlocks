@@ -26,7 +26,7 @@ import me.itangqi.testproj.adapter.PeopleListAdapter;
 import me.itangqi.testproj.bean.User;
 import me.itangqi.testproj.data.GsonRequest;
 import me.itangqi.testproj.data.RequestManager;
-import me.itangqi.testproj.utils.ZhuanLanApi;
+import me.itangqi.testproj.gson.ZhuanLanApi;
 
 public class PeopleListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     //    private RecyclerView mRecyclerView;
