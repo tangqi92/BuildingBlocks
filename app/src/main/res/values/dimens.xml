@@ -40,4 +40,7 @@
     <dimen name="snackbar_elevation">6dp</dimen>
     <dimen name="switch_elevation">1dp</dimen>
 
+    <dimen name="image_thumbnail_size">100dp</dimen>
+    <dimen name="image_thumbnail_spacing">5dp</dimen>
+
 </resources>

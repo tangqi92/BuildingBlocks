@@ -48,6 +48,7 @@ dependencies {
     compile 'com.github.kenumir:MaterialSettings:v.1.2.2'
     compile 'com.mcxiaoke.volley:library:1.0.17'
     compile 'com.soundcloud.android:android-crop:1.0.0@aar'
+    compile 'com.loopj.android:android-async-http:1.4.8'
     compile('com.mikepenz:materialdrawer:3.1.2@aar') {
         transitive = true
     }
