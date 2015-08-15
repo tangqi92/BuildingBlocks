@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.facebook.FacebookSdk;
 import com.github.mrengineer13.snackbar.SnackBar;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -40,7 +41,6 @@ import de.greenrobot.event.EventBus;
 import me.itangqi.testproj.R;
 import me.itangqi.testproj.placepicker.PlaceAutocompleteActivity;
 import me.itangqi.testproj.ui.fragment.PeopleListFragment;
-import me.itangqi.testproj.utils.App;
 import me.itangqi.testproj.utils.Constants;
 
 /**
@@ -71,6 +71,9 @@ public abstract class BaseActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        // Initialize the SDK before executing any other operations,
+        // especially, if you're using Facebook UI elements.
         setContentView(R.layout.activity_single_fragment);
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
@@ -258,7 +261,6 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected void onDestroy() {
         super.onDestroy();
         // watch  memory leak
-        App.getRefWatcher().watch(this);
     }
 
 }

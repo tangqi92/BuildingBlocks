@@ -15,6 +15,8 @@
     <string name="autocomplete_hint">Enter place name or address</string>
     <string name="selected_place">Last Selected Place:</string>
     <string name="clear_text">Clear Text</string>
+    <string name="facebook_app_id">670639366306902</string>
+
 
     <!-- getString(String, Object...) does not support HTML tags directly, they need to be encoded first.
     Original string: <b>%1$s</b><br/><i>Place Id: %2$s</i><br/>Address: %3$s<br/>Phone: %4$s<br/>Website: %5$s-->

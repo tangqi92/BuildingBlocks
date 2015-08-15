@@ -4,15 +4,12 @@ import android.app.Application;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
 
 /**
  * Created by tangqi on 7/20/15.
  */
 public class App extends Application {
     private static App mContext;
-    private RefWatcher mRefWatcher;
     public static RequestQueue requestQueue;
     public static int memoryCacheSize;
     /**
@@ -26,15 +23,10 @@ public class App extends Application {
         super.onCreate();
         mContext = this;
 
-        mRefWatcher = LeakCanary.install(this);
         // 不必为每一次HTTP请求都创建一个RequestQueue对象，推荐在application中初始化
         requestQueue = Volley.newRequestQueue(this);
         // 计算内存缓存
         memoryCacheSize = getMemoryCacheSize();
-    }
-
-    public static RefWatcher getRefWatcher() {
-        return getInstance().mRefWatcher;
     }
 
     public static App getInstance() {

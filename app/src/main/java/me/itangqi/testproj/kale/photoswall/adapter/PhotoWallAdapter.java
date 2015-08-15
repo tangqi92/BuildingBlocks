@@ -11,8 +11,11 @@ import android.widget.BaseAdapter;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import me.itangqi.testproj.R;
-import me.itangqi.testproj.kale.photoswall.provider.Images;
 import me.itangqi.testproj.kale.photoswall.util.LruBitmapCache;
 import me.itangqi.testproj.kale.photoswall.util.ViewHolder;
 import me.itangqi.testproj.utils.App;
@@ -26,18 +29,22 @@ public class PhotoWallAdapter extends BaseAdapter implements OnScrollListener {
      */
     private int mItemHeight = 0;
 
+    private List<HashMap<String, String>> imageThumbUrls = new ArrayList<HashMap<String, String>>();
 
-    public PhotoWallAdapter(Context context) {
+
+    public PhotoWallAdapter(Context context, List<HashMap<String, String>> imageThumbUrls) {
         mContext = context;
         // 初始化mImageLoader，并且传入了自定义的内存缓存
         mImageLoader = new ImageLoader(App.requestQueue, new LruBitmapCache()); // 初始化一个loader对象，可以进行自定义配置
         // 配置是否进行磁盘缓存
 //        mImageLoader.setShouldCache(true); // 设置允许磁盘缓存，默认是true
+        this.imageThumbUrls = imageThumbUrls;
+
     }
 
     @Override
     public int getCount() {
-        return Images.imageThumbUrls.length; // 返回item的个数
+        return imageThumbUrls.size(); // 返回item的个数
     }
 
     @Override
@@ -79,7 +86,7 @@ public class PhotoWallAdapter extends BaseAdapter implements OnScrollListener {
         }
 
         // 开始加载网络图片
-        networkImageView.setImageUrl(Images.imageThumbUrls[position], mImageLoader);
+        networkImageView.setImageUrl(imageThumbUrls.get(position).get("picture"), mImageLoader);
         return convertView;
     }
 
