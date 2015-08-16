@@ -1,4 +1,4 @@
-package me.itangqi.buildingblocks.view;
+package me.itangqi.buildingblocks.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;

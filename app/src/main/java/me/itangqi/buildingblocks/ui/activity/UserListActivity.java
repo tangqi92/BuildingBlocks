@@ -15,7 +15,7 @@ import me.itangqi.buildingblocks.ui.fragment.UserListFragment;
  *
  * @author bxbxbai
  */
-public class PeopleListActivity extends BaseActivity {
+public class UserListActivity extends BaseActivity {
 
     @Override
     protected Fragment createFragment() {

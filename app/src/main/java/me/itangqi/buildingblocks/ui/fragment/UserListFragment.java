@@ -45,12 +45,12 @@ public class UserListFragment extends Fragment implements SwipeRefreshLayout.OnR
 
     @OnClick(R.id.fab)
     void feed_multiple_actions() {
-
+        // TODO do what you want
     }
 
     public static UserListFragment newInstance() {
         UserListFragment fragment = new UserListFragment();
-        // you can use bundle to transfer data
+        // TODO you can use bundle to transfer data
         return fragment;
     }
 

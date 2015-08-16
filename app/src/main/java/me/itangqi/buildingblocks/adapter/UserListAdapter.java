@@ -13,8 +13,7 @@ import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.bean.User;
 import me.itangqi.buildingblocks.data.RequestManager;
 import me.itangqi.buildingblocks.gson.ZhuanLanApi;
-import me.itangqi.buildingblocks.utils.Utils;
-import me.itangqi.buildingblocks.view.CircleImageView;
+import me.itangqi.buildingblocks.widget.CircleImageView;
 
 /**
  * Created by tangqi on 7/11/15.
@@ -42,7 +41,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.CardVi
     public void onBindViewHolder(CardViewHolder holder, int position) {
         User user = mUserList.get(position);
         String id = user.getAuthor().getAvatar().getId();
-        String picUrl = Utils.getAuthorAvatarUrl(user.getAuthor().getAvatar().getTemplate(),
+        String picUrl = ZhuanLanApi.getAuthorAvatarUrl(user.getAuthor().getAvatar().getTemplate(),
                 id, ZhuanLanApi.PIC_SIZE_XL);
         holder.imageView.setImageUrl(picUrl, RequestManager.getImageLoader());
         holder.name.setText(user.getName());
@@ -80,7 +79,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.CardVi
 
         @Override
         public void onClick(View view) {
-            // TODO Do what you want
+            // TODO do what you want
         }
     }
 }

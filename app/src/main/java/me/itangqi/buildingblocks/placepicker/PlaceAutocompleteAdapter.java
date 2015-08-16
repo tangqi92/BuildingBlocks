@@ -16,6 +16,7 @@ package me.itangqi.buildingblocks.placepicker;/*
 
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -33,8 +34,6 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
-
-import me.itangqi.buildingblocks.logger.Log;
 
 
 public class PlaceAutocompleteAdapter

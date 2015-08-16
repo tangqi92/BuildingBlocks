@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.Spanned;
@@ -42,11 +43,8 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.logger.Log;
-import me.itangqi.buildingblocks.ui.activity.SampleActivityBase;
 
-
-public class PlaceAutocompleteActivity extends SampleActivityBase
+public class PlaceAutocompleteActivity extends AppCompatActivity
         implements GoogleApiClient.OnConnectionFailedListener {
     /**
      * GoogleApiClient wraps our service connection to Google Play Services and provides access
@@ -114,11 +112,10 @@ public class PlaceAutocompleteActivity extends SampleActivityBase
                 public void onResult(PlaceLikelihoodBuffer likelyPlaces) {
                     if (!likelyPlaces.getStatus().isSuccess()) {
                         // Request did not complete successfully
-                        Log.e(TAG, "Place query did not complete. Error: " + likelyPlaces.getStatus().toString());
                         likelyPlaces.release();
                         return;
                     }
-                    String placename = String.format("%s", likelyPlaces.get(0).getPlace().getName());
+                    String placename = String.format("%s", likelyPlaces.get(0).getPlace().getAddress());
                     Intent intent = new Intent();
                     intent.putExtra("location", placename);
                     PlaceAutocompleteActivity.this.setResult(RESULT_OK, intent);
@@ -128,7 +125,6 @@ public class PlaceAutocompleteActivity extends SampleActivityBase
             });
         }
     };
-
 
     /**
      * Listener that handles selections from suggestions from the AutoCompleteTextView that
@@ -150,7 +146,6 @@ public class PlaceAutocompleteActivity extends SampleActivityBase
               */
             final PlaceAutocompleteAdapter.PlaceAutocomplete item = mAdapter.getItem(position);
             final String placeId = String.valueOf(item.placeId);
-            Log.i(TAG, "Autocomplete item selected: " + item.description);
 
             /*
              Issue a request to the Places Geo Data API to retrieve a Place object with additional
@@ -163,7 +158,6 @@ public class PlaceAutocompleteActivity extends SampleActivityBase
             intent.putExtra("location", item.description);
             PlaceAutocompleteActivity.this.setResult(RESULT_OK, intent);
             PlaceAutocompleteActivity.this.finish();
-            Log.i(TAG, "Called getPlaceById to get Place details for " + item.placeId);
         }
     };
 
@@ -177,7 +171,6 @@ public class PlaceAutocompleteActivity extends SampleActivityBase
         public void onResult(PlaceBuffer places) {
             if (!places.getStatus().isSuccess()) {
                 // Request did not complete successfully
-                Log.e(TAG, "Place query did not complete. Error: " + places.getStatus().toString());
                 places.release();
                 return;
             }
@@ -187,8 +180,6 @@ public class PlaceAutocompleteActivity extends SampleActivityBase
 
     private static Spanned formatPlaceDetails(Resources res, CharSequence name, String id,
                                               CharSequence address, CharSequence phoneNumber, Uri websiteUri) {
-        Log.e(TAG, res.getString(R.string.place_details, name, id, address, phoneNumber,
-                websiteUri));
         return Html.fromHtml(res.getString(R.string.place_details, name, id, address, phoneNumber,
                 websiteUri));
     }
@@ -202,10 +193,6 @@ public class PlaceAutocompleteActivity extends SampleActivityBase
      */
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-
-        Log.e(TAG, "onConnectionFailed: ConnectionResult.getErrorCode() = "
-                + connectionResult.getErrorCode());
-
         // TODO(Developer): Check error code and notify the user of error state and resolution.
         Toast.makeText(this,
                 "Could not connect to Google API Client: Error " + connectionResult.getErrorCode(),
