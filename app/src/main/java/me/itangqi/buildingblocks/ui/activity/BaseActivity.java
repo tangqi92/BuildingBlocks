@@ -2,6 +2,7 @@ package me.itangqi.buildingblocks.ui.activity;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,7 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.facebook.FacebookSdk;
@@ -24,11 +24,11 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeaderBuilder;
-import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
@@ -43,11 +43,7 @@ import me.itangqi.buildingblocks.placepicker.PlaceAutocompleteActivity;
 import me.itangqi.buildingblocks.ui.fragment.UserListFragment;
 import me.itangqi.buildingblocks.utils.Constants;
 
-/**
- * Created by baia on 15/3/14.
- *
- * @author bxbxbai
- */
+
 public abstract class BaseActivity extends ActionBarActivity {
     protected abstract Fragment createFragment();
 
@@ -87,7 +83,7 @@ public abstract class BaseActivity extends ActionBarActivity {
 
         // Create a few sample profile
         // NOTE you have to define the loader logic too. See the CustomApplication for more details
-        final IProfile profile = new ProfileDrawerItem().withName("Tang Qi").withEmail("imtangqi@gmail.com").withIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_avatar_tangqi));
+        final IProfile profile = new ProfileDrawerItem().withName("Qi Tang").withEmail("imtangqi@gmail.com").withIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_avatar_tangqi));
         // Create the AccountHeader
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
@@ -104,7 +100,7 @@ public abstract class BaseActivity extends ActionBarActivity {
                         //sample usage of the onProfileChanged listener
                         //if the clicked item has the identifier 1 add a new profile ;)
                         if (profile instanceof IDrawerItem && ((IDrawerItem) profile).getIdentifier() == PROFILE_SETTING) {
-                            IProfile newProfile = new ProfileDrawerItem().withNameShown(true).withName("Batman").withEmail("batman@gmail.com").withIcon(getResources().getDrawable(R.drawable.ic_avatar_tangqi));
+                            IProfile newProfile = new ProfileDrawerItem().withNameShown(true).withName("Building Blocks").withEmail("buildingblocks@gmail.com").withIcon(getResources().getDrawable(R.drawable.ic_avatar_tangqi));
                             if (headerResult.getProfiles() != null) {
                                 //we know that there are 2 setting elements. set the new profile above them ;)
                                 headerResult.addProfile(newProfile, headerResult.getProfiles().size() - 2);
@@ -118,31 +114,39 @@ public abstract class BaseActivity extends ActionBarActivity {
                 })
                 .withSavedInstance(savedInstanceState)
                 .build();
-        //Create the drawer
+//Create the drawer
         result = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName("Test").withIcon(GoogleMaterial.Icon.gmd_wb_sunny).withIdentifier(1).withCheckable(false),
-                        new DividerDrawerItem(),
-                        new SecondaryDrawerItem().withName("Test").withIcon(FontAwesome.Icon.faw_eye).withIdentifier(4).withCheckable(false)
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home),
+                        //here we use a customPrimaryDrawerItem we defined in our sample app
+                        //this custom DrawerItem extends the PrimaryDrawerItem so it just overwrites some methods
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_free_play).withIcon(FontAwesome.Icon.faw_gamepad),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_custom).withDescription("This is a description").withIcon(FontAwesome.Icon.faw_eye),
+                        new SectionDrawerItem().withName(R.string.drawer_item_section_header),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cart_plus),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_database).setEnabled(false),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_contact).withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_add).actionBarSize().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Bullhorn"),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_question).setEnabled(false)
                 ) // add the items we want to use with our Drawer
-                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                .withOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
                     @Override
-                    public boolean onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
-                        //check if the drawerItem is set.
-                        //there are different reasons for the drawerItem to be null
-                        //--> click on the header
-                        //--> click on the footer
-                        //those items don't contain a drawerItem
-                        Intent intent = new Intent(BaseActivity.this, ToolbarControlRecyclerViewActivity.class);
-                        startActivity(intent);
+                    public boolean onNavigationClickListener(View clickedView) {
+                        //this method is only called if the Arrow icon is shown. The hamburger is automatically managed by the MaterialDrawer
+                        //if the back arrow is shown. close the activity
+                        //return true if we have consumed the event
                         return true;
                     }
                 })
+                .addStickyDrawerItems(
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(10),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github)
+                )
+                .withAnimateDrawerItems(true)
                 .withSavedInstance(savedInstanceState)
-                .withShowDrawerOnFirstLaunch(true)
                 .build();
 
         //only set the active selection or active profile if we do not recreate the activity
@@ -211,7 +215,6 @@ public abstract class BaseActivity extends ActionBarActivity {
             fm.beginTransaction().add(R.id.id_fragment_container, fragment).commit();
         }
     }
-
 
     private class MyPagerAdapter extends FragmentStatePagerAdapter {
         public MyPagerAdapter(FragmentManager fm) {

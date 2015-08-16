@@ -9,7 +9,7 @@ import com.android.volley.toolbox.Volley;
  * Created by tangqi on 7/20/15.
  */
 public class App extends Application {
-    private static App mContext;
+    public static App mContext;
     public static RequestQueue requestQueue;
     public static int memoryCacheSize;
     /**

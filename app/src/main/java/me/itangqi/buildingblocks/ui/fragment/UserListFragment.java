@@ -29,7 +29,6 @@ import me.itangqi.buildingblocks.data.RequestManager;
 import me.itangqi.buildingblocks.gson.ZhuanLanApi;
 
 public class UserListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-    //    private RecyclerView mRecyclerView;
     private List<User> mUserleList = new ArrayList<>();
     private UserListAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -44,7 +43,7 @@ public class UserListFragment extends Fragment implements SwipeRefreshLayout.OnR
     CircularProgressBar progressBar;
 
     @OnClick(R.id.fab)
-    void feed_multiple_actions() {
+    void fab_actions() {
         // TODO do what you want
     }
 
@@ -67,7 +66,7 @@ public class UserListFragment extends Fragment implements SwipeRefreshLayout.OnR
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_people_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_list, container, false);
         ButterKnife.bind(this, view);
 
         // use this setting to improve performance if you know that changes
@@ -153,6 +152,7 @@ public class UserListFragment extends Fragment implements SwipeRefreshLayout.OnR
 
     @Override
     public void onRefresh() {
+        // TODO do really refresh
         mSwipeRefreshLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
