@@ -73,4 +73,8 @@
         <item name="highlightColor">@color/highlight</item>
     </style>
 
+    <style name="CollapsingToolbarTitleStyle" parent="Widget.Design.CollapsingToolbar">
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
+
 </resources>

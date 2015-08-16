@@ -17,4 +17,17 @@
     <!-- getString(String, Object...) does not support HTML tags directly, they need to be encoded first.
     Original string: <b>%1$s</b><br/><i>Place Id: %2$s</i><br/>Address: %3$s<br/>Phone: %4$s<br/>Website: %5$s-->
     <string name="place_details">&lt;b&gt;%1$s&lt;/b&gt;&lt;br/&gt;&lt;i&gt;Place Id: %2$s&lt;/i&gt;&lt;br/&gt;Address: %3$s&lt;br/&gt;Phone: %4$s&lt;br/&gt;Website: %5$s</string>
+
+    <string name="about">关于</string>
+    <string name="introduce">「积木」- 让应用开发如同搭积木一般充满乐趣与成就感。\n\n开源是必须的，如果你觉得值得推荐的话，可以点击右上角的分享按钮进行分享，这将成为我最大的动力和支持，非常感谢！</string>
+    <string name="share">分享</string>
+    <string name="share_text">积木 - 享受搭建应用的乐趣\nhttps://github.com/tangqi92/BuildingBlocks</string>
+    <string name="app_name_with_introduce">积木 - 享受搭建应用的乐趣</string>
+    <string name="developers">开发人员</string>
+    <string name="developer_contributor">Android Contributor</string>
+    <string name="developer_and_designer">开发 &amp; 设计</string>
+    <string name="open_source_lis">使用的开源库</string>
+    <string name="introduce_and_help">介绍与帮助</string>
+    <string name="open_source_libraries_list">Coming soon</string>
+
 </resources>

@@ -165,7 +165,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_action_about:
-                Intent itToAboutMe = new Intent(BaseActivity.this, AboutMeActivity.class);
+                Intent itToAboutMe = new Intent(BaseActivity.this, AboutActivity.class);
                 startActivity(itToAboutMe);
                 break;
             case R.id.menu_action_pick_photo:

@@ -4,10 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 public final class Constants {
-    private Constants() {
 
-    }
-    
+    public static final String VERSION_NAME = "0.1.1";
+
     public static final class Date {
         public static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd", Locale.US);
         @SuppressWarnings("deprecation")

@@ -1,24 +1,72 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingTop="16dp">
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_card_nopic">
 
-    <Button
-        android:id="@+id/email"
+    <ImageView
+        android:id="@+id/ig_avatar_tangqi"
+        android:layout_width="@dimen/avatar_size"
+        android:layout_height="@dimen/avatar_size"
+        android:layout_margin="16dp"
+        android:src="@mipmap/ic_avatar_tangqi" />
+
+    <TextView
+        android:id="@+id/tv_tangqi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="email" />
+        android:layout_alignTop="@id/ig_avatar_tangqi"
+        android:layout_toEndOf="@id/ig_avatar_tangqi"
+        android:layout_toRightOf="@id/ig_avatar_tangqi"
+        android:text="汤奇"
+        android:textColor="@color/md_grey_800"
+        tools:ignore="HardcodedText" />
 
-    <Button
-        android:id="@+id/sms"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SMS" />
+        android:layout_below="@id/tv_tangqi"
+        android:layout_toEndOf="@id/ig_avatar_tangqi"
+        android:layout_toRightOf="@id/ig_avatar_tangqi"
+        android:text="@string/developer_and_designer"
+        android:textColor="@color/md_grey_600" />
+
+    <TextView
+        android:id="@+id/tv_avator_blog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/ig_avatar_tangqi"
+        android:layout_below="@id/ig_avatar_tangqi"
+        android:text="作者博客: "
+        android:textColor="@color/md_grey_800" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tv_avator_blog"
+        android:layout_toRightOf="@id/tv_avator_blog"
+        android:autoLink="web"
+        android:text="http://itangqi.me"
+        android:textColor="@color/md_grey_800" />
+
+    <TextView
+        android:id="@+id/tv_avator_github"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/tv_avator_blog"
+        android:layout_below="@id/tv_avator_blog"
+        android:text="GitHub: "
+        android:textColor="@color/md_grey_800" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tv_avator_github"
+        android:layout_marginBottom="16dp"
+        android:layout_toRightOf="@id/tv_avator_github"
+        android:autoLink="web"
+        android:text="https://github.com/tangqi92"
+        android:textColor="@color/md_grey_800" />
 
 
-</LinearLayout>
+</RelativeLayout>

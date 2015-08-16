@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="me.itangqi.buildingblocks.ui.activity.AboutMeActivity" />
+        <activity android:name=".ui.activity.AboutActivity" />
 
         <activity
             android:name="me.itangqi.buildingblocks.placepicker.PlaceAutocompleteActivity"
