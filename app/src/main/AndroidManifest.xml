@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.itangqi.testproj">
+    package="me.itangqi.buildingblocks">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -16,7 +16,7 @@
         android:glEsVersion="0x00020000"
         android:required="true" />
     <application
-        android:name="me.itangqi.testproj.utils.App"
+        android:name=".application.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -30,10 +30,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDWF5Al83s2a9P1JctqM3um9usNXEpVa2U" />
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-
         <activity
-            android:name=".ui.activity.PeopleListActivity"
+            android:name="me.itangqi.buildingblocks.ui.activity.PeopleListActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,33 +40,33 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activity.AboutMeActivity" />
+        <activity android:name="me.itangqi.buildingblocks.ui.activity.AboutMeActivity" />
 
         <activity
-            android:name=".placepicker.PlaceAutocompleteActivity"
+            android:name="me.itangqi.buildingblocks.placepicker.PlaceAutocompleteActivity"
             android:theme="@style/MaterialSettingsTheme" />
 
         <activity
-            android:name=".ui.activity.PickPhotoActivity"
+            android:name="me.itangqi.buildingblocks.ui.activity.PickPhotoActivity"
             android:theme="@style/CustomTheme" />
 
         <activity
-            android:name=".ui.activity.ToolbarControlRecyclerViewActivity"
+            android:name="me.itangqi.buildingblocks.ui.activity.ToolbarControlRecyclerViewActivity"
             android:theme="@style/AppTheme.Toolbar" />
 
         <activity
-            android:name=".ui.activity.SettingsActivity"
+            android:name="me.itangqi.buildingblocks.ui.activity.SettingsActivity"
             android:theme="@style/MaterialSettingsTheme" />
 
         <activity
             android:name="com.soundcloud.android.crop.CropImageActivity"
             android:theme="@style/CustomTheme" />
 
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
     </application>
 </manifest>

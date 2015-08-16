@@ -1,22 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <string name="app_name">知乎</string>
+    <string name="app_name">积木</string>
     <string name="menu_action_about">About Me</string>
     <string name="menu_action_search">Search</string>
     <string name="menu_action_settings">Settings</string>
     <string name="men_action_pick_date">Pick Date</string>
     <string name="men_action_pick_photo">Pick Photo</string>
     <string name="men_action_pick_place">Pick Place</string>
-    <string name="people_list_follower">flowers</string>
-    <string name="people_list_post_count">posts</string>
+    <string name="user_list_follower">flowers</string>
+    <string name="user_list_post_count">posts</string>
     <string name="api_network_error">Network Error</string>
     <string name="action_select">Pick</string>
     <string name="collapsing_toolbar_title">Qi Tang</string>
     <string name="autocomplete_hint">Enter place name or address</string>
-    <string name="selected_place">Last Selected Place:</string>
-    <string name="clear_text">Clear Text</string>
-    <string name="facebook_app_id">670639366306902</string>
-
 
     <!-- getString(String, Object...) does not support HTML tags directly, they need to be encoded first.
     Original string: <b>%1$s</b><br/><i>Place Id: %2$s</i><br/>Address: %3$s<br/>Phone: %4$s<br/>Website: %5$s-->
