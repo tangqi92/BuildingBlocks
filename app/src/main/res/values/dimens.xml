@@ -3,11 +3,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="title">17dp</dimen>
-    <dimen name="rating">15dp</dimen>
-    <dimen name="genre">13dp</dimen>
-    <dimen name="year">12dp</dimen>
-
     <dimen name="margin_4dp">4dp</dimen>
     <dimen name="margin_8dp">8dp</dimen>
     <dimen name="margin_16dp">16dp</dimen>
@@ -44,12 +39,7 @@
     <dimen name="image_thumbnail_spacing">5dp</dimen>
 
     <dimen name="toolbar_height">56dp</dimen>
-    <dimen name="gank_header_height">224dp</dimen>
     <dimen name="about_header_height">230dp</dimen>
-    <dimen name="text_size_gank_title">14sp</dimen>
-    <dimen name="padding_gank_item">16dp</dimen>
-    <dimen name="text_size_gank_category">18sp</dimen>
-    <dimen name="padding_vertical_gank_item">6dp</dimen>
     <dimen name="avatar_size">38dp</dimen>
     <dimen name="open_source_lis_text_size">13sp</dimen>
     <dimen name="about_card_margin">8dp</dimen>

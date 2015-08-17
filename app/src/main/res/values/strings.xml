@@ -9,11 +9,11 @@
     <string name="men_action_pick_place">Pick Place</string>
     <string name="user_list_follower">flowers</string>
     <string name="user_list_post_count">posts</string>
-    <string name="api_network_error">Network Error</string>
     <string name="action_select">Pick</string>
-    <string name="collapsing_toolbar_title">Qi Tang</string>
-    <string name="autocomplete_hint">Enter place name or address</string>
 
+    <string name="place_autocomplete_hint">Enter place name or address</string>
+    <string name="place_selected_place">Last Selected Place:</string>
+    <string name="place_get_current_place">GET CURRENT PLACE</string>
     <!-- getString(String, Object...) does not support HTML tags directly, they need to be encoded first.
     Original string: <b>%1$s</b><br/><i>Place Id: %2$s</i><br/>Address: %3$s<br/>Phone: %4$s<br/>Website: %5$s-->
     <string name="place_details">&lt;b&gt;%1$s&lt;/b&gt;&lt;br/&gt;&lt;i&gt;Place Id: %2$s&lt;/i&gt;&lt;br/&gt;Address: %3$s&lt;br/&gt;Phone: %4$s&lt;br/&gt;Website: %5$s</string>
@@ -29,6 +29,7 @@
     <string name="open_source_lis">使用的开源库</string>
     <string name="introduce_and_help">介绍与帮助</string>
     <string name="open_source_libraries_list">Coming soon</string>
+
     <string name="drawer_with_menu">Menu Drawer</string>
     <string name="drawer_item_home">Home</string>
     <string name="drawer_item_free_play">Free Play</string>
@@ -38,7 +39,5 @@
     <string name="drawer_item_help">Help</string>
     <string name="drawer_item_open_source">Open Source</string>
     <string name="drawer_item_contact">Contact</string>
-    <string name="selected_place">Last Selected Place:</string>
-    <string name="get_current_place">GET CURRENT PLACE</string>
 
 </resources>

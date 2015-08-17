@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
-      tools:context="me.drakeet.meizhi.ui.AboutActivity">
+      tools:context="me.itangqi.buildingblocks.ui.activity.AboutActivity">
       <item
           android:id="@+id/menu_share"
           android:orderInCategory="99"
