@@ -1,4 +1,4 @@
-package me.itangqi.buildingblocks.placepicker;/*
+package me.itangqi.buildingblocks.adapter;/*
  * Copyright (C) 2015 Google Inc. All Rights Reserved.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -186,7 +186,7 @@ public class GooglePlacesAdapter
     /**
      * Holder for Places Geo Data Autocomplete API results.
      */
-    class PlaceAutocomplete {
+    public class PlaceAutocomplete {
 
         public CharSequence placeId;
         public CharSequence description;

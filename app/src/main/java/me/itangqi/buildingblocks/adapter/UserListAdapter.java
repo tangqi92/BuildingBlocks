@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.orhanobut.logger.Logger;
-
 import java.util.List;
 
 import butterknife.Bind;
@@ -45,7 +43,6 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.CardVi
     @Override
     public void onBindViewHolder(CardViewHolder holder, int position) {
         User user = mUserList.get(position);
-        Logger.d(user.getFollowerCount()+"");
         String id = user.getAuthor().getAvatar().getId();
         String picUrl = ZhuanLanApi.getAuthorAvatarUrl(user.getAuthor().getAvatar().getTemplate(),
                 id, ZhuanLanApi.PIC_SIZE_XL);

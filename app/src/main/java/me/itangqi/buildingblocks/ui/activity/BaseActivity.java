@@ -37,7 +37,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.placepicker.GooglePlacesActivity;
 import me.itangqi.buildingblocks.ui.fragment.UserListFragment;
 import me.itangqi.buildingblocks.utils.Constants;
 
@@ -45,17 +44,12 @@ import me.itangqi.buildingblocks.utils.Constants;
 public abstract class BaseActivity extends ActionBarActivity {
     protected abstract Fragment createFragment();
 
-    private static final int PAGE_COUNT = 7;
-    private static final int PROFILE_SETTING = 1;
     // save our header or result
     private AccountHeader headerResult = null;
     private Drawer result = null;
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
-    @Bind(R.id.main_pager_tabs)
-    PagerSlidingTabStrip tabs;
-    @Bind(R.id.pager)
-    ViewPager pager;
+    @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.main_pager_tabs) PagerSlidingTabStrip tabs;
+    @Bind(R.id.pager) ViewPager pager;
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -71,7 +65,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         setSupportActionBar(toolbar);
         beginTransaction();
 
-        pager.setOffscreenPageLimit(PAGE_COUNT);
+        pager.setOffscreenPageLimit(Constants.PAGE_COUNT);
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(adapter);
         tabs.setViewPager(pager);
@@ -86,7 +80,7 @@ public abstract class BaseActivity extends ActionBarActivity {
                 .addProfiles(
                         profile,
                         //don't ask but google uses 14dp for the add account icon in gmail but 20dp for the normal icons (like manage account)
-                        new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new GitHub Account").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_add).actionBarSize().paddingDp(5).colorRes(R.color.material_drawer_primary_text)).withIdentifier(PROFILE_SETTING),
+                        new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new GitHub Account").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_add).actionBarSize().paddingDp(5).colorRes(R.color.material_drawer_primary_text)).withIdentifier(Constants.PROFILE_SETTING),
                         new ProfileSettingDrawerItem().withName("Manage Account").withIcon(GoogleMaterial.Icon.gmd_settings)
                 )
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
@@ -94,7 +88,7 @@ public abstract class BaseActivity extends ActionBarActivity {
                     public boolean onProfileChanged(View view, IProfile profile, boolean current) {
                         //sample usage of the onProfileChanged listener
                         //if the clicked item has the identifier 1 add a new profile ;)
-                        if (profile instanceof IDrawerItem && ((IDrawerItem) profile).getIdentifier() == PROFILE_SETTING) {
+                        if (profile instanceof IDrawerItem && ((IDrawerItem) profile).getIdentifier() == Constants.PROFILE_SETTING) {
                             IProfile newProfile = new ProfileDrawerItem().withNameShown(true).withName("Building Blocks").withEmail("buildingblocks@gmail.com").withIcon(getResources().getDrawable(R.mipmap.ic_avatar_tangqi));
                             if (headerResult.getProfiles() != null) {
                                 //we know that there are 2 setting elements. set the new profile above them ;)
@@ -235,7 +229,7 @@ public abstract class BaseActivity extends ActionBarActivity {
 
         @Override
         public int getCount() {
-            return PAGE_COUNT;
+            return Constants.PAGE_COUNT;
         }
 
         @Override

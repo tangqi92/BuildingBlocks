@@ -15,7 +15,7 @@ import me.itangqi.buildingblocks.application.App;
  */
 public final class RequestManager {
 
-    private static final RequestQueue mRequestQueue = Volley.newRequestQueue(App.getInstance());
+    private static final RequestQueue mRequestQueue = Volley.newRequestQueue(App.mContext);
 
     private static ImageLoader imageLoader;
 
