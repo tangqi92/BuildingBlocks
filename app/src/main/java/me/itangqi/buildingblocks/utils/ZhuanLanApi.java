@@ -1,4 +1,4 @@
-package me.itangqi.buildingblocks.gson;
+package me.itangqi.buildingblocks.utils;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;

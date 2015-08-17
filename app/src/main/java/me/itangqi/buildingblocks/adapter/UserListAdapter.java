@@ -7,14 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
+
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.bean.User;
 import me.itangqi.buildingblocks.data.RequestManager;
-import me.itangqi.buildingblocks.gson.ZhuanLanApi;
+import me.itangqi.buildingblocks.utils.ZhuanLanApi;
 import me.itangqi.buildingblocks.widget.CircleImageView;
 
 /**
@@ -42,13 +45,14 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.CardVi
     @Override
     public void onBindViewHolder(CardViewHolder holder, int position) {
         User user = mUserList.get(position);
+        Logger.d(user.getFollowerCount()+"");
         String id = user.getAuthor().getAvatar().getId();
         String picUrl = ZhuanLanApi.getAuthorAvatarUrl(user.getAuthor().getAvatar().getTemplate(),
                 id, ZhuanLanApi.PIC_SIZE_XL);
         holder.imageView.setImageUrl(picUrl, RequestManager.getImageLoader());
         holder.name.setText(user.getName());
-        holder.follower.setText(mContext.getString(R.string.user_list_follower, user.getFollowerCount()));
-        holder.postCount.setText(mContext.getString(R.string.user_list_post_count, user.getPostCount()));
+        holder.follower.setText(user.getFollowerCount() + " follower");
+        holder.postCount.setText(user.getPostCount() + " posts");
         holder.description.setText(user.getDescription());
     }
 
@@ -62,7 +66,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.CardVi
         return mUserList.size();
     }
 
-    public static class CardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class CardViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.avatar) CircleImageView imageView;
         @Bind(R.id.tv_name) TextView name;
         @Bind(R.id.tv_follower) TextView follower;
@@ -72,11 +76,10 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.CardVi
         public CardViewHolder(View v) {
             super(v);
             ButterKnife.bind(this, v);
-            v.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View view) {
+        @OnClick(R.id.rl_card_parent)
+        void onClick(View v) {
             // TODO do what you want
         }
     }

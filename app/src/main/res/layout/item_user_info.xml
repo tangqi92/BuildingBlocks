@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -14,6 +13,7 @@
         card_view:cardElevation="@dimen/margin_4dp">
 
         <RelativeLayout
+            android:id="@+id/rl_card_parent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/margin_4dp"
@@ -78,7 +78,7 @@
                 android:layout_toRightOf="@id/avatar"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="给您不一样的看日本的视角，带您体会不一样的日本文化，让您的日本之旅更有意境。"
+                android:text="Android/iOS Developer | Blog:http://itangqi.me | Github:https://github.com/tangqi92"
                 android:textSize="14sp" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>

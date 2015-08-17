@@ -223,7 +223,7 @@ public abstract class BaseActivity extends ActionBarActivity {
 
             Calendar dateToGetUrl = Calendar.getInstance();
             dateToGetUrl.add(Calendar.DAY_OF_YEAR, 1 - i);
-            String date = Constants.Date.simpleDateFormat.format(dateToGetUrl.getTime());
+            String date = Constants.simpleDateFormat.format(dateToGetUrl.getTime());
 
             bundle.putBoolean("first_page?", i == 0);
             bundle.putBoolean("single?", false);

@@ -25,7 +25,7 @@ import me.itangqi.buildingblocks.adapter.UserListAdapter;
 import me.itangqi.buildingblocks.bean.User;
 import me.itangqi.buildingblocks.data.GsonRequest;
 import me.itangqi.buildingblocks.data.RequestManager;
-import me.itangqi.buildingblocks.gson.ZhuanLanApi;
+import me.itangqi.buildingblocks.utils.ZhuanLanApi;
 
 public class UserListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private List<User> mUserleList = new ArrayList<>();
@@ -42,6 +42,7 @@ public class UserListFragment extends Fragment implements SwipeRefreshLayout.OnR
     @OnClick(R.id.fab)
     void fab_actions() {
         // TODO do what you want
+
     }
 
     public static UserListFragment newInstance() {

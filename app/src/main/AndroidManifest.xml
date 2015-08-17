@@ -53,10 +53,6 @@
             android:theme="@style/CustomTheme" />
 
         <activity
-            android:name=".ui.activity.ToolbarControlRecyclerViewActivity"
-            android:theme="@style/AppTheme.Toolbar" />
-
-        <activity
             android:name=".ui.activity.SettingsActivity"
             android:theme="@style/MaterialSettingsTheme" />
 
