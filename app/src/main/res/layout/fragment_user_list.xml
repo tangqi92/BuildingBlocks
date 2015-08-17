@@ -20,6 +20,4 @@
 
     <include layout="@layout/widget_circular_progressbar" />
 
-    <include layout="@layout/widget_floating_action_button" />
-
 </FrameLayout>

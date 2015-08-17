@@ -28,7 +28,7 @@ public class PickPhotoActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_pick, menu);
+        getMenuInflater().inflate(R.menu.menu_pick_photo, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

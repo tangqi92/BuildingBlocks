@@ -15,8 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.facebook.FacebookSdk;
-import com.github.mrengineer13.snackbar.SnackBar;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.iconics.typeface.FontAwesome;
@@ -67,9 +65,6 @@ public abstract class BaseActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        // Initialize the SDK before executing any other operations,
-        // especially, if you're using Facebook UI elements.
         setContentView(R.layout.activity_single_fragment);
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
@@ -83,7 +78,7 @@ public abstract class BaseActivity extends ActionBarActivity {
 
         // Create a few sample profile
         // NOTE you have to define the loader logic too. See the CustomApplication for more details
-        final IProfile profile = new ProfileDrawerItem().withName("Qi Tang").withEmail("imtangqi@gmail.com").withIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_avatar_tangqi));
+        final IProfile profile = new ProfileDrawerItem().withName("Qi Tang").withEmail("imtangqi@gmail.com").withIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_avatar_tangqi));
         // Create the AccountHeader
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
@@ -100,7 +95,7 @@ public abstract class BaseActivity extends ActionBarActivity {
                         //sample usage of the onProfileChanged listener
                         //if the clicked item has the identifier 1 add a new profile ;)
                         if (profile instanceof IDrawerItem && ((IDrawerItem) profile).getIdentifier() == PROFILE_SETTING) {
-                            IProfile newProfile = new ProfileDrawerItem().withNameShown(true).withName("Building Blocks").withEmail("buildingblocks@gmail.com").withIcon(getResources().getDrawable(R.drawable.ic_avatar_tangqi));
+                            IProfile newProfile = new ProfileDrawerItem().withNameShown(true).withName("Building Blocks").withEmail("buildingblocks@gmail.com").withIcon(getResources().getDrawable(R.mipmap.ic_avatar_tangqi));
                             if (headerResult.getProfiles() != null) {
                                 //we know that there are 2 setting elements. set the new profile above them ;)
                                 headerResult.addProfile(newProfile, headerResult.getProfiles().size() - 2);
@@ -251,13 +246,6 @@ public abstract class BaseActivity extends ActionBarActivity {
             return (position == 0 ? getResources().getString(R.string.app_name) + " " : "")
                     + DateFormat.getDateInstance().format(displayDate.getTime());
         }
-    }
-
-    public void showSnackBar() {
-        new SnackBar.Builder(BaseActivity.this)
-                .withMessage("This library is awesome!") // OR
-                .withActionMessage("Action") // OR
-                .show();
     }
 
     @Override

@@ -49,7 +49,7 @@
             android:theme="@style/MaterialSettingsTheme" />
 
         <activity
-            android:name="me.itangqi.buildingblocks.ui.activity.PickPhotoActivity"
+            android:name=".ui.activity.PickPhotoActivity"
             android:theme="@style/CustomTheme" />
 
         <activity
