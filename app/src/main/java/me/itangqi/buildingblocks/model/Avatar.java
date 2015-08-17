@@ -1,4 +1,4 @@
-package me.itangqi.buildingblocks.bean;
+package me.itangqi.buildingblocks.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -1,4 +1,4 @@
-package me.itangqi.buildingblocks.data;
+package me.itangqi.buildingblocks.utils;
 
 import android.support.v4.util.ArrayMap;
 import android.text.TextUtils;

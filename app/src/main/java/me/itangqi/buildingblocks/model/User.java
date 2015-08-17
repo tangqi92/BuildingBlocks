@@ -1,4 +1,4 @@
-package me.itangqi.buildingblocks.bean;
+package me.itangqi.buildingblocks.model;
 
 import com.google.gson.annotations.SerializedName;
 

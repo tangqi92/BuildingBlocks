@@ -22,9 +22,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.adapter.UserListAdapter;
-import me.itangqi.buildingblocks.bean.User;
-import me.itangqi.buildingblocks.data.GsonRequest;
-import me.itangqi.buildingblocks.data.RequestManager;
+import me.itangqi.buildingblocks.model.User;
+import me.itangqi.buildingblocks.utils.GsonRequest;
+import me.itangqi.buildingblocks.utils.RequestManager;
 import me.itangqi.buildingblocks.utils.ZhuanLanApi;
 
 public class UserListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {

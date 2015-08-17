@@ -1,4 +1,4 @@
-package me.itangqi.buildingblocks.adapter;/*
+/*
  * Copyright (C) 2015 Google Inc. All Rights Reserved.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,9 +14,9 @@ package me.itangqi.buildingblocks.adapter;/*
  *  limitations under the License.
  */
 
+package me.itangqi.buildingblocks.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -35,11 +35,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
-
 public class GooglePlacesAdapter
         extends ArrayAdapter<GooglePlacesAdapter.PlaceAutocomplete> implements Filterable {
 
-    private static final String TAG = "PlaceAutocompleteAdapter";
     /**
      * Current results returned by this adapter.
      */
@@ -132,10 +130,8 @@ public class GooglePlacesAdapter
         return filter;
     }
 
-
     private ArrayList<PlaceAutocomplete> getAutocomplete(CharSequence constraint) {
         if (mGoogleApiClient.isConnected()) {
-            Log.i(TAG, "Starting autocomplete query for: " + constraint);
 
             // Submit the query to the autocomplete API and retrieve a PendingResult that will
             // contain the results when the query completes.
@@ -154,17 +150,12 @@ public class GooglePlacesAdapter
             if (!status.isSuccess()) {
                 Toast.makeText(getContext(), "Error contacting API: " + status.toString(),
                         Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "Error getting autocomplete prediction API call: " + status.toString());
                 autocompletePredictions.release();
                 return null;
             }
 
-            Log.i(TAG, "Query completed. Received " + autocompletePredictions.getCount()
-                    + " predictions.");
-
             // Copy the results into our own data structure, because we can't hold onto the buffer.
             // AutocompletePrediction objects encapsulate the API response (place ID and description).
-
             Iterator<AutocompletePrediction> iterator = autocompletePredictions.iterator();
             ArrayList resultList = new ArrayList<>(autocompletePredictions.getCount());
             while (iterator.hasNext()) {
@@ -179,7 +170,6 @@ public class GooglePlacesAdapter
 
             return resultList;
         }
-        Log.e(TAG, "Google API client is not connected for autocomplete query.");
         return null;
     }
 

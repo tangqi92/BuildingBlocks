@@ -1,4 +1,4 @@
-package me.itangqi.buildingblocks.data;
+package me.itangqi.buildingblocks.utils;
 
 import android.graphics.Bitmap;
 import android.os.Build;

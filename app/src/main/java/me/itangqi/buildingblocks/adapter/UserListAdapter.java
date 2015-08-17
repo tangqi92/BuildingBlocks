@@ -13,8 +13,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.bean.User;
-import me.itangqi.buildingblocks.data.RequestManager;
+import me.itangqi.buildingblocks.model.User;
+import me.itangqi.buildingblocks.utils.RequestManager;
 import me.itangqi.buildingblocks.utils.ZhuanLanApi;
 import me.itangqi.buildingblocks.widget.CircleImageView;
 

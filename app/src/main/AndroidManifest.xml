@@ -43,9 +43,9 @@
 
         <activity android:name=".ui.activity.AboutActivity" />
 
-        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
-
         <activity android:name=".ui.activity.GooglePlacesActivity" />
+
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
 
         <activity
             android:name=".ui.activity.PickPhotoActivity"

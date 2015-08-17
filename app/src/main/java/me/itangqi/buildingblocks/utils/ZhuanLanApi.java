@@ -4,8 +4,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.orhanobut.logger.Logger;
 
-import me.itangqi.buildingblocks.bean.User;
-import me.itangqi.buildingblocks.data.GsonRequest;
+import me.itangqi.buildingblocks.model.User;
 
 
 /**
