@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.bean.User;
 import me.itangqi.buildingblocks.data.RequestManager;
@@ -61,19 +63,15 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.CardVi
     }
 
     public static class CardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public CircleImageView imageView;
-        public TextView name;
-        public TextView follower;
-        public TextView postCount;
-        public TextView description;
+        @Bind(R.id.avatar) CircleImageView imageView;
+        @Bind(R.id.tv_name) TextView name;
+        @Bind(R.id.tv_follower) TextView follower;
+        @Bind(R.id.tv_post_count) TextView postCount;
+        @Bind(R.id.tv_description) TextView description;
 
         public CardViewHolder(View v) {
             super(v);
-            imageView = (CircleImageView) v.findViewById(R.id.avatar);
-            name = (TextView) v.findViewById(R.id.tv_name);
-            follower = (TextView) v.findViewById(R.id.tv_follower);
-            postCount = (TextView) v.findViewById(R.id.tv_post_count);
-            description = (TextView) v.findViewById(R.id.tv_description);
+            ButterKnife.bind(this, v);
             v.setOnClickListener(this);
         }
 

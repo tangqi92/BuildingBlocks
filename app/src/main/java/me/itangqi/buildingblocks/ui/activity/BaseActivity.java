@@ -39,7 +39,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.placepicker.PlaceAutocompleteActivity;
+import me.itangqi.buildingblocks.placepicker.GooglePlacesActivity;
 import me.itangqi.buildingblocks.ui.fragment.UserListFragment;
 import me.itangqi.buildingblocks.utils.Constants;
 
@@ -177,7 +177,7 @@ public abstract class BaseActivity extends ActionBarActivity {
                 startActivity(itToPhoto);
                 break;
             case R.id.menu_action_pick_place:
-                Intent itToPlace = new Intent(BaseActivity.this, PlaceAutocompleteActivity.class);
+                Intent itToPlace = new Intent(BaseActivity.this, GooglePlacesActivity.class);
                 startActivity(itToPlace);
                 break;
             case R.id.menu_action_settings:

@@ -45,7 +45,7 @@
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
 
         <activity
-            android:name="me.itangqi.buildingblocks.placepicker.PlaceAutocompleteActivity"
+            android:name=".placepicker.GooglePlacesActivity"
             android:theme="@style/MaterialSettingsTheme" />
 
         <activity

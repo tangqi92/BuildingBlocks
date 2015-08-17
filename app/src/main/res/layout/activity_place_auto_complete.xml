@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
   Copyright (C) 2015 Google Inc. All Rights Reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,59 +15,33 @@
    See the License for the specific language governing permissions and
    limitations under the License.
   -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ms_gray"
+    android:layout_margin="@dimen/margin_16dp"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <AutoCompleteTextView
+        android:id="@+id/autocomplete_places"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
-        app:theme="@style/Toolbar" />
+        android:layout_gravity="center_horizontal"
+        android:hint="@string/autocomplete_hint" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/ms_white"
-        android:orientation="vertical">
-
-        <AutoCompleteTextView
-            android:id="@+id/autocomplete_places"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:hint="@string/autocomplete_hint"
-            android:textColor="@color/ms_black"
-            android:textColorHint="@color/hint_text" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_current_location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/ms_white"
-        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/margin_8dp">
+        android:paddingTop="@dimen/margin_8dp">
 
-        <ImageView
+        <Button
+            android:id="@+id/btn_current_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_location" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/margin_8dp"
-            android:text="Current Loaction"
-            android:textColor="@color/ms_black" />
+            android:layout_gravity="center_vertical"
+            android:text="@string/get_current_place"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
     </LinearLayout>
 
     <ImageView
@@ -73,5 +49,29 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:src="@drawable/powered_by_google_light" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/selected_place"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/place_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoLink="all"
+        android:paddingTop="@dimen/margin_8dp"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/place_attribution"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoLink="all"
+        android:paddingTop="@dimen/margin_16dp"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </LinearLayout>

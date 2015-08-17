@@ -36,8 +36,8 @@ import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 
-public class PlaceAutocompleteAdapter
-        extends ArrayAdapter<PlaceAutocompleteAdapter.PlaceAutocomplete> implements Filterable {
+public class GooglePlacesAdapter
+        extends ArrayAdapter<GooglePlacesAdapter.PlaceAutocomplete> implements Filterable {
 
     private static final String TAG = "PlaceAutocompleteAdapter";
     /**
@@ -65,8 +65,8 @@ public class PlaceAutocompleteAdapter
      *
      * @see ArrayAdapter#ArrayAdapter(Context, int)
      */
-    public PlaceAutocompleteAdapter(Context context, int resource, GoogleApiClient googleApiClient,
-                                    LatLngBounds bounds, AutocompleteFilter filter) {
+    public GooglePlacesAdapter(Context context, int resource, GoogleApiClient googleApiClient,
+                               LatLngBounds bounds, AutocompleteFilter filter) {
         super(context, resource);
         mGoogleApiClient = googleApiClient;
         mBounds = bounds;
