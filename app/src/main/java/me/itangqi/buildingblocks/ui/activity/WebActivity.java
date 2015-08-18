@@ -45,7 +45,7 @@ public class WebActivity extends ToolbarActivity {
 
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.setWebChromeClient(new ChromeClient());
-        mWebView.setWebViewClient(new LoveClient());
+        mWebView.setWebViewClient(new ViewClient());
         mWebView.getSettings().setLoadWithOverviewMode(true);
         mWebView.getSettings().setAppCacheEnabled(true);
         mWebView.loadUrl(mUrl);
@@ -107,7 +107,7 @@ public class WebActivity extends ToolbarActivity {
         }
     }
 
-    private class LoveClient extends WebViewClient {
+    private class ViewClient extends WebViewClient {
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             if (url != null) view.loadUrl(url);
             return true;

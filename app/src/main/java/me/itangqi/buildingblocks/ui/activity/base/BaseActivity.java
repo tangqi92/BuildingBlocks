@@ -35,7 +35,6 @@ import java.util.Calendar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import de.greenrobot.event.EventBus;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.ui.activity.AboutActivity;
 import me.itangqi.buildingblocks.ui.activity.GooglePlacesActivity;
@@ -65,7 +64,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_fragment);
         ButterKnife.bind(this);
-        EventBus.getDefault().register(this);
         setSupportActionBar(toolbar);
 
         pager.setOffscreenPageLimit(Constants.PAGE_COUNT);
@@ -73,82 +71,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         pager.setAdapter(adapter);
         tabs.setViewPager(pager);
 
-        // Create a few sample profile
-        // NOTE you have to define the loader logic too. See the CustomApplication for more details
-        final IProfile profile = new ProfileDrawerItem().withName("Qi Tang").withEmail("imtangqi@gmail.com").withIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_avatar_tangqi));
-        // Create the AccountHeader
-        headerResult = new AccountHeaderBuilder()
-                .withActivity(this)
-                .withHeaderBackground(R.drawable.header)
-                .addProfiles(
-                        profile,
-                        //don't ask but google uses 14dp for the add account icon in gmail but 20dp for the normal icons (like manage account)
-                        new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new GitHub Account").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_add).actionBarSize().paddingDp(5).colorRes(R.color.material_drawer_primary_text)).withIdentifier(Constants.PROFILE_SETTING),
-                        new ProfileSettingDrawerItem().withName("Manage Account").withIcon(GoogleMaterial.Icon.gmd_settings)
-                )
-                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
-                    @Override
-                    public boolean onProfileChanged(View view, IProfile profile, boolean current) {
-                        //sample usage of the onProfileChanged listener
-                        //if the clicked item has the identifier 1 add a new profile ;)
-                        if (profile instanceof IDrawerItem && ((IDrawerItem) profile).getIdentifier() == Constants.PROFILE_SETTING) {
-                            IProfile newProfile = new ProfileDrawerItem().withNameShown(true).withName("Building Blocks").withEmail("buildingblocks@gmail.com").withIcon(getResources().getDrawable(R.mipmap.ic_avatar_tangqi));
-                            if (headerResult.getProfiles() != null) {
-                                //we know that there are 2 setting elements. set the new profile above them ;)
-                                headerResult.addProfile(newProfile, headerResult.getProfiles().size() - 2);
-                            } else {
-                                headerResult.addProfiles(newProfile);
-                            }
-                        }
-                        //false if you have not consumed the event and it should close the drawer
-                        return false;
-                    }
-                })
-                .withSavedInstance(savedInstanceState)
-                .build();
-//Create the drawer
-        result = new DrawerBuilder()
-                .withActivity(this)
-                .withToolbar(toolbar)
-                .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
-                .addDrawerItems(
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home),
-                        //here we use a customPrimaryDrawerItem we defined in our sample app
-                        //this custom DrawerItem extends the PrimaryDrawerItem so it just overwrites some methods
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_free_play).withIcon(FontAwesome.Icon.faw_gamepad),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_custom).withDescription("This is a description").withIcon(FontAwesome.Icon.faw_eye),
-                        new SectionDrawerItem().withName(R.string.drawer_item_section_header),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cart_plus),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_database).setEnabled(false),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_contact).withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_add).actionBarSize().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Bullhorn"),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_question).setEnabled(false)
-                ) // add the items we want to use with our Drawer
-                .withOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
-                    @Override
-                    public boolean onNavigationClickListener(View clickedView) {
-                        //this method is only called if the Arrow icon is shown. The hamburger is automatically managed by the MaterialDrawer
-                        //if the back arrow is shown. close the activity
-                        //return true if we have consumed the event
-                        return true;
-                    }
-                })
-                .addStickyDrawerItems(
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(10),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github)
-                )
-                .withAnimateDrawerItems(true)
-                .withSavedInstance(savedInstanceState)
-                .build();
-
-        //only set the active selection or active profile if we do not recreate the activity
-        if (savedInstanceState == null) {
-            // set the selection to the item with the identifier 11
-            result.setSelectionByIdentifier(11, false);
-
-            //set the active profile
-            headerResult.setActiveProfile(profile);
-        }
+        createProfile(savedInstanceState);
     }
 
     @Override
@@ -199,6 +122,85 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
+    public void createProfile(Bundle savedInstanceState) {
+        // Create a few sample profile
+        // NOTE you have to define the loader logic too. See the CustomApplication for more details
+        final IProfile profile = new ProfileDrawerItem().withName("Qi Tang").withEmail("imtangqi@gmail.com").withIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_avatar_tangqi));
+        // Create the AccountHeader
+        headerResult = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withHeaderBackground(R.drawable.header)
+                .addProfiles(
+                        profile,
+                        //don't ask but google uses 14dp for the add account icon in gmail but 20dp for the normal icons (like manage account)
+                        new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new GitHub Account").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_add).actionBarSize().paddingDp(5).colorRes(R.color.material_drawer_primary_text)).withIdentifier(Constants.PROFILE_SETTING),
+                        new ProfileSettingDrawerItem().withName("Manage Account").withIcon(GoogleMaterial.Icon.gmd_settings)
+                )
+                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+                    @Override
+                    public boolean onProfileChanged(View view, IProfile profile, boolean current) {
+                        //sample usage of the onProfileChanged listener
+                        //if the clicked item has the identifier 1 add a new profile ;)
+                        if (profile instanceof IDrawerItem && ((IDrawerItem) profile).getIdentifier() == Constants.PROFILE_SETTING) {
+                            IProfile newProfile = new ProfileDrawerItem().withNameShown(true).withName("Building Blocks").withEmail("buildingblocks@gmail.com").withIcon(getResources().getDrawable(R.mipmap.ic_avatar_tangqi));
+                            if (headerResult.getProfiles() != null) {
+                                //we know that there are 2 setting elements. set the new profile above them ;)
+                                headerResult.addProfile(newProfile, headerResult.getProfiles().size() - 2);
+                            } else {
+                                headerResult.addProfiles(newProfile);
+                            }
+                        }
+                        //false if you have not consumed the event and it should close the drawer
+                        return false;
+                    }
+                })
+                .withSavedInstance(savedInstanceState)
+                .build();
+        //Create the drawer
+        result = new DrawerBuilder()
+                .withActivity(this)
+                .withToolbar(toolbar)
+                .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
+                .addDrawerItems(
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home),
+                        //here we use a customPrimaryDrawerItem we defined in our sample app
+                        //this custom DrawerItem extends the PrimaryDrawerItem so it just overwrites some methods
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_free_play).withIcon(FontAwesome.Icon.faw_gamepad),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_custom).withDescription("This is a description").withIcon(FontAwesome.Icon.faw_eye),
+                        new SectionDrawerItem().withName(R.string.drawer_item_section_header),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cart_plus),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_database).setEnabled(false),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_contact).withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_add).actionBarSize().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Bullhorn"),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_question).setEnabled(false)
+                ) // add the items we want to use with our Drawer
+                .withOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
+                    @Override
+                    public boolean onNavigationClickListener(View clickedView) {
+                        //this method is only called if the Arrow icon is shown. The hamburger is automatically managed by the MaterialDrawer
+                        //if the back arrow is shown. close the activity
+                        //return true if we have consumed the event
+                        return true;
+                    }
+                })
+                .addStickyDrawerItems(
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(10),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github)
+                )
+                .withAnimateDrawerItems(true)
+                .withSavedInstance(savedInstanceState)
+                .build();
+
+        //only set the active selection or active profile if we do not recreate the activity
+        if (savedInstanceState == null) {
+            // set the selection to the item with the identifier 11
+            result.setSelectionByIdentifier(11, false);
+
+            //set the active profile
+            headerResult.setActiveProfile(profile);
+        }
+    }
+
     private class MyPagerAdapter extends FragmentStatePagerAdapter {
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -241,5 +243,4 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onDestroy();
         // watch  memory leak
     }
-
 }

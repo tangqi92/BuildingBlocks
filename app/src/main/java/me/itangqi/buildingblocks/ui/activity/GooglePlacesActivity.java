@@ -19,7 +19,6 @@ package me.itangqi.buildingblocks.ui.activity;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.View;
@@ -42,8 +41,9 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.adapter.GooglePlacesAdapter;
+import me.itangqi.buildingblocks.ui.activity.base.ToolbarActivity;
 
-public class GooglePlacesActivity extends AppCompatActivity
+public class GooglePlacesActivity extends ToolbarActivity
         implements GoogleApiClient.OnConnectionFailedListener {
     /**
      * GoogleApiClient wraps our service connection to Google Play Services and provides access
@@ -67,6 +67,11 @@ public class GooglePlacesActivity extends AppCompatActivity
             new LatLng(-34.041458, 150.790100), new LatLng(-33.682247, 151.383362));
 
     @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_place_auto_complete;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -80,7 +85,7 @@ public class GooglePlacesActivity extends AppCompatActivity
                 .addApi(Places.PLACE_DETECTION_API)
                 .build();
 
-        setContentView(R.layout.activity_place_auto_complete);
+        setTitle("位置");
 
         // Retrieve the AutoCompleteTextView that will display Place suggestions.
         mAutocompleteView = (AutoCompleteTextView)

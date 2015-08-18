@@ -65,7 +65,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.CardVi
         return mUserList.size();
     }
 
-    public static class CardViewHolder extends RecyclerView.ViewHolder {
+    public class CardViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.avatar) CircleImageView imageView;
         @Bind(R.id.tv_name) TextView name;
         @Bind(R.id.tv_follower) TextView follower;
@@ -80,9 +80,10 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.CardVi
         @OnClick(R.id.rl_card_parent)
         void onClick(View v) {
             // TODO do what you want
+            User user = mUserList.get(getLayoutPosition());
             Intent intent = new Intent(v.getContext(), WebActivity.class);
-            intent.putExtra(WebActivity.EXTRA_TITLE, "Test");
-            intent.putExtra(WebActivity.EXTRA_URL, "http://itangqi.me");
+            intent.putExtra(WebActivity.EXTRA_TITLE, user.getName());
+            intent.putExtra(WebActivity.EXTRA_URL, user.getUrl());
             v.getContext().startActivity(intent);
         }
     }

@@ -1,21 +1,21 @@
 package me.itangqi.buildingblocks.ui.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.ui.activity.base.ToolbarActivity;
 import me.itangqi.buildingblocks.ui.fragment.PrefsFragment;
 
-public class PrefsActivity extends AppCompatActivity {
-    protected Toolbar mToolBar;
+public class PrefsActivity extends ToolbarActivity {
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_prefs;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prefs);
-        mToolBar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolBar);
+        setTitle("设置");
         getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_frame, new PrefsFragment())

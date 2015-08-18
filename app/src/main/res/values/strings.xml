@@ -67,5 +67,6 @@
     <string name="accelerate_server_unlock">Accelerate server unlocked</string>
     <string name="auto_refresh_summary">Auto refresh when this app is launched?</string>
     <string name="auto_refresh">Auto Refresh</string>
+    <string name="exit_once_more">再按一次后退键退出应用程序</string>
 
 </resources>
