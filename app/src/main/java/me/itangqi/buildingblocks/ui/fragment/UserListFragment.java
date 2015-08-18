@@ -12,14 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.volley.Response;
-import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.adapter.UserListAdapter;
 import me.itangqi.buildingblocks.model.User;
@@ -36,14 +34,6 @@ public class UserListFragment extends Fragment implements SwipeRefreshLayout.OnR
     RecyclerView mRecyclerView;
     @Bind(R.id.swipe_refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
-    @Bind(R.id.fab)
-    FloatingActionButton mFloatingActionButton;
-
-    @OnClick(R.id.fab)
-    void fab_actions() {
-        // TODO do what you want
-
-    }
 
     public static UserListFragment newInstance() {
         UserListFragment fragment = new UserListFragment();
@@ -77,8 +67,6 @@ public class UserListFragment extends Fragment implements SwipeRefreshLayout.OnR
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.primary);
-
-        mFloatingActionButton.attachToRecyclerView(mRecyclerView);
 
         return view;
     }

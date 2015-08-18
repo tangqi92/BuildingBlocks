@@ -16,6 +16,5 @@
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    <include layout="@layout/widget_floating_action_button" />
 
 </FrameLayout>

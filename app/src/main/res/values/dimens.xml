@@ -44,4 +44,9 @@
     <dimen name="open_source_lis_text_size">13sp</dimen>
     <dimen name="about_card_margin">8dp</dimen>
 
+    <dimen name="fab_margin_right">0dp</dimen>
+    <dimen name="fab_margin_bottom">0dp</dimen>
+    <dimen name="tabsHeight">48dp</dimen>
+
+
 </resources>

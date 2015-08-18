@@ -67,7 +67,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
         setSupportActionBar(toolbar);
-        beginTransaction();
 
         pager.setOffscreenPageLimit(Constants.PAGE_COUNT);
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
@@ -197,15 +196,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             result.closeDrawer();
         } else {
             super.onBackPressed();
-        }
-    }
-
-    public void beginTransaction() {
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.id_fragment_container);
-        if (fragment == null) {
-            fragment = createFragment();
-            fm.beginTransaction().add(R.id.id_fragment_container, fragment).commit();
         }
     }
 
