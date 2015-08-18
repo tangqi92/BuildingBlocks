@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import de.greenrobot.event.EventBus;
 import me.itangqi.buildingblocks.event.TestEvent;
+import me.itangqi.buildingblocks.ui.activity.base.BaseActivity;
 import me.itangqi.buildingblocks.ui.fragment.UserListFragment;
 
 

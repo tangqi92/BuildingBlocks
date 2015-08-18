@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Author
+ *
  * @author bxbxbai
  */
 public class Author implements Parcelable {

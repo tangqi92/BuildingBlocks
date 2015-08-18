@@ -1,6 +1,7 @@
 package me.itangqi.buildingblocks.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.model.User;
+import me.itangqi.buildingblocks.ui.activity.WebActivity;
 import me.itangqi.buildingblocks.utils.RequestManager;
 import me.itangqi.buildingblocks.utils.ZhuanLanApi;
 import me.itangqi.buildingblocks.widget.CircleImageView;
@@ -78,6 +80,10 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.CardVi
         @OnClick(R.id.rl_card_parent)
         void onClick(View v) {
             // TODO do what you want
+            Intent intent = new Intent(v.getContext(), WebActivity.class);
+            intent.putExtra(WebActivity.EXTRA_TITLE, "Test");
+            intent.putExtra(WebActivity.EXTRA_URL, "http://itangqi.me");
+            v.getContext().startActivity(intent);
         }
     }
 }

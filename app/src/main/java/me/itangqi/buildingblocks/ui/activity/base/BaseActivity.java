@@ -1,4 +1,4 @@
-package me.itangqi.buildingblocks.ui.activity;
+package me.itangqi.buildingblocks.ui.activity.base;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,11 +37,15 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.ui.activity.AboutActivity;
+import me.itangqi.buildingblocks.ui.activity.GooglePlacesActivity;
+import me.itangqi.buildingblocks.ui.activity.PickPhotoActivity;
+import me.itangqi.buildingblocks.ui.activity.SettingsActivity;
 import me.itangqi.buildingblocks.ui.fragment.UserListFragment;
 import me.itangqi.buildingblocks.utils.Constants;
 
 
-public abstract class BaseActivity extends ActionBarActivity {
+public abstract class BaseActivity extends AppCompatActivity {
     protected abstract Fragment createFragment();
 
     // save our header or result
