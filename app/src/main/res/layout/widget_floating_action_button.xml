@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.melnykov.fab.FloatingActionButton xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fab"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom|right"
-    android:layout_margin="16dp"
-    android:src="@mipmap/ic_refresh_white_24dp"
-    fab:fab_colorNormal="@color/accent"
-    fab:fab_colorRipple="@color/ripple" />
+<android.support.design.widget.FloatingActionButton
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+
+android:id="@+id/fab"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="end|bottom"
+android:layout_margin="@dimen/fab_margin"
+android:src="@mipmap/ic_refresh_white_24dp"
+app:borderWidth="0dp"
+app:layout_behavior="me.itangqi.buildingblocks.widget.ScrollingFABBehavior"/>
 
