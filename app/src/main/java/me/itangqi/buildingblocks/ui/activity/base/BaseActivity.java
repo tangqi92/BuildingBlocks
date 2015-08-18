@@ -40,7 +40,7 @@ import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.ui.activity.AboutActivity;
 import me.itangqi.buildingblocks.ui.activity.GooglePlacesActivity;
 import me.itangqi.buildingblocks.ui.activity.PickPhotoActivity;
-import me.itangqi.buildingblocks.ui.activity.SettingsActivity;
+import me.itangqi.buildingblocks.ui.activity.PrefsActivity;
 import me.itangqi.buildingblocks.ui.fragment.UserListFragment;
 import me.itangqi.buildingblocks.utils.Constants;
 
@@ -173,7 +173,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 startActivity(itToPlace);
                 break;
             case R.id.menu_action_settings:
-                Intent itToSettings = new Intent(BaseActivity.this, SettingsActivity.class);
+                Intent itToSettings = new Intent(BaseActivity.this, PrefsActivity.class);
                 startActivity(itToSettings);
                 break;
         }

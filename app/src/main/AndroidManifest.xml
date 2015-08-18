@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.itangqi.buildingblocks">
+<manifest
+    package="me.itangqi.buildingblocks"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
 
     <!-- PlacePicker also requires OpenGL ES version 2 -->
     <uses-feature
         android:glEsVersion="0x00020000"
-        android:required="true" />
+        android:required="true"/>
     <application
         android:name=".application.App"
         android:allowBackup="true"
@@ -24,38 +25,35 @@
 
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+            android:value="@integer/google_play_services_version"/>
 
         <!-- Replace with your API_KEY -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDWF5Al83s2a9P1JctqM3um9usNXEpVa2U" />
+            android:value="AIzaSyDWF5Al83s2a9P1JctqM3um9usNXEpVa2U"/>
 
         <activity
             android:name=".ui.activity.UserListActivity"
             android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activity.AboutActivity" />
+        <activity android:name=".ui.activity.AboutActivity"/>
 
-        <activity android:name=".ui.activity.GooglePlacesActivity" />
+        <activity android:name=".ui.activity.GooglePlacesActivity"/>
 
-        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity"/>
 
-        <activity android:name=".ui.activity.WebActivity" />
-
+        <activity android:name=".ui.activity.WebActivity"/>
+        <activity android:name=".ui.activity.PrefsActivity"
+            />
         <activity
             android:name=".ui.activity.PickPhotoActivity"
-            android:theme="@style/CustomTheme" />
-
-        <activity
-            android:name=".ui.activity.SettingsActivity"
-            android:theme="@style/MaterialSettingsTheme" />
+            android:theme="@style/CustomTheme"/>
 
     </application>
 </manifest>

@@ -40,4 +40,32 @@
     <string name="drawer_item_open_source">Open Source</string>
     <string name="drawer_item_contact">Contact</string>
 
+    <string name="settings_settings">General Settings</string>
+    <string name="settings_others">Others</string>
+    <string name="settings_others_about">About</string>
+
+    <string name="action_pick_date">Pick a Date</string>
+    <string name="using_client">Open Link Using Zhihu Client</string>
+    <string name="network_error">Network Error！</string>
+    <string name="no_browser"><![CDATA[No Browser Installed~ >_<]]></string>
+    <string name="not_coming"><![CDATA[That day has not come yet! >_<]]></string>
+    <string name="not_born"><![CDATA[Zhihu Daily not born that day! >_<]]></string>
+    <string name="zhihu_daily_today">Zhihu Daily Today |</string>
+    <string name="action_forward">The Day After</string>
+    <string name="action_back">The Day Before</string>
+    <string name="this_is_today">This is today, no content for tomorrow!</string>
+    <string name="this_is_birthday">This is birthday, no content before it!</string>
+    <string name="using_accelerate_server">Using accelerate server?</string>
+    <string name="using_accelerate_server_summary">Check this to browse old news faster</string>
+    <string name="settings_network_settings">Network Settings</string>
+    <string name="action_search">Search</string>
+    <string name="search_hint">Search Zhihu Daily</string>
+    <string name="no_result_found">No result found</string>
+    <string name="searching">Searching for result…</string>
+    <string name="action_share_url">Share</string>
+    <string name="share_to">Share to…</string>
+    <string name="accelerate_server_unlock">Accelerate server unlocked</string>
+    <string name="auto_refresh_summary">Auto refresh when this app is launched?</string>
+    <string name="auto_refresh">Auto Refresh</string>
+
 </resources>

@@ -1,0 +1,37 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:key="preference_screen">
+    <PreferenceCategory
+        android:key="settings_network_settings"
+        android:title="@string/settings_network_settings">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:enabled="true"
+            android:key="using_accelerate_server?"
+            android:summary="@string/using_accelerate_server_summary"
+            android:title="@string/using_accelerate_server" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="settings_settings"
+        android:title="@string/settings_settings">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:enabled="true"
+            android:key="auto_refresh?"
+            android:summary="@string/auto_refresh_summary"
+            android:title="@string/auto_refresh" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:enabled="true"
+            android:key="using_client?"
+            android:title="@string/using_client" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_others">
+        <Preference
+            android:key="about"
+            android:title="@string/settings_others_about" />
+    </PreferenceCategory>
+</PreferenceScreen>
