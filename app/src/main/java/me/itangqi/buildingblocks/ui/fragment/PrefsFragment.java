@@ -14,7 +14,7 @@ public class PrefsFragment extends PreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.preferencescreen);
+        addPreferencesFromResource(R.xml.prefs);
     }
 
 

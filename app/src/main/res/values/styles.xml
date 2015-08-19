@@ -5,6 +5,11 @@
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+    </style>
+
+    <style name="Prefs" parent="AppTheme">
+        <item name="android:textColorPrimary">@color/secondary_text</item>
     </style>
 
     <style name="Widget.CardContent" parent="android:Widget">
@@ -13,17 +18,6 @@
         <item name="android:paddingTop">24dp</item>
         <item name="android:paddingBottom">24dp</item>
         <item name="android:orientation">vertical</item>
-    </style>
-
-    <style name="CustomTheme" parent="android:Theme.DeviceDefault" tools:ignore="NewApi">
-        <item name="cropImageStyle">@style/Widget.CropImageView</item>
-    </style>
-
-    <style name="Widget.CropImageView" parent="android:Widget">
-        <item name="showThirds">true</item>
-        <item name="showCircle">false</item>
-        <item name="showHandles">always</item>
-        <item name="highlightColor">@color/highlight</item>
     </style>
 
     <style name="CollapsingToolbarTitleStyle" parent="Widget.Design.CollapsingToolbar">

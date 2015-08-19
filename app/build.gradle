@@ -8,7 +8,7 @@ android {
         applicationId "me.itangqi.buildingblocks"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 25
+        versionCode 26
         versionName "0.1.5"
     }
     buildTypes {
@@ -30,7 +30,6 @@ dependencies {
     compile 'com.android.support:design:22.2.0'
     // Third party
     compile 'com.orhanobut:logger:1.10'
-    compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.google.code.gson:gson:2.3'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.mcxiaoke.volley:library:1.0.17'

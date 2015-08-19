@@ -9,6 +9,7 @@
     <string name="men_action_pick_place">Pick Place</string>
     <string name="user_list_follower">flowers</string>
     <string name="user_list_post_count">posts</string>
+    <string name="exit_once_more">再按一次后退键退出应用程序</string>
     <string name="action_select">Pick</string>
 
     <string name="place_autocomplete_hint">Enter place name or address</string>
@@ -40,35 +41,10 @@
     <string name="drawer_item_open_source">Open Source</string>
     <string name="drawer_item_contact">Contact</string>
 
-    <string name="settings_settings">General Settings</string>
     <string name="settings_about">关于</string>
     <string name="settings_version_code">版本</string>
-
-    <string name="action_pick_date">Pick a Date</string>
-    <string name="using_client">Open Link Using Zhihu Client</string>
-    <string name="network_error">Network Error！</string>
-    <string name="no_browser"><![CDATA[No Browser Installed~ >_<]]></string>
-    <string name="not_coming"><![CDATA[That day has not come yet! >_<]]></string>
-    <string name="not_born"><![CDATA[Zhihu Daily not born that day! >_<]]></string>
-    <string name="zhihu_daily_today">Zhihu Daily Today |</string>
-    <string name="action_forward">The Day After</string>
-    <string name="action_back">The Day Before</string>
-    <string name="this_is_today">This is today, no content for tomorrow!</string>
-    <string name="this_is_birthday">This is birthday, no content before it!</string>
-    <string name="using_accelerate_server">Using accelerate server?</string>
     <string name="auto_update">自动更新应用</string>
     <string name="auto_notification">通知</string>
     <string name="settings_general_settings">常规</string>
     <string name="settings_notification_settings">通知</string>
-    <string name="action_search">Search</string>
-    <string name="search_hint">Search Zhihu Daily</string>
-    <string name="no_result_found">No result found</string>
-    <string name="searching">Searching for result…</string>
-    <string name="action_share_url">Share</string>
-    <string name="share_to">Share to…</string>
-    <string name="accelerate_server_unlock">Accelerate server unlocked</string>
-    <string name="auto_refresh_summary">Auto refresh when this app is launched?</string>
-    <string name="auto_refresh">Auto Refresh</string>
-    <string name="exit_once_more">再按一次后退键退出应用程序</string>
-
 </resources>

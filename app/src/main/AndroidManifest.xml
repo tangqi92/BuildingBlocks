@@ -46,11 +46,15 @@
 
         <activity android:name=".ui.activity.AboutActivity"/>
 
-        <activity android:name=".ui.activity.PrefsActivity"/>
+        <activity
+            android:name=".ui.activity.PrefsActivity"
+            android:theme="@style/Prefs"/>
 
         <activity android:name=".ui.activity.PickPhotoActivity"/>
 
-        <activity android:name=".ui.activity.GooglePlacesActivity"/>
+        <activity
+            android:name=".ui.activity.GooglePlacesActivity"
+            android:theme="@style/Prefs"/>
 
         <activity android:name="com.soundcloud.android.crop.CropImageActivity"/>
     </application>

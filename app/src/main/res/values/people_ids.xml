@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="people_ids">
-        <item>limiao</item>
-        <item>100offer</item>
-        <item>andlib</item>
-        <item>travelacrossjapan</item>
-        <item>qinchao</item>
-        <item>haoqishiyanshi</item>
-        <item>loveyou</item>
-        <item>chenyuz</item>
-        <item>youxia</item>
-        <item>invest</item>
         <item>shizheng</item>
         <item>newpie</item>
         <item>daily</item>
