@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <PreferenceCategory
+        android:key="settings_general_settings"
+        android:title="@string/settings_general_settings">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:enabled="true"
+            android:key="auto_update"
+            android:title="@string/auto_update"
+            />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="settings_notification_settings"
+        android:title="@string/settings_notification_settings">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:enabled="true"
+            android:key="notification"
+            android:title="@string/auto_notification"
+            />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_about">
+        <Preference
+            android:key="version"
+            android:title="@string/settings_version_code"/>
+    </PreferenceCategory>
+</PreferenceScreen>

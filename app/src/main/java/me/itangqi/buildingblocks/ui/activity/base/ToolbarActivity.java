@@ -11,7 +11,6 @@ import android.view.animation.DecelerateInterpolator;
 
 import me.itangqi.buildingblocks.R;
 
-
 public abstract class ToolbarActivity extends AppCompatActivity {
 
     abstract protected int getLayoutResource();
@@ -23,7 +22,8 @@ public abstract class ToolbarActivity extends AppCompatActivity {
     protected Toolbar mToolbar;
     protected boolean mIsHidden = false;
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());
 
@@ -50,7 +50,8 @@ public abstract class ToolbarActivity extends AppCompatActivity {
         return false;
     }
 
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
             return true;
@@ -65,9 +66,9 @@ public abstract class ToolbarActivity extends AppCompatActivity {
 
     protected void hideOrShowToolbar() {
         mAppBar.animate()
-            .translationY(mIsHidden ? 0 : -mAppBar.getHeight())
-            .setInterpolator(new DecelerateInterpolator(2))
-            .start();
+                .translationY(mIsHidden ? 0 : -mAppBar.getHeight())
+                .setInterpolator(new DecelerateInterpolator(2))
+                .start();
 
         mIsHidden = !mIsHidden;
     }

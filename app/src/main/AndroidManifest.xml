@@ -42,18 +42,16 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.activity.WebActivity"/>
+
         <activity android:name=".ui.activity.AboutActivity"/>
+
+        <activity android:name=".ui.activity.PrefsActivity"/>
+
+        <activity android:name=".ui.activity.PickPhotoActivity"/>
 
         <activity android:name=".ui.activity.GooglePlacesActivity"/>
 
         <activity android:name="com.soundcloud.android.crop.CropImageActivity"/>
-
-        <activity android:name=".ui.activity.WebActivity"/>
-        <activity android:name=".ui.activity.PrefsActivity"
-            />
-        <activity
-            android:name=".ui.activity.PickPhotoActivity"
-            android:theme="@style/CustomTheme"/>
-
     </application>
 </manifest>

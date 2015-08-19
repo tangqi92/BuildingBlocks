@@ -1,6 +1,5 @@
 package me.itangqi.buildingblocks.ui.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,17 +12,30 @@ import com.soundcloud.android.crop.Crop;
 
 import java.io.File;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.ui.activity.base.ToolbarActivity;
 
-public class PickPhotoActivity extends Activity {
+public class PickPhotoActivity extends ToolbarActivity {
 
-    private ImageView resultView;
+    @Bind(R.id.result_image) ImageView resultView;
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_pick_crop;
+    }
+
+    @Override
+    public boolean canBack() {
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pick_crop);
-        resultView = (ImageView) findViewById(R.id.result_image);
+        ButterKnife.bind(this);
+        setTitle("选择照片");
     }
 
     @Override

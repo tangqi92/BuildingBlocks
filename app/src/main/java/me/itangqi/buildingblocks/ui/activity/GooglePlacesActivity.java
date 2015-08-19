@@ -26,7 +26,6 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -39,9 +38,11 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
+import butterknife.ButterKnife;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.adapter.GooglePlacesAdapter;
 import me.itangqi.buildingblocks.ui.activity.base.ToolbarActivity;
+import me.itangqi.buildingblocks.utils.ToastUtils;
 
 public class GooglePlacesActivity extends ToolbarActivity
         implements GoogleApiClient.OnConnectionFailedListener {
@@ -72,6 +73,11 @@ public class GooglePlacesActivity extends ToolbarActivity
     }
 
     @Override
+    public boolean canBack() {
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -84,6 +90,8 @@ public class GooglePlacesActivity extends ToolbarActivity
                 .addApi(Places.GEO_DATA_API)
                 .addApi(Places.PLACE_DETECTION_API)
                 .build();
+
+        ButterKnife.bind(this);
 
         setTitle("位置");
 
@@ -119,6 +127,7 @@ public class GooglePlacesActivity extends ToolbarActivity
                 public void onResult(PlaceLikelihoodBuffer likelyPlaces) {
                     if (!likelyPlaces.getStatus().isSuccess()) {
                         // Request did not complete successfully
+                        ToastUtils.showShort("你科学上网了吗？");
                         likelyPlaces.release();
                         return;
                     }
@@ -150,8 +159,8 @@ public class GooglePlacesActivity extends ToolbarActivity
              The adapter stores each Place suggestion in a PlaceAutocomplete object from which we
              read the place ID.
               */
-             final GooglePlacesAdapter.PlaceAutocomplete item = mAdapter.getItem(position);
-             final String placeId = String.valueOf(item.placeId);
+            final GooglePlacesAdapter.PlaceAutocomplete item = mAdapter.getItem(position);
+            final String placeId = String.valueOf(item.placeId);
 
             /*
              Issue a request to the Places Geo Data API to retrieve a Place object with additional
@@ -201,7 +210,6 @@ public class GooglePlacesActivity extends ToolbarActivity
                                               CharSequence address, CharSequence phoneNumber, Uri websiteUri) {
         return Html.fromHtml(res.getString(R.string.place_details, name, id, address, phoneNumber,
                 websiteUri));
-
     }
 
     /**
@@ -215,10 +223,7 @@ public class GooglePlacesActivity extends ToolbarActivity
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
         // TODO(Developer): Check error code and notify the user of error state and resolution.
-        Toast.makeText(this,
-                "Could not connect to Google API Client: Error " + connectionResult.getErrorCode(),
-                Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort("Could not connect to Google API Client: Error " + connectionResult.getErrorCode());
         GooglePlacesActivity.this.finish();
     }
-
 }

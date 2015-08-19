@@ -38,7 +38,6 @@ public class AboutActivity extends AppCompatActivity {
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
     }
 
     private void setUpVersionName() {

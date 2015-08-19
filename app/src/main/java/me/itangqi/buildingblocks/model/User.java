@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- *
  * @author bxbxbai
  */
 public class User {
@@ -54,7 +53,6 @@ public class User {
 
     @SerializedName("activateAuthorRequested")
     private boolean activateAuthorRequested;
-
 
     public int getFollowerCount() {
         return followerCount;

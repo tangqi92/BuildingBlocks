@@ -43,7 +43,6 @@ import me.itangqi.buildingblocks.ui.activity.PrefsActivity;
 import me.itangqi.buildingblocks.ui.fragment.UserListFragment;
 import me.itangqi.buildingblocks.utils.Constants;
 
-
 public abstract class BaseActivity extends AppCompatActivity {
     protected abstract Fragment createFragment();
 

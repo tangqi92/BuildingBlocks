@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 /**
- *
  * @author bxbxbai
  */
 public class Author implements Parcelable {
@@ -45,7 +44,6 @@ public class Author implements Parcelable {
 
     @SerializedName(NAME)
     private String name;
-
 
     public String getBio() {
         return bio;

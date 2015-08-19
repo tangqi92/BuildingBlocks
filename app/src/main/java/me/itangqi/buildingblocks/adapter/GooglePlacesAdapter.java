@@ -20,7 +20,6 @@ import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -34,6 +33,8 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
+
+import me.itangqi.buildingblocks.utils.ToastUtils;
 
 public class GooglePlacesAdapter
         extends ArrayAdapter<GooglePlacesAdapter.PlaceAutocomplete> implements Filterable {
@@ -148,8 +149,7 @@ public class GooglePlacesAdapter
             // Confirm that the query completed successfully, otherwise return null
             final Status status = autocompletePredictions.getStatus();
             if (!status.isSuccess()) {
-                Toast.makeText(getContext(), "Error contacting API: " + status.toString(),
-                        Toast.LENGTH_SHORT).show();
+                ToastUtils.showShort("你科学上网了吗？");
                 autocompletePredictions.release();
                 return null;
             }

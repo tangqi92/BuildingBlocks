@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 /**
- *
  * @author bxbxbai
  */
 public class Avatar implements Parcelable {

@@ -2,6 +2,7 @@ package me.itangqi.buildingblocks.ui.activity;
 
 import android.os.Bundle;
 
+import butterknife.ButterKnife;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.ui.activity.base.ToolbarActivity;
 import me.itangqi.buildingblocks.ui.fragment.PrefsFragment;
@@ -13,8 +14,15 @@ public class PrefsActivity extends ToolbarActivity {
     }
 
     @Override
+    public boolean canBack() {
+        return true;
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
         setTitle("设置");
         getFragmentManager()
                 .beginTransaction()

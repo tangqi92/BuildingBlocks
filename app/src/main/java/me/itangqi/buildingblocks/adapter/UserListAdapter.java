@@ -79,7 +79,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.CardVi
 
         @OnClick(R.id.rl_card_parent)
         void onClick(View v) {
-            // TODO do what you want
+            // TODO do what you want :) you can use WebActivity
             User user = mUserList.get(getLayoutPosition());
             Intent intent = new Intent(v.getContext(), WebActivity.class);
             intent.putExtra(WebActivity.EXTRA_TITLE, user.getName());
