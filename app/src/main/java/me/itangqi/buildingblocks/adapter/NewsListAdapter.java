@@ -19,7 +19,7 @@ import me.itangqi.buildingblocks.model.DailyNews;
 import me.itangqi.buildingblocks.utils.RequestManager;
 
 /**
- * Created by tangqi on 7/11/15.
+ * Created by tangqi on 8/20/15.
  */
 public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.CardViewHolder> {
     private List<DailyNews> mNewsList;
@@ -43,13 +43,9 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.CardVi
     @Override
     public void onBindViewHolder(CardViewHolder holder, int position) {
         DailyNews news = mNewsList.get(position);
+        // 目前暂未有使用多张图片的情形出现
         holder.mCover.setImageUrl(news.images.get(0), RequestManager.getImageLoader());
         holder.mTitle.setText(news.title);
-    }
-
-    public void add(DailyNews news) {
-        mNewsList.add(news);
-        notifyDataSetChanged();
     }
 
     @Override

@@ -8,7 +8,7 @@
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="8dp"
         card_view:cardCornerRadius="@dimen/margin_4dp"
         card_view:cardElevation="@dimen/margin_4dp">
 
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:layout_margin="@dimen/margin_4dp"
+            android:layout_margin="@dimen/margin_8dp"
             android:orientation="horizontal">
 
             <com.android.volley.toolbox.NetworkImageView

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by tangqi on 8/20/15.
  */
-public class GetDailyNewsResult implements Serializable {
+public class DailyNewsResult implements Serializable {
     @SerializedName("date")
     public String date;
     @SerializedName("stories")

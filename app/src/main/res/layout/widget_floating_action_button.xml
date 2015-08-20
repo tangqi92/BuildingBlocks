@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.FloatingActionButton
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fab"
+    xmlns:android="http://schemas.android.com/apk/res/android"
 
-android:id="@+id/fab"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_gravity="end|bottom"
-android:layout_margin="@dimen/fab_margin"
-android:src="@mipmap/ic_refresh_white_24dp"
-app:borderWidth="0dp"
-app:layout_behavior="me.itangqi.buildingblocks.widget.ScrollingFABBehavior"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end|bottom"
+    android:layout_margin="@dimen/fab_margin"
+    android:src="@mipmap/ic_refresh_white_24dp"
+    app:borderWidth="0dp"
+    app:layout_behavior="me.itangqi.buildingblocks.widget.ScrollingFABBehavior"/>
 

@@ -19,11 +19,9 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.adapter.UserListAdapter;
-import me.itangqi.buildingblocks.model.User;
 import me.itangqi.buildingblocks.utils.GsonRequest;
 import me.itangqi.buildingblocks.utils.RequestManager;
-import me.itangqi.buildingblocks.api.ZhuanLanApi;
+import me.itangqi.buildingblocks.api.ZhihuApi;
 
 public class UserListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private List<User> mUserleList = new ArrayList<>();
@@ -81,7 +79,7 @@ public class UserListFragment extends Fragment implements SwipeRefreshLayout.OnR
         String[] ids = getActivity().getResources().getStringArray(R.array.people_ids);
 
         for (String id : ids) {
-            GsonRequest<User> request = ZhuanLanApi.getUserInfoRequest(id);
+            GsonRequest<User> request = ZhihuApi.getUserInfoRequest(id);
             request.setSuccessListener(new Response.Listener<User>() {
                 @Override
                 public void onResponse(User response) {
