@@ -1,10 +1,11 @@
-package me.itangqi.buildingblocks.utils;
+package me.itangqi.buildingblocks.api;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.orhanobut.logger.Logger;
 
 import me.itangqi.buildingblocks.model.User;
+import me.itangqi.buildingblocks.utils.GsonRequest;
 
 
 /**
@@ -19,6 +20,8 @@ public final class ZhuanLanApi {
     private static final String KEY_LIMIT = "limit";
     private static final String KEY_OFFSET = "offset";
     private static final String KEY_RATING = "rating";
+
+    public static final String ZHIHU_DAILY_NEWS = "http://news.at.zhihu.com/api/4/news/before/";
 
     public static final String ZHUAN_LAN_URL = "http://zhuanlan.zhihu.com";
     private static final String API_BASE = ZHUAN_LAN_URL + "/api/columns/%s";

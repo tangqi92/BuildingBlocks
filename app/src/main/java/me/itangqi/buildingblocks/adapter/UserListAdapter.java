@@ -17,7 +17,7 @@ import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.model.User;
 import me.itangqi.buildingblocks.ui.activity.WebActivity;
 import me.itangqi.buildingblocks.utils.RequestManager;
-import me.itangqi.buildingblocks.utils.ZhuanLanApi;
+import me.itangqi.buildingblocks.api.ZhuanLanApi;
 import me.itangqi.buildingblocks.widget.CircleImageView;
 
 /**

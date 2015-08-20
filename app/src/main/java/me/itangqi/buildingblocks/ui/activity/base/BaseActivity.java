@@ -40,7 +40,7 @@ import me.itangqi.buildingblocks.ui.activity.AboutActivity;
 import me.itangqi.buildingblocks.ui.activity.GooglePlacesActivity;
 import me.itangqi.buildingblocks.ui.activity.PickPhotoActivity;
 import me.itangqi.buildingblocks.ui.activity.PrefsActivity;
-import me.itangqi.buildingblocks.ui.fragment.UserListFragment;
+import me.itangqi.buildingblocks.ui.fragment.NewsListFragment;
 import me.itangqi.buildingblocks.utils.Constants;
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -208,7 +208,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int i) {
             Bundle bundle = new Bundle();
-            Fragment newFragment = new UserListFragment();
+            Fragment newFragment = new NewsListFragment();
 
             Calendar dateToGetUrl = Calendar.getInstance();
             dateToGetUrl.add(Calendar.DAY_OF_YEAR, 1 - i);

@@ -11,7 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.volley.Response;
+import com.google.gson.Gson;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
+
+import org.apache.http.Header;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,24 +24,47 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.adapter.UserListAdapter;
-import me.itangqi.buildingblocks.model.User;
-import me.itangqi.buildingblocks.utils.GsonRequest;
-import me.itangqi.buildingblocks.utils.RequestManager;
+import me.itangqi.buildingblocks.adapter.NewsListAdapter;
 import me.itangqi.buildingblocks.api.ZhuanLanApi;
+import me.itangqi.buildingblocks.model.DailyNews;
+import me.itangqi.buildingblocks.model.GetDailyNewsResult;
+import me.itangqi.buildingblocks.utils.RequestManager;
 
-public class UserListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-    private List<User> mUserleList = new ArrayList<>();
-    private UserListAdapter mAdapter;
+public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+    private List<DailyNews> mNewsList = new ArrayList<>();
+    private NewsListAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private String date;
+    AsyncHttpClient mClient = new AsyncHttpClient();
+    AsyncHttpResponseHandler mResponseHandlerGetNews = new BaseJsonHttpResponseHandler<GetDailyNewsResult>() {
 
-    @Bind(R.id.cardList)
-    RecyclerView mRecyclerView;
-    @Bind(R.id.swipe_refresh_layout)
-    SwipeRefreshLayout mSwipeRefreshLayout;
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, GetDailyNewsResult response) {
+            if (response.stories != null) {
+                for (DailyNews item : response.stories) {
+                    mNewsList.add(item);
+                }
+                mAdapter.notifyDataSetChanged();
 
-    public static UserListFragment newInstance() {
-        UserListFragment fragment = new UserListFragment();
+            }
+        }
+
+        @Override
+        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, GetDailyNewsResult errorResponse) {
+
+        }
+
+        @Override
+        protected GetDailyNewsResult parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+            Gson gson = new Gson();
+            return gson.fromJson(rawJsonData, GetDailyNewsResult.class);
+        }
+    };
+    @Bind(R.id.cardList) RecyclerView mRecyclerView;
+    @Bind(R.id.swipe_refresh_layout) SwipeRefreshLayout mSwipeRefreshLayout;
+
+    public static NewsListFragment newInstance() {
+        NewsListFragment fragment = new NewsListFragment();
         // TODO you can use bundle to transfer data
         return fragment;
     }
@@ -49,6 +77,12 @@ public class UserListFragment extends Fragment implements SwipeRefreshLayout.OnR
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState == null) {
+            Bundle bundle = getArguments();
+            date = bundle.getString("date");
+
+            setRetainInstance(true);
+        }
     }
 
     @Override
@@ -67,7 +101,8 @@ public class UserListFragment extends Fragment implements SwipeRefreshLayout.OnR
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.primary);
-
+        String url = ZhuanLanApi.ZHIHU_DAILY_NEWS + date;
+        mClient.get(getActivity(), url, mResponseHandlerGetNews);
         return view;
     }
 
@@ -75,22 +110,9 @@ public class UserListFragment extends Fragment implements SwipeRefreshLayout.OnR
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // specify an adapter
-        mAdapter = new UserListAdapter(mUserleList);
+        mAdapter = new NewsListAdapter(mNewsList);
         mRecyclerView.setAdapter(mAdapter);
 
-        String[] ids = getActivity().getResources().getStringArray(R.array.people_ids);
-
-        for (String id : ids) {
-            GsonRequest<User> request = ZhuanLanApi.getUserInfoRequest(id);
-            request.setSuccessListener(new Response.Listener<User>() {
-                @Override
-                public void onResponse(User response) {
-                    mRecyclerView.setVisibility(View.VISIBLE);
-                    mAdapter.add(response);
-                }
-            });
-            RequestManager.addRequest(request, this);
-        }
     }
 
     @Override
