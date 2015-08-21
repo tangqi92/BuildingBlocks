@@ -2,7 +2,6 @@ package me.itangqi.buildingblocks.ui.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,7 +14,6 @@ import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
-import com.orhanobut.logger.Logger;
 
 import org.apache.http.Header;
 
@@ -26,9 +24,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.adapter.DailyNewsListAdapter;
+import me.itangqi.buildingblocks.api.ZhihuApi;
 import me.itangqi.buildingblocks.model.DailyNews;
 import me.itangqi.buildingblocks.model.DailyNewsResult;
-import me.itangqi.buildingblocks.utils.RequestManager;
 
 public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private List<DailyNews> mNewsList = new ArrayList<>();
@@ -43,7 +41,6 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
             if (response.stories != null) {
                 for (DailyNews item : response.stories) {
                     mNewsList.add(item);
-                    Logger.d(item.title);
                 }
                 mAdapter.notifyDataSetChanged();
 
@@ -89,7 +86,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_news_list, container, false);
         ButterKnife.bind(this, view);
 
         // use this setting to improve performance if you know that changes
@@ -103,22 +100,13 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.primary);
 
-        mAdapter = new DailyNewsListAdapter(mNewsList);
+        mAdapter = new DailyNewsListAdapter(getActivity(), mNewsList);
         mRecyclerView.setAdapter(mAdapter);
-//        String url = ZhihuApi.getDailyNews(getActivity(), date);
+        String url = ZhihuApi.getDailyNews(getActivity(), date);
         // Debug url
-        String url = "http://news.at.zhihu.com/api/4/news/before/20150822";
+//        String url = "http://news.at.zhihu.com/api/4/news/before/20150822";
         mClient.get(getActivity(), url, mResponseHandlerGetNews);
         return view;
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        // specify an adapter
-        mAdapter = new DailyNewsListAdapter(mNewsList);
-        mRecyclerView.setAdapter(mAdapter);
-
     }
 
     @Override
@@ -139,7 +127,6 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
     @Override
     public void onPause() {
         super.onPause();
-        RequestManager.getRequestQueue().cancelAll(this);
     }
 
     @Override
@@ -150,7 +137,6 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        RequestManager.getRequestQueue().cancelAll(this);
     }
 
     @Override

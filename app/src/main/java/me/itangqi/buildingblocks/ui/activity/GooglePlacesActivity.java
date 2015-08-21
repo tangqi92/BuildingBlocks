@@ -127,7 +127,7 @@ public class GooglePlacesActivity extends ToolbarActivity
                 public void onResult(PlaceLikelihoodBuffer likelyPlaces) {
                     if (!likelyPlaces.getStatus().isSuccess()) {
                         // Request did not complete successfully
-                        ToastUtils.showShort("你科学上网了吗？");
+                        ToastUtils.showShort("嘿，你科学上网了吗？");
                         likelyPlaces.release();
                         return;
                     }

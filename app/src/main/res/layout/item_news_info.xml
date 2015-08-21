@@ -17,12 +17,11 @@
         android:layout_margin="@dimen/margin_16dp"
         android:orientation="horizontal">
 
-        <com.android.volley.toolbox.NetworkImageView
+        <ImageView
             android:id="@+id/iv_cover"
             android:layout_width="90dp"
             android:layout_height="90dp"
-            android:scaleType="centerCrop"
-            />
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:id="@+id/tv_title"
