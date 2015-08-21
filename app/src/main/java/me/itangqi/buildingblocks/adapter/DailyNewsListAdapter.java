@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -28,7 +29,9 @@ public class DailyNewsListAdapter extends RecyclerView.Adapter<DailyNewsListAdap
     public DailyNewsListAdapter(Context mContext, List<DailyNews> mNewsList) {
         this.mContext = mContext;
         this.mNewsList = mNewsList;
-        setHasStableIds(true);
+        // I hate it !!!
+        // http://stackoverflow.com/questions/28787008/onbindviewholder-position-is-starting-again-at-0
+//        setHasStableIds(true);
     }
 
     @Override
@@ -43,6 +46,7 @@ public class DailyNewsListAdapter extends RecyclerView.Adapter<DailyNewsListAdap
     @Override
     public void onBindViewHolder(CardViewHolder holder, int position) {
         DailyNews news = mNewsList.get(position);
+        Logger.d(position+"");
         // 目前暂未有使用多张图片的情形出现
         Glide.with(mContext).load(news.images.get(0)).into(holder.mCover);
         holder.mTitle.setText(news.title);
