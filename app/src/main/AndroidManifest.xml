@@ -33,7 +33,7 @@
             android:value="AIzaSyDWF5Al83s2a9P1JctqM3um9usNXEpVa2U"/>
 
         <activity
-            android:name=".ui.activity.NewsListActivity"
+            android:name=".ui.activity.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

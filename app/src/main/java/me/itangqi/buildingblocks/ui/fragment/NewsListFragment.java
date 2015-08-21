@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
+import com.orhanobut.logger.Logger;
 
 import org.apache.http.Header;
 
@@ -42,6 +43,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
             if (response.stories != null) {
                 for (DailyNews item : response.stories) {
                     mNewsList.add(item);
+                    Logger.d(item.title);
                 }
                 mAdapter.notifyDataSetChanged();
 
@@ -100,6 +102,9 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.primary);
+
+        mAdapter = new DailyNewsListAdapter(mNewsList);
+        mRecyclerView.setAdapter(mAdapter);
 //        String url = ZhihuApi.getDailyNews(getActivity(), date);
         // Debug url
         String url = "http://news.at.zhihu.com/api/4/news/before/20150822";

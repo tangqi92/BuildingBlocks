@@ -19,7 +19,6 @@ import com.android.volley.toolbox.NetworkImageView;
 
 import me.itangqi.buildingblocks.R;
 
-
 public class CircleImageView extends NetworkImageView {
 
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;

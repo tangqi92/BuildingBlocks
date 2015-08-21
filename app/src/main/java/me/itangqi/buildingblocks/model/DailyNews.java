@@ -19,4 +19,6 @@ public class DailyNews implements Serializable {
     public String ga_prefix;
     @SerializedName("title")
     public String title;
+    @SerializedName("multipic")
+    public boolean multipic;
 }

@@ -7,7 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.util.AttributeSet;
 import android.view.View;
 
-import me.itangqi.buildingblocks.utils.Utils;
+import me.itangqi.buildingblocks.utils.CommonUtils;
 
 
 public class ScrollingFABBehavior extends FloatingActionButton.Behavior {
@@ -15,7 +15,7 @@ public class ScrollingFABBehavior extends FloatingActionButton.Behavior {
 
     public ScrollingFABBehavior(Context context, AttributeSet attrs) {
         super();
-        this.toolbarHeight = Utils.getToolbarHeight(context);
+        this.toolbarHeight = CommonUtils.getToolbarHeight(context);
     }
 
     @Override

@@ -5,7 +5,7 @@ import android.content.res.TypedArray;
 
 import me.itangqi.buildingblocks.R;
 
-public class Utils {
+public class CommonUtils {
 
     public static int getToolbarHeight(Context context) {
         final TypedArray styledAttributes = context.getTheme().obtainStyledAttributes(
