@@ -24,15 +24,14 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.adapter.NewsListAdapter;
-import me.itangqi.buildingblocks.api.ZhihuApi;
+import me.itangqi.buildingblocks.adapter.DailyNewsListAdapter;
 import me.itangqi.buildingblocks.model.DailyNews;
 import me.itangqi.buildingblocks.model.DailyNewsResult;
 import me.itangqi.buildingblocks.utils.RequestManager;
 
 public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private List<DailyNews> mNewsList = new ArrayList<>();
-    private NewsListAdapter mAdapter;
+    private DailyNewsListAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private String date;
     AsyncHttpClient mClient = new AsyncHttpClient();
@@ -101,7 +100,9 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.primary);
-        String url = ZhihuApi.ZHIHU_DAILY_NEWS + date;
+//        String url = ZhihuApi.getDailyNews(getActivity(), date);
+        // Debug url
+        String url = "http://news.at.zhihu.com/api/4/news/before/20150822";
         mClient.get(getActivity(), url, mResponseHandlerGetNews);
         return view;
     }
@@ -110,7 +111,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // specify an adapter
-        mAdapter = new NewsListAdapter(mNewsList);
+        mAdapter = new DailyNewsListAdapter(mNewsList);
         mRecyclerView.setAdapter(mAdapter);
 
     }

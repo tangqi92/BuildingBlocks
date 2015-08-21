@@ -1,6 +1,7 @@
 package me.itangqi.buildingblocks.ui.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +13,6 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.utils.Constants;
 
 /**
  * Created by drakeet on 15/8/15.
@@ -41,7 +41,14 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     private void setUpVersionName() {
-        mVersionTextView.setText("Version " + Constants.VERSION_NAME);
+        String versionName = null;
+        try {
+            versionName = getApplicationContext().getPackageManager()
+                    .getPackageInfo(getApplicationContext().getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        mVersionTextView.setText("Version " +  versionName);
     }
 
     @Override

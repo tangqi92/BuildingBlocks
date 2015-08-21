@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:key="settings_general_settings"
         android:title="@string/settings_general_settings">
         <CheckBoxPreference
             android:defaultValue="false"
@@ -14,7 +12,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="settings_notification_settings"
         android:title="@string/settings_notification_settings">
         <CheckBoxPreference
             android:defaultValue="false"

@@ -12,8 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/widget_toolbar"/>
-
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
         <com.astuetz.PagerSlidingTabStrip
             android:id="@+id/main_pager_tabs"
@@ -25,14 +31,11 @@
             app:pstsTextAllCaps="false"/>
     </android.support.design.widget.AppBarLayout>
 
-
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        />
-
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <include layout="@layout/widget_floating_action_button"/>
 

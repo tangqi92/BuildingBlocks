@@ -5,8 +5,6 @@ import java.util.Locale;
 
 public final class Constants {
 
-    public static final String VERSION_NAME = "0.1.2";
-
     public static final int PAGE_COUNT = 7;
     public static final int PROFILE_SETTING = 1;
 

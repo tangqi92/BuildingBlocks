@@ -21,11 +21,11 @@ import me.itangqi.buildingblocks.utils.RequestManager;
 /**
  * Created by tangqi on 8/20/15.
  */
-public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.CardViewHolder> {
+public class DailyNewsListAdapter extends RecyclerView.Adapter<DailyNewsListAdapter.CardViewHolder> {
     private List<DailyNews> mNewsList;
     private Context mContext;
 
-    public NewsListAdapter(List<DailyNews> mNewsList) {
+    public DailyNewsListAdapter(List<DailyNews> mNewsList) {
         this.mNewsList = mNewsList;
         setHasStableIds(true);
     }
