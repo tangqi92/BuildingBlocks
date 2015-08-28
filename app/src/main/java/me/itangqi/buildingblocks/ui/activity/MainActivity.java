@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -14,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.astuetz.PagerSlidingTabStrip;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.iconics.typeface.FontAwesome;
@@ -46,7 +46,7 @@ public class MainActivity extends BaseActivity {
     private AccountHeader headerResult = null;
     private Drawer result = null;
 
-    @Bind(R.id.main_pager_tabs) PagerSlidingTabStrip tabs;
+    @Bind(R.id.tabs) TabLayout tabs;
     @Bind(R.id.pager) ViewPager pager;
     @Bind(R.id.toolbar) Toolbar toolbar;
 
@@ -60,7 +60,7 @@ public class MainActivity extends BaseActivity {
         pager.setOffscreenPageLimit(Constants.PAGE_COUNT);
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(adapter);
-        tabs.setViewPager(pager);
+        tabs.setupWithViewPager(pager);
         createProfile(savedInstanceState);
     }
 
