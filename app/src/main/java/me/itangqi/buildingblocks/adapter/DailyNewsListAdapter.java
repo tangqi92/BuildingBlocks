@@ -1,6 +1,7 @@
 package me.itangqi.buildingblocks.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.api.ZhihuApi;
 import me.itangqi.buildingblocks.model.DailyNews;
+import me.itangqi.buildingblocks.ui.activity.WebActivity;
 
 /**
  * Created by tangqi on 8/20/15.
@@ -68,7 +71,13 @@ public class DailyNewsListAdapter extends RecyclerView.Adapter<DailyNewsListAdap
 
         @OnClick(R.id.ll_card_parent)
         void onClick(View v) {
-            // TODO do what you want :) you can use WebActivity
+            // TODO do what you want :) you can use WebActivity to load detail content
+            DailyNews news = mNewsList.get(getLayoutPosition());
+            String url = ZhihuApi.getNewsContent(news.id);
+            Intent intent = new Intent(v.getContext(), WebActivity.class);
+            intent.putExtra(WebActivity.EXTRA_TITLE, news.title);
+            intent.putExtra(WebActivity.EXTRA_URL, url);
+            v.getContext().startActivity(intent);
         }
     }
 }

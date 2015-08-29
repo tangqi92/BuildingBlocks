@@ -140,7 +140,7 @@
                     android:layout_below="@id/tv_tangqi"
                     android:layout_toEndOf="@id/ig_avatar_tangqi"
                     android:layout_toRightOf="@id/ig_avatar_tangqi"
-                    android:text="@string/developer_and_designer"
+                    android:text="@string/developer_description"
                     android:textColor="@color/md_grey_600"/>
 
                 <TextView
@@ -149,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@id/ig_avatar_tangqi"
                     android:layout_below="@id/ig_avatar_tangqi"
-                    android:text="作者博客: "
+                    android:text="Blog: "
                     android:textColor="@color/md_grey_800"/>
 
                 <TextView

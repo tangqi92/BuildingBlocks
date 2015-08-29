@@ -25,8 +25,7 @@
     <string name="share_text">积木 - 享受搭建应用的乐趣\nhttps://github.com/tangqi92/BuildingBlocks</string>
     <string name="app_name_with_introduce">积木 - 享受搭建应用的乐趣</string>
     <string name="developers">开发人员</string>
-    <string name="developer_contributor">Android Contributor</string>
-    <string name="developer_and_designer">开发 &amp; 设计</string>
+    <string name="developer_description">一个 Android 菜鸟</string>
     <string name="open_source_lis">感谢开源</string>
     <string name="introduce_and_help">介绍与帮助</string>
     <string name="open_source_libraries_list">Coming soon</string>

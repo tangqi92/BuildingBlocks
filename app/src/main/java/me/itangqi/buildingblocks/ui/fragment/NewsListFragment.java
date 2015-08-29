@@ -102,7 +102,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
 
         mAdapter = new DailyNewsListAdapter(getActivity(), mNewsList);
         mRecyclerView.setAdapter(mAdapter);
-        String url = ZhihuApi.getDailyNews(getActivity(), date);
+        String url = ZhihuApi.getDailyNews(date);
         // Debug url
 //        String url = "http://news.at.zhihu.com/api/4/news/before/20150822";
         mClient.get(getActivity(), url, mResponseHandlerGetNews);
