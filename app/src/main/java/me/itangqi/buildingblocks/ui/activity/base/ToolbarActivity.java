@@ -7,7 +7,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.animation.DecelerateInterpolator;
 
 import me.itangqi.buildingblocks.R;
 
@@ -15,12 +14,8 @@ public abstract class ToolbarActivity extends AppCompatActivity {
 
     abstract protected int getLayoutResource();
 
-    public void onToolbarClick() {
-    }
-
     protected AppBarLayout mAppBar;
     protected Toolbar mToolbar;
-    protected boolean mIsHidden = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,18 +53,5 @@ public abstract class ToolbarActivity extends AppCompatActivity {
         } else {
             return super.onOptionsItemSelected(item);
         }
-    }
-
-    protected void setAppBarAlpha(float alpha) {
-        mAppBar.setAlpha(alpha);
-    }
-
-    protected void hideOrShowToolbar() {
-        mAppBar.animate()
-                .translationY(mIsHidden ? 0 : -mAppBar.getHeight())
-                .setInterpolator(new DecelerateInterpolator(2))
-                .start();
-
-        mIsHidden = !mIsHidden;
     }
 }

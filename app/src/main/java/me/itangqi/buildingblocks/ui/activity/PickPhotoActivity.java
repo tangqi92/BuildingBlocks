@@ -35,7 +35,7 @@ public class PickPhotoActivity extends ToolbarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        setTitle("选择照片");
+        setTitle(getString(R.string.pick_photo_title));
     }
 
     @Override

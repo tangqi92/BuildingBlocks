@@ -188,7 +188,6 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-
     /**
      * 实现再按一次退出提醒
      */
@@ -243,8 +242,7 @@ public class MainActivity extends BaseActivity {
             Calendar displayDate = Calendar.getInstance();
             displayDate.add(Calendar.DAY_OF_YEAR, -position);
 
-            return (position == 0 ? getString(R.string.app_name) + " " : "")
-                    + DateFormat.getDateInstance().format(displayDate.getTime());
+            return DateFormat.getDateInstance().format(displayDate.getTime());
         }
     }
 }

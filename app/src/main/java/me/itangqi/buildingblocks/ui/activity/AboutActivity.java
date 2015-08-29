@@ -34,7 +34,7 @@ public class AboutActivity extends AppCompatActivity {
 
         setUpVersionName();
 
-        mCollapsingToolbarLayout.setTitle(getString(R.string.app_name));
+        mCollapsingToolbarLayout.setTitle(getString(R.string.about));
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -23,7 +23,7 @@ public class PrefsActivity extends ToolbarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        setTitle("设置");
+        setTitle(getString(R.string.settings_title));
         getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_frame, new PrefsFragment())

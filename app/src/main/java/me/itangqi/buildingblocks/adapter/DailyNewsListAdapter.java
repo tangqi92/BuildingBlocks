@@ -50,7 +50,7 @@ public class DailyNewsListAdapter extends RecyclerView.Adapter<DailyNewsListAdap
     public void onBindViewHolder(CardViewHolder holder, int position) {
         DailyNews news = mNewsList.get(position);
         Logger.d(position+"");
-        // 目前暂未有使用多张图片的情形出现
+        // 日报封面，目前暂未有使用多张图片的情形出现
         Glide.with(mContext).load(news.images.get(0)).into(holder.mCover);
         holder.mTitle.setText(news.title);
     }
@@ -73,10 +73,10 @@ public class DailyNewsListAdapter extends RecyclerView.Adapter<DailyNewsListAdap
         void onClick(View v) {
             // TODO do what you want :) you can use WebActivity to load detail content
             DailyNews news = mNewsList.get(getLayoutPosition());
-            String url = ZhihuApi.getNewsContent(news.id);
+            String news_url = ZhihuApi.getNewsContent(news.id);
             Intent intent = new Intent(v.getContext(), WebActivity.class);
             intent.putExtra(WebActivity.EXTRA_TITLE, news.title);
-            intent.putExtra(WebActivity.EXTRA_URL, url);
+            intent.putExtra(WebActivity.EXTRA_URL, news_url);
             v.getContext().startActivity(intent);
         }
     }

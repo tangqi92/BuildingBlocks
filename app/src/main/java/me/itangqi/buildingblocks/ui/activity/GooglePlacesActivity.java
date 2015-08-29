@@ -93,7 +93,7 @@ public class GooglePlacesActivity extends ToolbarActivity
 
         ButterKnife.bind(this);
 
-        setTitle("位置");
+        setTitle(getString(R.string.place_title));
 
         // Retrieve the AutoCompleteTextView that will display Place suggestions.
         mAutocompleteView = (AutoCompleteTextView)
@@ -127,7 +127,7 @@ public class GooglePlacesActivity extends ToolbarActivity
                 public void onResult(PlaceLikelihoodBuffer likelyPlaces) {
                     if (!likelyPlaces.getStatus().isSuccess()) {
                         // Request did not complete successfully
-                        ToastUtils.showShort("嘿，你科学上网了吗？");
+                        ToastUtils.showShort(R.string.place_fuck_gfw);
                         likelyPlaces.release();
                         return;
                     }
@@ -182,6 +182,7 @@ public class GooglePlacesActivity extends ToolbarActivity
         public void onResult(PlaceBuffer places) {
             if (!places.getStatus().isSuccess()) {
                 // Request did not complete successfully
+                ToastUtils.showShort(R.string.place_fuck_gfw);
                 places.release();
                 return;
             }

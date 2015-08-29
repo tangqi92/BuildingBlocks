@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
+import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.utils.ToastUtils;
 
 public class GooglePlacesAdapter
@@ -149,7 +150,7 @@ public class GooglePlacesAdapter
             // Confirm that the query completed successfully, otherwise return null
             final Status status = autocompletePredictions.getStatus();
             if (!status.isSuccess()) {
-                ToastUtils.showShort("嘿，你科学上网了吗？");
+                ToastUtils.showShort(R.string.place_fuck_gfw);
                 autocompletePredictions.release();
                 return null;
             }
