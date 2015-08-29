@@ -50,11 +50,9 @@ public class MainActivity extends BaseActivity {
     @Bind(R.id.pager) ViewPager pager;
     @Bind(R.id.toolbar) Toolbar toolbar;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         layoutResID = R.layout.activity_main;
-
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         pager.setOffscreenPageLimit(Constants.PAGE_COUNT);

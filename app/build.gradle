@@ -8,8 +8,8 @@ android {
         applicationId "me.itangqi.buildingblocks"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 33
-        versionName "0.2.1"
+        versionCode 34
+        versionName "0.2.2"
     }
     buildTypes {
         release {
@@ -32,12 +32,10 @@ dependencies {
     compile 'com.orhanobut:logger:1.10'
     compile 'com.google.code.gson:gson:2.3'
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.mcxiaoke.volley:library:1.0.17'
-    compile 'com.jpardogo.materialtabstrip:library:1.0.9'
     compile 'com.soundcloud.android:android-crop:1.0.0@aar'
+    compile 'com.loopj.android:android-async-http:1.4.8'
+    compile 'com.github.bumptech.glide:glide:3.6.1'
     compile('com.mikepenz:materialdrawer:3.1.2@aar') {
         transitive = true
     }
-    compile 'com.loopj.android:android-async-http:1.4.8'
-    compile 'com.github.bumptech.glide:glide:3.6.1'
 }

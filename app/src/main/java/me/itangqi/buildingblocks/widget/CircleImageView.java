@@ -14,12 +14,11 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-
-import com.android.volley.toolbox.NetworkImageView;
+import android.widget.ImageView;
 
 import me.itangqi.buildingblocks.R;
 
-public class CircleImageView extends NetworkImageView {
+public class CircleImageView extends ImageView {
 
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;
 

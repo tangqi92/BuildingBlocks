@@ -23,23 +23,23 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.adapter.DailyNewsListAdapter;
+import me.itangqi.buildingblocks.adapter.DailyListAdapter;
 import me.itangqi.buildingblocks.api.ZhihuApi;
-import me.itangqi.buildingblocks.model.DailyNews;
-import me.itangqi.buildingblocks.model.DailyNewsResult;
+import me.itangqi.buildingblocks.model.Daily;
+import me.itangqi.buildingblocks.model.DailyResult;
 
 public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-    private List<DailyNews> mNewsList = new ArrayList<>();
-    private DailyNewsListAdapter mAdapter;
+    private List<Daily> mNewsList = new ArrayList<>();
+    private DailyListAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private String date;
     AsyncHttpClient mClient = new AsyncHttpClient();
-    AsyncHttpResponseHandler mResponseHandlerGetNews = new BaseJsonHttpResponseHandler<DailyNewsResult>() {
+    AsyncHttpResponseHandler mResponseHandlerGetNews = new BaseJsonHttpResponseHandler<DailyResult>() {
 
         @Override
-        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, DailyNewsResult response) {
+        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, DailyResult response) {
             if (response.stories != null) {
-                for (DailyNews item : response.stories) {
+                for (Daily item : response.stories) {
                     mNewsList.add(item);
                 }
                 mAdapter.notifyDataSetChanged();
@@ -48,14 +48,14 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
         }
 
         @Override
-        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, DailyNewsResult errorResponse) {
+        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, DailyResult errorResponse) {
 
         }
 
         @Override
-        protected DailyNewsResult parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+        protected DailyResult parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
             Gson gson = new Gson();
-            return gson.fromJson(rawJsonData, DailyNewsResult.class);
+            return gson.fromJson(rawJsonData, DailyResult.class);
         }
     };
     @Bind(R.id.cardList) RecyclerView mRecyclerView;
@@ -86,7 +86,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_news_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_daily_list, container, false);
         ButterKnife.bind(this, view);
 
         // use this setting to improve performance if you know that changes
@@ -100,7 +100,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.primary);
 
-        mAdapter = new DailyNewsListAdapter(getActivity(), mNewsList);
+        mAdapter = new DailyListAdapter(getActivity(), mNewsList);
         mRecyclerView.setAdapter(mAdapter);
         String url = ZhihuApi.getDailyNews(date);
         // Debug url

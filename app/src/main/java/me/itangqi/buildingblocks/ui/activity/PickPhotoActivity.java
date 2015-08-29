@@ -46,7 +46,7 @@ public class PickPhotoActivity extends ToolbarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_select) {
+        if (item.getItemId() == R.id.menu_select) {
             resultView.setImageDrawable(null);
             Crop.pickImage(this);
             return true;
@@ -75,5 +75,4 @@ public class PickPhotoActivity extends ToolbarActivity {
             Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
 }

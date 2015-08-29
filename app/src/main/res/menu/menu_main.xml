@@ -9,10 +9,9 @@
         android:title="@string/men_action_pick_place" />
 
     <item
-        android:id="@+id/menu_action_about"
-        android:title="@string/menu_action_about" />
-
-    <item
         android:id="@+id/menu_action_settings"
         android:title="@string/menu_action_settings" />
+    <item
+        android:id="@+id/menu_action_about"
+        android:title="@string/menu_action_about" />
 </menu>
