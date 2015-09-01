@@ -20,6 +20,7 @@ public class PrefsFragment extends PreferenceFragment
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
+        // TODO the rest over to you :)
         return false;
     }
 }

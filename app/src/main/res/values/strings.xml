@@ -28,7 +28,7 @@
     <string name="developer_description">一个 Android 菜鸟</string>
     <string name="open_source_lis">感谢开源</string>
     <string name="introduce_and_help">介绍与帮助</string>
-    <string name="open_source_libraries_list">com.orhanobut:logger:1.10\ncom.google.code.gson:gson:2.3\ncom.jakewharton:butterknife:7.0.1\ncom.soundcloud.android:android-crop:1.0.0@aar\ncom.loopj.android:android-async-http:1.4.8\ncom.github.bumptech.glide:glide:3.6.1\ncom.mikepenz:materialdrawer:3.1.2@aar</string>
+    <string name="open_source_libraries_list">com.orhanobut:logger:1.10\ncom.jakewharton:butterknife:7.0.1\ncom.soundcloud.android:android-crop:1.0.0@aar\ncom.loopj.android:android-async-http:1.4.8\ncom.github.bumptech.glide:glide:3.6.1\ncom.mikepenz:materialdrawer:3.1.2@aar</string>
 
     <string name="drawer_with_menu">Menu Drawer</string>
     <string name="drawer_item_home">Home</string>
@@ -44,7 +44,7 @@
     <string name="settings_about">关于</string>
     <string name="settings_version_code">版本</string>
     <string name="auto_update">自动更新应用</string>
-    <string name="auto_notification">通知</string>
+    <string name="auto_notification">接受通知</string>
     <string name="settings_general_settings">常规</string>
     <string name="settings_notification_settings">通知</string>
 </resources>
