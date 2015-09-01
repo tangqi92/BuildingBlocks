@@ -2,7 +2,7 @@ Building Blocks - 积木
 =====================
 
 
-- [Features](#features)
+- [Features](#features-功能点)
 - [Demo](#demo)
 - [Screenshots](#screenshots)
 - [Dependencies](#dependencies)
@@ -44,11 +44,11 @@ Building Blocks - 积木
 
 ## Help - 帮帮我
 
-至今不会 Sketch，更别说 PS 了（好吧，我承认，是我笨是我懒），所以，「积木」至今都没有属于她的「应用图标」。
+至今不会 Sketch，更别说 PS 了（好吧，我承认，是我笨是我懒），所以，「积木」至今都没有属于自己的「应用图标」。
 
-如果你正好发现了她，又正好没处发挥你的才华，那么不妨为她设计个图标吧：）
+如果你正好发现了她，又正好没处发挥你的才华的话，那么不妨为她设计个图标吧：）
 
-你能在下面找到我的联系方式，在此先替她谢过啦！！！
+你能在下面找到我的联系方式，我在此先替她谢过啦！！！
 
 ## Contact Me - 联系我
 
