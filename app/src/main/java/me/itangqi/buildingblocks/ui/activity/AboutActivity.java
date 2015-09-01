@@ -14,9 +14,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.itangqi.buildingblocks.R;
 
-/**
- * Created by drakeet on 15/8/15.
+/*
+ * Thanks
+ * Author: drakeet
  */
+
 public class AboutActivity extends AppCompatActivity {
 
     @Bind(R.id.toolbar)

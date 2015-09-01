@@ -20,11 +20,11 @@
     <string name="place_fuck_gfw">嘿，你科学上网了吗？</string>
 
     <string name="about">关于</string>
-    <string name="introduce">「积木」- 让应用开发如同搭积木一般充满乐趣与成就感。\n\n开源是必须的，如果你觉得值得推荐的话，可以点击右上角的分享按钮进行分享，这将成为我最大的动力和支持，非常感谢！</string>
+    <string name="introduce">「积木」- 让应用开发如同搭积木一般充满乐趣与成就感。\n\n开源是必须的，如果你觉得她是个值得推荐的应用：），希望更多的人能知道她，只需点击右上角的分享按钮进行分享，这将成为我最大的动力与支持！</string>
     <string name="share">分享</string>
     <string name="share_text">积木 - 享受搭建应用的乐趣\nhttps://github.com/tangqi92/BuildingBlocks</string>
     <string name="app_name_with_introduce">积木 - 享受搭建应用的乐趣</string>
-    <string name="developers">开发人员</string>
+    <string name="developers">关于我</string>
     <string name="developer_description">一个 Android 菜鸟</string>
     <string name="open_source_lis">感谢开源</string>
     <string name="introduce_and_help">介绍与帮助</string>
@@ -44,7 +44,7 @@
     <string name="settings_about">关于</string>
     <string name="settings_version_code">版本</string>
     <string name="auto_update">自动更新应用</string>
-    <string name="auto_notification">接受通知</string>
+    <string name="auto_notification">是否接受通知</string>
     <string name="settings_general_settings">常规</string>
     <string name="settings_notification_settings">通知</string>
 </resources>

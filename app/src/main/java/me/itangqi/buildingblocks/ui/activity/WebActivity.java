@@ -14,6 +14,11 @@ import butterknife.ButterKnife;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.ui.activity.base.ToolbarActivity;
 
+/*
+ * Thanks to
+ * Author: drakeet
+ */
+
 public class WebActivity extends ToolbarActivity {
 
     public static final String EXTRA_URL = "extra_url";

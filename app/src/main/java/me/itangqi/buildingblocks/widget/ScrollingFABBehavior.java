@@ -9,7 +9,6 @@ import android.view.View;
 
 import me.itangqi.buildingblocks.utils.CommonUtils;
 
-
 public class ScrollingFABBehavior extends FloatingActionButton.Behavior {
     private int toolbarHeight;
 
