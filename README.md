@@ -64,6 +64,10 @@ Building Blocks - 积木
 - Blog: [http://itangqi.me](http://itangqi.me)
 - Gmail：[imtangqi#gmail.com](mailto:imtangqi@gmail.com "欢迎与我联系")
 
+## Project Home - 项目主页
+
+[http://itangqi.me/android/building-blocks/](http://itangqi.me/android/building-blocks/)
+
 ## License - 许可证
 
 <pre>
