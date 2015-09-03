@@ -1,15 +1,15 @@
 Building Blocks - 积木
 =====================
 
-积木是以  [Izzy Leung](https://github.com/izzyleung) 提供的 [知乎日报 API](https://github.com/izzyleung/ZhihuDailyPurify/wiki/%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A5-API-%E5%88%86%E6%9E%90) 既知乎日报为数据展现内容；以 OptionsMenu（选项菜单）的形式为功能扩展入口；以 Design Support Library（依循 Material Design）为主导设计 UI。
+**积木**是以  [Izzy Leung](https://github.com/izzyleung) 提供的 [知乎日报 API](https://github.com/izzyleung/ZhihuDailyPurify/wiki/%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A5-API-%E5%88%86%E6%9E%90) 既知乎日报为数据展现内容；以 OptionsMenu（选项菜单）的形式为功能扩展入口；以 Design Support Library（依循 Material Design）为主导设计 UI。
 
 ### How to use
 
 那么，你该如何利用她呢？
 
-好啦，其实我已经帮完成了整体框架的搭建，你需要做的，仅仅是依据自己的实际需求，简单的替换下数据来源（API）然后改改 UI，就可以快速地完成一款全新应用的开发！
+好啦，其实我已经帮完成了整体框架的搭建，你需要做的，仅仅是依据自己的实际需求，简单的替换下数据来源（API）然后改改 UI，就可以快速地完成一款全新应用的开发啦！
 
-想想，还有点小激动？那么赶紧 Star 与 Fork 吧！你的支持将是我最大的动力与褒奖~
+想想，还有点小激动？那么赶紧 **Star** 与 **Fork** 吧！你的支持将成为我最大的动力与褒奖！
 
 ## Features - 功能点
 
@@ -23,10 +23,10 @@ Building Blocks - 积木
 
 ## Demo - 示例
 
-[]()
+[快速下载](https://github.com/tangqi92/BuildingBlocks/releases/download/v0.3.0/buildingblocks_v0.3.0.apk)
 
 ## Screenshots - 预览
-[]()
+[](blob/master/screenshots/s1.png)
 []()
 []()
 []()
