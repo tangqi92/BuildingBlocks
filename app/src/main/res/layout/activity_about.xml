@@ -108,6 +108,36 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:layout_marginTop="12dp"
+                android:text="@string/help_me"
+                android:textColor="@color/md_grey_600"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_card_nopic"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/help_me_detail"
+                    android:textColor="@color/md_grey_800"
+                    android:textSize="14sp"
+                    tools:ignore="HardcodedText"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="12dp"
+                android:background="@color/md_grey_500"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="12dp"
                 android:text="@string/developers"
                 android:textColor="@color/md_grey_600"/>
 
@@ -181,6 +211,7 @@
                     android:textColor="@color/md_grey_800"/>
 
             </RelativeLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"

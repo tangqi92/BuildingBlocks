@@ -1,31 +1,35 @@
 Building Blocks - 积木
 =====================
 
+积木是以  [Izzy Leung](https://github.com/izzyleung) 提供的 [知乎日报 API](https://github.com/izzyleung/ZhihuDailyPurify/wiki/%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A5-API-%E5%88%86%E6%9E%90) 既知乎日报为数据展现内容；以 OptionsMenu（选项菜单）的形式为功能扩展入口；以 Design Support Library（依循 Material Design）为主导设计 UI。
 
-- [Features](#features-功能点)
-- [Demo](#demo)
-- [Screenshots](#screenshots)
-- [Dependencies](#dependencies)
-- [Thanks](#thanks)
-- [Help](#help)
-- [Contact Me](#contact-me)
-- [License](#license)
+### How to use
+
+那么，你该如何利用她呢？
+
+好啦，其实我已经帮完成了整体框架的搭建，你需要做的，仅仅是依据自己的实际需求，简单的替换下数据来源（API）然后改改 UI，就可以快速地完成一款全新应用的开发！
+
+想想，还有点小激动？那么赶紧 Star 与 Fork 吧！你的支持将是我最大的动力与褒奖~
 
 ## Features - 功能点
 
-- About - 关于
+- About - 关于页面
 - Pick Photo - 选择与裁剪照片
 - Pick Place - 选择位置（需安装 Google Play Services 与 翻墙 - WTF）
 - Settings - 详细设置（只实现 UI）
 - MaterialDrawer - 导航抽屉（只实现 UI）
 - Design Support Library 不完全使用
+- 未完待续 ......
 
 ## Demo - 示例
 
 []()
 
 ## Screenshots - 预览
-
+[]()
+[]()
+[]()
+[]()
 
 ## Dependencies - 开源项目
 
@@ -36,7 +40,7 @@ Building Blocks - 积木
  - [MaterialDrawer](https://github.com/mikepenz/MaterialDrawer)
  - [android-async-http](https://github.com/loopj/android-async-http)
 
-## Thanks - 感谢
+## Thanks - 感谢你们
 
 - 感谢 [drakeet](https://github.com/drakeet) 及他的 [妹纸&gank.io](https://github.com/drakeet/Meizhi)， 其代码写得真的非常漂亮：)，从中学到了很多并运用到了项目中（依葫芦画瓢而已啦）
 
@@ -44,13 +48,13 @@ Building Blocks - 积木
 
 ## Help - 帮帮我
 
-至今不会 Sketch，更别说 PS 了（好吧，我承认，是我笨是我懒），所以，「积木」至今都没有属于自己的「应用图标」。
+天生不是做设计的料，至今还没学会 Sketch，更别说 PS 了，所以，「积木」的「应用图标」至今还缺省着。
 
-如果你正好发现了她，又正好没处发挥你的才华的话，那么不妨为她设计个图标吧：）
+不愿将就的我，愿意等，如果你正好发现了她，又正好没处发挥你的才华的话，那么不妨为她设计个漂亮的图标吧：）
 
-你能在下面找到我的联系方式，我在此先替她谢过啦！！！
+你能在下面找到我的联系方式，在此我先替她谢过啦！！！
 
-## Contact Me - 联系我
+## Contact - 联系我
 
 - Weibo：[汤奇V](http://weibo.com/qiktang)
 - Blog: [http://itangqi.me](http://itangqi.me)
