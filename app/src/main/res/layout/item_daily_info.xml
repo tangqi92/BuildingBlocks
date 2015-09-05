@@ -5,9 +5,9 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
+    android:layout_margin="3dp"
     card_view:cardCornerRadius="@dimen/margin_4dp"
-    card_view:cardElevation="@dimen/margin_4dp">
+    card_view:cardElevation="@dimen/card_elevation_resting">
 
     <LinearLayout
         android:id="@+id/ll_card_parent"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/abc_list_item_padding_horizontal_material"
             android:text="今天是七夕节..."
-            android:textColor="@android:color/black"
+            android:textColor="@color/primary_text"
             android:textSize="18sp"/>
 
     </LinearLayout>

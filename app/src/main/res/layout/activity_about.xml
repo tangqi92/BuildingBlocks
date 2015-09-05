@@ -30,24 +30,24 @@
                 <ImageView
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="@dimen/margin_24dp"
                     android:src="@mipmap/ic_launcher"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/margin_8dp"
                     android:gravity="center"
                     android:text="@string/app_name_with_introduce"
-                    android:textColor="@color/md_white_1000"
+                    android:textColor="@color/icons"
                     android:textSize="18sp"/>
 
                 <TextView
                     android:id="@+id/tv_version"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@color/md_white_1000"
+                    android:layout_marginTop="@dimen/margin_8dp"
+                    android:textColor="@color/icons"
                     android:textSize="14sp"
                     tools:text="Version 0.1.1"/>
             </LinearLayout>
@@ -71,14 +71,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/about_card_margin">
+            android:padding="@dimen/margin_8dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:text="@string/introduce_and_help"
-                android:textColor="@color/md_grey_600"/>
+                android:textColor="@color/secondary_text"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:autoLink="web"
                     android:text="@string/introduce"
-                    android:textColor="@color/md_grey_800"
+                    android:textColor="@color/secondary_text"
                     android:textIsSelectable="true"
                     android:textSize="14sp"/>
 
@@ -101,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginTop="12dp"
-                android:background="@color/md_grey_500"/>
+                android:background="@color/divider"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -109,7 +109,7 @@
                 android:layout_marginBottom="12dp"
                 android:layout_marginTop="12dp"
                 android:text="@string/help_me"
-                android:textColor="@color/md_grey_600"/>
+                android:textColor="@color/secondary_text"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -121,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/help_me_detail"
-                    android:textColor="@color/md_grey_800"
+                    android:textColor="@color/secondary_text"
                     android:textSize="14sp"
                     tools:ignore="HardcodedText"/>
 
@@ -131,7 +131,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginTop="12dp"
-                android:background="@color/md_grey_500"/>
+                android:background="@color/divider"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -139,7 +139,7 @@
                 android:layout_marginBottom="12dp"
                 android:layout_marginTop="12dp"
                 android:text="@string/developers"
-                android:textColor="@color/md_grey_600"/>
+                android:textColor="@color/secondary_text"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -161,7 +161,7 @@
                     android:layout_toEndOf="@id/ig_avatar_tangqi"
                     android:layout_toRightOf="@id/ig_avatar_tangqi"
                     android:text="汤奇"
-                    android:textColor="@color/md_grey_800"
+                    android:textColor="@color/primary_text"
                     tools:ignore="HardcodedText"/>
 
                 <TextView
@@ -171,7 +171,7 @@
                     android:layout_toEndOf="@id/ig_avatar_tangqi"
                     android:layout_toRightOf="@id/ig_avatar_tangqi"
                     android:text="@string/developer_description"
-                    android:textColor="@color/md_grey_600"/>
+                    android:textColor="@color/secondary_text"/>
 
                 <TextView
                     android:id="@+id/tv_avator_blog"
@@ -180,7 +180,7 @@
                     android:layout_alignLeft="@id/ig_avatar_tangqi"
                     android:layout_below="@id/ig_avatar_tangqi"
                     android:text="Blog: "
-                    android:textColor="@color/md_grey_800"/>
+                    android:textColor="@color/primary_text"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -189,7 +189,7 @@
                     android:layout_toRightOf="@id/tv_avator_blog"
                     android:autoLink="web"
                     android:text="http://itangqi.me"
-                    android:textColor="@color/md_grey_800"/>
+                    android:textColor="@color/secondary_text"/>
 
                 <TextView
                     android:id="@+id/tv_avator_github"
@@ -198,7 +198,7 @@
                     android:layout_alignLeft="@id/tv_avator_blog"
                     android:layout_below="@id/tv_avator_blog"
                     android:text="GitHub: "
-                    android:textColor="@color/md_grey_800"/>
+                    android:textColor="@color/primary_text"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -208,7 +208,7 @@
                     android:layout_toRightOf="@id/tv_avator_github"
                     android:autoLink="web"
                     android:text="https://github.com/tangqi92"
-                    android:textColor="@color/md_grey_800"/>
+                    android:textColor="@color/secondary_text"/>
 
             </RelativeLayout>
 
@@ -217,7 +217,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginTop="12dp"
-                android:background="@color/md_grey_500"/>
+                android:background="@color/divider"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -225,12 +225,12 @@
                 android:layout_marginBottom="12dp"
                 android:layout_marginTop="12dp"
                 android:text="@string/open_source_lis"
-                android:textColor="@color/md_grey_600"/>
+                android:textColor="@color/secondary_text"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="@dimen/margin_16dp"
                 android:background="@drawable/bg_card_nopic"
                 android:padding="16dp">
 
@@ -238,7 +238,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/open_source_libraries_list"
-                    android:textColor="@color/md_grey_600"
+                    android:textColor="@color/secondary_text"
                     android:textSize="@dimen/open_source_lis_text_size"
                     tools:ignore="HardcodedText"/>
 
