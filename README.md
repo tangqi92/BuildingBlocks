@@ -66,7 +66,7 @@ Building Blocks - 积木
 
 ## Project Home - 项目主页
 
-[http://itangqi.me/android/building-blocks/](http://itangqi.me/android/building-blocks/)
+[http://itangqi.me/2015/09/03/building-blocks/](http://itangqi.me/2015/09/03/building-blocks/)
 
 ## License - 许可证
 
