@@ -1,31 +1,32 @@
-Building Blocks - 积木
-=====================
+# Building Blocks
 
-**积木**是以  [Izzy Leung](https://github.com/izzyleung) 提供的 [知乎日报 API](https://github.com/izzyleung/ZhihuDailyPurify/wiki/%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A5-API-%E5%88%86%E6%9E%90) 既知乎日报为数据展现内容；以 OptionsMenu（选项菜单）的形式为功能扩展入口；以 Design Support Library（依循 Material Design）为主导设计 UI。
+[中文介绍](README.z.md)
+
+>**Building Blocks** with Zhihu Daily API as a source of data; OptionsMenu as extensions of the entry; Design Support Library as UI design leader.
 
 ### How to use
 
-那么，你该如何利用她呢？
+So, how do you take advantage of her?
 
-好啦，其实我已经帮完成了整体框架的搭建，你需要做的，仅仅是依据自己的实际需求，简单的替换下数据来源（API）然后改改 UI，就可以快速地完成一款全新应用的开发啦！
+Well, actually, I have to help you complete the overall framework set up, you need to do is just based on actual demand, simply replace data at source, and modify UI, you can quickly complete a new application development！
 
-想想，还有点小激动？那么赶紧 **Star** 与 **Fork** 吧！你的支持将成为我最大的动力与褒奖！
+Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your support will be my greatest motivation and praise!
 
-## Features - 功能点
+## Features
 
-- About - 关于页面
-- Pick Photo - 选择与裁剪照片
-- Pick Place - 选择位置（需安装 Google Play Services 与 翻墙 - WTF）
-- Settings - 详细设置（只实现 UI）
-- MaterialDrawer - 导航抽屉（只实现 UI）
-- Design Support Library 不完全使用
-- 未完待续 ......
+- About
+- Pick Photo
+- Pick Place
+- Settings
+- MaterialDrawer
+- Design Support Library
+- Comming soon ......
 
-## Demo - 示例
+## Demo
 
-[快速下载](https://github.com/tangqi92/BuildingBlocks/releases/download/v0.3.0/buildingblocks_v0.3.0.apk)
+[Download](https://github.com/tangqi92/BuildingBlocks/releases/download/v0.3.0/buildingblocks_v0.3.0.apk)
 
-## Screenshots - 预览
+## Screenshots
 <img src="/screenshots/s1.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s2.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
 <img src="/screenshots/s3.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s4.png" alt="screenshot" title="screenshot" width="270" height="486" />
@@ -35,7 +36,7 @@ Building Blocks - 积木
 <img src="/screenshots/s7.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s8.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
 
-## Dependencies - 开源项目
+## Dependencies
 
  - [glide](https://github.com/bumptech/glide)
  - [logger](https://github.com/orhanobut/logger)
@@ -44,32 +45,28 @@ Building Blocks - 积木
  - [MaterialDrawer](https://github.com/mikepenz/MaterialDrawer)
  - [android-async-http](https://github.com/loopj/android-async-http)
 
-## Thanks - 感谢你们
+## Thanks
 
-- 感谢 [drakeet](https://github.com/drakeet) 及他的 [妹纸&gank.io](https://github.com/drakeet/Meizhi)， 其代码写得真的非常漂亮：)，从中学到了很多并运用到了项目中（依葫芦画瓢而已啦）
+- Thank [drakeet](https://github.com/drakeet) and his [妹纸&gank.io](https://github.com/drakeet/Meizhi), the code he wrote is very beautiful：）, I learned a lot and applied to the project.
 
-- 感谢 [Izzy Leung](https://github.com/izzyleung) 及他的 [知乎日报·净化](https://github.com/izzyleung/ZhihuDailyPurify)，项目最初的原型就来自于此，感谢其提供了详细的知乎日报 API 说明
+- Thank [Izzy Leung](https://github.com/izzyleung) and his [知乎日报·净化](https://github.com/izzyleung/ZhihuDailyPurify)，the initial prototype project will come from this.
 
-## Help - 帮帮我
+## Help
 
-天生不是做设计的料，至今还没学会 Sketch，更别说 PS 了，所以，「积木」的「应用图标」至今还缺省着。
+Because I have not learned how to use Sketch, so the icon of Building Blocks still default.
 
-不愿将就的我，愿意等，如果你正好发现了她，又正好没处发挥你的才华的话，那么不妨为她设计个漂亮的图标吧：）
+If you happen to find her, and just no place to play your talent, then, ask you for her design a beautiful icon it :)
 
-你能在下面找到我的联系方式，在此我先替她谢过啦！！！
-
-## Contact - 联系我
+## Contact
 
 - Weibo：[汤奇V](http://weibo.com/qiktang)
 - Blog: [http://itangqi.me](http://itangqi.me)
 - Gmail：[imtangqi#gmail.com](mailto:imtangqi@gmail.com "欢迎与我联系")
 
-## Project Home - 项目主页
+## Project Home
 
 [http://itangqi.me/2015/09/03/building-blocks/](http://itangqi.me/2015/09/03/building-blocks/)
 
-## License - 许可证
+## License
 
-源代码在 GPL v3 协议下发布
-
-[LICENSE](/LICENSE)
+[GPLv3](/LICENSE)
