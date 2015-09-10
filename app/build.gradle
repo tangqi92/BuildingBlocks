@@ -8,8 +8,8 @@ android {
         applicationId "me.itangqi.buildingblocks"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 40
-        versionName "0.3.1"
+        versionCode 41
+        versionName "0.4.0"
     }
     buildTypes {
         release {
@@ -24,10 +24,10 @@ dependencies {
     // Google Play Services
     compile 'com.google.android.gms:play-services-location:7.5.0'
     // Support Libraries
-    compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.android.support:cardview-v7:22.2.0'
-    compile 'com.android.support:recyclerview-v7:22.2.0'
-    compile 'com.android.support:design:22.2.0'
+    compile 'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.android.support:cardview-v7:22.2.1'
+    compile 'com.android.support:recyclerview-v7:22.2.1'
+    compile 'com.android.support:design:22.2.1'
     compile 'com.google.code.gson:gson:2.3'
     // Third party
     compile 'com.orhanobut:logger:1.10'
