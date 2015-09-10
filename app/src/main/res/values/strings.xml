@@ -6,7 +6,7 @@
     <string name="men_action_pick_photo">Pick Photo</string>
     <string name="men_action_pick_place">Pick Place</string>
     <string name="menu_select">Pick</string>
-    <string name="exit_once_more">再点击一下退出</string>
+    <string name="exit_once_more">再按一次退出积木</string>
     <string name="rest_over_to_you">剩下的就交给你了：）</string>
 
     <string name="pick_photo_title">照片</string>

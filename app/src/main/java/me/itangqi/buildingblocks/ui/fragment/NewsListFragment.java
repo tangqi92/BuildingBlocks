@@ -43,13 +43,14 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
                     mNewsList.add(item);
                 }
                 mAdapter.notifyDataSetChanged();
+                mSwipeRefreshLayout.setRefreshing(false);
 
             }
         }
 
         @Override
         public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, DailyResult errorResponse) {
-
+            mSwipeRefreshLayout.setRefreshing(false);
         }
 
         @Override
@@ -151,12 +152,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
 
     @Override
     public void onRefresh() {
-        // TODO do really refresh
-        mSwipeRefreshLayout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        }, 3000);
+        String url = ZhihuApi.getDailyNews(date);
+        mClient.get(getActivity(), url, mResponseHandlerGetNews);
     }
 }

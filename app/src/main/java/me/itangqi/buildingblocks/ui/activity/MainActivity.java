@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -48,6 +50,7 @@ public class MainActivity extends BaseActivity {
     private AccountHeader headerResult = null;
     private Drawer result = null;
 
+    @Bind(R.id.coordinatorLayout) CoordinatorLayout container;
     @Bind(R.id.tabs) TabLayout tabs;
     @Bind(R.id.pager) ViewPager pager;
     @Bind(R.id.toolbar) Toolbar toolbar;
@@ -211,7 +214,7 @@ public class MainActivity extends BaseActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK
                 && event.getAction() == KeyEvent.ACTION_DOWN) {
             if ((System.currentTimeMillis() - exitTime) > 3000) {
-                ToastUtils.showShort(getString(R.string.exit_once_more));
+                Snackbar.make(container,R.string.exit_once_more,Snackbar.LENGTH_LONG).show();
                 exitTime = System.currentTimeMillis();
             } else {
                 finish();
