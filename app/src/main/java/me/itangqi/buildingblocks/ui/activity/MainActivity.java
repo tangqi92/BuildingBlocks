@@ -43,7 +43,7 @@ import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.ui.activity.base.BaseActivity;
 import me.itangqi.buildingblocks.ui.fragment.NewsListFragment;
 import me.itangqi.buildingblocks.utils.Constants;
-import me.itangqi.buildingblocks.utils.ToastUtils;
+import me.itangqi.buildingblocks.utils.NetworkUtils;
 
 public class MainActivity extends BaseActivity {
     // save our header or result
@@ -56,8 +56,8 @@ public class MainActivity extends BaseActivity {
     @Bind(R.id.toolbar) Toolbar toolbar;
 
     @OnClick(R.id.fab)
-    public void fabOnClick(){
-        ToastUtils.showShort(R.string.rest_over_to_you);
+    public void fabOnClick() {
+        Snackbar.make(container, R.string.rest_over_to_you, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -65,11 +65,15 @@ public class MainActivity extends BaseActivity {
         layoutResID = R.layout.activity_main;
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        if (!NetworkUtils.isNetworkConnected(this)) {
+            Snackbar.make(container, R.string.network_error, Snackbar.LENGTH_LONG).show();
+        }
         pager.setOffscreenPageLimit(Constants.PAGE_COUNT);
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(adapter);
         tabs.setupWithViewPager(pager);
         createProfile(savedInstanceState);
+
     }
 
     @Override
@@ -186,7 +190,7 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public boolean onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
                         // do something with the clicked item :D
-                        ToastUtils.showShort(R.string.rest_over_to_you);
+                        Snackbar.make(container, R.string.rest_over_to_you, Snackbar.LENGTH_LONG).show();
                         return false;
                     }
                 })
@@ -214,7 +218,7 @@ public class MainActivity extends BaseActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK
                 && event.getAction() == KeyEvent.ACTION_DOWN) {
             if ((System.currentTimeMillis() - exitTime) > 3000) {
-                Snackbar.make(container,R.string.exit_once_more,Snackbar.LENGTH_LONG).show();
+                Snackbar.make(container, R.string.exit_once_more, Snackbar.LENGTH_LONG).show();
                 exitTime = System.currentTimeMillis();
             } else {
                 finish();
