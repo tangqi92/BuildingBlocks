@@ -24,7 +24,7 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
 
 ## Demo
 
-[Download](https://github.com/tangqi92/BuildingBlocks/releases/download/v0.3.0/buildingblocks_v0.3.0.apk)
+[Download](https://github.com/tangqi92/BuildingBlocks/releases/download/v0.4.0/buildingblocks_v0.4.0.apk)
 
 ## Screenshots
 <img src="/screenshots/s1.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s2.png" alt="screenshot" title="screenshot" width="270" height="486" />
