@@ -24,7 +24,7 @@ Building Blocks - 积木
 
 ## Demo - 示例
 
-[快速下载](https://github.com/tangqi92/BuildingBlocks/releases/download/v0.4.0/buildingblocks_v0.4.0.apk)
+[快速下载](https://github.com/tangqi92/BuildingBlocks/releases/download/v0.4.1/buildingblocks_v0.4.1.apk)
 
 ## Screenshots - 预览
 <img src="/screenshots/s1.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s2.png" alt="screenshot" title="screenshot" width="270" height="486" />
