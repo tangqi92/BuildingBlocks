@@ -2,6 +2,7 @@ package me.itangqi.buildingblocks.ui.activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -11,18 +12,22 @@ import android.widget.ProgressBar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.ui.activity.base.ToolbarActivity;
+import me.itangqi.buildingblocks.ui.activity.base.SwipeBackActivity;
 
 /*
  * Thanks to
  * Author: drakeet
  */
 
-public class WebActivity extends ToolbarActivity {
+public class WebActivity extends SwipeBackActivity {
 
     public static final String EXTRA_URL = "extra_url";
     public static final String EXTRA_TITLE = "extra_title";
+    private SwipeBackLayout mSwipeBackLayout;
+
+    protected Toolbar mToolbar;
 
     @Bind(R.id.progressbar) ProgressBar mProgressbar;
     @Bind(R.id.webView) WebView mWebView;
@@ -39,10 +44,10 @@ public class WebActivity extends ToolbarActivity {
     public boolean canBack() {
         return true;
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         ButterKnife.bind(this);
         mContext = this;
         mUrl = getIntent().getStringExtra(EXTRA_URL);
@@ -56,6 +61,9 @@ public class WebActivity extends ToolbarActivity {
         mWebView.loadUrl(mUrl);
 
         setTitle(mTitle);
+
+        mSwipeBackLayout = getSwipeBackLayout();
+        mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
     }
 
     @Override

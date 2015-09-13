@@ -3,11 +3,14 @@ package me.itangqi.buildingblocks.ui.activity;
 import android.os.Bundle;
 
 import butterknife.ButterKnife;
+import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.ui.activity.base.ToolbarActivity;
+import me.itangqi.buildingblocks.ui.activity.base.SwipeBackActivity;
 import me.itangqi.buildingblocks.ui.fragment.PrefsFragment;
 
-public class PrefsActivity extends ToolbarActivity {
+public class PrefsActivity extends SwipeBackActivity {
+    private SwipeBackLayout mSwipeBackLayout;
+
     @Override
     protected int getLayoutResource() {
         return R.layout.activity_prefs;
@@ -27,5 +30,7 @@ public class PrefsActivity extends ToolbarActivity {
                 .beginTransaction()
                 .replace(R.id.fragment_frame, new PrefsFragment())
                 .commit();
+        mSwipeBackLayout = getSwipeBackLayout();
+        mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
     }
 }

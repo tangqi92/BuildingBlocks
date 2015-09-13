@@ -14,12 +14,15 @@ import java.io.File;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.ui.activity.base.ToolbarActivity;
+import me.itangqi.buildingblocks.ui.activity.base.SwipeBackActivity;
 
-public class PickPhotoActivity extends ToolbarActivity {
+public class PickPhotoActivity extends SwipeBackActivity {
 
     @Bind(R.id.result_image) ImageView resultView;
+
+    private SwipeBackLayout mSwipeBackLayout;
 
     @Override
     protected int getLayoutResource() {
@@ -36,6 +39,8 @@ public class PickPhotoActivity extends ToolbarActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         setTitle(getString(R.string.pick_photo_title));
+        mSwipeBackLayout = getSwipeBackLayout();
+        mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
     }
 
     @Override

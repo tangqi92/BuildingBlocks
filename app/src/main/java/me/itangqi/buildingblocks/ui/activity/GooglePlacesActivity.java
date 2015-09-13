@@ -39,12 +39,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
 import butterknife.ButterKnife;
+import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.adapter.GooglePlacesAdapter;
-import me.itangqi.buildingblocks.ui.activity.base.ToolbarActivity;
+import me.itangqi.buildingblocks.ui.activity.base.SwipeBackActivity;
 import me.itangqi.buildingblocks.utils.ToastUtils;
 
-public class GooglePlacesActivity extends ToolbarActivity
+public class GooglePlacesActivity extends SwipeBackActivity
         implements GoogleApiClient.OnConnectionFailedListener {
     /**
      * GoogleApiClient wraps our service connection to Google Play Services and provides access
@@ -64,6 +65,8 @@ public class GooglePlacesActivity extends ToolbarActivity
 
     private Button mCurrentLocation;
 
+    private SwipeBackLayout mSwipeBackLayout;
+
     private static final LatLngBounds BOUNDS_GREATER_SYDNEY = new LatLngBounds(
             new LatLng(-34.041458, 150.790100), new LatLng(-33.682247, 151.383362));
 
@@ -80,7 +83,6 @@ public class GooglePlacesActivity extends ToolbarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // Construct a GoogleApiClient for the {@link Places#GEO_DATA_API} using AutoManage
         // functionality, which automatically sets up the API client to handle Activity lifecycle
         // events. If your activity does not extend FragmentActivity, make sure to call connect()
@@ -115,6 +117,9 @@ public class GooglePlacesActivity extends ToolbarActivity
         mAdapter = new GooglePlacesAdapter(this, android.R.layout.simple_list_item_1,
                 mGoogleApiClient, BOUNDS_GREATER_SYDNEY, null);
         mAutocompleteView.setAdapter(mAdapter);
+
+        mSwipeBackLayout = getSwipeBackLayout();
+        mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
     }
 
     private View.OnClickListener mOnClickListener = new View.OnClickListener() {
