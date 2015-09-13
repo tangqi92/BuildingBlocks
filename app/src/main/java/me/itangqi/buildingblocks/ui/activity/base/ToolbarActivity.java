@@ -14,7 +14,6 @@ import me.itangqi.buildingblocks.R;
  * Thanks
  * Author: drakeet
  */
-
 public abstract class ToolbarActivity extends AppCompatActivity {
 
     abstract protected int getLayoutResource();

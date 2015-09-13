@@ -32,7 +32,7 @@
     <string name="help_me">帮帮我</string>
     <string name="help_me_detail">天生不是做设计的料，至今还没学会 Sketch，更别说 PS 了，所以，「积木」的「应用图标」至今还缺省着。\n\n不愿将就的我，愿意等，如果你正好发现了她，又正好没处发挥你的才华的话，那么不妨为她设计个漂亮的图标吧：）\n\n你能在下面找到我的联系方式，在此我先替她谢过啦！！！</string>
     <string name="introduce_and_help">介绍与帮助</string>
-    <string name="open_source_libraries_list">com.orhanobut:logger:1.10\ncom.jakewharton:butterknife:7.0.1\ncom.soundcloud.android:android-crop:1.0.0@aar\ncom.loopj.android:android-async-http:1.4.8\ncom.github.bumptech.glide:glide:3.6.1\ncom.mikepenz:materialdrawer:3.1.2@aar</string>
+    <string name="open_source_libraries_list">com.orhanobut:logger:1.10\ncom.jakewharton:butterknife:7.0.1\ncom.soundcloud.android:android-crop:1.0.0@aar\ncom.loopj.android:android-async-http:1.4.8\ncom.github.bumptech.glide:glide:3.6.1\ncom.mikepenz:materialdrawer:3.1.2@aar\nme.imid.swipebacklayout.lib:library:1.0.0</string>
 
     <string name="drawer_with_menu">Menu Drawer</string>
     <string name="drawer_item_home">Home</string>

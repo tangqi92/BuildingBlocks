@@ -19,5 +19,4 @@ public final class ZhihuApi {
     public static String getNewsContent(int id) {
         return ZHIHU_DAILY_NEWS_CONTENT + id;
     }
-
 }

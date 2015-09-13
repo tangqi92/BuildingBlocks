@@ -73,7 +73,6 @@ public class MainActivity extends BaseActivity {
         pager.setAdapter(adapter);
         tabs.setupWithViewPager(pager);
         createProfile(savedInstanceState);
-
     }
 
     @Override
@@ -228,7 +227,6 @@ public class MainActivity extends BaseActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
 
     private class MyPagerAdapter extends FragmentStatePagerAdapter {
         public MyPagerAdapter(FragmentManager fm) {

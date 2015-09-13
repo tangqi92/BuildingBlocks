@@ -20,6 +20,7 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
 - Settings
 - MaterialDrawer
 - Design Support Library
+- SwipeBackLayout
 - Comming soon ......
 
 ## Demo
@@ -35,6 +36,8 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
 
 <img src="/screenshots/s7.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s8.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
+<img src="/screenshots/s9.png" alt="screenshot" title="screenshot" width="270" height="486" />
+
 
 ## Dependencies
 
@@ -44,6 +47,7 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
  - [android-crop](https://github.com/jdamcd/android-crop)
  - [MaterialDrawer](https://github.com/mikepenz/MaterialDrawer)
  - [android-async-http](https://github.com/loopj/android-async-http)
+ - [SwipeBackLayout](https://github.com/ikew0ng/SwipeBackLayout)
 
 ## Thanks
 
