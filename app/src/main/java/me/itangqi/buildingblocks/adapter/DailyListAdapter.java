@@ -24,7 +24,11 @@ import me.itangqi.buildingblocks.ui.activity.WebActivity;
 /**
  * Created by tangqi on 8/20/15.
  */
-public class DailyListAdapter extends RecyclerView.Adapter<DailyListAdapter.CardViewHolder> {
+public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public static enum ITEM_TYPE {
+        ITEM_TYPE_IMAGE,
+        ITEM_TYPE_TEXT
+    }
     private List<Daily> mNewsList;
     private Context mContext;
 
@@ -37,23 +41,39 @@ public class DailyListAdapter extends RecyclerView.Adapter<DailyListAdapter.Card
     }
 
     @Override
-    public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater
-                .from(mContext)
-                .inflate(R.layout.item_daily_info, parent, false);
-        CardViewHolder cardViewHolder = new CardViewHolder(itemView);
-        return cardViewHolder;
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        if (viewType == ITEM_TYPE.ITEM_TYPE_IMAGE.ordinal()) {
+            return new ImageViewHolder(LayoutInflater
+                    .from(mContext)
+                    .inflate(R.layout.item_daily_normal_info, parent, false));
+        } else {
+            return new ThemeViewHolder(LayoutInflater
+                    .from(mContext)
+                    .inflate(R.layout.item_daily_theme_info, parent, false));
+        }
     }
 
     @Override
-    public void onBindViewHolder(CardViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Daily news = mNewsList.get(position);
-        // 如遇到不能正常加载，请查看 API 返回内容结构
-        if (news.images == null || news.images.size() == 0) {
-        } else {
-            Glide.with(mContext).load(news.images.get(0)).into(holder.mCover);
+        if (holder instanceof ThemeViewHolder) {
+            ((ThemeViewHolder) holder).mTitle.setText(news.title);
+            ((ThemeViewHolder) holder).mFrom.setText(news.theme.name);
+        } else if (holder instanceof ImageViewHolder) {
+            ((ImageViewHolder) holder).mTitle.setText(news.title);
+            Glide.with(mContext).load(news.images.get(0)).into(((ImageViewHolder)holder).mCover);
         }
-        holder.mTitle.setText(news.title);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        Daily news = mNewsList.get(position);
+        if (news.images == null || news.images.size() == 0) {
+             return ITEM_TYPE.ITEM_TYPE_TEXT.ordinal();
+        } else {
+            return ITEM_TYPE.ITEM_TYPE_IMAGE.ordinal();
+        }
     }
 
     @Override
@@ -61,16 +81,37 @@ public class DailyListAdapter extends RecyclerView.Adapter<DailyListAdapter.Card
         return mNewsList.size();
     }
 
-    public class CardViewHolder extends RecyclerView.ViewHolder {
+    public class ImageViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.iv_cover) ImageView mCover;
         @Bind(R.id.tv_title) TextView mTitle;
 
-        public CardViewHolder(View v) {
+        public ImageViewHolder(View v) {
             super(v);
             ButterKnife.bind(this, v);
         }
 
         @OnClick(R.id.ll_card_parent)
+        void onClick(View v) {
+            // TODO do what you want :) you can use WebActivity to load detail content
+            Daily news = mNewsList.get(getLayoutPosition());
+            String news_url = ZhihuApi.getNewsContent(news.id);
+            Intent intent = new Intent(v.getContext(), WebActivity.class);
+            intent.putExtra(WebActivity.EXTRA_TITLE, news.title);
+            intent.putExtra(WebActivity.EXTRA_URL, news_url);
+            v.getContext().startActivity(intent);
+        }
+    }
+
+    public class ThemeViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.tv_title) TextView mTitle;
+        @Bind(R.id.tv_from) TextView mFrom;
+
+        public ThemeViewHolder(View v) {
+            super(v);
+            ButterKnife.bind(this, v);
+        }
+
+        @OnClick(R.id.ll_theme_parent)
         void onClick(View v) {
             // TODO do what you want :) you can use WebActivity to load detail content
             Daily news = mNewsList.get(getLayoutPosition());
