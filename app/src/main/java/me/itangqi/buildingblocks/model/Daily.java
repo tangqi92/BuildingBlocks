@@ -21,4 +21,6 @@ public class Daily implements Serializable {
     public String title;
     @SerializedName("multipic")
     public boolean multipic;
+    @SerializedName("theme")
+    public Theme theme;
 }

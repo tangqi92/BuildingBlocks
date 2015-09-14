@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -49,9 +48,11 @@ public class DailyListAdapter extends RecyclerView.Adapter<DailyListAdapter.Card
     @Override
     public void onBindViewHolder(CardViewHolder holder, int position) {
         Daily news = mNewsList.get(position);
-        Logger.d(position+"");
-        // 图像地址（官方 API 使用数组形式，目前暂未有使用多张图片的情形出现，曾见无 images 属性的情况，请在使用中注意 ）
-        Glide.with(mContext).load(news.images.get(0)).into(holder.mCover);
+        // 如遇到不能正常加载，请查看 API 返回内容结构
+        if (news.images == null || news.images.size() == 0) {
+        } else {
+            Glide.with(mContext).load(news.images.get(0)).into(holder.mCover);
+        }
         holder.mTitle.setText(news.title);
     }
 
