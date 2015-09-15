@@ -45,7 +45,6 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
  - [logger](https://github.com/orhanobut/logger)
  - [butterknife](https://github.com/JakeWharton/butterknife)
  - [android-crop](https://github.com/jdamcd/android-crop)
- - [MaterialDrawer](https://github.com/mikepenz/MaterialDrawer)
  - [android-async-http](https://github.com/loopj/android-async-http)
  - [SwipeBackLayout](https://github.com/ikew0ng/SwipeBackLayout)
 
