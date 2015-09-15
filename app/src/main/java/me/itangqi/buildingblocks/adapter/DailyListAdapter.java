@@ -25,16 +25,17 @@ import me.itangqi.buildingblocks.ui.activity.WebActivity;
  * Created by tangqi on 8/20/15.
  */
 public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    public static enum ITEM_TYPE {
-        ITEM_TYPE_IMAGE,
-        ITEM_TYPE_TEXT
-    }
+
     private List<Daily> mNewsList;
     private Context mContext;
+    private LayoutInflater mLayoutInflater;
+    private static final int ITEM_TYPE_IMAGE = 1;
+    private static final int ITEM_TYPE_TEXT = 2;
 
     public DailyListAdapter(Context mContext, List<Daily> mNewsList) {
         this.mContext = mContext;
         this.mNewsList = mNewsList;
+        mLayoutInflater = LayoutInflater.from(mContext);
         // I hate it !!!
         // http://stackoverflow.com/questions/28787008/onbindviewholder-position-is-starting-again-at-0
 //        setHasStableIds(true);
@@ -42,38 +43,34 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        if (viewType == ITEM_TYPE.ITEM_TYPE_IMAGE.ordinal()) {
-            return new ImageViewHolder(LayoutInflater
-                    .from(mContext)
-                    .inflate(R.layout.item_daily_normal_info, parent, false));
+        if (viewType == ITEM_TYPE_IMAGE) {
+            return new ImageViewHolder(mLayoutInflater.inflate(R.layout.item_daily_image_info, parent, false));
         } else {
-            return new ThemeViewHolder(LayoutInflater
-                    .from(mContext)
-                    .inflate(R.layout.item_daily_theme_info, parent, false));
+            return new ThemeViewHolder(mLayoutInflater.inflate(R.layout.item_daily_text_info, parent, false));
         }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Daily news = mNewsList.get(position);
-        if (holder instanceof ThemeViewHolder) {
-            ((ThemeViewHolder) holder).mTitle.setText(news.title);
-            ((ThemeViewHolder) holder).mFrom.setText(news.theme.name);
-        } else if (holder instanceof ImageViewHolder) {
-            ((ImageViewHolder) holder).mTitle.setText(news.title);
-            Glide.with(mContext).load(news.images.get(0)).into(((ImageViewHolder)holder).mCover);
+        switch (holder.getItemViewType()) {
+            case ITEM_TYPE_TEXT:
+                ((ThemeViewHolder) holder).mTitle.setText(news.title);
+                ((ThemeViewHolder) holder).mFrom.setText("选自 " + news.theme.name);
+                break;
+            case ITEM_TYPE_IMAGE:
+                ((ImageViewHolder) holder).mTitle.setText(news.title);
+                Glide.with(mContext).load(news.images.get(0)).into(((ImageViewHolder) holder).mCover);
+                break;
         }
     }
 
     @Override
     public int getItemViewType(int position) {
+        // add here your booleans or switch() to set viewType at your needed
         Daily news = mNewsList.get(position);
-        if (news.images == null || news.images.size() == 0) {
-             return ITEM_TYPE.ITEM_TYPE_TEXT.ordinal();
-        } else {
-            return ITEM_TYPE.ITEM_TYPE_IMAGE.ordinal();
-        }
+        // 根据是否存在 images 来判断加载 View 的类型
+        return (news.images == null || news.images.size() == 0) ? ITEM_TYPE_TEXT : ITEM_TYPE_IMAGE;
     }
 
     @Override

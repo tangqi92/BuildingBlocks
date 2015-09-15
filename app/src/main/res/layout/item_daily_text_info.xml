@@ -35,7 +35,7 @@
             android:id="@+id/tv_from"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="选自 "
+            android:text="然并卵..."
             android:textColor="@color/secondary_text"
             android:layout_marginTop="12dp"
             android:textSize="10sp"/>
