@@ -79,16 +79,6 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        //handle the back press :D close the drawer first and if the drawer is closed close the activity
-        if (result != null && result.isDrawerOpen()) {
-            result.closeDrawer();
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
     protected void onSaveInstanceState(Bundle outState) {
         //add the values which need to be saved from the drawer to the bundle
         outState = result.saveInstanceState(outState);
@@ -228,7 +218,11 @@ public class MainActivity extends BaseActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK
                 && event.getAction() == KeyEvent.ACTION_DOWN) {
-            if ((System.currentTimeMillis() - exitTime) > 3000) {
+            //handle the back press :D close the drawer first and if the drawer is closed close the activity
+            if (result != null && result.isDrawerOpen()) {
+                result.closeDrawer();
+            }
+            else if ((System.currentTimeMillis() - exitTime) > 3000) {
                 Snackbar.make(container, R.string.exit_once_more, Snackbar.LENGTH_LONG).show();
                 exitTime = System.currentTimeMillis();
             } else {

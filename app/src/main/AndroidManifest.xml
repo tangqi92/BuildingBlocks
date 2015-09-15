@@ -34,16 +34,16 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode = "adjustPan">
+            android:windowSoftInputMode="adjustPan">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
 
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".ui.activity.SearchResultActivity"/>
         </activity>
 
         <activity android:name=".ui.activity.WebActivity"/>
@@ -52,7 +52,14 @@
 
         <activity android:name=".ui.activity.PickPhotoActivity"/>
 
-        <activity android:name=".ui.activity.SearchResultActivity"/>
+        <activity android:name=".ui.activity.SearchResultActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>
 
         <activity android:name="com.soundcloud.android.crop.CropImageActivity"/>
 
@@ -66,7 +73,7 @@
 
         <meta-data
             android:name="android.app.searchable"
-            android:resource="@xml/searchable" />
+            android:resource="@xml/searchable"/>
 
     </application>
 </manifest>
