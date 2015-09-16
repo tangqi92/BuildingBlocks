@@ -28,6 +28,7 @@ import me.itangqi.buildingblocks.adapter.DailyListAdapter;
 import me.itangqi.buildingblocks.api.ZhihuApi;
 import me.itangqi.buildingblocks.model.Daily;
 import me.itangqi.buildingblocks.model.DailyResult;
+import me.itangqi.buildingblocks.widget.SimpleDividerItemDecoration;
 
 public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private List<Daily> mNewsList = new ArrayList<>();
@@ -99,6 +100,9 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(
+                getActivity()
+        ));
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.primary);

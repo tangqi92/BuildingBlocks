@@ -38,7 +38,7 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         mLayoutInflater = LayoutInflater.from(mContext);
         // I hate it !!!
         // http://stackoverflow.com/questions/28787008/onbindviewholder-position-is-starting-again-at-0
-//        setHasStableIds(true);
+        // setHasStableIds(true);
     }
 
     @Override
@@ -78,6 +78,14 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return mNewsList.size();
     }
 
+    public void gotoWebView(Daily news, View v) {
+        String news_url = ZhihuApi.getNewsContent(news.id);
+        Intent intent = new Intent(v.getContext(), WebActivity.class);
+        intent.putExtra(WebActivity.EXTRA_TITLE, news.title);
+        intent.putExtra(WebActivity.EXTRA_URL, news_url);
+        v.getContext().startActivity(intent);
+    }
+
     public class ImageViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.iv_cover) ImageView mCover;
         @Bind(R.id.tv_title) TextView mTitle;
@@ -91,11 +99,7 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         void onClick(View v) {
             // TODO do what you want :) you can use WebActivity to load detail content
             Daily news = mNewsList.get(getLayoutPosition());
-            String news_url = ZhihuApi.getNewsContent(news.id);
-            Intent intent = new Intent(v.getContext(), WebActivity.class);
-            intent.putExtra(WebActivity.EXTRA_TITLE, news.title);
-            intent.putExtra(WebActivity.EXTRA_URL, news_url);
-            v.getContext().startActivity(intent);
+            gotoWebView(news, v);
         }
     }
 
@@ -112,11 +116,7 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         void onClick(View v) {
             // TODO do what you want :) you can use WebActivity to load detail content
             Daily news = mNewsList.get(getLayoutPosition());
-            String news_url = ZhihuApi.getNewsContent(news.id);
-            Intent intent = new Intent(v.getContext(), WebActivity.class);
-            intent.putExtra(WebActivity.EXTRA_TITLE, news.title);
-            intent.putExtra(WebActivity.EXTRA_URL, news_url);
-            v.getContext().startActivity(intent);
+            gotoWebView(news, v);
         }
     }
 }
