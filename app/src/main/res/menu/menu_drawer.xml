@@ -1,30 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
 
         <item
             android:id="@+id/nav_home"
+            android:checked="false"
             android:icon="@drawable/drawer_action_share"
             android:title="首页"/>
         <item
             android:id="@+id/nav_collection"
+            android:checked="false"
             android:icon="@drawable/drawer_action_collection"
             android:title="我的收藏"/>
         <item
             android:id="@+id/nav_read"
+            android:checked="false"
             android:icon="@drawable/drawer_action_read"
             android:title="浏览历史"/>
 
-
-        <item
-            android:title="设置 1"/>
-        <item
-            android:title="设置 2"/>
-        <item
-            android:title="设置 3"/>
-        <item
-            android:title="设置 4"/>
-        <item
-            android:title="设置 5"/>
     </group>
 </menu>

@@ -54,14 +54,7 @@ public class MainActivity extends BaseActivity {
         layoutResID = R.layout.activity_main;
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        if (!NetworkUtils.isNetworkConnected(this)) {
-            Snackbar.make(container, R.string.network_error, Snackbar.LENGTH_LONG).show();
-        }
-        pager.setOffscreenPageLimit(Constants.PAGE_COUNT);
-        MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
-        pager.setAdapter(adapter);
-        tabs.setupWithViewPager(pager);
-//        createProfile(savedInstanceState);
+
         //Initializing NavigationView
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
@@ -82,7 +75,7 @@ public class MainActivity extends BaseActivity {
 
                 //Check to see which item was being clicked and perform appropriate action
                 switch (menuItem.getItemId()) {
-
+                    // TODO
                 }
                 return true;
             }
@@ -111,6 +104,14 @@ public class MainActivity extends BaseActivity {
 
         //calling sync state is necessay or else your hamburger icon wont show up
         actionBarDrawerToggle.syncState();
+
+        if (!NetworkUtils.isNetworkConnected(this)) {
+            Snackbar.make(container, R.string.network_error, Snackbar.LENGTH_LONG).show();
+        }
+        pager.setOffscreenPageLimit(Constants.PAGE_COUNT);
+        MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
+        pager.setAdapter(adapter);
+        tabs.setupWithViewPager(pager);
 
     }
 
