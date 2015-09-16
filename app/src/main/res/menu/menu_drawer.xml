@@ -19,5 +19,25 @@
             android:icon="@drawable/drawer_action_read"
             android:title="浏览历史"/>
 
+        <item android:title="附加功能">
+            <menu>
+                <item
+                    android:id="@+id/nav_pick_photo"
+                    android:checked="false"
+                    android:title="照片选取"/>
+                <item
+                    android:id="@+id/nav_pick_place"
+                    android:checked="false"
+                    android:title="位置选取"/>
+                <item
+                    android:id="@+id/nav_settings"
+                    android:checked="false"
+                    android:title="设置"/>
+                <item
+                    android:id="@+id/nav_about"
+                    android:checked="false"
+                    android:title="关于"/>
+            </menu>
+        </item>
     </group>
 </menu>

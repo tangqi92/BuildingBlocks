@@ -54,28 +54,44 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
 
+        if (!NetworkUtils.isNetworkConnected(this)) {
+            Snackbar.make(container, R.string.network_error, Snackbar.LENGTH_LONG).show();
+        }
+
         if (navigationView != null) {
             setupDrawerContent();
         }
 
         setupActionBarToggle();
 
-        if (!NetworkUtils.isNetworkConnected(this)) {
-            Snackbar.make(container, R.string.network_error, Snackbar.LENGTH_LONG).show();
+        if (pager != null) {
+            setupViewPager();
         }
-
-        setupViewPager();
     }
-
 
     private void setupDrawerContent() {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        menuItem.setChecked(true);
+                        //Checking if the item is in checked state or not, if not make it in checked state
+                        if (menuItem.isChecked()) menuItem.setChecked(false);
+                        else menuItem.setChecked(true);
+                        //Closing drawer on item click
                         drawerLayout.closeDrawers();
-                        return true;
+                        //Check to see which item was being clicked and perform appropriate action
+                        switch (menuItem.getItemId()) {
+                            case R.id.nav_pick_photo:
+                                return prepareIntent(PickPhotoActivity.class);
+                            case R.id.nav_pick_place:
+                                return prepareIntent(GooglePlacesActivity.class);
+                            case R.id.nav_settings:
+                                return prepareIntent(PrefsActivity.class);
+                            case R.id.nav_about:
+                                return prepareIntent(AboutActivity.class);
+                            default:
+                                return true;
+                        }
                     }
                 });
     }
@@ -129,14 +145,18 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_action_about:
-                return prepareIntent(AboutActivity.class);
-            case R.id.menu_action_pick_photo:
-                return prepareIntent(PickPhotoActivity.class);
-            case R.id.menu_action_pick_place:
-                return prepareIntent(GooglePlacesActivity.class);
-            case R.id.menu_action_settings:
-                return prepareIntent(PrefsActivity.class);
+            case R.id.men_action_refresh:
+                Snackbar.make(container, R.string.rest_over_to_you, Snackbar.LENGTH_LONG).show();
+                return true;
+
+            case R.id.men_action_sort:
+                Snackbar.make(container, R.string.rest_over_to_you, Snackbar.LENGTH_LONG).show();
+                return true;
+
+            case R.id.menu_action_feedback:
+                Snackbar.make(container, R.string.rest_over_to_you, Snackbar.LENGTH_LONG).show();
+                return true;
+
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
@@ -148,7 +168,6 @@ public class MainActivity extends BaseActivity {
         startActivity(new Intent(MainActivity.this, clazz));
         return true;
     }
-
 
     /**
      * 实现再按一次退出提醒

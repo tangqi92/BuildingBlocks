@@ -9,17 +9,14 @@
         app:showAsAction="always"/>
 
     <item
-        android:id="@+id/menu_action_pick_photo"
-        android:title="@string/men_action_pick_photo"/>
+        android:id="@+id/men_action_refresh"
+        android:title="@string/men_action_refresh"/>
 
     <item
-        android:id="@+id/menu_action_pick_place"
-        android:title="@string/men_action_pick_place"/>
+        android:id="@+id/men_action_sort"
+        android:title="@string/men_action_sort"/>
 
     <item
-        android:id="@+id/menu_action_settings"
-        android:title="@string/menu_action_settings"/>
-    <item
-        android:id="@+id/menu_action_about"
-        android:title="@string/menu_action_about"/>
+        android:id="@+id/menu_action_feedback"
+        android:title="@string/menu_action_feedback"/>
 </menu>
