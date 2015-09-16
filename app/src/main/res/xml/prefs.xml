@@ -7,23 +7,22 @@
             android:defaultValue="false"
             android:enabled="true"
             android:key="auto_update"
-            android:title="@string/auto_update"
-            />
+            android:title="@string/auto_update"/>
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/settings_notification_settings">
+        android:title="@string/settings_push_settings">
         <CheckBoxPreference
             android:defaultValue="false"
             android:enabled="true"
             android:key="notification"
-            android:title="@string/auto_notification"
-            />
+            android:title="@string/auto_push"/>
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_about">
+    <PreferenceCategory android:title="@string/settings_version">
         <Preference
             android:key="version"
             android:title="@string/settings_version_code"/>
     </PreferenceCategory>
+
 </PreferenceScreen>

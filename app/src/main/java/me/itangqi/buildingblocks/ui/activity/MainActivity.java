@@ -11,6 +11,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -35,11 +36,9 @@ import me.itangqi.buildingblocks.utils.NetworkUtils;
 
 public class MainActivity extends BaseActivity {
 
-    //Defining Variables
-    private NavigationView navigationView;
-    private DrawerLayout drawerLayout;
-
+    @Bind(R.id.drawer_layout) DrawerLayout drawerLayout;
     @Bind(R.id.coordinatorLayout) CoordinatorLayout container;
+    @Bind(R.id.navigation_view) NavigationView navigationView;
     @Bind(R.id.tabs) TabLayout tabs;
     @Bind(R.id.pager) ViewPager pager;
     @Bind(R.id.toolbar) Toolbar mToolbar;
@@ -55,35 +54,35 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
 
-        //Initializing NavigationView
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        if (navigationView != null) {
+            setupDrawerContent();
+        }
 
-        //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        setupActionBarToggle();
 
-            // This method will trigger on item Click of navigation menu
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
+        if (!NetworkUtils.isNetworkConnected(this)) {
+            Snackbar.make(container, R.string.network_error, Snackbar.LENGTH_LONG).show();
+        }
+
+        setupViewPager();
+    }
 
 
-                //Checking if the item is in checked state or not, if not make it in checked state
-                if (menuItem.isChecked()) menuItem.setChecked(false);
-                else menuItem.setChecked(true);
+    private void setupDrawerContent() {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        menuItem.setChecked(true);
+                        drawerLayout.closeDrawers();
+                        return true;
+                    }
+                });
+    }
 
-                //Closing drawer on item click
-                drawerLayout.closeDrawers();
-
-                //Check to see which item was being clicked and perform appropriate action
-                switch (menuItem.getItemId()) {
-                    // TODO
-                }
-                return true;
-            }
-        });
-
+    private void setupActionBarToggle() {
         // Initializing Drawer Layout and ActionBarToggle
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,mToolbar,R.string.openDrawer, R.string.closeDrawer){
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.openDrawer, R.string.closeDrawer) {
 
             @Override
             public void onDrawerClosed(View drawerView) {
@@ -94,7 +93,6 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onDrawerOpened(View drawerView) {
                 // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
-
                 super.onDrawerOpened(drawerView);
             }
         };
@@ -104,15 +102,13 @@ public class MainActivity extends BaseActivity {
 
         //calling sync state is necessay or else your hamburger icon wont show up
         actionBarDrawerToggle.syncState();
+    }
 
-        if (!NetworkUtils.isNetworkConnected(this)) {
-            Snackbar.make(container, R.string.network_error, Snackbar.LENGTH_LONG).show();
-        }
+    private void setupViewPager() {
         pager.setOffscreenPageLimit(Constants.PAGE_COUNT);
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(adapter);
         tabs.setupWithViewPager(pager);
-
     }
 
     @Override
@@ -141,6 +137,9 @@ public class MainActivity extends BaseActivity {
                 return prepareIntent(GooglePlacesActivity.class);
             case R.id.menu_action_settings:
                 return prepareIntent(PrefsActivity.class);
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

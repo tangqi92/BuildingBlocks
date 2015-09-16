@@ -32,8 +32,8 @@
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabMode="scrollable"
-                />
+                app:tabMode="scrollable"/>
+
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.view.ViewPager
@@ -52,8 +52,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:background="@android:color/white"
-        app:itemTextColor="@color/primary_text"
         app:headerLayout="@layout/drawer_header"
         app:menu="@menu/menu_drawer"/>
 
