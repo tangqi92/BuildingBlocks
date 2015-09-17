@@ -4,7 +4,7 @@
       tools:context="me.itangqi.buildingblocks.ui.activity.PickPhotoActivity">
     <item
         android:id="@+id/menu_select"
-        android:orderInCategory="99"
         android:title="@string/menu_select"
+        android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
         app:showAsAction="always"/>
 </menu>

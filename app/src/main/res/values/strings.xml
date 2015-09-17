@@ -4,7 +4,7 @@
     <string name="menu_action_about">关于</string>
     <string name="menu_action_feedback">用户反馈</string>
     <string name="men_action_refresh">刷新</string>
-    <string name="men_action_sort">排序</string>
+    <string name="men_action_read_mode">夜间模式</string>
     <string name="menu_select">选取</string>
     <string name="exit_once_more">再按一次退出积木</string>
     <string name="rest_over_to_you">剩下的就交给你了：）</string>

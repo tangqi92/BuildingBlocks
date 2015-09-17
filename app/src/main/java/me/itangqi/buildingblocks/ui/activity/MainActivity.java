@@ -151,7 +151,6 @@ public class MainActivity extends BaseActivity {
                                 }// end if
                                 if (searchView != null) {
                                     searchView.onActionViewCollapsed();
-                                    searchView.setQuery("", false);
                                 }// end if
                             }// end if
                         }
@@ -191,7 +190,7 @@ public class MainActivity extends BaseActivity {
                 Snackbar.make(mContainer, R.string.rest_over_to_you, Snackbar.LENGTH_LONG).show();
                 return true;
 
-            case R.id.men_action_sort:
+            case R.id.men_action_read_mode:
                 Snackbar.make(mContainer, R.string.rest_over_to_you, Snackbar.LENGTH_LONG).show();
                 return true;
 

@@ -9,6 +9,7 @@ import android.view.View;
 import me.itangqi.buildingblocks.R;
 
 /**
+ * Simple RecyclerView Divider
  * Created by tangqi on 9/16/15.
  */
 public class SimpleDividerItemDecoration extends RecyclerView.ItemDecoration {

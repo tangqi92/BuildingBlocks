@@ -8,8 +8,6 @@ import me.itangqi.buildingblocks.application.App;
 
 public class ToastUtils {
 
-    Context mContext;
-
     private ToastUtils() {
     }
 

@@ -15,8 +15,4 @@ public class CommonUtils {
 
         return toolbarHeight;
     }
-
-    public static int getTabsHeight(Context context) {
-        return (int) context.getResources().getDimension(R.dimen.tabsHeight);
-    }
 }

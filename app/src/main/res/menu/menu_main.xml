@@ -13,8 +13,8 @@
         android:title="@string/men_action_refresh"/>
 
     <item
-        android:id="@+id/men_action_sort"
-        android:title="@string/men_action_sort"/>
+        android:id="@+id/men_action_read_mode"
+        android:title="@string/men_action_read_mode"/>
 
     <item
         android:id="@+id/menu_action_feedback"
