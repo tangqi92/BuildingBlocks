@@ -56,7 +56,7 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         switch (holder.getItemViewType()) {
             case ITEM_TYPE_TEXT:
                 ((ThemeViewHolder) holder).mTitle.setText(news.title);
-                ((ThemeViewHolder) holder).mFrom.setText("选自 " + news.theme.name);
+                ((ThemeViewHolder) holder).mFrom.setText("From " + news.theme.name);
                 break;
             case ITEM_TYPE_IMAGE:
                 ((ImageViewHolder) holder).mTitle.setText(news.title);
@@ -69,7 +69,7 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public int getItemViewType(int position) {
         // add here your booleans or switch() to set viewType at your needed
         Daily news = mNewsList.get(position);
-        // 根据是否存在 images 来判断加载 View 的类型
+        // Depending on whether the presence of images to determine the type of load View
         return (news.images == null || news.images.size() == 0) ? ITEM_TYPE_TEXT : ITEM_TYPE_IMAGE;
     }
 
@@ -81,7 +81,6 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void gotoWebView(Daily news, View v) {
         String news_url = ZhihuApi.getNewsContent(news.id);
         Intent intent = new Intent(v.getContext(), WebActivity.class);
-        intent.putExtra(WebActivity.EXTRA_TITLE, news.title);
         intent.putExtra(WebActivity.EXTRA_URL, news_url);
         v.getContext().startActivity(intent);
     }
@@ -97,7 +96,7 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @OnClick(R.id.ll_card_parent)
         void onClick(View v) {
-            // TODO do what you want :) you can use WebActivity to load detail content
+            // TODO do what you want :) you can use WebActivity to load
             Daily news = mNewsList.get(getLayoutPosition());
             gotoWebView(news, v);
         }
@@ -114,7 +113,7 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @OnClick(R.id.ll_theme_parent)
         void onClick(View v) {
-            // TODO do what you want :) you can use WebActivity to load detail content
+            // TODO do what you want :) you can use WebActivity to load
             Daily news = mNewsList.get(getLayoutPosition());
             gotoWebView(news, v);
         }

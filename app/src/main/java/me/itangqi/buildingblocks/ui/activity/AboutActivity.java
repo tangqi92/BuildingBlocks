@@ -1,6 +1,5 @@
 package me.itangqi.buildingblocks.ui.activity;
 
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -18,6 +17,7 @@ import me.imid.swipebacklayout.lib.Utils;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.utils.ShareUtils;
 
 /*
  * Thanks
@@ -26,12 +26,9 @@ import me.itangqi.buildingblocks.R;
 
 public class AboutActivity extends AppCompatActivity implements SwipeBackActivityBase {
 
-    @Bind(R.id.toolbar)
-    Toolbar mToolbar;
-    @Bind(R.id.tv_version)
-    TextView mVersionTextView;
-    @Bind(R.id.collapsing_toolbar)
-    CollapsingToolbarLayout mCollapsingToolbarLayout;
+    @Bind(R.id.toolbar) Toolbar mToolbar;
+    @Bind(R.id.tv_version) TextView mVersionTextView;
+    @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout mCollapsingToolbarLayout;
 
     private SwipeBackActivityHelper mHelper;
 
@@ -90,22 +87,10 @@ public class AboutActivity extends AppCompatActivity implements SwipeBackActivit
                 this.finish();
                 return true;
             case R.id.menu_share:
-                onClickShare();
+                ShareUtils.share(this);
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * On share item click
-     */
-    public void onClickShare() {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_SUBJECT, R.string.share);
-        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text));
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(Intent.createChooser(intent, getTitle()));
     }
 
     public void onResume() {

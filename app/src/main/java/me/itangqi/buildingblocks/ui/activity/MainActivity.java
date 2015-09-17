@@ -36,16 +36,16 @@ import me.itangqi.buildingblocks.utils.NetworkUtils;
 
 public class MainActivity extends BaseActivity {
 
-    @Bind(R.id.drawer_layout) DrawerLayout drawerLayout;
-    @Bind(R.id.coordinatorLayout) CoordinatorLayout container;
-    @Bind(R.id.navigation_view) NavigationView navigationView;
-    @Bind(R.id.tabs) TabLayout tabs;
-    @Bind(R.id.pager) ViewPager pager;
+    @Bind(R.id.drawer_layout) DrawerLayout mDrawerLayout;
+    @Bind(R.id.coordinatorLayout) CoordinatorLayout mContainer;
+    @Bind(R.id.navigation_view) NavigationView mNavigationView;
+    @Bind(R.id.tabs) TabLayout mTabLayout;
+    @Bind(R.id.pager) ViewPager mViewPager;
     @Bind(R.id.toolbar) Toolbar mToolbar;
 
     @OnClick(R.id.fab)
     public void fabOnClick() {
-        Snackbar.make(container, R.string.rest_over_to_you, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(mContainer, R.string.rest_over_to_you, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -55,22 +55,22 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         if (!NetworkUtils.isNetworkConnected(this)) {
-            Snackbar.make(container, R.string.network_error, Snackbar.LENGTH_LONG).show();
+            Snackbar.make(mContainer, R.string.network_error, Snackbar.LENGTH_LONG).show();
         }
 
-        if (navigationView != null) {
+        if (mNavigationView != null) {
             setupDrawerContent();
         }
 
         setupActionBarToggle();
 
-        if (pager != null) {
+        if (mViewPager != null) {
             setupViewPager();
         }
     }
 
     private void setupDrawerContent() {
-        navigationView.setNavigationItemSelectedListener(
+        mNavigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -78,7 +78,7 @@ public class MainActivity extends BaseActivity {
                         if (menuItem.isChecked()) menuItem.setChecked(false);
                         else menuItem.setChecked(true);
                         //Closing drawer on item click
-                        drawerLayout.closeDrawers();
+                        mDrawerLayout.closeDrawers();
                         //Check to see which item was being clicked and perform appropriate action
                         switch (menuItem.getItemId()) {
                             case R.id.nav_pick_photo:
@@ -98,7 +98,7 @@ public class MainActivity extends BaseActivity {
 
     private void setupActionBarToggle() {
         // Initializing Drawer Layout and ActionBarToggle
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.openDrawer, R.string.closeDrawer) {
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.openDrawer, R.string.closeDrawer) {
 
             @Override
             public void onDrawerClosed(View drawerView) {
@@ -114,17 +114,17 @@ public class MainActivity extends BaseActivity {
         };
 
         //Setting the actionbarToggle to drawer layout
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        mDrawerLayout.setDrawerListener(actionBarDrawerToggle);
 
         //calling sync state is necessay or else your hamburger icon wont show up
         actionBarDrawerToggle.syncState();
     }
 
     private void setupViewPager() {
-        pager.setOffscreenPageLimit(Constants.PAGE_COUNT);
+        mViewPager.setOffscreenPageLimit(Constants.PAGE_COUNT);
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
-        pager.setAdapter(adapter);
-        tabs.setupWithViewPager(pager);
+        mViewPager.setAdapter(adapter);
+        mTabLayout.setupWithViewPager(mViewPager);
     }
 
     @Override
@@ -188,19 +188,19 @@ public class MainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.men_action_refresh:
-                Snackbar.make(container, R.string.rest_over_to_you, Snackbar.LENGTH_LONG).show();
+                Snackbar.make(mContainer, R.string.rest_over_to_you, Snackbar.LENGTH_LONG).show();
                 return true;
 
             case R.id.men_action_sort:
-                Snackbar.make(container, R.string.rest_over_to_you, Snackbar.LENGTH_LONG).show();
+                Snackbar.make(mContainer, R.string.rest_over_to_you, Snackbar.LENGTH_LONG).show();
                 return true;
 
             case R.id.menu_action_feedback:
-                Snackbar.make(container, R.string.rest_over_to_you, Snackbar.LENGTH_LONG).show();
+                Snackbar.make(mContainer, R.string.rest_over_to_you, Snackbar.LENGTH_LONG).show();
                 return true;
 
             case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
+                mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -222,7 +222,7 @@ public class MainActivity extends BaseActivity {
                 && event.getAction() == KeyEvent.ACTION_DOWN) {
 
             if ((System.currentTimeMillis() - exitTime) > 3000) {
-                Snackbar.make(container, R.string.exit_once_more, Snackbar.LENGTH_LONG).show();
+                Snackbar.make(mContainer, R.string.exit_once_more, Snackbar.LENGTH_LONG).show();
                 exitTime = System.currentTimeMillis();
             } else {
                 finish();

@@ -16,6 +16,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
 import me.itangqi.buildingblocks.R;
 
 /**
+ * 手势右划返回
  * Created by tangqi on 9/13/15.
  */
 public abstract class SwipeBackActivity extends AppCompatActivity implements SwipeBackActivityBase {
