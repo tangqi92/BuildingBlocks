@@ -3,8 +3,8 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="me.itangqi.buildingblocks.ui.activity.PickPhotoActivity">
     <item
-        android:id="@+id/menu_select"
-        android:title="@string/menu_select"
+        android:id="@+id/menu_action_pick_photo"
+        android:title="@string/menu_action_pick_photo"
         android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
         app:showAsAction="always"/>
 </menu>

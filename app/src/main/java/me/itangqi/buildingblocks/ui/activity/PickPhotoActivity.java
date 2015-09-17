@@ -38,7 +38,7 @@ public class PickPhotoActivity extends SwipeBackActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        setTitle(getString(R.string.pick_photo_title));
+        setTitle(getString(R.string.title_pick_photo));
         mSwipeBackLayout = getSwipeBackLayout();
         mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
     }
@@ -51,7 +51,7 @@ public class PickPhotoActivity extends SwipeBackActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_select) {
+        if (item.getItemId() == R.id.menu_action_pick_photo) {
             resultView.setImageDrawable(null);
             Crop.pickImage(this);
             return true;

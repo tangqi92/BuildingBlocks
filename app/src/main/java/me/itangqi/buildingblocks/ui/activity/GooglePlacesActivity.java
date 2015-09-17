@@ -95,7 +95,7 @@ public class GooglePlacesActivity extends SwipeBackActivity
 
         ButterKnife.bind(this);
 
-        setTitle(getString(R.string.place_title));
+        setTitle(getString(R.string.title_pick_place));
 
         // Retrieve the AutoCompleteTextView that will display Place suggestions.
         mAutocompleteView = (AutoCompleteTextView)

@@ -52,7 +52,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
 
         @Override
         public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, DailyResult errorResponse) {
-            Snackbar.make(getView(), R.string.network_error, Snackbar.LENGTH_LONG).show();
+            Snackbar.make(getView(), R.string.snack_network_error, Snackbar.LENGTH_LONG).show();
             mSwipeRefreshLayout.setRefreshing(false);
         }
 

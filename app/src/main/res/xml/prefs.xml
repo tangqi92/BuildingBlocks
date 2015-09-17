@@ -7,7 +7,7 @@
             android:defaultValue="false"
             android:enabled="true"
             android:key="auto_update"
-            android:title="@string/auto_update"/>
+            android:title="@string/settings_auto_update"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -16,7 +16,7 @@
             android:defaultValue="false"
             android:enabled="true"
             android:key="notification"
-            android:title="@string/auto_push"/>
+            android:title="@string/settings_auto_push"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_version">

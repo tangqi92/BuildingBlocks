@@ -25,7 +25,7 @@ public class PrefsActivity extends SwipeBackActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        setTitle(getString(R.string.settings_title));
+        setTitle(getString(R.string.title_settings));
         getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_frame, new PrefsFragment())

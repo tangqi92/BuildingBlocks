@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.fab)
     public void fabOnClick() {
-        Snackbar.make(mContainer, R.string.rest_over_to_you, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(mContainer, R.string.snack_rest_over_to_you, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -55,7 +55,7 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         if (!NetworkUtils.isNetworkConnected(this)) {
-            Snackbar.make(mContainer, R.string.network_error, Snackbar.LENGTH_LONG).show();
+            Snackbar.make(mContainer, R.string.snack_network_error, Snackbar.LENGTH_LONG).show();
         }
 
         if (mNavigationView != null) {
@@ -98,7 +98,7 @@ public class MainActivity extends BaseActivity {
 
     private void setupActionBarToggle() {
         // Initializing Drawer Layout and ActionBarToggle
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.openDrawer, R.string.closeDrawer) {
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.openDrawerContentDescRes, R.string.closeDrawerContentDescRes) {
 
             @Override
             public void onDrawerClosed(View drawerView) {
@@ -186,21 +186,11 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.men_action_refresh:
-                Snackbar.make(mContainer, R.string.rest_over_to_you, Snackbar.LENGTH_LONG).show();
-                return true;
-
-            case R.id.men_action_read_mode:
-                Snackbar.make(mContainer, R.string.rest_over_to_you, Snackbar.LENGTH_LONG).show();
-                return true;
-
-            case R.id.menu_action_feedback:
-                Snackbar.make(mContainer, R.string.rest_over_to_you, Snackbar.LENGTH_LONG).show();
-                return true;
-
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
+            default:
+                Snackbar.make(mContainer, R.string.snack_rest_over_to_you, Snackbar.LENGTH_LONG).show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -221,7 +211,7 @@ public class MainActivity extends BaseActivity {
                 && event.getAction() == KeyEvent.ACTION_DOWN) {
 
             if ((System.currentTimeMillis() - exitTime) > 3000) {
-                Snackbar.make(mContainer, R.string.exit_once_more, Snackbar.LENGTH_LONG).show();
+                Snackbar.make(mContainer, R.string.snack_exit_once_more, Snackbar.LENGTH_LONG).show();
                 exitTime = System.currentTimeMillis();
             } else {
                 finish();

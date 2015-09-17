@@ -1,59 +1,60 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="app_name">积木</string>
-    <string name="menu_action_about">关于</string>
-    <string name="menu_action_feedback">用户反馈</string>
-    <string name="men_action_refresh">刷新</string>
-    <string name="men_action_read_mode">夜间模式</string>
-    <string name="menu_select">选取</string>
-    <string name="exit_once_more">再按一次退出积木</string>
-    <string name="rest_over_to_you">剩下的就交给你了：）</string>
-    <string name="network_error">加载失败，请重试</string>
-    <string name="search_hint">搜索</string>
-    <string name="closeDrawer">Navigation View</string>
-    <string name="openDrawer">Navigation View Closed</string>
 
-    <string name="pick_photo_title">照片</string>
+    <string name="openDrawerContentDescRes">Navigation View</string>
+    <string name="closeDrawerContentDescRes">Navigation View Closed</string>
 
-    <string name="place_title">位置</string>
-    <string name="place_autocomplete_hint">Enter place name or address</string>
-    <string name="place_selected_place">Last Selected Place:</string>
-    <string name="place_get_current_place">GET CURRENT PLACE</string>
+    <string name="title_pick_photo">照片</string>
+    <string name="title_pick_place">位置</string>
+    <string name="title_about">关于</string>
+    <string name="title_settings">设置</string>
+
+    <string name="place_autocomplete_hint">请输入你要搜索的位置</string>
+    <string name="place_selected_place">最近一次搜索的结果:</string>
+    <string name="place_get_current_place">自动获取当前位置</string>
     <!-- getString(String, Object...) does not support HTML tags directly, they need to be encoded first.
     Original string: <b>%1$s</b><br/><i>Place Id: %2$s</i><br/>Address: %3$s<br/>Phone: %4$s<br/>Website: %5$s-->
     <string name="place_details">&lt;b&gt;%1$s&lt;/b&gt;&lt;br/&gt;&lt;i&gt;Place Id: %2$s&lt;/i&gt;&lt;br/&gt;Address: %3$s&lt;br/&gt;Phone: %4$s&lt;br/&gt;Website: %5$s</string>
     <string name="place_fuck_gfw">嘿，你科学上网了吗？</string>
 
-    <string name="about">关于</string>
-    <string name="introduce">「积木」- 让应用开发如同搭积木一般充满乐趣与成就感。\n\n开源是必须的，如果你觉得她是个值得推荐的应用：），并且希望更多的人能知道她，你只需点击右上角的分享按钮进行分享，你的支持将是我最大的动力与褒奖！</string>
-    <string name="share">分享</string>
-    <string name="share_text">积木 - 享受搭建应用的乐趣\nhttps://github.com/tangqi92/BuildingBlocks</string>
-    <string name="app_name_with_introduce">积木 - 享受搭建应用的乐趣</string>
-    <string name="developers">关于我</string>
-    <string name="developer_description">一个 Android 菜鸟</string>
-    <string name="open_source_lis">感谢开源</string>
-    <string name="help_me">帮帮我</string>
-    <string name="help_me_detail">天生不是做设计的料，至今还没学会 Sketch，更别说 PS 了，所以，「积木」的「应用图标」至今还缺省着。\n\n不愿将就的我，愿意等，如果你正好发现了她，又正好没处发挥你的才华的话，那么不妨为她设计个漂亮的图标吧：）\n\n你能在下面找到我的联系方式，在此我先替她谢过啦！！！</string>
-    <string name="introduce_and_help">介绍与帮助</string>
-    <string name="open_source_libraries_list">com.orhanobut:logger:1.10\ncom.jakewharton:butterknife:7.0.1\ncom.soundcloud.android:android-crop:1.0.0@aar\ncom.loopj.android:android-async-http:1.4.8\ncom.github.bumptech.glide:glide:3.6.1\nme.imid.swipebacklayout.lib:library:1.0.0</string>
+    <string name="about_introduce">「积木」- 让应用开发如同搭积木一般充满乐趣与成就感。\n\n开源是必须的，如果你觉得她是个值得推荐的应用：），并且希望更多的人能知道她，你只需点击右上角的分享按钮进行分享，你的支持将是我最大的动力与褒奖！</string>
+    <string name="about_menu_action_share">分享</string>
+    <string name="about_share_text">积木 - 享受搭建应用的乐趣\nhttps://github.com/tangqi92/BuildingBlocks</string>
+    <string name="about_app_name_with_introduce">积木 - 享受搭建应用的乐趣</string>
+    <string name="about_developers">关于我</string>
+    <string name="about_developer_description">一个 Android 菜鸟</string>
+    <string name="about_open_source_lis">感谢开源</string>
+    <string name="about_help_me">帮帮我</string>
+    <string name="about_help_me_detail">天生不是做设计的料，至今还没学会 Sketch，更别说 PS 了，所以，「积木」的「应用图标」至今还缺省着。\n\n不愿将就的我，愿意等，如果你正好发现了她，又正好没处发挥你的才华的话，那么不妨为她设计个漂亮的图标吧：）\n\n你能在下面找到我的联系方式，在此我先替她谢过啦！！！</string>
+    <string name="about_introduce_and_help">介绍与帮助</string>
+    <string name="about_open_source_libraries_list">com.orhanobut:logger:1.10\ncom.jakewharton:butterknife:7.0.1\ncom.soundcloud.android:android-crop:1.0.0@aar\ncom.loopj.android:android-async-http:1.4.8\ncom.github.bumptech.glide:glide:3.6.1\nme.imid.swipebacklayout.lib:library:1.0.0</string>
 
-    <string name="drawer_with_menu">Menu Drawer</string>
-    <string name="drawer_item_home">Home</string>
-    <string name="drawer_item_free_play">Free Play</string>
-    <string name="drawer_item_custom">Custom</string>
-    <string name="drawer_item_section_header">Section Header</string>
-    <string name="drawer_item_settings">Settings</string>
-    <string name="drawer_item_help">Help</string>
-    <string name="drawer_item_open_source">Open Source</string>
-    <string name="drawer_item_contact">Contact</string>
-
-    <string name="settings_title">设置</string>
     <string name="settings_version">版本更新</string>
     <string name="settings_version_code">版本:</string>
-    <string name="auto_update">自动更新应用</string>
-    <string name="auto_push">推送精选内容</string>
+    <string name="settings_auto_update">自动更新应用</string>
+    <string name="settings_auto_push">推送精选内容</string>
     <string name="settings_general_settings">常规</string>
     <string name="settings_push_settings">推送</string>
 
-    <string name="search_result_title">搜索结果</string>
+    <string name="search_hint">搜索</string>
+    <string name="search_result_title">搜索:</string>
+
+    <string name="menu_action_feedback">用户反馈</string>
+    <string name="men_action_refresh">刷新</string>
+    <string name="men_action_read_mode">夜间模式</string>
+    <string name="menu_action_pick_photo">选取</string>
+
+    <string name="snack_exit_once_more">再按一次退出积木</string>
+    <string name="snack_rest_over_to_you">剩下的就交给你了：）</string>
+    <string name="snack_network_error">加载失败，请重试</string>
+
+    <string name="drawer_item_home">首页</string>
+    <string name="drawer_item_collection">我的收藏</string>
+    <string name="drawer_item_read">浏览历史</string>
+    <string name="drawer_item_additional">附加功能</string>
+    <string name="drawer_item_pick_photo">照片选取</string>
+    <string name="drawer_item_pick_place">位置选取</string>
+    <string name="drawer_item_settings">设置</string>
+    <string name="drawer_item_about">关于</string>
 </resources>

@@ -40,7 +40,7 @@ public class AboutActivity extends AppCompatActivity implements SwipeBackActivit
 
         setUpVersionName();
 
-        mCollapsingToolbarLayout.setTitle(getString(R.string.about));
+        mCollapsingToolbarLayout.setTitle(getString(R.string.title_about));
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

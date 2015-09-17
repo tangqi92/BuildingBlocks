@@ -27,7 +27,6 @@ public class SearchResultActivity extends SwipeBackActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        setTitle(getString(R.string.search_result_title));
         mSwipeBackLayout = getSwipeBackLayout();
         mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
         handleIntent(getIntent());
@@ -46,6 +45,7 @@ public class SearchResultActivity extends SwipeBackActivity {
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
+            setTitle(getString(R.string.search_result_title) + " " +query);
             //use the query to search
         }
     }

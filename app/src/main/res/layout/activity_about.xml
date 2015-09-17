@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_8dp"
                     android:gravity="center"
-                    android:text="@string/app_name_with_introduce"
+                    android:text="@string/about_app_name_with_introduce"
                     android:textColor="@color/icons"
                     android:textSize="18sp"/>
 
@@ -77,7 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                android:text="@string/introduce_and_help"
+                android:text="@string/about_introduce_and_help"
                 android:textColor="@color/secondary_text"/>
 
             <RelativeLayout
@@ -90,7 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:autoLink="web"
-                    android:text="@string/introduce"
+                    android:text="@string/about_introduce"
                     android:textColor="@color/secondary_text"
                     android:textIsSelectable="true"
                     android:textSize="14sp"/>
@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:layout_marginTop="12dp"
-                android:text="@string/help_me"
+                android:text="@string/about_help_me"
                 android:textColor="@color/secondary_text"/>
 
             <RelativeLayout
@@ -120,7 +120,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/help_me_detail"
+                    android:text="@string/about_help_me_detail"
                     android:textColor="@color/secondary_text"
                     android:textSize="14sp"
                     tools:ignore="HardcodedText"/>
@@ -138,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:layout_marginTop="12dp"
-                android:text="@string/developers"
+                android:text="@string/about_developers"
                 android:textColor="@color/secondary_text"/>
 
             <RelativeLayout
@@ -170,7 +170,7 @@
                     android:layout_below="@id/tv_tangqi"
                     android:layout_toEndOf="@id/ig_avatar_tangqi"
                     android:layout_toRightOf="@id/ig_avatar_tangqi"
-                    android:text="@string/developer_description"
+                    android:text="@string/about_developer_description"
                     android:textColor="@color/secondary_text"/>
 
                 <TextView
@@ -223,7 +223,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:layout_marginTop="12dp"
-                android:text="@string/open_source_lis"
+                android:text="@string/about_open_source_lis"
                 android:textColor="@color/secondary_text"/>
 
             <RelativeLayout
@@ -236,7 +236,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/open_source_libraries_list"
+                    android:text="@string/about_open_source_libraries_list"
                     android:textColor="@color/secondary_text"
                     android:textSize="@dimen/open_source_lis_text_size"
                     tools:ignore="HardcodedText"/>
