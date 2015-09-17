@@ -11,7 +11,7 @@
     <string name="title_settings">设置</string>
 
     <string name="place_autocomplete_hint">请输入你要搜索的位置</string>
-    <string name="place_selected_place">最近一次搜索的结果:</string>
+    <string name="place_selected_place">最近一次搜索的位置:</string>
     <string name="place_get_current_place">自动获取当前位置</string>
     <!-- getString(String, Object...) does not support HTML tags directly, they need to be encoded first.
     Original string: <b>%1$s</b><br/><i>Place Id: %2$s</i><br/>Address: %3$s<br/>Phone: %4$s<br/>Website: %5$s-->

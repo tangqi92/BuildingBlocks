@@ -17,7 +17,6 @@ public class PrefsFragment extends PreferenceFragment
         addPreferencesFromResource(R.xml.prefs);
     }
 
-
     @Override
     public boolean onPreferenceClick(Preference preference) {
         // TODO the rest over to you :)

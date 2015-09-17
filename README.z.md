@@ -1,30 +1,31 @@
 Building Blocks - 积木
 =====================
 
-**积木**是以  [Izzy Leung](https://github.com/izzyleung) 提供的 [知乎日报 API](https://github.com/izzyleung/ZhihuDailyPurify/wiki/%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A5-API-%E5%88%86%E6%9E%90) 既知乎日报为数据展现内容；以 OptionsMenu（选项菜单）的形式为功能扩展入口；以 Design Support Library（依循 Material Design）为主导设计 UI。
+>**积木** - 一个以知乎日报作为数据展现内容；以抽屉菜单作为功能扩展入口；依循 Material Design 作为主导设计 UI 的应用；好吧，酷！
 
-### How to use
+### How to use - 如何使用
 
-那么，你该如何利用她呢？
+那么，你该如何利用「她」呢？
 
-好啦，其实我已经帮完成了整体框架的搭建，你需要做的，仅仅是依据自己的实际需求，简单的替换下数据来源，比如在 [APIStore](http://apistore.baidu.com/) 上有详细的类别供你选择，然后再改改 UI，就可以快速地完成一款全新应用的开发啦！
+好啦，其实我已经帮你完成了应用整体框架的搭建，你需要做的，仅仅是依据自己的实际需求，简单的替换下数据来源，比如在 [APIStore](http://apistore.baidu.com/) 上就有详细的类别供你选择，然后再改改 UI，一款全新应用就完成啦！
 
-想想，还有点小激动？那么赶紧 **Star** 与 **Fork** 吧！你的支持将成为我最大的动力与褒奖！
+想想，是不是还有点小激动？那么赶紧 **Star** 与 **Fork** 吧！你的支持将成为我最大的动力与褒奖！
 
-## Features - 功能点
+## Update Log - 更新日志
 
-- About - 关于页面
-- Pick Photo - 选择与裁剪照片
-- Pick Place - 选择位置（需安装 Google Play Services 与 翻墙 - WTF）
-- Settings - 详细设置（只实现 UI）
-- MaterialDrawer - 导航抽屉（只实现 UI）
-- Design Support Library 不完全使用
-- SwipeBackLayout - 右滑返回
-- 未完待续 ......
+### v0.5.0
+
+- 抛弃 - CardView，回归朴实并为 RecycerView 中 item 增加分割线
+- 抛弃 - 第三方 DrawerLayout，华而不实
+- 抛弃 - WebView 中显示文章标题，取而代之为分享按钮
+- 新增 - 搜索功能，跳转页面显示结果
+- 新增 - 手势右滑，返回上级页面功能
+- 优化 - 将功能扩展作为抽屉菜单的子选项
+- 重构 - 尽可能将代码写得优雅和规整
 
 ## Demo - 示例
 
-[快速下载](https://github.com/tangqi92/BuildingBlocks/releases/download/v0.4.1/buildingblocks_v0.4.1.apk)
+[快速下载](https://github.com/tangqi92/BuildingBlocks/releases/download/v0.5.0/buildingblocks_v0.5.0.apk)
 
 ## Screenshots - 预览
 <img src="/screenshots/s1.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s2.png" alt="screenshot" title="screenshot" width="270" height="486" />
@@ -35,7 +36,8 @@ Building Blocks - 积木
 
 <img src="/screenshots/s7.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s8.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
-<img src="/screenshots/s9.png" alt="screenshot" title="screenshot" width="270" height="486" />
+<img src="/screenshots/s9.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s10.png" alt="screenshot" title="screenshot" width="270" height="486" />
+
 
 ## Dependencies - 开源项目
 
@@ -56,7 +58,7 @@ Building Blocks - 积木
 
 天生不是做设计的料，至今还没学会 Sketch，更别说 PS 了，所以，「积木」的「应用图标」至今还缺省着。
 
-不愿将就的我，愿意等，如果你正好发现了她，又正好没处发挥你的才华的话，那么不妨为她设计个漂亮的图标吧：）
+不愿将就的我，愿意等，如果你正好发现了她，又愿意赏脸施展下你的才华，那么不妨为她设计个漂亮的图标吧：）
 
 你能在下面找到我的联系方式，在此我先替她谢过啦！！！
 

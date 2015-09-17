@@ -2,7 +2,7 @@
 
 [中文介绍](README.z.md)
 
->**Building Blocks** with Zhihu Daily API as a source of data; OptionsMenu as extensions of the entry; Design Support Library as UI design leader.
+>**Building Blocks** with Zhihu Daily API as a source of data; OptionsMenu as extensions of the entry; Design Support Library as UI design leader.I know, it sounds cool！
 
 ### How to use
 
@@ -12,20 +12,21 @@ Well, actually, I have to help you complete the overall framework set up, you ne
 
 Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your support will be my greatest motivation and praise!
 
-## Features
+## Update Log
 
-- About
-- Pick Photo
-- Pick Place
-- Settings
-- MaterialDrawer
-- Design Support Library
-- SwipeBackLayout
-- Comming soon ......
+### v0.5.0
+
+- Abandon - CardView, simple regression and to increase RecycerView the dividing line item
+- Abandon - Third party DrawerLayout, flashy
+- Abandon - WebView display the article title, instead of sharing buttons
+- New - Search function, jump page displays the results
+- New - Right slide gestures, return to the previous page function
+- Optimization - Extended capabilities as a drawer sub-menu options
+- Reconstruction -  As far as possible, the code is written and structured elegance
 
 ## Demo
 
-[Download](https://github.com/tangqi92/BuildingBlocks/releases/download/v0.4.1/buildingblocks_v0.4.1.apk)
+[Download](https://github.com/tangqi92/BuildingBlocks/releases/download/v0.5.0/buildingblocks_v0.5.0.apk)
 
 ## Screenshots
 <img src="/screenshots/s1.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s2.png" alt="screenshot" title="screenshot" width="270" height="486" />
@@ -36,7 +37,8 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
 
 <img src="/screenshots/s7.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s8.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
-<img src="/screenshots/s9.png" alt="screenshot" title="screenshot" width="270" height="486" />
+<img src="/screenshots/s9.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s10.png" alt="screenshot" title="screenshot" width="270" height="486" />
+
 
 
 ## Dependencies
