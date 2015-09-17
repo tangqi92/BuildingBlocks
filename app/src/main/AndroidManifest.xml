@@ -46,7 +46,8 @@
                 android:value=".ui.activity.SearchResultActivity"/>
         </activity>
 
-        <activity android:name=".ui.activity.SearchResultActivity">
+        <activity android:name=".ui.activity.SearchResultActivity"
+                  android:launchMode="singleTop">
 
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>

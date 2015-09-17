@@ -130,15 +130,57 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchManager searchManager = (SearchManager) MainActivity.this.getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = null;
-        if (searchItem != null) {
-            searchView = (SearchView) searchItem.getActionView();
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        final MenuItem searchMenuItem = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) searchMenuItem
+                .getActionView();
+        searchView.setIconifiedByDefault(true);
+        if (searchManager != null && searchView != null) {
+            searchView.setSearchableInfo(searchManager
+                    .getSearchableInfo(getComponentName()));
+
+            searchView
+                    .setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+
+                        @Override
+                        public void onFocusChange(View v, boolean hasFocus) {
+
+                            if (!hasFocus) {
+                                if (searchMenuItem != null) {
+                                    searchMenuItem.collapseActionView();
+                                }// end if
+                                if (searchView != null) {
+                                    searchView.onActionViewCollapsed();
+                                    searchView.setQuery("", false);
+                                }// end if
+                            }// end if
+                        }
+                    });
+
+            searchView
+                    .setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+                        @Override
+                        public boolean onQueryTextSubmit(String query) {
+                            /**
+                             * hides and then unhides search tab to make sure
+                             * keyboard disappears when query is submitted
+                             */
+                            if (searchView != null) {
+                                searchView.setVisibility(View.INVISIBLE);
+                                searchView.setVisibility(View.VISIBLE);
+                            }
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onQueryTextChange(String newText) {
+                            // TODO Auto-generated method stub
+                            return false;
+                        }
+                    });
         }
-        if (searchView != null) {
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(MainActivity.this.getComponentName()));
-        }
+
         return super.onCreateOptionsMenu(menu);
     }
 

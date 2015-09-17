@@ -8,8 +8,8 @@ android {
         applicationId "me.itangqi.buildingblocks"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 52
-        versionName "0.4.7"
+        versionCode 53
+        versionName "0.4.8"
     }
     buildTypes {
         release {
