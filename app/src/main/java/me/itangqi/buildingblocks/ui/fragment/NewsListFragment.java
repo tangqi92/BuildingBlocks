@@ -160,5 +160,6 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
     public void onRefresh() {
         String url = ZhihuApi.getDailyNews(date);
         mClient.get(getActivity(), url, mResponseHandlerGetNews);
+        mSwipeRefreshLayout.setRefreshing(true);
     }
 }
