@@ -1,15 +1,20 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.AppTheme" parent="Base.Theme.AppTheme">
+    <style name="Root.Theme.AppTheme" parent="Base.Theme.AppTheme">
+        <!-- 解决activity切换时的黑屏问题 -->
+        <item name="android:windowIsTranslucent">false</item>
     </style>
 
-    <style name="Base.Theme.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Base.Theme.AppTheme" parent="Theme.AppTheme">
+        <!-- 解决activity切换时的黑屏问题 -->
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="Theme.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Material Theme -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
-        <!-- 解决activity切换时的黑屏问题 -->
-        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="CollapsingToolbarTitleStyle"

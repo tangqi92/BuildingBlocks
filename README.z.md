@@ -13,19 +13,19 @@ Building Blocks - 积木
 
 ## Update Log - 更新日志
 
-### v0.5.0
+### v0.5.1
 
-- 抛弃 - CardView，回归朴实并为 RecycerView 中 item 增加分割线
-- 抛弃 - 第三方 DrawerLayout，华而不实
-- 抛弃 - WebView 中显示文章标题，取而代之为分享按钮
-- 新增 - 搜索功能，跳转页面显示结果
-- 新增 - 手势右滑，返回上级页面功能
+- 抛弃 - CardView，回归朴实，更符合设计规范
+- 抛弃 - 第三方 DrawerLayout，那家伙华而不实
+- 抛弃 - WebView 顶部栏中文章标题，取而代之为分享按钮
+- 新增 - 搜索功能，在跳转页面显示搜索结果
+- 新增 - 手势右滑，返回上级页面功能（v0.5.0 中出现的 Bug 已经修复）
 - 优化 - 将功能扩展作为抽屉菜单的子选项
 - 重构 - 尽可能将代码写得优雅和规整
 
 ## Demo - 示例
 
-[快速下载](https://github.com/tangqi92/BuildingBlocks/releases/download/v0.5.0/buildingblocks_v0.5.0.apk)
+[快速下载](https://github.com/tangqi92/BuildingBlocks/releases/download/v0.5.1/buildingblocks_v0.5.1.apk)
 
 ## Screenshots - 预览
 <img src="/screenshots/s1.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s2.png" alt="screenshot" title="screenshot" width="270" height="486" />

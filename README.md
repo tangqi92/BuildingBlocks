@@ -14,19 +14,19 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
 
 ## Update Log
 
-### v0.5.0
+### v0.5.1
 
-- Abandon - CardView, simple regression and to increase RecycerView the dividing line item
-- Abandon - Third party DrawerLayout, flashy
-- Abandon - WebView display the article title, instead of sharing buttons
-- New - Search function, jump page displays the results
-- New - Right slide gestures, return to the previous page function
+- Abandon - CardView, return to simple, more in line with the design specifications
+- Abandon - third party DrawerLayout, flashy guy
+- Abandon - WebView article title bar at the top, instead of sharing buttons
+- New - Search function, display the search results page jump
+- New - Right slide gestures, return to the previous page function (Bug v0.5.0 appearing been fixed)
 - Optimization - Extended capabilities as a drawer sub-menu options
 - Reconstruction -  As far as possible, the code is written and structured elegance
 
 ## Demo
 
-[Download](https://github.com/tangqi92/BuildingBlocks/releases/download/v0.5.0/buildingblocks_v0.5.0.apk)
+[Download](https://github.com/tangqi92/BuildingBlocks/releases/download/v0.5.1/buildingblocks_v0.5.1.apk)
 
 ## Screenshots
 <img src="/screenshots/s1.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s2.png" alt="screenshot" title="screenshot" width="270" height="486" />
