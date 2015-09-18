@@ -36,3 +36,4 @@ build/
 .DS_Store
 
 *.keystore
+gradle.properties

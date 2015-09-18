@@ -45,7 +45,9 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.fab)
     public void fabOnClick() {
-        Snackbar.make(mContainer, R.string.snack_rest_over_to_you, Snackbar.LENGTH_LONG).show();
+        FragmentStatePagerAdapter adapter = (FragmentStatePagerAdapter) mViewPager.getAdapter();
+        NewsListFragment fragment = (NewsListFragment) adapter.instantiateItem(mViewPager, mViewPager.getCurrentItem());
+        fragment.onRefresh();
     }
 
     @Override
@@ -218,7 +220,6 @@ public class MainActivity extends BaseActivity {
                 exitTime = System.currentTimeMillis();
             } else {
                 finish();
-                System.exit(0);
             }
             return true;
         }
