@@ -35,4 +35,4 @@ build/
 # Mac system files
 .DS_Store
 
-*.keystore
+*.keystoregradle.properties
