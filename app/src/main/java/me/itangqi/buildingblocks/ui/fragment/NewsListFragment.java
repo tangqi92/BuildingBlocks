@@ -50,7 +50,6 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
                 for (Daily item : response.stories) {
                     mNewsList.add(item);
                 }
-                mCacheDaliyList.clear();
                 mAdapter.notifyDataSetChanged();
                 mSwipeRefreshLayout.setRefreshing(false);
                 try {
@@ -126,7 +125,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.primary);
-        List<Daily> toAddList = (mCacheDaliyList.size() != 0 && mNewsList.size() == 0)
+        List<Daily> toAddList = (mNewsList.size() == 0)
                 ? mCacheDaliyList : mNewsList;
         mAdapter = new DailyListAdapter(getActivity(), toAddList);
         mRecyclerView.setAdapter(mAdapter);
