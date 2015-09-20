@@ -54,6 +54,10 @@ Building Blocks - 积木
 
 - 感谢 [Izzy Leung](https://github.com/izzyleung) 及他的 [知乎日报·净化](https://github.com/izzyleung/ZhihuDailyPurify)，项目最初的原型就来自于此，感谢其提供了详细的知乎日报 API 说明
 
+## Contributors
+
+- [troyliu0105](https://github.com/troyliu0105) 
+
 ## Help - 帮帮我
 
 天生不是做设计的料，至今还没学会 Sketch，更别说 PS 了，所以，「积木」的「应用图标」至今还缺省着。
