@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.loopj.android.http.BaseJsonHttpResponseHandler;
 
 import org.apache.http.Header;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +30,13 @@ import me.itangqi.buildingblocks.adapter.DailyListAdapter;
 import me.itangqi.buildingblocks.api.ZhihuApi;
 import me.itangqi.buildingblocks.model.Daily;
 import me.itangqi.buildingblocks.model.DailyResult;
+import me.itangqi.buildingblocks.utils.CommonUtils;
+import me.itangqi.buildingblocks.utils.PrefUtils;
 import me.itangqi.buildingblocks.widget.SimpleDividerItemDecoration;
 
 public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private List<Daily> mNewsList = new ArrayList<>();
+    private List<Daily> mCacheDaliyList = new ArrayList<>();
     private DailyListAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private String date;
@@ -40,13 +45,19 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
 
         @Override
         public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, DailyResult response) {
+            mNewsList.clear();
             if (response.stories != null) {
                 for (Daily item : response.stories) {
                     mNewsList.add(item);
                 }
+                mCacheDaliyList.clear();
                 mAdapter.notifyDataSetChanged();
                 mSwipeRefreshLayout.setRefreshing(false);
-
+                try {
+                    CommonUtils.serializDaily(date, mNewsList);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -62,8 +73,10 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
             return gson.fromJson(rawJsonData, DailyResult.class);
         }
     };
-    @Bind(R.id.cardList) RecyclerView mRecyclerView;
-    @Bind(R.id.swipe_refresh_layout) SwipeRefreshLayout mSwipeRefreshLayout;
+    @Bind(R.id.cardList)
+    RecyclerView mRecyclerView;
+    @Bind(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     public static NewsListFragment newInstance() {
         NewsListFragment fragment = new NewsListFragment();
@@ -82,7 +95,14 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
         if (savedInstanceState == null) {
             Bundle bundle = getArguments();
             date = bundle.getString("date");
-
+            if (PrefUtils.isEnableCache() && CommonUtils.hasSerializedObject(date)) {
+                try {
+                    mCacheDaliyList = CommonUtils.deserializDaily(date);
+                    Log.d("readSerializedOB", "mCacheDailyList的数量->" + mCacheDaliyList.size());
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
             setRetainInstance(true);
         }
     }
@@ -106,13 +126,11 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.primary);
-
-        mAdapter = new DailyListAdapter(getActivity(), mNewsList);
+        List<Daily> toAddList = (mCacheDaliyList.size() != 0 && mNewsList.size() == 0)
+                ? mCacheDaliyList : mNewsList;
+        mAdapter = new DailyListAdapter(getActivity(), toAddList);
         mRecyclerView.setAdapter(mAdapter);
-        String url = ZhihuApi.getDailyNews(date);
-        // Debug url
-//        String url = "http://news.at.zhihu.com/api/4/news/before/20150822";
-        mClient.get(getActivity(), url, mResponseHandlerGetNews);
+        onRefresh();
         return view;
     }
 

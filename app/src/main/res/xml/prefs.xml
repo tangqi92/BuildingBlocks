@@ -8,6 +8,11 @@
             android:enabled="true"
             android:key="auto_update"
             android:title="@string/settings_auto_update"/>
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:enabled="true"
+            android:key="enable_cache"
+            android:title="@string/setting_enable_cahce"/>
     </PreferenceCategory>
 
     <PreferenceCategory
