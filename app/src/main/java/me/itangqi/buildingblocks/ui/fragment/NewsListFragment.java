@@ -28,9 +28,11 @@ import butterknife.ButterKnife;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.adapter.DailyListAdapter;
 import me.itangqi.buildingblocks.api.ZhihuApi;
+import me.itangqi.buildingblocks.application.App;
 import me.itangqi.buildingblocks.model.Daily;
 import me.itangqi.buildingblocks.model.DailyResult;
 import me.itangqi.buildingblocks.utils.CommonUtils;
+import me.itangqi.buildingblocks.utils.NetworkUtils;
 import me.itangqi.buildingblocks.utils.PrefUtils;
 import me.itangqi.buildingblocks.widget.SimpleDividerItemDecoration;
 
@@ -62,7 +64,8 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
 
         @Override
         public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, DailyResult errorResponse) {
-            Snackbar.make(getView(), R.string.snack_network_error, Snackbar.LENGTH_LONG).show();
+            int show = NetworkUtils.isNetworkConnected() ? R.string.snack_network_error : R.string.cache_is_enable;
+            Snackbar.make(getView(), show, Snackbar.LENGTH_LONG).show();
             mSwipeRefreshLayout.setRefreshing(false);
         }
 

@@ -17,7 +17,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,13 +29,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.application.App;
 import me.itangqi.buildingblocks.ui.activity.base.BaseActivity;
 import me.itangqi.buildingblocks.ui.fragment.NewsListFragment;
-import me.itangqi.buildingblocks.utils.CommonUtils;
 import me.itangqi.buildingblocks.utils.Constants;
 import me.itangqi.buildingblocks.utils.NetworkUtils;
-import me.itangqi.buildingblocks.utils.PrefUtils;
 
 public class MainActivity extends BaseActivity {
 
@@ -65,14 +61,6 @@ public class MainActivity extends BaseActivity {
         layoutResID = R.layout.activity_main;
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-
-        if (!NetworkUtils.isNetworkConnected(this)) {
-            //TODO 当没有连接的时候，读取本地缓存。
-            Log.d("isEnableCahce", PrefUtils.isEnableCache() ? getString(R.string.cache_is_enable)
-                    : getString(R.string.cache_is_disable));
-            Log.d("cachePath", App.getContext().getCacheDir().getAbsolutePath());
-            Snackbar.make(mContainer, R.string.snack_network_error, Snackbar.LENGTH_LONG).show();
-        }
 
         if (mNavigationView != null) {
             setupDrawerContent();

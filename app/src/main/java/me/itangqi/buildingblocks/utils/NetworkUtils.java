@@ -4,11 +4,14 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import me.itangqi.buildingblocks.application.App;
+
 /**
  * Created by tangqi on 9/10/15.
  */
 public class NetworkUtils {
-    public static boolean isNetworkConnected(Context context) {
+    public static boolean isNetworkConnected() {
+        Context context = App.getContext();
         if (context != null) {
             ConnectivityManager mConnectivityManager = (ConnectivityManager) context
                     .getSystemService(Context.CONNECTIVITY_SERVICE);
