@@ -57,4 +57,9 @@
     <string name="drawer_item_pick_place">位置选取</string>
     <string name="drawer_item_settings">设置</string>
     <string name="drawer_item_about">关于</string>
+
+    <!-- 缓存相关 -->
+    <string name="setting_enable_cahce">允许缓存</string>
+    <string name="cache_is_enable">当前读取的是缓存</string>
+    <string name="cache_is_disable">当前未设置缓存</string>
 </resources>
