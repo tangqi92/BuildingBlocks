@@ -40,13 +40,13 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
 
         @Override
         public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, DailyResult response) {
+            mNewsList.clear();
             if (response.stories != null) {
                 for (Daily item : response.stories) {
                     mNewsList.add(item);
                 }
                 mAdapter.notifyDataSetChanged();
                 mSwipeRefreshLayout.setRefreshing(false);
-
             }
         }
 
@@ -109,10 +109,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
 
         mAdapter = new DailyListAdapter(getActivity(), mNewsList);
         mRecyclerView.setAdapter(mAdapter);
-        String url = ZhihuApi.getDailyNews(date);
-        // Debug url
-//        String url = "http://news.at.zhihu.com/api/4/news/before/20150822";
-        mClient.get(getActivity(), url, mResponseHandlerGetNews);
+        onRefresh();
         return view;
     }
 
