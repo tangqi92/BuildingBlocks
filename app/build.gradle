@@ -36,4 +36,5 @@ dependencies {
     compile 'com.loopj.android:android-async-http:1.4.8'
     compile 'com.github.bumptech.glide:glide:3.6.1'
     compile 'me.imid.swipebacklayout.lib:library:1.0.0'
+    compile 'org.litepal.android:core:1.2.1'
 }
