@@ -62,11 +62,13 @@ Because I have not learned how to use Sketch, so the icon of Building Blocks sti
 
 If you happen to find her, and just no place to play your talent, then, ask you for her design a beautiful icon it :)
 
-## Contact
+## Contact Me
 
-- Weibo：[汤奇V](http://weibo.com/qiktang)
-- Blog: [http://itangqi.me](http://itangqi.me)
-- Gmail：[imtangqi#gmail.com](mailto:imtangqi@gmail.com "欢迎与我联系")
+Born in 1992, now a student of Southeast University, master of software engineerin. Loving technology, programming, reading and sports. 
+
+I will graduate in June 2017, expect the internship or full-time job in Android or iOS.
+
+If you have any questions or want to make friends with me, please feel free to contact me : [imtangqi#gmail.com](mailto:imtangqi@gmail.com "Welcome to contact me") 
 
 ## Project Home
 
