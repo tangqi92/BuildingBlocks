@@ -30,20 +30,28 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.application.App;
 import me.itangqi.buildingblocks.ui.activity.base.BaseActivity;
 import me.itangqi.buildingblocks.ui.fragment.NewsListFragment;
+import me.itangqi.buildingblocks.utils.CommonUtils;
 import me.itangqi.buildingblocks.utils.Constants;
 import me.itangqi.buildingblocks.utils.NetworkUtils;
 import me.itangqi.buildingblocks.utils.PrefUtils;
 
 public class MainActivity extends BaseActivity {
 
-    @Bind(R.id.drawer_layout) DrawerLayout mDrawerLayout;
-    @Bind(R.id.coordinatorLayout) CoordinatorLayout mContainer;
-    @Bind(R.id.navigation_view) NavigationView mNavigationView;
-    @Bind(R.id.tabs) TabLayout mTabLayout;
-    @Bind(R.id.pager) ViewPager mViewPager;
-    @Bind(R.id.toolbar) Toolbar mToolbar;
+    @Bind(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
+    @Bind(R.id.coordinatorLayout)
+    CoordinatorLayout mContainer;
+    @Bind(R.id.navigation_view)
+    NavigationView mNavigationView;
+    @Bind(R.id.tabs)
+    TabLayout mTabLayout;
+    @Bind(R.id.pager)
+    ViewPager mViewPager;
+    @Bind(R.id.toolbar)
+    Toolbar mToolbar;
 
     @OnClick(R.id.fab)
     public void fabOnClick() {
@@ -60,8 +68,9 @@ public class MainActivity extends BaseActivity {
 
         if (!NetworkUtils.isNetworkConnected(this)) {
             //TODO 当没有连接的时候，读取本地缓存。
-            Log.d("isEnableCahce", PrefUtils.isEnableCache()?getString(R.string.cache_is_enable)
-                    :getString(R.string.cache_is_disable));
+            Log.d("isEnableCahce", PrefUtils.isEnableCache() ? getString(R.string.cache_is_enable)
+                    : getString(R.string.cache_is_disable));
+            Log.d("cachePath", App.getContext().getCacheDir().getAbsolutePath());
             Snackbar.make(mContainer, R.string.snack_network_error, Snackbar.LENGTH_LONG).show();
         }
 
