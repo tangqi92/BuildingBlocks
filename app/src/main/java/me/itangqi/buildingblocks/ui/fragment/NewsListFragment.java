@@ -127,6 +127,9 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
         mSwipeRefreshLayout.setColorSchemeResources(R.color.primary);
         List<Daily> toAddList = (mNewsList.size() == 0)
                 ? mCacheDaliyList : mNewsList;
+        if (mNewsList.size() != 0) {
+            mCacheDaliyList.clear();
+        }
         mAdapter = new DailyListAdapter(getActivity(), toAddList);
         mRecyclerView.setAdapter(mAdapter);
         onRefresh();
