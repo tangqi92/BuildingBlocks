@@ -56,6 +56,10 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
 
 - Thank [Izzy Leung](https://github.com/izzyleung) and his [知乎日报·净化](https://github.com/izzyleung/ZhihuDailyPurify)，the initial prototype project will come from this.
 
+## Contributors
+
+- [troyliu0105](https://github.com/troyliu0105) 
+
 ## Help
 
 Because I have not learned how to use Sketch, so the icon of Building Blocks still default.
