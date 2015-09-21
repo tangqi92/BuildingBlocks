@@ -13,6 +13,9 @@
             android:enabled="true"
             android:key="enable_cache"
             android:title="@string/setting_enable_cahce"/>
+        <Preference
+            android:key="delete_cache"
+            android:title="@string/delete_cache"/>
     </PreferenceCategory>
 
     <PreferenceCategory

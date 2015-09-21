@@ -2,6 +2,7 @@ package me.itangqi.buildingblocks.view.ui.activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.domin.utils.PrefUtils;
 import me.itangqi.buildingblocks.presenters.WebActivityPresenter;
 import me.itangqi.buildingblocks.domin.utils.NetworkUtils;
 import me.itangqi.buildingblocks.view.IWebView;
@@ -61,15 +63,16 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
 
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        if (NetworkUtils.isNetworkConnected()) {
-            webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
-        } else {
-            webSettings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
+        if (PrefUtils.isEnableCache()) {
+            if (NetworkUtils.isNetworkConnected()) {
+                webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+            } else {
+                webSettings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
+            }
+            webSettings.setAppCacheEnabled(true);
+            webSettings.setDatabaseEnabled(true);
         }
         webSettings.setLoadWithOverviewMode(true);
-        webSettings.setAppCacheEnabled(true);
-        webSettings.setDatabaseEnabled(true);
-        webSettings.setAppCacheEnabled(true);
         mWebView.setWebChromeClient(new ChromeClient());
         mWebView.setWebViewClient(new ViewClient());
         mWebView.loadUrl(mUrl);
