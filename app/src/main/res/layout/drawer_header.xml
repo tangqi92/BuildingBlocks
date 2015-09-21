@@ -5,7 +5,7 @@
                 android:background="@drawable/drawer_header"
                 android:orientation="vertical">
 
-    <me.itangqi.buildingblocks.widget.CircleImageView
+    <me.itangqi.buildingblocks.view.widget.CircleImageView
         android:id="@+id/profile_image"
         android:layout_width="76dp"
         android:layout_height="76dp"

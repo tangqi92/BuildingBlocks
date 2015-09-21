@@ -47,7 +47,8 @@
 
     <string name="snack_exit_once_more">再按一次退出积木</string>
     <string name="snack_rest_over_to_you">剩下的就交给你了：）</string>
-    <string name="snack_network_error">加载失败，请重试</string>
+    <string name="snack_load_error">加载失败，请重试</string>
+    <string name="snack_network_error">网络错误</string>
 
     <string name="drawer_item_home">首页</string>
     <string name="drawer_item_collection">我的收藏</string>
