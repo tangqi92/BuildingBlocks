@@ -9,5 +9,5 @@
     android:layout_margin="@dimen/fab_margin"
     android:src="@mipmap/ic_refresh_white_24dp"
     app:borderWidth="0dp"
-    app:layout_behavior="me.itangqi.buildingblocks.widget.ScrollingFABBehavior"/>
+    app:layout_behavior="me.itangqi.buildingblocks.view.widget.ScrollingFABBehavior"/>
 

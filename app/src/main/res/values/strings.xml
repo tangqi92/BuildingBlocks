@@ -47,7 +47,8 @@
 
     <string name="snack_exit_once_more">再按一次退出积木</string>
     <string name="snack_rest_over_to_you">剩下的就交给你了：）</string>
-    <string name="snack_network_error">加载失败，请重试</string>
+    <string name="snack_load_error">加载失败，请重试</string>
+    <string name="snack_network_error">网络错误</string>
 
     <string name="drawer_item_home">首页</string>
     <string name="drawer_item_collection">我的收藏</string>
@@ -62,4 +63,5 @@
     <string name="setting_enable_cahce">允许缓存</string>
     <string name="cache_is_enable">当前读取的是缓存</string>
     <string name="cache_is_disable">当前未设置缓存</string>
+    <string name="delete_cache">清除缓存</string>
 </resources>
