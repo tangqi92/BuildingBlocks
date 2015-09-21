@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppTheme">
+    <style name="Base.Theme.AppTheme" parent="Theme.AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Root.Theme.AppTheme" parent="Base.Theme.AppTheme">
+        <!-- 解决activity切换时的黑屏问题 -->
+        <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
