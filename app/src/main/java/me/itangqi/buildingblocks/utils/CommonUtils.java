@@ -6,7 +6,6 @@ import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -15,7 +14,7 @@ import java.util.List;
 
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.application.App;
-import me.itangqi.buildingblocks.model.Daily;
+import me.itangqi.buildingblocks.mvp.bean.Daily;
 
 public class CommonUtils {
 
