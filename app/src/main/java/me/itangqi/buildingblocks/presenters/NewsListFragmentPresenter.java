@@ -7,8 +7,8 @@ import me.itangqi.buildingblocks.model.entity.Daily;
 import me.itangqi.buildingblocks.model.DailyModel;
 import me.itangqi.buildingblocks.model.ICallBack;
 import me.itangqi.buildingblocks.view.IViewPager;
-import me.itangqi.buildingblocks.utils.NetworkUtils;
-import me.itangqi.buildingblocks.utils.PrefUtils;
+import me.itangqi.buildingblocks.domin.utils.NetworkUtils;
+import me.itangqi.buildingblocks.domin.utils.PrefUtils;
 
 /**
  * Created by Troy on 2015/9/21.

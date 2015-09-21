@@ -1,4 +1,4 @@
-package me.itangqi.buildingblocks.utils;
+package me.itangqi.buildingblocks.domin.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;

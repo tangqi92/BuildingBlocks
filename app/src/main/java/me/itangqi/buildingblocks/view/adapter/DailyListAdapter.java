@@ -18,7 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.api.ZhihuApi;
+import me.itangqi.buildingblocks.domin.api.ZhihuApi;
 import me.itangqi.buildingblocks.model.entity.Daily;
 import me.itangqi.buildingblocks.view.ui.activity.WebActivity;
 

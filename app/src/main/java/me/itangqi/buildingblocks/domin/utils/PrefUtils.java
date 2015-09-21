@@ -1,9 +1,9 @@
-package me.itangqi.buildingblocks.utils;
+package me.itangqi.buildingblocks.domin.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import me.itangqi.buildingblocks.application.App;
+import me.itangqi.buildingblocks.domin.application.App;
 
 /**
  * Created by Troy on 2015/9/20.

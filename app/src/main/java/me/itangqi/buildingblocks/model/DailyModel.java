@@ -11,10 +11,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.itangqi.buildingblocks.api.ZhihuApi;
+import me.itangqi.buildingblocks.domin.api.ZhihuApi;
 import me.itangqi.buildingblocks.model.entity.Daily;
 import me.itangqi.buildingblocks.model.entity.DailyResult;
-import me.itangqi.buildingblocks.utils.CommonUtils;
+import me.itangqi.buildingblocks.domin.utils.CommonUtils;
 
 /**
  * Created by Troy on 2015/9/21.

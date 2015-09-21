@@ -35,7 +35,7 @@ import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.utils.ToastUtils;
+import me.itangqi.buildingblocks.domin.utils.ToastUtils;
 
 public class GooglePlacesAdapter
         extends ArrayAdapter<GooglePlacesAdapter.PlaceAutocomplete> implements Filterable {

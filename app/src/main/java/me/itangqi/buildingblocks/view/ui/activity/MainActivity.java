@@ -31,7 +31,7 @@ import butterknife.OnClick;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.view.ui.activity.base.BaseActivity;
 import me.itangqi.buildingblocks.view.ui.fragment.NewsListFragment;
-import me.itangqi.buildingblocks.utils.Constants;
+import me.itangqi.buildingblocks.domin.utils.Constants;
 
 public class MainActivity extends BaseActivity {
 

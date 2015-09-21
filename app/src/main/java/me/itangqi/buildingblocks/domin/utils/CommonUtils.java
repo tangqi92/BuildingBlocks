@@ -1,4 +1,4 @@
-package me.itangqi.buildingblocks.utils;
+package me.itangqi.buildingblocks.domin.utils;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -13,7 +13,7 @@ import java.io.ObjectOutputStream;
 import java.util.List;
 
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.application.App;
+import me.itangqi.buildingblocks.domin.application.App;
 import me.itangqi.buildingblocks.model.entity.Daily;
 
 public class CommonUtils {

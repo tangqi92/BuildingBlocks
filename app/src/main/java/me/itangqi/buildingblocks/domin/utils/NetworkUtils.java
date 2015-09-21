@@ -1,10 +1,10 @@
-package me.itangqi.buildingblocks.utils;
+package me.itangqi.buildingblocks.domin.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import me.itangqi.buildingblocks.application.App;
+import me.itangqi.buildingblocks.domin.application.App;
 
 /**
  * Created by tangqi on 9/10/15.

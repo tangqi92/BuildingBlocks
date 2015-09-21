@@ -7,26 +7,33 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+
+import java.io.File;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.presenters.WebActivityPresenter;
+import me.itangqi.buildingblocks.domin.utils.NetworkUtils;
+import me.itangqi.buildingblocks.view.IWebView;
 import me.itangqi.buildingblocks.view.ui.activity.base.SwipeBackActivity;
-import me.itangqi.buildingblocks.utils.ShareUtils;
+import me.itangqi.buildingblocks.domin.utils.ShareUtils;
 
 /*
  * Thanks to
  * Author: drakeet
  */
 
-public class WebActivity extends SwipeBackActivity {
+public class WebActivity extends SwipeBackActivity implements IWebView {
 
     public static final String EXTRA_URL = "extra_url";
     private SwipeBackLayout mSwipeBackLayout;
+    private WebActivityPresenter mPresenter;
 
     @Bind(R.id.progressbar) ProgressBar mProgressbar;
     @Bind(R.id.webView) WebView mWebView;
@@ -47,16 +54,24 @@ public class WebActivity extends SwipeBackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mPresenter = new WebActivityPresenter(this);
         ButterKnife.bind(this);
         mContext = this;
         mUrl = getIntent().getStringExtra(EXTRA_URL);
 
-        mWebView.getSettings().setJavaScriptEnabled(true);
+        WebSettings webSettings = mWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        if (NetworkUtils.isNetworkConnected()) {
+            webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        } else {
+            webSettings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
+        }
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setAppCacheEnabled(true);
+        webSettings.setDatabaseEnabled(true);
+        webSettings.setAppCacheEnabled(true);
         mWebView.setWebChromeClient(new ChromeClient());
         mWebView.setWebViewClient(new ViewClient());
-        mWebView.getSettings().setLoadWithOverviewMode(true);
-        mWebView.getSettings().setAppCacheEnabled(true);
         mWebView.loadUrl(mUrl);
 
         mSwipeBackLayout = getSwipeBackLayout();
@@ -115,6 +130,11 @@ public class WebActivity extends SwipeBackActivity {
     protected void onResume() {
         super.onResume();
         if (mWebView != null) mWebView.onResume();
+    }
+
+    @Override
+    public File getWebViewCacheDir() {
+        return this.getCacheDir();
     }
 
     private class ChromeClient extends WebChromeClient {
