@@ -4,6 +4,6 @@
     <version value="1" />
 
     <list>
-        <mapping class="me.itangqi.buildingblocks.mvp.bean.Daily"/>
+        <mapping class="me.itangqi.buildingblocks.mvp.entity.Daily"/>
     </list>
 </litepal>

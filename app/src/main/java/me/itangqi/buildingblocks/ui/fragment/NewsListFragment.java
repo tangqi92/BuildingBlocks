@@ -17,9 +17,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.adapter.DailyListAdapter;
-import me.itangqi.buildingblocks.api.ZhihuApi;
-import me.itangqi.buildingblocks.mvp.bean.Daily;
-import me.itangqi.buildingblocks.mvp.presenters.ViewPagerPresenter;
+import me.itangqi.buildingblocks.mvp.entity.Daily;
+import me.itangqi.buildingblocks.mvp.presenters.NewsListFragmentPresenter;
 import me.itangqi.buildingblocks.mvp.view.IViewPager;
 import me.itangqi.buildingblocks.widget.SimpleDividerItemDecoration;
 
@@ -28,7 +27,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
     private DailyListAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private String date;
-    private ViewPagerPresenter mPresenter;
+    private NewsListFragmentPresenter mPresenter;
 
     @Bind(R.id.cardList)
     RecyclerView mRecyclerView;
@@ -52,7 +51,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
         if (savedInstanceState == null) {
             Bundle bundle = getArguments();
             date = bundle.getString("date");
-            mPresenter = new ViewPagerPresenter(this, date);
+            mPresenter = new NewsListFragmentPresenter(this, date);
             setRetainInstance(true);
         }
     }
@@ -124,13 +123,16 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
 
     @Override
     public void onRefresh() {
-
+        mPresenter.getNews(date);
+        mSwipeRefreshLayout.setRefreshing(true);
     }
 
     @Override
-    public List<Daily> getNewsContent() {
-        mNewsList = mPresenter.getNewsContent();
-        return mNewsList;
+    public void loadData(List<Daily> dailies) {
+        mNewsList.clear();
+        mNewsList = dailies;
+        mSwipeRefreshLayout.setRefreshing(false);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -140,6 +142,21 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
 
     @Override
     public void hideProgress() {
+
+    }
+
+    @Override
+    public void failload() {
+
+    }
+
+    @Override
+    public void networkunavaiable() {
+
+    }
+
+    @Override
+    public void notifyNewsChanged() {
 
     }
 }

@@ -14,7 +14,7 @@ import java.util.List;
 
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.application.App;
-import me.itangqi.buildingblocks.mvp.bean.Daily;
+import me.itangqi.buildingblocks.mvp.entity.Daily;
 
 public class CommonUtils {
 

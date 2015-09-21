@@ -1,4 +1,4 @@
-package me.itangqi.buildingblocks.mvp.bean;
+package me.itangqi.buildingblocks.mvp.entity;
 
 import com.google.gson.annotations.SerializedName;
 
