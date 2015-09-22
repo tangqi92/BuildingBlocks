@@ -6,7 +6,7 @@
 
 ### How to use
 
-So, how do you take advantage of her?
+>dev branch is currently maintained by [troyliu0105](https://github.com/troyliu0105), he will continue to reconstruct the building blocks and increase the fun of the function, if you also like, then welcome **Star** and **Fork** this branch!
 
 Well, actually, I have to help you complete the overall framework set up, you need to do is just based on actual demand, simply replace data at source, and modify UI, you can quickly complete a new application development！
 

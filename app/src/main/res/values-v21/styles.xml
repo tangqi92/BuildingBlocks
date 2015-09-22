@@ -3,8 +3,6 @@
 
     <style name="Base.Theme.AppTheme" parent="Theme.AppTheme">
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <style name="Root.Theme.AppTheme" parent="Base.Theme.AppTheme">
