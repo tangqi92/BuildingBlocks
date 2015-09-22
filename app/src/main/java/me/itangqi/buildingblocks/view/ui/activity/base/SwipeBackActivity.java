@@ -95,4 +95,6 @@ public abstract class SwipeBackActivity extends AppCompatActivity implements Swi
             return super.onOptionsItemSelected(item);
         }
     }
+
+
 }

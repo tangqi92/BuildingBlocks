@@ -1,9 +1,11 @@
 Building Blocks - 积木
 =====================
 
->**积木** - 一个以知乎日报作为数据展现内容；以抽屉菜单作为功能扩展入口；依循 Material Design 作为主导设计 UI 的应用；好吧，酷！
+>**积木** - 一个以知乎日报作为数据展现内容；以抽屉菜单作为功能扩展入口；依循 Material Design 作为主导设计 UI 的应用；我知道，这听起来就很酷！
 
 ### How to use - 如何使用
+
+>dev 分支由 [troyliu0105](https://github.com/troyliu0105) 同学维护，他会不断对积木进行重构与增加好玩的功能，如果你也喜欢，那么欢迎 **Star** 与 **Fork** 此分支！
 
 那么，你该如何利用「她」呢？
 
@@ -53,6 +55,10 @@ Building Blocks - 积木
 - 感谢 [drakeet](https://github.com/drakeet) 及他的 [妹纸&gank.io](https://github.com/drakeet/Meizhi)， 其代码写得真的非常漂亮：)，从中学到了很多并运用到了项目中（依葫芦画瓢而已啦）
 
 - 感谢 [Izzy Leung](https://github.com/izzyleung) 及他的 [知乎日报·净化](https://github.com/izzyleung/ZhihuDailyPurify)，项目最初的原型就来自于此，感谢其提供了详细的知乎日报 API 说明
+
+## Contributors
+
+- [troyliu0105](https://github.com/troyliu0105) 
 
 ## Help - 帮帮我
 
