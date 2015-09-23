@@ -2,6 +2,8 @@
 
 [中文介绍](README.z.md)
 
+![logo](http://7xk54v.com1.z0.glb.clouddn.com/images/logo/icon.png)
+
 >**Building Blocks** with Zhihu Daily API as a source of data; OptionsMenu as extensions of the entry; Design Support Library as UI design leader.I know, it sounds cool！
 
 ### How to use
@@ -59,21 +61,15 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
 ## Contributors
 
 - [troyliu0105](https://github.com/troyliu0105) 
-
-
-## Help
-
-Because I have not learned how to use Sketch, so the icon of Building Blocks still default.
-
-If you happen to find her, and just no place to play your talent, then, ask you for her design a beautiful icon it :)
+- **logo: **[Mao](http://weibo.com/cat93/) & troyliu0105
 
 ## Contact Me
 
-Born in 1992, now a student of Southeast University, master of software engineerin. Loving technology, programming, reading and sports. 
+Born in 1992, now a student of Southeast University, master of software engineerin. Loving technology, programming, reading and sports.
 
 I will graduate in June 2017, expect the internship or full-time job in Android or iOS.
 
-If you have any questions or want to make friends with me, please feel free to contact me : [imtangqi#gmail.com](mailto:imtangqi@gmail.com "Welcome to contact me") 
+If you have any questions or want to make friends with me, please feel free to contact me : [imtangqi#gmail.com](mailto:imtangqi@gmail.com "Welcome to contact me")
 
 ## Project Home
 

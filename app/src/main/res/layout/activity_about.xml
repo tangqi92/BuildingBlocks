@@ -31,7 +31,7 @@
                     android:layout_width="96dp"
                     android:layout_height="96dp"
                     android:layout_marginTop="@dimen/margin_24dp"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@drawable/icon"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:layout_marginTop="12dp"
-                android:text="@string/about_help_me"
+                android:text="@string/about_thanks_to"
                 android:textColor="@color/secondary_text"/>
 
             <RelativeLayout
@@ -118,9 +118,10 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/about_thanks_to"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/about_help_me_detail"
+                    android:text="@string/about_thanks_to_detail"
                     android:textColor="@color/secondary_text"
                     android:textSize="14sp"
                     tools:ignore="HardcodedText"/>
