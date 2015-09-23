@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.domin.api.ZhihuApi;
-import me.itangqi.buildingblocks.model.entity.DailyHttp;
+import me.itangqi.buildingblocks.model.entity.Daily;
 import me.itangqi.buildingblocks.view.ui.activity.WebActivity;
 
 /**
@@ -27,13 +27,13 @@ import me.itangqi.buildingblocks.view.ui.activity.WebActivity;
  */
 public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<DailyHttp> mNewsList;
+    private List<Daily> mNewsList;
     private Context mContext;
     private LayoutInflater mLayoutInflater;
     private static final int ITEM_TYPE_IMAGE = 1;
     private static final int ITEM_TYPE_TEXT = 2;
 
-    public DailyListAdapter(Context mContext, List<DailyHttp> mNewsList) {
+    public DailyListAdapter(Context mContext, List<Daily> mNewsList) {
         this.mContext = mContext;
         this.mNewsList = mNewsList;
         mLayoutInflater = LayoutInflater.from(mContext);
@@ -54,7 +54,7 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        DailyHttp news = mNewsList.get(position);
+        Daily news = mNewsList.get(position);
         switch (holder.getItemViewType()) {
             case ITEM_TYPE_TEXT:
                 ((ThemeViewHolder) holder).mTitle.setText(news.title);
@@ -70,7 +70,7 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public int getItemViewType(int position) {
         // add here your booleans or switch() to set viewType at your needed
-        DailyHttp news = mNewsList.get(position);
+        Daily news = mNewsList.get(position);
         // Depending on whether the presence of images to determine the type of load View
         return (news.images == null || news.images.size() == 0) ? ITEM_TYPE_TEXT : ITEM_TYPE_IMAGE;
     }
@@ -80,10 +80,13 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return mNewsList.size();
     }
 
-    public void gotoWebView(DailyHttp news, View v) {
+    public void gotoWebView(Daily news, View v) {
+        Log.d("Daily", "id--->" + news.id);
         String news_url = ZhihuApi.getNewsContent(news.id);
+        int id = news.id;
         Intent intent = new Intent(v.getContext(), WebActivity.class);
         intent.putExtra(WebActivity.EXTRA_URL, news_url);
+        intent.putExtra(WebActivity.EXTRA_ID, id);
         v.getContext().startActivity(intent);
     }
 
@@ -99,7 +102,7 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         @OnClick(R.id.ll_card_parent)
         void onClick(View v) {
             // TODO do what you want :) you can use WebActivity to load
-            DailyHttp news = mNewsList.get(getLayoutPosition());
+            Daily news = mNewsList.get(getLayoutPosition());
             gotoWebView(news, v);
         }
     }
@@ -116,7 +119,7 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         @OnClick(R.id.ll_theme_parent)
         void onClick(View v) {
             // TODO do what you want :) you can use WebActivity to load
-            DailyHttp news = mNewsList.get(getLayoutPosition());
+            Daily news = mNewsList.get(getLayoutPosition());
             gotoWebView(news, v);
         }
     }

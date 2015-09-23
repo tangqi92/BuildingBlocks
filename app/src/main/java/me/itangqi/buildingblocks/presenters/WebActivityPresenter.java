@@ -5,8 +5,12 @@ import android.util.Log;
 import org.litepal.util.LogUtil;
 
 import java.io.File;
+import java.util.List;
 
 import me.itangqi.buildingblocks.domin.application.App;
+import me.itangqi.buildingblocks.model.DailyModel;
+import me.itangqi.buildingblocks.model.IGsonCallBack;
+import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.view.IWebView;
 
 /**
@@ -14,16 +18,23 @@ import me.itangqi.buildingblocks.view.IWebView;
  */
 public class WebActivityPresenter {
 
-    IWebView mWebView;
-    File cacheDir;
+    private IWebView mWebView;
+    private File cacheDir;
+    private DailyModel mDailyModel;
 
     public WebActivityPresenter(IWebView webView) {
-        mWebView = webView;
-        cacheDir = mWebView.getWebViewCacheDir();
+        this.mWebView = webView;
+        this.cacheDir = mWebView.getWebViewCacheDir();
+        mDailyModel = new DailyModel(new IGsonCallBack() {
+            @Override
+            public void onGsonItemFinish(DailyGson dailyGson) {
+                mWebView.loadGsonNews(dailyGson);
+            }
+        });
     }
 
     public WebActivityPresenter() {
-        cacheDir = App.getContext().getCacheDir();
+        this.cacheDir = App.getContext().getCacheDir();
     }
 
     public long clearCacheFolder() {
@@ -47,6 +58,10 @@ public class WebActivityPresenter {
             }
         }
         return deletedSize;
+    }
+
+    public void getDailyGson(int id) {
+        mDailyModel.getGsonNews(id);
     }
 
 }

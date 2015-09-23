@@ -19,7 +19,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.domin.utils.CommonUtils;
 import me.itangqi.buildingblocks.domin.utils.PrefUtils;
+import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.presenters.WebActivityPresenter;
 import me.itangqi.buildingblocks.domin.utils.NetworkUtils;
 import me.itangqi.buildingblocks.view.IWebView;
@@ -34,14 +36,18 @@ import me.itangqi.buildingblocks.domin.utils.ShareUtils;
 public class WebActivity extends SwipeBackActivity implements IWebView {
 
     public static final String EXTRA_URL = "extra_url";
+    public static final String EXTRA_ID = "id";
     private SwipeBackLayout mSwipeBackLayout;
     private WebActivityPresenter mPresenter;
 
-    @Bind(R.id.progressbar) ProgressBar mProgressbar;
-    @Bind(R.id.webView) WebView mWebView;
+    @Bind(R.id.progressbar)
+    ProgressBar mProgressbar;
+    @Bind(R.id.webView)
+    WebView mWebView;
 
     Context mContext;
     String mUrl;
+    int mId;
 
     @Override
     protected int getLayoutResource() {
@@ -60,7 +66,7 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
         ButterKnife.bind(this);
         mContext = this;
         mUrl = getIntent().getStringExtra(EXTRA_URL);
-
+        mId = getIntent().getIntExtra(EXTRA_ID, 0);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         if (PrefUtils.isEnableCache()) {
@@ -73,10 +79,14 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
             webSettings.setDatabaseEnabled(true);
         }
         webSettings.setLoadWithOverviewMode(true);
+        webSettings.setDefaultTextEncodingName("utf-8");
         mWebView.setWebChromeClient(new ChromeClient());
         mWebView.setWebViewClient(new ViewClient());
-        mWebView.loadUrl(mUrl);
-
+        if (PrefUtils.isUsingGson()) {
+            mPresenter.getDailyGson(mId);
+        }else {
+            mWebView.loadUrl(mUrl);
+        }
         mSwipeBackLayout = getSwipeBackLayout();
         mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
     }
@@ -138,6 +148,13 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
     @Override
     public File getWebViewCacheDir() {
         return this.getCacheDir();
+    }
+
+    @Override
+    public void loadGsonNews(DailyGson dailyGson) {
+        String summery = dailyGson.getBody();
+        CommonUtils.writeLog("summery.txt", summery);
+        mWebView.loadData(summery, "text/html; charset=UTF-8", null);
     }
 
     private class ChromeClient extends WebChromeClient {
