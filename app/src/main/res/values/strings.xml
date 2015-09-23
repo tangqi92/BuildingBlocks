@@ -25,8 +25,8 @@
     <string name="about_developers">关于我</string>
     <string name="about_developer_description">一个 Android 菜鸟</string>
     <string name="about_open_source_lis">感谢开源</string>
-    <string name="about_help_me">帮帮我</string>
-    <string name="about_help_me_detail">天生不是做设计的料，至今还没学会 Sketch，更别说 PS 了，所以，「积木」的「应用图标」至今还缺省着。\n\n不愿将就的我，愿意等，如果你正好发现了她，又正好没处发挥你的才华的话，那么不妨为她设计个漂亮的图标吧：）\n\n你能在下面找到我的联系方式，在此我先替她谢过啦！！！</string>
+    <string name="about_thanks_to">特别鸣谢</string>
+    <string name="about_thanks_to_detail">感谢<a href="http://weibo.com/cat93/">Mao</a>设计的图标</string>
     <string name="about_introduce_and_help">介绍与帮助</string>
     <string name="about_open_source_libraries_list">com.orhanobut:logger:1.10\ncom.jakewharton:butterknife:7.0.1\ncom.soundcloud.android:android-crop:1.0.0@aar\ncom.loopj.android:android-async-http:1.4.8\ncom.github.bumptech.glide:glide:3.6.1\nme.imid.swipebacklayout.lib:library:1.0.0</string>
 

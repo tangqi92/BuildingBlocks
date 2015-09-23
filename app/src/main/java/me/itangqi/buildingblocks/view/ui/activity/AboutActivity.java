@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,9 +27,14 @@ import me.itangqi.buildingblocks.domin.utils.ShareUtils;
 
 public class AboutActivity extends AppCompatActivity implements SwipeBackActivityBase {
 
-    @Bind(R.id.toolbar) Toolbar mToolbar;
-    @Bind(R.id.tv_version) TextView mVersionTextView;
-    @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout mCollapsingToolbarLayout;
+    @Bind(R.id.toolbar)
+    Toolbar mToolbar;
+    @Bind(R.id.tv_version)
+    TextView mVersionTextView;
+    @Bind(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout mCollapsingToolbarLayout;
+    @Bind(R.id.about_thanks_to)
+    TextView mThanksTo;
 
     private SwipeBackActivityHelper mHelper;
 
@@ -44,7 +50,7 @@ public class AboutActivity extends AppCompatActivity implements SwipeBackActivit
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        mThanksTo.setMovementMethod(LinkMovementMethod.getInstance());
         mHelper = new SwipeBackActivityHelper(this);
         mHelper.onActivityCreate();
     }
