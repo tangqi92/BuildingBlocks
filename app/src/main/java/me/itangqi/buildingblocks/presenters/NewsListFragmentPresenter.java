@@ -20,7 +20,7 @@ public class NewsListFragmentPresenter {
     public NewsListFragmentPresenter(IViewPager IViewPager, final String date) {
         this.mIViewPager = IViewPager;
         this.date = date;
-        mDailyModel = new DailyModel(new IHttpCallBack() {
+        mDailyModel = DailyModel.newInstance(new IHttpCallBack() {
             @Override
             public void onFinish(List<Daily> dailyList) {
                 mDailyModel.saveDailies(dailyList, date);

@@ -1,18 +1,16 @@
 package me.itangqi.buildingblocks.model.entity;
 
-import org.litepal.crud.DataSupport;
-
 /**
  * Created by Troy on 2015/9/23.
  */
-public class DailyGson extends DataSupport {
+public class DailyGson {
 
     private String body;
     private String image_source;
     private String title;
     private String image;
     private String share_url;
-    private String ga_prefix;
+    private int ga_prefix;
     private int type;
     private int id;
 
@@ -56,11 +54,11 @@ public class DailyGson extends DataSupport {
         this.share_url = share_url;
     }
 
-    public String getGa_prefix() {
+    public int getGa_Prefix() {
         return ga_prefix;
     }
 
-    public void setGa_prefix(String ga_prefix) {
+    public void setGa_prefix(int ga_prefix) {
         this.ga_prefix = ga_prefix;
     }
 
