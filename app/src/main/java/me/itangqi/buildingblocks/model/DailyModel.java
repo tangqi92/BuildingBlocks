@@ -54,6 +54,7 @@ public class DailyModel implements IDaily {
 //                    mItems.put(daily.id, daily.title);   //待测试
                 }
                 mIHttpCallBack.onFinish(mDailiesFromNet);
+                saveDailyStoriesDB(response);
             }
         }
 
@@ -106,7 +107,7 @@ public class DailyModel implements IDaily {
     }
 
     private DailyModel() {
-        mSQLiteHelper = new SQLiteHelper(App.getContext(), "zhihu.db", null, 1);
+        mSQLiteHelper = new SQLiteHelper();
     }
 
     private DailyModel(IHttpCallBack IHttpCallBack) {
@@ -124,14 +125,19 @@ public class DailyModel implements IDaily {
     }
 
     @Override
-    public void getFromNet(String date) {
-        String url = ZhihuApi.getDailyNews(date);
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get(url, mAsyncHttpResponseHandler);
+    public void getFromNet(int date) {
+        mDailiesFromCache = getDailyStoriesDB(date);
+        if (mDailiesFromCache.size() == 0) {
+            String url = ZhihuApi.getDailyNews(date);
+            AsyncHttpClient client = new AsyncHttpClient();
+            client.get(url, mAsyncHttpResponseHandler);
+        } else {
+            mIHttpCallBack.onFinish(mDailiesFromCache);
+        }
     }
 
     @Override
-    public void getFromCache(String date) {
+    public void getFromCache(int date) {
         try {
             if (hasSerializedObject(date)) {
                 mDailiesFromCache = deserializDaily(date);
@@ -144,7 +150,7 @@ public class DailyModel implements IDaily {
 
 
     @Override
-    public void saveDailies(List<Daily> dailies, String date) {
+    public void saveDailies(List<Daily> dailies, int date) {
         try {
             serializDaily(date, dailies);
         } catch (IOException e) {
@@ -171,18 +177,18 @@ public class DailyModel implements IDaily {
 //            "body text)";
     private void saveDailyGsonDB(DailyGson daily) {
         remakeDBObject(true);
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("id", daily.getId());
-        contentValues.put("title", daily.getTitle());
-        contentValues.put("type", daily.getTitle());
-        contentValues.put("image_source", daily.getImage_source());
-        contentValues.put("image", daily.getImage());
-        contentValues.put("share_url", daily.getShare_url());
-        contentValues.put("ga_prefix", daily.getGa_Prefix());
-        contentValues.put("body", daily.getBody());
+        ContentValues values = new ContentValues();
+        values.put("id", daily.getId());
+        values.put("title", daily.getTitle());
+        values.put("type", daily.getTitle());
+        values.put("image_source", daily.getImage_source());
+        values.put("image", daily.getImage());
+        values.put("share_url", daily.getShare_url());
+        values.put("ga_prefix", daily.getGa_Prefix());
+        values.put("body", daily.getBody());
         mDatabase.beginTransaction();
         try {
-            mDatabase.insert("daily", null, contentValues);
+            mDatabase.insert("daily", null, values);
             mDatabase.setTransactionSuccessful();
         } catch (Exception e) {
             e.printStackTrace();
@@ -196,7 +202,7 @@ public class DailyModel implements IDaily {
         remakeDBObject(false);
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM daily where id = ?", new String[]{id + ""});
         DailyGson dailyGson = new DailyGson();
-        if (cursor.moveToFirst()) {
+        while (cursor.moveToNext()) {
             dailyGson.setId(cursor.getInt(cursor.getColumnIndex("id")));
             dailyGson.setTitle(cursor.getString(cursor.getColumnIndex("title")));
             dailyGson.setType(cursor.getInt(cursor.getColumnIndex("type")));
@@ -209,11 +215,53 @@ public class DailyModel implements IDaily {
             mIGsonCallBack.onGsonItemFinish(dailyGson);
             return dailyGson;
         }
+        mDatabase.close();
         return null;
     }
 
+    private void saveDailyStoriesDB(DailyResult dailyResult) {
+        remakeDBObject(true);
+        ContentValues values = new ContentValues();
+        List<Daily> stories = new ArrayList<>();
+        for (Daily story : dailyResult.stories) {
+            values.put("date", dailyResult.date);
+            values.put("id", story.id);
+            values.put("title", story.title);
+            values.put("image", story.images.get(0));
+            values.put("type", story.type);
+            values.put("ga_prefix", story.ga_prefix);
+            mDatabase.beginTransaction();
+            try {
+                mDatabase.insert("dailyresult", null, values);
+                mDatabase.setTransactionSuccessful();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                mDatabase.endTransaction();
+                mDatabase.close();
+            }
+        }
+    }
+
+    private List<Daily> getDailyStoriesDB(int date) {
+        remakeDBObject(false);
+        List<Daily> dailyList = new ArrayList<>();
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM dailyresult where date = ?", new String[]{date + ""});
+        while (cursor.moveToNext()) {
+            Daily daily = new Daily();
+            daily.id = cursor.getInt(cursor.getColumnIndex("id"));
+            daily.title = cursor.getString(cursor.getColumnIndex("title"));
+            daily.image = cursor.getString(cursor.getColumnIndex("image"));
+            daily.type = cursor.getInt(cursor.getColumnIndex("type"));
+            daily.ga_prefix = cursor.getInt(cursor.getColumnIndex("ga_prefix"));
+            dailyList.add(daily);
+        }
+        mDatabase.close();
+        return dailyList;
+    }
+
     @Deprecated
-    private void serializDaily(String date, List<Daily> dailyList) throws IOException {
+    private void serializDaily(int date, List<Daily> dailyList) throws IOException {
         String itemParentPath = App.getContext().getCacheDir().getAbsolutePath() + "/daily";
         Log.i("itemPath", itemParentPath);
         File itemParent = new File(itemParentPath);
@@ -229,7 +277,7 @@ public class DailyModel implements IDaily {
     }
 
     @Deprecated
-    private List<Daily> deserializDaily(String date) throws IOException, ClassNotFoundException {
+    private List<Daily> deserializDaily(int date) throws IOException, ClassNotFoundException {
         String cachePath = App.getContext().getCacheDir().getAbsolutePath();
         FileInputStream fis = new FileInputStream(cachePath + "/daily/" + date);
         ObjectInputStream ois = new ObjectInputStream(fis);
@@ -239,7 +287,7 @@ public class DailyModel implements IDaily {
     }
 
     @Deprecated
-    private boolean hasSerializedObject(String date) {
+    private boolean hasSerializedObject(int date) {
         String cachePath = App.getContext().getCacheDir().getAbsolutePath();
         File file = new File(cachePath + "/daily/" + date);
         return file.exists();

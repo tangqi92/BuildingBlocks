@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class DailyResult implements Serializable {
     @SerializedName("date")
-    public String date;
+    public int date;
     @SerializedName("stories")
     public List<Daily> stories;
 }

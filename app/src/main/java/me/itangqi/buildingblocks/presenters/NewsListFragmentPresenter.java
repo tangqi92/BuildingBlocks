@@ -15,9 +15,9 @@ import me.itangqi.buildingblocks.domin.utils.PrefUtils;
 public class NewsListFragmentPresenter {
     private DailyModel mDailyModel;
     private IViewPager mIViewPager;
-    private String date;
+    private int date;
 
-    public NewsListFragmentPresenter(IViewPager IViewPager, final String date) {
+    public NewsListFragmentPresenter(IViewPager IViewPager, final int date) {
         this.mIViewPager = IViewPager;
         this.date = date;
         mDailyModel = DailyModel.newInstance(new IHttpCallBack() {
@@ -29,7 +29,7 @@ public class NewsListFragmentPresenter {
         });
     }
 
-    public void getNews(String date) {
+    public void getNews(int date) {
         if (PrefUtils.isEnableCache()) {
             mDailyModel.getFromCache(date);
             mDailyModel.getFromNet(date);

@@ -8,11 +8,11 @@ import me.itangqi.buildingblocks.model.entity.Daily;
  * Created by Troy on 2015/9/21.
  */
 public interface IDaily {
-    void getFromNet(String date);
+    void getFromNet(int date);
 
-    void getFromCache(String date);
+    void getFromCache(int date);
 
-    void saveDailies(List<Daily> dailies, String date);
+    void saveDailies(List<Daily> dailies, int date);
 
     void getGsonNews(int id);
 }

@@ -4,29 +4,45 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import me.itangqi.buildingblocks.domin.application.App;
+
 /**
  * Created by Troy on 2015/9/23.
  */
 public class SQLiteHelper extends SQLiteOpenHelper {
 
-    public static String CREATE_DAILYGSON_TABLE = "CREATE TABLE daily("
-            + "id smallint PRIMARY KEY NOT NULL,"
-            + "title text NOT NULL,"
-            + "type smallint NOT NULL,"
-            + "image_source text NULL,"
-            + "image text NULL,"
-            + "share_url text NULL,"
-            + "ga_prefix smallint NULL,"
-            + "body text NULL)";
-    
+    public static int VERSION = 1;
 
-    public SQLiteHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public static String DATABASE_NAME = "zhihu.db";
+
+    public static String CREATE_DAILYGSON_TABLE = "CREATE TABLE daily("
+            + "id SMALLINT PRIMARY KEY NOT NULL,"
+            + "title TEXT NOT NULL,"
+            + "type SMALLINT NOT NULL,"
+            + "image_source TEXT NULL,"
+            + "image TEXT NULL,"
+            + "share_url TEXT NULL,"
+            + "ga_prefix SMALLINT NULL,"
+            + "body TEXT NULL)";
+
+    public static String CREATE_DAILYRESULT_TABLE = "CREATE TABLE dailyresult("
+            + "_id SMALLINT PRIMARY KEY AUTOINCREMENT,"
+            + "date SMALLINT,"
+            + "id SMALLINT,"
+            + "title TEXT,"
+            + "image TEXT NULL,"
+            + "type SMALLINT,"
+            + "ga_prefix SMALLINT)";
+
+
+    public SQLiteHelper() {
+        super(App.getContext(), DATABASE_NAME, null, VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_DAILYGSON_TABLE);
+        db.execSQL(CREATE_DAILYRESULT_TABLE);
     }
 
     @Override

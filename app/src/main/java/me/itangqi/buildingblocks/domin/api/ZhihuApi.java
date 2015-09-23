@@ -12,7 +12,7 @@ public final class ZhihuApi {
     public static final String ZHIHU_DAILY_NEWS_GSON_CONTENT = "http://news-at.zhihu.com/api/4/news/";
 
     // getDailyNews GET
-    public static String getDailyNews(String date) {
+    public static String getDailyNews(int date) {
         return ZHIHU_DAILY_NEWS + date;
     }
 
