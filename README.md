@@ -60,8 +60,8 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
 
 ## Contributors
 
-- [troyliu0105](https://github.com/troyliu0105) 
-- **logo: **[Mao](http://weibo.com/cat93/) & troyliu0105
+- [troyliu0105](https://github.com/troyliu0105)
+- logo: [Mao](http://weibo.com/cat93/) & troyliu0105
 
 ## Contact Me
 
