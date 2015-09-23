@@ -83,6 +83,7 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
         mWebView.setWebChromeClient(new ChromeClient());
         mWebView.setWebViewClient(new ViewClient());
         if (PrefUtils.isUsingGson()) {
+            webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
             mPresenter.getDailyGson(mId);
         }else {
             mWebView.loadUrl(mUrl);

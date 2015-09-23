@@ -4,6 +4,6 @@
     <version value="1" />
 
     <list>
-        <mapping class="me.itangqi.buildingblocks.model.entity.Daily"/>
+        <mapping class="me.itangqi.buildingblocks.model.entity.DailyGson"/>
     </list>
 </litepal>

@@ -1,7 +1,9 @@
 package me.itangqi.buildingblocks.presenters;
 
+import android.text.LoginFilter;
 import android.util.Log;
 
+import org.litepal.crud.DataSupport;
 import org.litepal.util.LogUtil;
 
 import java.io.File;
@@ -22,15 +24,17 @@ public class WebActivityPresenter {
     private File cacheDir;
     private DailyModel mDailyModel;
 
+    private IGsonCallBack mIGsonCallBack = new IGsonCallBack() {
+        @Override
+        public void onGsonItemFinish(DailyGson dailyGson) {
+            mWebView.loadGsonNews(dailyGson);
+        }
+    };
+
     public WebActivityPresenter(IWebView webView) {
         this.mWebView = webView;
         this.cacheDir = mWebView.getWebViewCacheDir();
-        mDailyModel = new DailyModel(new IGsonCallBack() {
-            @Override
-            public void onGsonItemFinish(DailyGson dailyGson) {
-                mWebView.loadGsonNews(dailyGson);
-            }
-        });
+        mDailyModel = new DailyModel(mIGsonCallBack);
     }
 
     public WebActivityPresenter() {
@@ -61,7 +65,13 @@ public class WebActivityPresenter {
     }
 
     public void getDailyGson(int id) {
-        mDailyModel.getGsonNews(id);
+        DailyGson dailyGson = DataSupport.find(DailyGson.class, id);
+        if (dailyGson != null) {
+            Log.d("WebPresenter", "read DailyFromDB" + dailyGson.getId());
+            mWebView.loadGsonNews(dailyGson);
+        } else {
+            mDailyModel.getGsonNews(id);
+        }
     }
 
 }

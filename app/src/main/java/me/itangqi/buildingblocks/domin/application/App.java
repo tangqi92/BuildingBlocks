@@ -1,13 +1,12 @@
 package me.itangqi.buildingblocks.domin.application;
 
+import android.app.Application;
 import android.content.Context;
-
-import org.litepal.LitePalApplication;
 
 /**
  * Created by tangqi on 7/20/15.
  */
-public class App extends LitePalApplication {
+public class App extends Application {
 
     public static Context mContext;
 
