@@ -61,7 +61,7 @@ Building Blocks - 积木
 ## Contributors
 
 - [troyliu0105](https://github.com/troyliu0105)
-- **logo: **[Mao](http://weibo.com/cat93/) & troyliu0105
+- logo: [Mao](http://weibo.com/cat93/) & troyliu0105
 
 ## Contact - 联系我
 
