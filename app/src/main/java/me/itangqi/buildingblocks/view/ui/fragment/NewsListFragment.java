@@ -18,13 +18,13 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.view.adapter.DailyListAdapter;
-import me.itangqi.buildingblocks.model.entity.Daily;
+import me.itangqi.buildingblocks.model.entity.DailyHttp;
 import me.itangqi.buildingblocks.presenters.NewsListFragmentPresenter;
 import me.itangqi.buildingblocks.view.IViewPager;
 import me.itangqi.buildingblocks.view.widget.SimpleDividerItemDecoration;
 
 public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, IViewPager {
-    private List<Daily> mNewsList = new ArrayList<>();
+    private List<DailyHttp> mNewsList = new ArrayList<>();
     private DailyListAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private String date;
@@ -129,10 +129,10 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
     }
 
     @Override
-    public void loadData(List<Daily> dailies) {
+    public void loadData(List<DailyHttp> dailies) {
         mNewsList.clear();
-        for (Daily daily : dailies) {
-            mNewsList.add(daily);
+        for (DailyHttp dailyHttp : dailies) {
+            mNewsList.add(dailyHttp);
         }
         hideProgress();
         mAdapter.notifyDataSetChanged();

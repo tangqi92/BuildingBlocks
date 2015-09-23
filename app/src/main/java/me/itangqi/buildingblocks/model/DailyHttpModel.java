@@ -20,43 +20,42 @@ import java.util.List;
 
 import me.itangqi.buildingblocks.domin.api.ZhihuApi;
 import me.itangqi.buildingblocks.domin.application.App;
-import me.itangqi.buildingblocks.model.entity.Daily;
-import me.itangqi.buildingblocks.model.entity.DailyResult;
-import me.itangqi.buildingblocks.domin.utils.CommonUtils;
+import me.itangqi.buildingblocks.model.entity.DailyHttp;
+import me.itangqi.buildingblocks.model.entity.DailyHttpResult;
 
 /**
  * Created by Troy on 2015/9/21.
  */
-public class DailyModel implements IDaily {
+public class DailyHttpModel implements IDaily {
 
-    private List<Daily> mDailiesFromNet;
-    private List<Daily> mDailiesFromCache;
-    private ICallBack mCallBack;
+    private List<DailyHttp> mDailiesFromNet;
+    private List<DailyHttp> mDailiesFromCache;
+    private IHttpCallBack mCallBack;
 
-    AsyncHttpResponseHandler mAsyncHttpResponseHandler = new BaseJsonHttpResponseHandler<DailyResult>() {
+    AsyncHttpResponseHandler mAsyncHttpResponseHandler = new BaseJsonHttpResponseHandler<DailyHttpResult>() {
         @Override
-        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, DailyResult response) {
+        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, DailyHttpResult response) {
             if (response != null && response.stories.size() != 0) {
-                for (Daily daily : response.stories) {
-                    mDailiesFromNet.add(daily);
+                for (DailyHttp dailyHttp : response.stories) {
+                    mDailiesFromNet.add(dailyHttp);
                 }
                 mCallBack.onFinish(mDailiesFromNet);
             }
         }
 
         @Override
-        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, DailyResult errorResponse) {
+        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, DailyHttpResult errorResponse) {
 
         }
 
         @Override
-        protected DailyResult parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+        protected DailyHttpResult parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
             Gson gson = new Gson();
-            return gson.fromJson(rawJsonData, DailyResult.class);
+            return gson.fromJson(rawJsonData, DailyHttpResult.class);
         }
     };
 
-    public DailyModel(ICallBack callBack) {
+    public DailyHttpModel(IHttpCallBack callBack) {
         this.mCallBack = callBack;
         mDailiesFromNet = new ArrayList<>();
         mDailiesFromCache = new ArrayList<>();
@@ -83,7 +82,7 @@ public class DailyModel implements IDaily {
 
 
     @Override
-    public void saveDailies(List<Daily> dailies, String date) {
+    public void saveDailies(List<DailyHttp> dailies, String date) {
         try {
             serializDaily(date, dailies);
         } catch (IOException e) {
@@ -91,7 +90,7 @@ public class DailyModel implements IDaily {
         }
     }
 
-    private void serializDaily(String date, List<Daily> dailyList) throws IOException {
+    private void serializDaily(String date, List<DailyHttp> dailyHttpList) throws IOException {
         String itemParentPath = App.getContext().getCacheDir().getAbsolutePath() + "/daily";
         Log.i("itemPath", itemParentPath);
         File itemParent = new File(itemParentPath);
@@ -102,17 +101,17 @@ public class DailyModel implements IDaily {
         File item = new File(itemParentPath + "/" + date);
         FileOutputStream fos = new FileOutputStream(item);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(dailyList);
+        oos.writeObject(dailyHttpList);
         oos.close();
     }
 
-    private List<Daily> deserializDaily(String date) throws IOException, ClassNotFoundException {
+    private List<DailyHttp> deserializDaily(String date) throws IOException, ClassNotFoundException {
         String cachePath = App.getContext().getCacheDir().getAbsolutePath();
         FileInputStream fis = new FileInputStream(cachePath + "/daily/" + date);
         ObjectInputStream ois = new ObjectInputStream(fis);
-        List<Daily> dailyList = (List<Daily>) ois.readObject();
+        List<DailyHttp> dailyHttpList = (List<DailyHttp>) ois.readObject();
         ois.close();
-        return dailyList;
+        return dailyHttpList;
     }
 
     private boolean hasSerializedObject(String date) {

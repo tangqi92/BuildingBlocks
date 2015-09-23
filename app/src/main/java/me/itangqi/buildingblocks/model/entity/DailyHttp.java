@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by tangqi on 8/20/15.
  */
-public class Daily implements Serializable {
+public class DailyHttp implements Serializable {
     @SerializedName("images")
     public List<String> images;
     @SerializedName("type")

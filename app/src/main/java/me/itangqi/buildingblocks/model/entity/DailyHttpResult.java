@@ -8,9 +8,9 @@ import java.util.List;
 /**
  * Created by tangqi on 8/20/15.
  */
-public class DailyResult implements Serializable {
+public class DailyHttpResult implements Serializable {
     @SerializedName("date")
     public String date;
     @SerializedName("stories")
-    public List<Daily> stories;
+    public List<DailyHttp> stories;
 }

@@ -3,6 +3,7 @@ package me.itangqi.buildingblocks.view.ui.fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.util.Log;
@@ -18,6 +19,7 @@ public class PrefsFragment extends PreferenceFragment
 
     private CheckBoxPreference mIsEnableCache;
     private Preference mPreference;
+    private ListPreference mListPreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
