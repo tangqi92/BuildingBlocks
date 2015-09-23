@@ -1,19 +1,28 @@
 package me.itangqi.buildingblocks.view.ui.activity;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -84,6 +93,8 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
         mWebView.setWebViewClient(new ViewClient());
         if (PrefUtils.isUsingGson()) {
             webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+            webSettings.setSupportZoom(true);
+            webSettings.setBuiltInZoomControls(true);
             mPresenter.getDailyGson(mId);
         }else {
             mWebView.loadUrl(mUrl);

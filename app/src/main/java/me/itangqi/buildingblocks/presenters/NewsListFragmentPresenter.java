@@ -23,7 +23,7 @@ public class NewsListFragmentPresenter {
         mDailyModel = DailyModel.newInstance(new IHttpCallBack() {
             @Override
             public void onFinish(List<Daily> dailyList) {
-                mDailyModel.saveDailies(dailyList, date);
+//                mDailyModel.saveDailies(dailyList, date);  //数据储存在Volly获取数据后立即进行，不单独调用saveDailies()
                 loadData(dailyList);
             }
         });

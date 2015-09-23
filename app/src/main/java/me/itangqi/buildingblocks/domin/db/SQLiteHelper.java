@@ -26,7 +26,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             + "body TEXT NULL)";
 
     public static String CREATE_DAILYRESULT_TABLE = "CREATE TABLE dailyresult("
-            + "_id SMALLINT PRIMARY KEY AUTOINCREMENT,"
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT,"
             + "date SMALLINT,"
             + "id SMALLINT,"
             + "title TEXT,"

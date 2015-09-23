@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.util.SparseArray;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -25,7 +24,6 @@ import java.util.List;
 import me.itangqi.buildingblocks.domin.api.ZhihuApi;
 import me.itangqi.buildingblocks.domin.application.App;
 import me.itangqi.buildingblocks.domin.db.SQLiteHelper;
-import me.itangqi.buildingblocks.domin.utils.PrefUtils;
 import me.itangqi.buildingblocks.model.entity.Daily;
 import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.model.entity.DailyResult;
@@ -41,7 +39,6 @@ public class DailyModel implements IDaily {
     private IGsonCallBack mIGsonCallBack;
 //    private SparseArray<String> mItems = new SparseArray<>();  //待测试
     private SQLiteHelper mSQLiteHelper;
-    private SQLiteDatabase mDatabase;
     private static DailyModel mDailyModel;
 
     //用来获取Daily集合
@@ -126,26 +123,14 @@ public class DailyModel implements IDaily {
 
     @Override
     public void getFromNet(int date) {
-        mDailiesFromCache = getDailyStoriesDB(date);
-        if (mDailiesFromCache.size() == 0) {
-            String url = ZhihuApi.getDailyNews(date);
-            AsyncHttpClient client = new AsyncHttpClient();
-            client.get(url, mAsyncHttpResponseHandler);
-        } else {
-            mIHttpCallBack.onFinish(mDailiesFromCache);
-        }
+        String url = ZhihuApi.getDailyNews(date);
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(url, mAsyncHttpResponseHandler);
     }
 
     @Override
     public void getFromCache(int date) {
-        try {
-            if (hasSerializedObject(date)) {
-                mDailiesFromCache = deserializDaily(date);
-            }
-            mIHttpCallBack.onFinish(mDailiesFromCache);
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        getDailyStoriesDB(date);
     }
 
 
@@ -176,7 +161,7 @@ public class DailyModel implements IDaily {
 //            "ga_prefix int,"
 //            "body text)";
     private void saveDailyGsonDB(DailyGson daily) {
-        remakeDBObject(true);
+        SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("id", daily.getId());
         values.put("title", daily.getTitle());
@@ -186,23 +171,15 @@ public class DailyModel implements IDaily {
         values.put("share_url", daily.getShare_url());
         values.put("ga_prefix", daily.getGa_Prefix());
         values.put("body", daily.getBody());
-        mDatabase.beginTransaction();
-        try {
-            mDatabase.insert("daily", null, values);
-            mDatabase.setTransactionSuccessful();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            mDatabase.endTransaction();
-            mDatabase.close();
-        }
+        database.insertWithOnConflict("daily", null, values, SQLiteDatabase.CONFLICT_ABORT);
+        database.close();
     }
 
     private DailyGson getDailyGsonDB(int id) {
-        remakeDBObject(false);
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM daily where id = ?", new String[]{id + ""});
+        SQLiteDatabase database = mSQLiteHelper.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM daily where id = ?", new String[]{id + ""});
         DailyGson dailyGson = new DailyGson();
-        while (cursor.moveToNext()) {
+        if (cursor.moveToFirst()) {
             dailyGson.setId(cursor.getInt(cursor.getColumnIndex("id")));
             dailyGson.setTitle(cursor.getString(cursor.getColumnIndex("title")));
             dailyGson.setType(cursor.getInt(cursor.getColumnIndex("type")));
@@ -213,14 +190,15 @@ public class DailyModel implements IDaily {
             dailyGson.setBody(cursor.getString(cursor.getColumnIndex("body")));
             cursor.close();
             mIGsonCallBack.onGsonItemFinish(dailyGson);
+            database.close();
             return dailyGson;
         }
-        mDatabase.close();
+        database.close();
         return null;
     }
 
     private void saveDailyStoriesDB(DailyResult dailyResult) {
-        remakeDBObject(true);
+        SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         List<Daily> stories = new ArrayList<>();
         for (Daily story : dailyResult.stories) {
@@ -230,23 +208,15 @@ public class DailyModel implements IDaily {
             values.put("image", story.images.get(0));
             values.put("type", story.type);
             values.put("ga_prefix", story.ga_prefix);
-            mDatabase.beginTransaction();
-            try {
-                mDatabase.insert("dailyresult", null, values);
-                mDatabase.setTransactionSuccessful();
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                mDatabase.endTransaction();
-                mDatabase.close();
-            }
+            database.insertWithOnConflict("dailyresult", null, values, SQLiteDatabase.CONFLICT_ABORT);
         }
+        database.close();
     }
 
     private List<Daily> getDailyStoriesDB(int date) {
-        remakeDBObject(false);
+        SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
         List<Daily> dailyList = new ArrayList<>();
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM dailyresult where date = ?", new String[]{date + ""});
+        Cursor cursor = database.rawQuery("SELECT * FROM dailyresult where date = ?", new String[]{date + ""});
         while (cursor.moveToNext()) {
             Daily daily = new Daily();
             daily.id = cursor.getInt(cursor.getColumnIndex("id"));
@@ -256,7 +226,7 @@ public class DailyModel implements IDaily {
             daily.ga_prefix = cursor.getInt(cursor.getColumnIndex("ga_prefix"));
             dailyList.add(daily);
         }
-        mDatabase.close();
+        database.close();
         return dailyList;
     }
 
@@ -291,16 +261,6 @@ public class DailyModel implements IDaily {
         String cachePath = App.getContext().getCacheDir().getAbsolutePath();
         File file = new File(cachePath + "/daily/" + date);
         return file.exists();
-    }
-
-    private void remakeDBObject(boolean writable) {
-        if (mDatabase == null) {
-            if (writable) {
-                mDatabase = mSQLiteHelper.getWritableDatabase();
-            } else {
-                mDatabase = mSQLiteHelper.getReadableDatabase();
-            }
-        }
     }
 
 }
