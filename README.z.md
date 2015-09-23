@@ -1,6 +1,8 @@
 Building Blocks - 积木
 =====================
 
+![logo](http://7xk54v.com1.z0.glb.clouddn.com/images/logo/icon.png)
+
 >**积木** - 一个以知乎日报作为数据展现内容；以抽屉菜单作为功能扩展入口；依循 Material Design 作为主导设计 UI 的应用；我知道，这听起来就很酷！
 
 ### How to use - 如何使用
@@ -58,15 +60,8 @@ Building Blocks - 积木
 
 ## Contributors
 
-- [troyliu0105](https://github.com/troyliu0105) 
-
-## Help - 帮帮我
-
-天生不是做设计的料，至今还没学会 Sketch，更别说 PS 了，所以，「积木」的「应用图标」至今还缺省着。
-
-不愿将就的我，愿意等，如果你正好发现了她，又愿意赏脸施展下你的才华，那么不妨为她设计个漂亮的图标吧：）
-
-你能在下面找到我的联系方式，在此我先替她谢过啦！！！
+- [troyliu0105](https://github.com/troyliu0105)
+- logo: [Mao](http://weibo.com/cat93/) & troyliu0105
 
 ## Contact - 联系我
 
