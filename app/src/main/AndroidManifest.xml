@@ -70,5 +70,7 @@
 
         <activity android:name=".view.ui.activity.GooglePlacesActivity"/>
 
+        <activity android:name=".view.ui.activity.GsonViewActivity"/>
+
     </application>
 </manifest>

@@ -91,14 +91,7 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
         webSettings.setDefaultTextEncodingName("utf-8");
         mWebView.setWebChromeClient(new ChromeClient());
         mWebView.setWebViewClient(new ViewClient());
-        if (PrefUtils.isUsingGson()) {
-            webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-            webSettings.setSupportZoom(true);
-            webSettings.setBuiltInZoomControls(true);
-            mPresenter.getDailyGson(mId);
-        }else {
-            mWebView.loadUrl(mUrl);
-        }
+        mWebView.loadUrl(mUrl);
         mSwipeBackLayout = getSwipeBackLayout();
         mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
     }
@@ -162,6 +155,11 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
         return this.getCacheDir();
     }
 
+    /**
+     * 读取gson数据里面的“body”，显示有问题
+     * @param dailyGson 又presenter传入的实例
+     */
+    @Deprecated
     @Override
     public void loadGsonNews(DailyGson dailyGson) {
         String summery = dailyGson.getBody();
@@ -178,6 +176,11 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
             } else if (newProgress != 100) {
                 mProgressbar.setVisibility(View.VISIBLE);
             }
+        }
+
+        @Override
+        public void onShowCustomView(View view, CustomViewCallback callback) {
+            super.onShowCustomView(view, callback);
         }
     }
 
