@@ -147,9 +147,9 @@ public class DailyModel implements IDaily {
         if (PrefUtils.isEnableCache() && NetworkUtils.isNetworkConnected()) {
             getFromCache(date);
             getFromNet(date);
-        }else if (!PrefUtils.isEnableCache() && NetworkUtils.isNetworkConnected()) {
+        } else if (!PrefUtils.isEnableCache() && NetworkUtils.isNetworkConnected()) {
             getFromNet(date);
-        }else if (!NetworkUtils.isNetworkConnected()) {
+        } else if (!NetworkUtils.isNetworkConnected()) {
             getFromCache(date);
         }
     }
@@ -209,14 +209,14 @@ public class DailyModel implements IDaily {
 
     private void insertDailyGsonDB(DailyGson dailyGson) {
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
-        String sql = "INSERT IGNORE INTO daily values("
+        String sql = "INSERT OR IGNORE INTO daily(id, title, image_source, image, share_url, ga_prefix, body) values("
                 + dailyGson.getId() + ","
-                + dailyGson.getTitle() + ","
-                + dailyGson.getImage_source() + ","
-                + dailyGson.getImage() + ","
-                + dailyGson.getShare_url() + ","
+                + "\'" + dailyGson.getTitle() + "\'" + ","
+                + "\'" + dailyGson.getImage_source() + "\'" + ","
+                + "\'" + dailyGson.getImage() + "\'" + ","
+                + "\'" + dailyGson.getShare_url() + "\'" + ","
                 + dailyGson.getGa_Prefix() + ","
-                + dailyGson.getBody() + ")";
+                + "\'" + dailyGson.getBody() + "\'" + ")";
         database.execSQL(sql);
     }
 
@@ -258,7 +258,7 @@ public class DailyModel implements IDaily {
         database.close();
     }
 
-//    + "date SMALLINT,"
+    //    + "date SMALLINT,"
 //            + "id SMALLINT PRIMARY KEY,"
 //            + "title TEXT,"
 //            + "image TEXT NULL,"
@@ -267,11 +267,11 @@ public class DailyModel implements IDaily {
     private void insertDailyStoriesDB(DailyResult dailyResult) {
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
         for (Daily story : dailyResult.stories) {
-            String sql = "INSERT IGNORE INTO dailyresult values("
+            String sql = "INSERT OR IGNORE INTO dailyresult(date, id, title, image, type, ga_prefix) values("
                     + dailyResult.date + ","
                     + story.id + ","
-                    + story.title + ","
-                    + story.image + ","
+                    + "\'" + story.title + "\'" + ","
+                    + "\'" + story.images.get(0) + "\'" + ","
                     + story.type + ","
                     + story.ga_prefix + ")";
             database.execSQL(sql);
@@ -297,6 +297,7 @@ public class DailyModel implements IDaily {
 
     /**
      * 使用Jsoup来对数据库里面的DaliyGson中的body字段进行解析
+     *
      * @param dailyGson
      * @return 返回一个包含额外信息和正文的HashMap
      */
