@@ -1,6 +1,7 @@
 package me.itangqi.buildingblocks.view.ui.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -69,7 +70,7 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
     public void loadGson(DailyGson dailyGson) {
         mDailyGson = dailyGson;
         Glide.with(this).load(dailyGson.getImage()).fitCenter().into(mHeader);
-        UITask uiTask = new UITask();
+        UITask uiTask = new UITask(this);
         uiTask.execute(dailyGson);
 //        mPresenter.startInflater(dailyGson);
     }
@@ -124,6 +125,12 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
 
     class UITask extends AsyncTask<DailyGson, Map.Entry<String, String>, Integer> {
 
+        private Context mContext;
+
+        public UITask(Context context) {
+            mContext = context;
+        }
+
         @Override
         protected Integer doInBackground(DailyGson... params) {
             Log.d("doInBackground", "params.size--->" + params.length);
@@ -157,13 +164,25 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
             } else if (entry.getValue().equals("bio")) {
                 mTextView_bio.setText(entry.getValue());
             } else if (entry.getValue().equals("p")) {
-                TextView textView = new TextView(App.getContext());
-                textView.setPadding(0, 5, 0, 0);
+                TextView textView = new TextView(mContext);
+                textView.setPadding(0, 7, 0, 0);
                 ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 textView.setLayoutParams(params);
                 textView.setTextColor(Color.BLACK);
+                textView.setTextSize(15);
                 textView.setText(entry.getKey());
                 mLinearLayout.addView(textView);
+            }else if (entry.getValue().equals("img")) {
+                ImageView imageView = new ImageView(App.getContext());
+                ViewGroup.LayoutParams ll_params = mLinearLayout.getLayoutParams();
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                imageView.setLayoutParams(params);
+//                imageView.setPadding(0, 5, 0, 0);
+                imageView.setVisibility(View.VISIBLE);
+                Glide.with(mContext).load(entry.getKey()).fitCenter().into(imageView);
+                mLinearLayout.addView(imageView);
+            }else if (entry.getValue().equals("strong")) {
+
             }
         }
 
