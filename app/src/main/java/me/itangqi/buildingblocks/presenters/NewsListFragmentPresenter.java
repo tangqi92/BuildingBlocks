@@ -30,14 +30,7 @@ public class NewsListFragmentPresenter {
     }
 
     public void getNews(int date) {
-        if (PrefUtils.isEnableCache()) {
-            mDailyModel.getFromCache(date);
-            mDailyModel.getFromNet(date);
-        }else if (!PrefUtils.isEnableCache() && NetworkUtils.isNetworkConnected()) {
-            mDailyModel.getFromNet(date);
-        }else if (PrefUtils.isEnableCache() && !NetworkUtils.isNetworkConnected()) {
-            mDailyModel.getFromCache(date);
-        }
+        mDailyModel.getDailyResult(date);
     }
 
     public void loadData(List<Daily> dailies) {

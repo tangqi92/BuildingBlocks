@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -15,6 +16,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.domin.application.App;
 import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.presenters.GsonNewsPresenter;
 import me.itangqi.buildingblocks.view.IGsonNews;
@@ -34,6 +36,9 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews{
     private Handler mHandler = new UIHandler(this);
     private GsonNewsPresenter mPresenter;
     private ImageView mHeader;
+    private ImageView mImageView_avatar;
+    private TextView mTextView_author;
+    private TextView mTextView_bio;
 
     private DailyGson mDailyGson;
 
@@ -55,7 +60,7 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews{
     @Override
     public void loadGson(DailyGson dailyGson) {
         mDailyGson = dailyGson;
-        Glide.with(this).load(dailyGson.getImage()).into(mHeader);
+        Glide.with(this).load(dailyGson.getImage()).fitCenter().into(mHeader);
         new UITask().execute(dailyGson);
     }
 
@@ -73,6 +78,9 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews{
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_layout);
         mLinearLayout = (LinearLayout) findViewById(R.id.ll_content);
         mHeader = (ImageView) findViewById(R.id.news_header);
+        mImageView_avatar = (ImageView) findViewById(R.id.iv_avatar);
+        mTextView_author = (TextView) findViewById(R.id.tv_author);
+        mTextView_bio = (TextView) findViewById(R.id.tv_bio);
         mCollapsingToolbarLayout.setTitle(title);
     }
 
@@ -89,7 +97,9 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews{
         @Override
         protected Boolean doInBackground(DailyGson... params) {
             Map<String, LinkedHashMap<String, String>> soup = mPresenter.getContentMap(params[0]);
-
+            LinkedHashMap<String, String> extra = soup.get("extra");
+            LinkedHashMap<String, String> article = soup.get("article");
+            loadExtra(extra);
             return true;
         }
 
@@ -106,6 +116,26 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews{
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
+        }
+
+        private void loadExtra(LinkedHashMap<String, String> extra) {
+            for (Map.Entry<String, String> entry : extra.entrySet()) {
+                if (entry.getValue().equals("avatar")) {
+                    Glide.with(App.getContext()).load(entry.getKey()).into(mImageView_avatar);
+                }
+                if (entry.getValue().equals("author")) {
+                    mTextView_author.setText(entry.getKey());
+                }
+                if (entry.getValue().equals("bio")) {
+                    mTextView_bio.setText(entry.getKey());
+                }
+            }
+        }
+
+        private void loadArticle(LinkedHashMap<String, String> article) {
+            for (Map.Entry<String, String> entry : article.entrySet()) {
+
+            }
         }
     }
 }

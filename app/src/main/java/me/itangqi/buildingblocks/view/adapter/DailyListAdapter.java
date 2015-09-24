@@ -63,7 +63,6 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         switch (holder.getItemViewType()) {
             case ITEM_TYPE_TEXT:
                 ((ThemeViewHolder) holder).mTitle.setText(news.title);
-                ((ThemeViewHolder) holder).mFrom.setText("From " + news.theme.name);
                 break;
             case ITEM_TYPE_IMAGE:
                 ((ImageViewHolder) holder).mTitle.setText(news.title);
