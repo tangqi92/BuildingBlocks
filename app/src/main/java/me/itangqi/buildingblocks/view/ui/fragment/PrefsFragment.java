@@ -36,9 +36,9 @@ public class PrefsFragment extends PreferenceFragment
         if (mIsEnableCache == preference) {
             editor.putBoolean("enable_cache", mIsEnableCache.isChecked());
         } else if (mPreference == preference) {
-            WebActivityPresenter presenter = new WebActivityPresenter();
+            WebActivityPresenter presenter = WebActivityPresenter.newInstance();
             long deletedSize = presenter.clearCacheFolder();
-            Toast.makeText(App.getContext(), "释放了" + (deletedSize / 1024) + "KB", Toast.LENGTH_SHORT).show();
+            Toast.makeText(App.getContext(), "释放了" + (deletedSize / 1024L /1024L) + "MB", Toast.LENGTH_SHORT).show();
         }
         return true;
     }

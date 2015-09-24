@@ -59,7 +59,7 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = new WebActivityPresenter(this);
+        mPresenter = WebActivityPresenter.newInstance(this);
         ButterKnife.bind(this);
         mContext = this;
         mUrl = getIntent().getStringExtra(EXTRA_URL);

@@ -69,7 +69,7 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
     @Override
     public void loadGson(DailyGson dailyGson) {
         mDailyGson = dailyGson;
-        Glide.with(this).load(dailyGson.getImage()).fitCenter().into(mHeader);
+        Glide.with(App.getContext()).load(dailyGson.getImage()).fitCenter().into(mHeader);
         UITask uiTask = new UITask(this);
         uiTask.execute(dailyGson);
 //        mPresenter.startInflater(dailyGson);

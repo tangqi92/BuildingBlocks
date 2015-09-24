@@ -18,6 +18,8 @@ public class WebActivityPresenter {
     private IWebView mWebView;
     private File cacheDir;
     private DailyModel mDailyModel;
+    private long mDeletedSize;
+    private static WebActivityPresenter mPresenter;
 
     private IGsonCallBack mIGsonCallBack = new IGsonCallBack() {
         @Override
@@ -26,37 +28,50 @@ public class WebActivityPresenter {
         }
     };
 
-    public WebActivityPresenter(IWebView webView) {
+    private WebActivityPresenter(IWebView webView) {
         this.mWebView = webView;
         this.cacheDir = mWebView.getWebViewCacheDir();
         mDailyModel = DailyModel.newInstance(mIGsonCallBack);
     }
 
-    public WebActivityPresenter() {
+    private WebActivityPresenter() {
         this.cacheDir = App.getContext().getCacheDir();
+    }
+
+    public static WebActivityPresenter newInstance() {
+        if (mPresenter == null) {
+            return new WebActivityPresenter();
+        } else {
+            return mPresenter;
+        }
+    }
+
+    public static WebActivityPresenter newInstance(IWebView webView) {
+        if (mPresenter == null || mPresenter.mWebView == null) {
+            return new WebActivityPresenter(webView);
+        } else {
+            return mPresenter;
+        }
     }
 
     public long clearCacheFolder() {
         Log.d("CachePath", "WebViewCachePath--->" + cacheDir.getAbsolutePath());
-        long deletedSize = 0;
         Log.d("canWrite?", "目录是否可写？--->" + (cacheDir.canWrite() ? "是" : "否"));
-        deletedSize += deleteFiles(cacheDir);
-        return deletedSize;
+        deleteFiles(cacheDir);
+        return mDeletedSize;
     }
 
-    private long deleteFiles(File file) {
-        long deletedSize = 0;
+    private void deleteFiles(File file) {
         for (File child : file.listFiles()) {
-            Log.d("fileName", child.getName());
             if (child.isDirectory()) {
                 deleteFiles(child);
-            } else {
-                deletedSize += child.length();
+            } else if (child.isFile()) {
+                Log.d("fileName", child.getName());
+                mDeletedSize += child.length();
                 boolean isDeleted = child.delete();
                 Log.d("isDeleted", isDeleted ? "删除成功" : "删除失败");
             }
         }
-        return deletedSize;
     }
 
     public void getDailyGson(int id) {
