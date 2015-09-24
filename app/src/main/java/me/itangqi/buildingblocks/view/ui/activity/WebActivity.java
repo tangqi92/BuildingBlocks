@@ -34,7 +34,6 @@ import me.itangqi.buildingblocks.view.ui.activity.base.SwipeBackActivity;
 public class WebActivity extends SwipeBackActivity implements IWebView {
 
     public static final String EXTRA_URL = "extra_url";
-    public static final String EXTRA_ID = "id";
     private SwipeBackLayout mSwipeBackLayout;
     private WebActivityPresenter mPresenter;
 
@@ -64,7 +63,6 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
         ButterKnife.bind(this);
         mContext = this;
         mUrl = getIntent().getStringExtra(EXTRA_URL);
-        mId = getIntent().getIntExtra(EXTRA_ID, 0);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         if (PrefUtils.isEnableCache()) {

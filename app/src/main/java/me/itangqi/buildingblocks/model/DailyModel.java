@@ -10,6 +10,13 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.parser.Parser;
+import org.jsoup.parser.XmlTreeBuilder;
+import org.jsoup.select.Elements;
+
 import org.apache.http.Header;
 
 import java.io.File;
@@ -19,7 +26,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 import me.itangqi.buildingblocks.domin.api.ZhihuApi;
 import me.itangqi.buildingblocks.domin.application.App;
@@ -171,7 +181,7 @@ public class DailyModel implements IDaily {
         values.put("share_url", daily.getShare_url());
         values.put("ga_prefix", daily.getGa_Prefix());
         values.put("body", daily.getBody());
-        database.insertWithOnConflict("daily", null, values, SQLiteDatabase.CONFLICT_ABORT);
+        database.insertOrThrow("daily", null, values);
         database.close();
     }
 
@@ -208,7 +218,7 @@ public class DailyModel implements IDaily {
             values.put("image", story.images.get(0));
             values.put("type", story.type);
             values.put("ga_prefix", story.ga_prefix);
-            database.insertWithOnConflict("dailyresult", null, values, SQLiteDatabase.CONFLICT_ABORT);
+            database.insertOrThrow("dailyresult", null, values);
         }
         database.close();
     }
@@ -228,6 +238,56 @@ public class DailyModel implements IDaily {
         }
         database.close();
         return dailyList;
+    }
+
+    /**
+     * 使用Jsoup来对数据库里面的DaliyGson中的body字段进行解析
+     * @param dailyGson
+     * @return 返回一个包含额外信息和正文的HashMap
+     */
+    public Map<String, LinkedHashMap<String, String>> parseBody(DailyGson dailyGson) {
+        long before = System.currentTimeMillis();
+        String xml = dailyGson.getBody();
+        Map<String, LinkedHashMap<String, String>> soup = new HashMap<String, LinkedHashMap<String, String>>();
+        LinkedHashMap<String, String> extra = new LinkedHashMap<String, String>();
+        LinkedHashMap<String, String> article = new LinkedHashMap<String, String>();
+        Document document = Jsoup.parse(xml, "", new Parser(new XmlTreeBuilder()));
+        Elements all = document.getAllElements();
+//		Element content_innner = document.select("div[class=\\\"content-inner\\\"]").get(0);
+//		Element h2 = document.select("h2[class=\\\"question-title\\\"").get(0);
+//		System.out.println("h2:--->" + h2.text());
+//		Element author = document.select("span[class=\\\"author\\\"").get(0);
+//		System.out.println("author:--->"+author.text());
+//		Elements contents = content_innner.getAllElements();
+//		System.out.println(contents.size());
+        for (Element content : all) {
+            if (content.hasClass("\\\"avatar\\\"")) {
+                String src = content.attr("src");
+                extra.put(src.substring(2, src.length() - 2), "avatar");
+            } else if (content.hasClass("\\\"author\\\"")) {
+                extra.put(content.text(), "author");
+            } else if (content.hasClass("\\\"bio\\\"")) {
+                extra.put(content.text(), "bio");
+            } else if (content.hasClass("\\\"content\\\"")) {
+                for (Element item : content.getAllElements()) {
+                    if (item.nodeName().equals("p") && item.getAllElements().size() == 1) {
+                        article.put(item.text(), "p");
+                    } else if (item.nodeName().equals("img")) {
+                        String src = item.attr("src");
+                        article.put(src.substring(2, src.length() - 2), "img");
+                    } else if (item.nodeName().equals("strong")) {
+                        article.put(item.text(), "strong");
+                    } else if (item.nodeName().equals("blockquote")) {
+                        article.put(item.text(), "blockquote");
+                    }
+                }
+            }
+        }
+        soup.put("extra", extra);
+        soup.put("article", article);
+        long after = System.currentTimeMillis();
+        Log.d("Parsing XML", "used time--->" + (after - before));
+        return soup;
     }
 
     @Deprecated

@@ -23,7 +23,7 @@
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
-            app:collapsedTitleTextAppearance="@android:style/TextAppearance.Holo.Widget.ActionBar.Subtitle"
+            app:collapsedTitleTextAppearance="@android:style/TextAppearance.Material.Widget.ActionBar.Subtitle"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
