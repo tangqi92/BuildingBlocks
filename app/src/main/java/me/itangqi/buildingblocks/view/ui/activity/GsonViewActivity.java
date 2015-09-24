@@ -1,8 +1,10 @@
 package me.itangqi.buildingblocks.view.ui.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.widget.RecyclerView;
 
+import butterknife.Bind;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.view.IGsonNews;
@@ -13,9 +15,8 @@ import me.itangqi.buildingblocks.view.ui.activity.base.SwipeBackActivity;
  */
 public class GsonViewActivity extends SwipeBackActivity implements IGsonNews{
 
-
-
-
+    private CollapsingToolbarLayout mCollapsingToolbarLayout;
+    private RecyclerView mRecyclerView;
 
     @Override
     protected int getLayoutResource() {
@@ -25,7 +26,7 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        initView();
     }
 
     @Override
@@ -41,5 +42,10 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews{
     @Override
     public void hideProgress() {
 
+    }
+
+    private void initView() {
+        mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_layout);
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv_gson_news);
     }
 }
