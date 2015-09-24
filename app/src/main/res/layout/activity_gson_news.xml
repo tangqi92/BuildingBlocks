@@ -20,10 +20,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
+            app:collapsedTitleTextAppearance="@android:style/TextAppearance.Holo.Small"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
-            app:collapsedTitleTextAppearance="@android:style/TextAppearance.Holo.Small"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
@@ -53,50 +53,51 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
-            android:id="@+id/ll_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingTop="5dp">
-
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/ll_content"
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="5dp">
 
-                <me.itangqi.buildingblocks.view.widget.CircleImageView
-                    android:id="@+id/iv_avatar"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
-                    android:src="@drawable/icon"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
 
-                <TextView
-                    android:id="@+id/tv_author"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30sp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_toRightOf="@+id/iv_avatar"
-                    android:layout_toEndOf="@+id/iv_avatar"
-                    android:text="author"
-                    android:textSize="25sp"/>
+                    <me.itangqi.buildingblocks.view.widget.CircleImageView
+                        android:id="@+id/iv_avatar"
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/icon"/>
 
-                <TextView
-                    android:id="@+id/tv_bio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_author"
-                    android:layout_marginLeft="5dp"
-                    android:layout_toRightOf="@+id/iv_avatar"
-                    android:layout_toEndOf="@id/iv_avatar"
-                    android:text="bio....."
-                    android:textSize="15sp"/>
+                    <TextView
+                        android:id="@+id/tv_author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20sp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_toEndOf="@+id/iv_avatar"
+                        android:layout_toRightOf="@+id/iv_avatar"
+                        android:text="author"
+                        android:textSize="17sp"/>
 
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/tv_bio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_author"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toEndOf="@id/iv_avatar"
+                        android:layout_toRightOf="@+id/iv_avatar"
+                        android:ellipsize="end"
+                        android:text="bio....."
+                        android:textSize="12sp"/>
 
-        </LinearLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
 

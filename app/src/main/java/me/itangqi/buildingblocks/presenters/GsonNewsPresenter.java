@@ -38,6 +38,19 @@ public class GsonNewsPresenter {
         mDailyModel.getGsonNews(id);
     }
 
+    /**
+     * 使用AsyncTask来更新UI
+     * @param dailyGson
+     * @return
+     */
+    public Map<String, LinkedHashMap<String, String>> getContentMap(DailyGson dailyGson) {
+        return mDailyModel.parseBody(dailyGson);
+    }
+
+    /**
+     * 使用Handler来更新UI
+     * @param dailyGson
+     */
     public void startInflater(DailyGson dailyGson) {
         Map<String, LinkedHashMap<String, String>> soup = mDailyModel.parseBody(dailyGson);
         Thread thread = new Thread(new Task(soup));

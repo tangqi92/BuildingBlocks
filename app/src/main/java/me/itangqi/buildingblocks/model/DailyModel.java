@@ -311,6 +311,7 @@ public class DailyModel implements IDaily {
         LinkedHashMap<String, String> article = new LinkedHashMap<String, String>();
         Document document = Jsoup.parse(xml, "", new Parser(new XmlTreeBuilder()));
         Elements all = document.getAllElements();
+        Log.i("Parsing", "all.size--->" + all.size());
 //		Element content_innner = document.select("div[class=\\\"content-inner\\\"]").get(0);
 //		Element h2 = document.select("h2[class=\\\"question-title\\\"").get(0);
 //		System.out.println("h2:--->" + h2.text());
@@ -319,20 +320,23 @@ public class DailyModel implements IDaily {
 //		Elements contents = content_innner.getAllElements();
 //		System.out.println(contents.size());
         for (Element content : all) {
-            if (content.hasClass("\\\"avatar\\\"")) {
+            if (content.hasClass("avatar")) {
                 String src = content.attr("src");
-                extra.put("avatar", src.substring(2, src.length() - 2));
-            } else if (content.hasClass("\\\"author\\\"")) {
+                extra.put("avatar", src);
+                Log.i("parsing", "avatar--->" + src);
+            } else if (content.hasClass("author")) {
                 extra.put("author", content.text());
-            } else if (content.hasClass("\\\"bio\\\"")) {
+                Log.i("parsing", "author--->" + content.text());
+            } else if (content.hasClass("bio")) {
                 extra.put("bio", content.text());
-            } else if (content.hasClass("\\\"content\\\"")) {
+                Log.i("parsing", "bio--->" + content.text());
+            } else if (content.hasClass("content")) {
                 for (Element item : content.getAllElements()) {
                     if (item.nodeName().equals("p") && item.getAllElements().size() == 1) {
                         article.put(item.text(), "p");
                     } else if (item.nodeName().equals("img")) {
                         String src = item.attr("src");
-                        article.put(src.substring(2, src.length() - 2), "img");
+                        article.put(src, "img");
                     } else if (item.nodeName().equals("strong")) {
                         article.put(item.text(), "strong");
                     } else if (item.nodeName().equals("blockquote")) {
