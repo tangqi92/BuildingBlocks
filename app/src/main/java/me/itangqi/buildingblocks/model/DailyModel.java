@@ -65,7 +65,7 @@ public class DailyModel implements IDaily {
 //                    mItems.put(daily.id, daily.title);   //待测试
                 }
                 mIHttpCallBack.onFinish(mDailiesFromNet);
-                insertDailyStoriesDB(response);
+                saveDailyStoriesDB(response);
             }
         }
 
@@ -86,7 +86,7 @@ public class DailyModel implements IDaily {
         @Override
         public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, DailyGson response) {
             mIGsonCallBack.onGsonItemFinish(response);
-            insertDailyGsonDB(response);
+            saveDailyGsonDB(response);
         }
 
         @Override
@@ -203,7 +203,7 @@ public class DailyModel implements IDaily {
         values.put("share_url", daily.getShare_url());
         values.put("ga_prefix", daily.getGa_Prefix());
         values.put("body", daily.getBody());
-        database.insertWithOnConflict("daily", null, values, SQLiteDatabase.CONFLICT_ROLLBACK);
+        database.insertWithOnConflict("daily", null, values, SQLiteDatabase.CONFLICT_IGNORE);
         database.close();
     }
 
@@ -211,13 +211,14 @@ public class DailyModel implements IDaily {
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
         String sql = "INSERT OR IGNORE INTO daily(id, title, image_source, image, share_url, ga_prefix, body) values("
                 + dailyGson.getId() + ","
-                + "\'" + dailyGson.getTitle() + "\'" + ","
-                + "\'" + dailyGson.getImage_source() + "\'" + ","
-                + "\'" + dailyGson.getImage() + "\'" + ","
-                + "\'" + dailyGson.getShare_url() + "\'" + ","
+                + "\"" + dailyGson.getTitle() + "\"" + ","
+                + "\"" + dailyGson.getImage_source() + "\"" + ","
+                + "\"" + dailyGson.getImage() + "\"" + ","
+                + "\"" + dailyGson.getShare_url() + "\"" + ","
                 + dailyGson.getGa_Prefix() + ","
-                + "\'" + dailyGson.getBody() + "\'" + ")";
+                + "\"" + dailyGson.getBody() + "\"" + ")";
         database.execSQL(sql);
+        database.close();
     }
 
     private DailyGson getDailyGsonDB(int id) {
@@ -253,7 +254,7 @@ public class DailyModel implements IDaily {
             values.put("image", story.images.get(0));
             values.put("type", story.type);
             values.put("ga_prefix", story.ga_prefix);
-            database.insertWithOnConflict("dailyresult", null, values, SQLiteDatabase.CONFLICT_ROLLBACK);
+            database.insertWithOnConflict("dailyresult", null, values, SQLiteDatabase.CONFLICT_IGNORE);
         }
         database.close();
     }
@@ -270,12 +271,13 @@ public class DailyModel implements IDaily {
             String sql = "INSERT OR IGNORE INTO dailyresult(date, id, title, image, type, ga_prefix) values("
                     + dailyResult.date + ","
                     + story.id + ","
-                    + "\'" + story.title + "\'" + ","
-                    + "\'" + story.images.get(0) + "\'" + ","
+                    + "\"" + story.title + "\"" + ","
+                    + "\"" + story.images.get(0) + "\"" + ","
                     + story.type + ","
                     + story.ga_prefix + ")";
             database.execSQL(sql);
         }
+        database.close();
     }
 
     private void getDailyStoriesDB(int date) {
@@ -319,11 +321,11 @@ public class DailyModel implements IDaily {
         for (Element content : all) {
             if (content.hasClass("\\\"avatar\\\"")) {
                 String src = content.attr("src");
-                extra.put(src.substring(2, src.length() - 2), "avatar");
+                extra.put("avatar", src.substring(2, src.length() - 2));
             } else if (content.hasClass("\\\"author\\\"")) {
-                extra.put(content.text(), "author");
+                extra.put("author", content.text());
             } else if (content.hasClass("\\\"bio\\\"")) {
-                extra.put(content.text(), "bio");
+                extra.put("bio", content.text());
             } else if (content.hasClass("\\\"content\\\"")) {
                 for (Element item : content.getAllElements()) {
                     if (item.nodeName().equals("p") && item.getAllElements().size() == 1) {

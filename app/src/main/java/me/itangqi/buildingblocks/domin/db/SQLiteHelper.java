@@ -23,7 +23,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             + "image TEXT NULL,"
             + "share_url TEXT NULL,"
             + "ga_prefix SMALLINT NULL,"
-            + "body TEXT NULL)";
+            + "body TEXT NULL,"
+            + "UNIQUE (id, title, type, image_source, image, share_url, ga_prefix, body))";
 
     public static String CREATE_DAILYRESULT_TABLE = "CREATE TABLE dailyresult("
             + "date SMALLINT,"
@@ -31,7 +32,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             + "title TEXT,"
             + "image TEXT NULL,"
             + "type SMALLINT,"
-            + "ga_prefix SMALLINT)";
+            + "ga_prefix SMALLINT,"
+            + "UNIQUE (id, title, image, type, ga_prefix))";
 
 
     public SQLiteHelper() {

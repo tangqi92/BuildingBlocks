@@ -1,5 +1,7 @@
 package me.itangqi.buildingblocks.view;
 
+import android.os.Handler;
+
 import me.itangqi.buildingblocks.model.entity.DailyGson;
 
 /**
@@ -7,6 +9,8 @@ import me.itangqi.buildingblocks.model.entity.DailyGson;
  */
 public interface IGsonNews {
     void loadGson(DailyGson dailyGson);
+
+    Handler getHandler();
 
     void showProgress();
 
