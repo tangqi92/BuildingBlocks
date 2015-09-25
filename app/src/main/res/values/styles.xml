@@ -17,9 +17,12 @@
         <item name="colorAccent">@color/accent</item>
     </style>
 
-    <style name="CollapsingToolbarTitleStyle"
-           parent="@android:style/TextAppearance">
+    <style name="CollapsingToolbarTitleStyle.About" parent="@android:style/TextAppearance">
         <item name="android:textColor">@android:color/transparent</item>
     </style>
 
+    <style name="CollapsingToolbarTitleStyle.GsonView" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/bg_white</item>
+        <item name="android:textSize">24sp</item>
+    </style>
 </resources>
