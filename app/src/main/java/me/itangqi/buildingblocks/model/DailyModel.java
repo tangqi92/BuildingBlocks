@@ -299,7 +299,6 @@ public class DailyModel implements IDaily {
 
     /**
      * 使用Jsoup来对数据库里面的DaliyGson中的body字段进行解析
-     *
      * @param dailyGson
      * @return 返回一个包含额外信息和正文的HashMap
      */
@@ -312,13 +311,6 @@ public class DailyModel implements IDaily {
         Document document = Jsoup.parse(xml, "", new Parser(new XmlTreeBuilder()));
         Elements all = document.getAllElements();
         Log.i("Parsing", "all.size--->" + all.size());
-//		Element content_innner = document.select("div[class=\\\"content-inner\\\"]").get(0);
-//		Element h2 = document.select("h2[class=\\\"question-title\\\"").get(0);
-//		System.out.println("h2:--->" + h2.text());
-//		Element author = document.select("span[class=\\\"author\\\"").get(0);
-//		System.out.println("author:--->"+author.text());
-//		Elements contents = content_innner.getAllElements();
-//		System.out.println(contents.size());
         for (Element content : all) {
             if (content.hasClass("avatar")) {
                 String src = content.attr("src");
@@ -331,16 +323,17 @@ public class DailyModel implements IDaily {
                 extra.put("bio", content.text());
                 Log.i("parsing", "bio--->" + content.text());
             } else if (content.hasClass("content")) {
-                for (Element item : content.getAllElements()) {
-                    if (item.nodeName().equals("p") && item.getAllElements().size() == 1) {
-                        article.put(item.text(), "p");
-                    } else if (item.nodeName().equals("img")) {
-                        String src = item.attr("src");
+                extra.put("allcontent", content.html());
+                for (Element item : content.children()) {
+                    String attr = item.attr("src");
+                    String className = item.className();
+                    if (!hasImgNode(item)) {
+                        String outerHtml = item.outerHtml().replaceAll("&nbsp;", " ");
+                        article.put(outerHtml, "p");
+                    } else if (hasImgNode(item)) {
+                        Element image = item.child(0);  //
+                        String src = image.attr("src");
                         article.put(src, "img");
-                    } else if (item.nodeName().equals("strong")) {
-                        article.put(item.text(), "strong");
-                    } else if (item.nodeName().equals("blockquote")) {
-                        article.put(item.text(), "blockquote");
                     }
                 }
             }
@@ -350,6 +343,16 @@ public class DailyModel implements IDaily {
         long after = System.currentTimeMillis();
         Log.d("Parsing XML", "used time--->" + (after - before));
         return soup;
+    }
+
+    private boolean hasImgNode(Element element) {
+        Elements childen = element.children();
+        for (Element child : childen) {
+            if (child.nodeName().equals("img")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Deprecated

@@ -18,8 +18,8 @@
             android:id="@+id/collapsing_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:expandedTitleTextAppearance="@style/CollapsingToolbarTitleStyle.GsonView"
             app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleTextAppearance="@style/CollapsingToolbarTitleStyle.GsonView"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
@@ -97,8 +97,8 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="@dimen/margin_16dp">
-
             </LinearLayout>
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
