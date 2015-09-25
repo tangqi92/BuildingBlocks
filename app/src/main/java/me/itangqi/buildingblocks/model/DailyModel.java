@@ -10,14 +10,13 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 
+import org.apache.http.Header;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 import org.jsoup.parser.XmlTreeBuilder;
 import org.jsoup.select.Elements;
-
-import org.apache.http.Header;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,21 +25,19 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 import me.itangqi.buildingblocks.domin.api.ZhihuApi;
 import me.itangqi.buildingblocks.domin.application.App;
 import me.itangqi.buildingblocks.domin.db.SQLiteHelper;
-import me.itangqi.buildingblocks.domin.utils.CommonUtils;
 import me.itangqi.buildingblocks.domin.utils.NetworkUtils;
 import me.itangqi.buildingblocks.domin.utils.PrefUtils;
 import me.itangqi.buildingblocks.model.entity.Daily;
 import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.model.entity.DailyResult;
-import me.itangqi.buildingblocks.model.entity.Theme;
 
 /**
  * Created by Troy on 2015/9/21.
@@ -60,6 +57,7 @@ public class DailyModel implements IDaily {
         @Override
         public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, DailyResult response) {
             if (response != null && response.stories.size() != 0) {
+                mDailiesFromNet.clear();
                 for (Daily daily : response.stories) {
                     mDailiesFromNet.add(daily);
 //                    mItems.put(daily.id, daily.title);   //待测试

@@ -19,6 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginStart="@dimen/margin_16dp"
+            android:fitsSystemWindows="true"
             app:expandedTitleTextAppearance="@style/CollapsingToolbarTitleStyle.GsonView"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -59,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/md_grey_50"
-                android:padding="@dimen/margin_8dp">
+                android:padding="12dp">
 
                 <me.itangqi.buildingblocks.view.widget.CircleImageView
                     android:id="@+id/iv_avatar"
@@ -70,9 +72,9 @@
                 <TextView
                     android:id="@+id/tv_author"
                     android:layout_width="wrap_content"
-                    android:layout_height="20sp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginStart="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_4dp"
+                    android:layout_marginStart="@dimen/margin_4dp"
                     android:layout_toEndOf="@+id/iv_avatar"
                     android:layout_toRightOf="@+id/iv_avatar"
                     android:text="author"
@@ -83,7 +85,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_author"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="@dimen/margin_4dp"
+                    android:layout_marginTop="2dp"
                     android:layout_toEndOf="@id/iv_avatar"
                     android:layout_toRightOf="@+id/iv_avatar"
                     android:ellipsize="end"
