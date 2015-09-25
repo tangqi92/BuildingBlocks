@@ -3,13 +3,16 @@ package me.itangqi.buildingblocks.view.ui.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -163,26 +166,47 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
                 mTextView_author.setText(entry.getValue());
             } else if (entry.getKey().equals("bio")) {
                 mTextView_bio.setText(entry.getValue());
-            } else if (entry.getKey().equals("p")) {
+            } else if (entry.getValue().equals("p")) {
                 TextView textView = new TextView(mContext);
-                textView.setPadding(0, 7, 0, 0);
+                textView.setPadding(10, 15, 10, 0);
                 ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 textView.setLayoutParams(params);
                 textView.setTextColor(Color.BLACK);
-                textView.setTextSize(15);
+                textView.setGravity(Gravity.START);
+                textView.setLinksClickable(true);
+                textView.setLineSpacing(3, 1.0F);
+                textView.setLinkTextColor(Color.CYAN);
+                textView.setTextScaleX(1.2F);
+                textView.setTextSize(18);
                 textView.setText(entry.getKey());
                 mLinearLayout.addView(textView);
             }else if (entry.getValue().equals("img")) {
                 ImageView imageView = new ImageView(App.getContext());
-                ViewGroup.LayoutParams ll_params = mLinearLayout.getLayoutParams();
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 imageView.setLayoutParams(params);
 //                imageView.setPadding(0, 5, 0, 0);
                 imageView.setVisibility(View.VISIBLE);
                 Glide.with(mContext).load(entry.getKey()).fitCenter().into(imageView);
                 mLinearLayout.addView(imageView);
-            }else if (entry.getValue().equals("strong")) {
-
+            } else if (entry.getValue().equals("strong")) {
+                TextView textView = new TextView(mContext);
+                textView.setPadding(5, 10, 5, 0);
+                ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                textView.setLayoutParams(params);
+                textView.setTextColor(Color.BLACK);
+                textView.setGravity(Gravity.CENTER_HORIZONTAL);
+                textView.setLinksClickable(true);
+                textView.setLineSpacing(3, 1.5F);
+                textView.setTypeface(Typeface.DEFAULT_BOLD);
+                textView.setLinkTextColor(Color.CYAN);
+                textView.setTextScaleX(1.2F);
+                textView.setTextSize(18);
+                textView.setText(entry.getKey());
+                mLinearLayout.addView(textView);
+            }else if (entry.getValue().equals("img")) {
+                ImageView imageView = new ImageView(App.getContext());
+                ViewGroup.LayoutParams ll_params = mLinearLayout.getLayoutParams();
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         }
 
