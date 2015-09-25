@@ -30,7 +30,6 @@ dependencies {
     compile 'com.android.support:design:22.2.1'
     compile 'com.google.code.gson:gson:2.3'
     // The third party
-    compile 'com.orhanobut:logger:1.10'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.soundcloud.android:android-crop:1.0.0@aar'
     compile 'com.loopj.android:android-async-http:1.4.8'

@@ -1,6 +1,5 @@
 package me.itangqi.buildingblocks.view.ui.activity;
 
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +18,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.domin.utils.ShareUtils;
+import me.itangqi.buildingblocks.domin.utils.VersionUtils;
 
 /*
  * Thanks
@@ -44,7 +44,7 @@ public class AboutActivity extends AppCompatActivity implements SwipeBackActivit
         setContentView(R.layout.activity_about);
         ButterKnife.bind(this);
 
-        setUpVersionName();
+        mVersionTextView.setText(VersionUtils.setUpVersionName(this));
 
         mCollapsingToolbarLayout.setTitle(getString(R.string.title_about));
 
@@ -67,17 +67,6 @@ public class AboutActivity extends AppCompatActivity implements SwipeBackActivit
         if (v == null && mHelper != null)
             return mHelper.findViewById(id);
         return v;
-    }
-
-    private void setUpVersionName() {
-        String versionName = null;
-        try {
-            versionName = getApplicationContext().getPackageManager()
-                    .getPackageInfo(getApplicationContext().getPackageName(), 0).versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        mVersionTextView.setText("Version " + versionName);
     }
 
     @Override

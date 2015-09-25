@@ -21,6 +21,7 @@ public final class ZhihuApi {
         return ZHIHU_DAILY_NEWS_CONTENT + id;
     }
 
+    // getGsonNewsContent GET
     public static String getGsonNewsContent(int id) {
         return ZHIHU_DAILY_NEWS_GSON_CONTENT + id;
     }

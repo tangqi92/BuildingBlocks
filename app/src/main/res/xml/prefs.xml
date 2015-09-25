@@ -36,8 +36,7 @@
 
     <PreferenceCategory android:title="@string/settings_version">
         <Preference
-            android:key="version"
-            android:title="@string/settings_version_code"/>
+            android:key="version"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

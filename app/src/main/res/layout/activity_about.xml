@@ -162,6 +162,7 @@
                     android:layout_toEndOf="@id/ig_avatar_tangqi"
                     android:layout_toRightOf="@id/ig_avatar_tangqi"
                     android:text="汤奇"
+                    android:layout_marginLeft="@dimen/margin_4dp"
                     android:textColor="@color/primary_text"
                     tools:ignore="HardcodedText"/>
 
@@ -172,6 +173,7 @@
                     android:layout_toEndOf="@id/ig_avatar_tangqi"
                     android:layout_toRightOf="@id/ig_avatar_tangqi"
                     android:text="@string/about_developer_description"
+                    android:layout_marginLeft="@dimen/margin_4dp"
                     android:textColor="@color/secondary_text"/>
 
                 <TextView
@@ -211,7 +213,6 @@
                     android:textColor="@color/secondary_text"/>
 
             </RelativeLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"

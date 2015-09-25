@@ -7,7 +7,7 @@ Building Blocks - 积木
 
 ### How to use - 如何使用
 
->dev 分支由 [troyliu0105](https://github.com/troyliu0105) 同学维护，他会不断对积木进行重构与增加好玩的功能，如果你也喜欢，那么欢迎 **Star** 与 **Fork** 此分支！
+>dev 分支由 [troyliu0105](https://github.com/troyliu0105) 同学全力维护，他会不断对**积木**进行重构与增加好玩的功能，这非常酷，欢迎 **Star** 与 **Fork** 此分支！
 
 那么，你该如何利用「她」呢？
 
@@ -46,7 +46,6 @@ Building Blocks - 积木
 ## Dependencies - 开源项目
 
  - [glide](https://github.com/bumptech/glide)
- - [logger](https://github.com/orhanobut/logger)
  - [butterknife](https://github.com/JakeWharton/butterknife)
  - [android-crop](https://github.com/jdamcd/android-crop)
  - [android-async-http](https://github.com/loopj/android-async-http)
@@ -60,8 +59,8 @@ Building Blocks - 积木
 
 ## Contributors
 
-- [troyliu0105](https://github.com/troyliu0105)
-- logo: [Mao](http://weibo.com/cat93/) & troyliu0105
+- dev version: [troyliu0105](https://github.com/troyliu0105)
+- Logo: [Mao](http://weibo.com/cat93/) & [troyliu0105](https://github.com/troyliu0105)
 
 ## Contact - 联系我
 
