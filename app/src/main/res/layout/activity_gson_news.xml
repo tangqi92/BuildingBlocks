@@ -97,15 +97,8 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="@dimen/margin_16dp">
-
-                <TextView
-                    android:id="@+id/tv_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/md_black_1000"
-                    android:textSize="15sp"/>
-
             </LinearLayout>
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

@@ -16,10 +16,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.SyncStateContract;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.text.Html;
+import android.text.Layout;
 import android.text.method.ScrollingMovementMethod;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -39,7 +42,9 @@ import org.apache.http.Header;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.ref.WeakReference;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.LinkedHashMap;
@@ -73,7 +78,6 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
     private ImageView mImageView_avatar;
     private TextView mTextView_author;
     private TextView mTextView_bio;
-    private TextView mTextView_content;
 
     private DailyGson mDailyGson;
 
@@ -96,20 +100,8 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
     public void loadGson(DailyGson dailyGson) {
         mDailyGson = dailyGson;
         Glide.with(App.getContext()).load(dailyGson.getImage()).fitCenter().into(mHeader);
-        LinkedHashMap<String, String> extra = mPresenter.getContentMap(dailyGson).get("extra");
-        for (Map.Entry<String, String> entry : extra.entrySet()) {
-            if (entry.getKey().equals("avatar")) {
-                Glide.with(this).load(entry.getValue()).into(mImageView_avatar);
-            }else if (entry.getKey().equals("author")) {
-                mTextView_author.setText(entry.getValue());
-            }else if (entry.getKey().equals("bio")) {
-                mTextView_bio.setText(entry.getValue());
-            }else if (entry.getKey().equals("allcontent")) {
-                String content = entry.getValue();
-                mTextView_content.setMovementMethod(ScrollingMovementMethod.getInstance());
-                mTextView_content.setText(Html.fromHtml(content, new ImageGetter(this, mTextView_content), null));
-            }
-        }
+        UITask task = new UITask();
+        task.execute(dailyGson);
     }
 
     @Override
@@ -135,82 +127,48 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
         mImageView_avatar = (ImageView) findViewById(R.id.iv_avatar);
         mTextView_author = (TextView) findViewById(R.id.tv_author);
         mTextView_bio = (TextView) findViewById(R.id.tv_bio);
-        mTextView_content = (TextView) findViewById(R.id.tv_content);
         mCollapsingToolbarLayout.setTitle(title);
     }
 
-    private class ImageGetter implements Html.ImageGetter {
+    private class UITask extends AsyncTask<DailyGson, Map.Entry<String, String>, Integer> {
 
-        private Context mContext;
-        private TextView mTextView;
-
-        public ImageGetter(Context context, TextView textView) {
-            mContext = context;
-            mTextView = textView;
+        @Override
+        protected Integer doInBackground(DailyGson... params) {
+            Map<String, LinkedHashMap<String, String>> soup = mPresenter.getContentMap(params[0]);
+            LinkedHashMap<String, String> extra = soup.get("extra");
+            LinkedHashMap<String, String> article = soup.get("article");
+            for (Map.Entry<String, String> entry : extra.entrySet()) {
+                publishProgress(entry);
+            }
+            for (Map.Entry<String, String> entry : article.entrySet()) {
+                publishProgress(entry);
+            }
+            return 1;
         }
 
         @Override
-        public Drawable getDrawable(String source) {
-            ImageDrawable imageDrawable = new ImageDrawable(mContext);
-            ImageTasker tasker = new ImageTasker(imageDrawable);
-            tasker.execute(source);
-            return imageDrawable;
-        }
-
-        private class ImageTasker extends AsyncTask<String, Void, Drawable> {
-
-            private ImageDrawable mDrawable;
-
-            public ImageTasker(ImageDrawable drawable) {
-                mDrawable = drawable;
-            }
-
-            @Override
-            protected Drawable doInBackground(String... params) {
-                URL url = null;
-                Drawable drawable = null;
-                try {
-                    url = new URL(params[0]);
-                    drawable = Drawable.createFromStream(url.openStream(), null);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return drawable;
-            }
-
-            @Override
-            protected void onPostExecute(Drawable drawable) {
-                if (drawable != null) {
-                    mDrawable.mDrawable = drawable;
-                    ImageGetter.this.mTextView.requestLayout();
-                }
-            }
-
-        }
-
-        private class ImageDrawable extends BitmapDrawable {
-
-            protected Drawable mDrawable;
-
-            public ImageDrawable(Context context) {
-                this.setBounds(getDefaultImageBounds(context));
-                mDrawable = context.getResources().getDrawable(R.drawable.icon);
-                mDrawable.setBounds(getDefaultImageBounds(context));
-            }
-
-            @Override
-            public void draw(Canvas canvas) {
-                if (mDrawable != null) {
-                    mDrawable.draw(canvas);
-                }
-            }
-
-            public Rect getDefaultImageBounds(Context context) {
-                Display display = ((Activity) context).getWindowManager().getDefaultDisplay();
-                int width = display.getWidth();
-                int height = display.getHeight();
-                Rect bounds = new Rect(0, 0, width, height);
-                return bounds;
+        protected void onProgressUpdate(Map.Entry<String, String>... values) {
+            Map.Entry<String, String> entry = values[0];
+            if (entry.getKey().equals("avatar")) {
+                Glide.with(App.getContext()).load(entry.getValue()).into(mImageView_avatar);
+            } else if (entry.getKey().equals("author")) {
+                mTextView_author.setText(entry.getValue());
+            } else if (entry.getKey().equals("bio")) {
+                mTextView_bio.setText(entry.getValue());
+            } else if (entry.getValue().equals("p")) {
+                TextView textView = new TextView(App.getContext());
+                textView.setMovementMethod(ScrollingMovementMethod.getInstance());
+                textView.setTextColor(Color.BLACK);
+                textView.setTextSize(15);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                textView.setLayoutParams(params);
+                textView.setText(Html.fromHtml(entry.getKey()));
+                mLinearLayout.addView(textView);
+            }else if (entry.getValue().equals("img")) {
+                ImageView imageView = new ImageView(App.getContext());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                mLinearLayout.addView(imageView);
+                Glide.with(App.getContext()).load(entry.getKey()).crossFade().fitCenter().into(imageView);
             }
         }
     }
