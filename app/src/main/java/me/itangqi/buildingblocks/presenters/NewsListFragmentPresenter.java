@@ -1,11 +1,10 @@
 package me.itangqi.buildingblocks.presenters;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import me.itangqi.buildingblocks.model.entity.Daily;
 import me.itangqi.buildingblocks.model.DailyModel;
-import me.itangqi.buildingblocks.model.ICallBack;
+import me.itangqi.buildingblocks.model.IHttpCallBack;
 import me.itangqi.buildingblocks.view.IViewPager;
 import me.itangqi.buildingblocks.domin.utils.NetworkUtils;
 import me.itangqi.buildingblocks.domin.utils.PrefUtils;
@@ -16,33 +15,22 @@ import me.itangqi.buildingblocks.domin.utils.PrefUtils;
 public class NewsListFragmentPresenter {
     private DailyModel mDailyModel;
     private IViewPager mIViewPager;
-    private List<Daily> mDailyList;
-    private List<Daily> mCacheList;
-    private String date;
+    private int date;
 
-    public NewsListFragmentPresenter(IViewPager IViewPager, final String date) {
+    public NewsListFragmentPresenter(IViewPager IViewPager, final int date) {
         this.mIViewPager = IViewPager;
         this.date = date;
-        this.mDailyList = new ArrayList<>();
-        this.mCacheList = new ArrayList<>();
-        mDailyModel = new DailyModel(new ICallBack() {
+        mDailyModel = DailyModel.newInstance(new IHttpCallBack() {
             @Override
             public void onFinish(List<Daily> dailyList) {
-                mDailyModel.saveDailies(dailyList, date);
+//                mDailyModel.saveDailies(dailyList, date);  //数据储存在Volly获取数据后立即进行，不单独调用saveDailies()
                 loadData(dailyList);
             }
         });
     }
 
-    public void getNews(String date) {
-        if (PrefUtils.isEnableCache()) {
-            mDailyModel.getFromCache(date);
-            mDailyModel.getFromNet(date);
-        }else if (!PrefUtils.isEnableCache() && NetworkUtils.isNetworkConnected()) {
-            mDailyModel.getFromNet(date);
-        }else if (PrefUtils.isEnableCache() && !NetworkUtils.isNetworkConnected()) {
-            mDailyModel.getFromCache(date);
-        }
+    public void getNews(int date) {
+        mDailyModel.getDailyResult(date);
     }
 
     public void loadData(List<Daily> dailies) {

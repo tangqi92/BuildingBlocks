@@ -3,6 +3,7 @@ package me.itangqi.buildingblocks.view.ui.fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.util.Log;
@@ -18,6 +19,7 @@ public class PrefsFragment extends PreferenceFragment
 
     private CheckBoxPreference mIsEnableCache;
     private Preference mPreference;
+    private ListPreference mListPreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,9 +36,9 @@ public class PrefsFragment extends PreferenceFragment
         if (mIsEnableCache == preference) {
             editor.putBoolean("enable_cache", mIsEnableCache.isChecked());
         } else if (mPreference == preference) {
-            WebActivityPresenter presenter = new WebActivityPresenter();
+            WebActivityPresenter presenter = WebActivityPresenter.newInstance();
             long deletedSize = presenter.clearCacheFolder();
-            Toast.makeText(App.getContext(), "释放了" + (deletedSize / 1024) + "KB", Toast.LENGTH_SHORT).show();
+            Toast.makeText(App.getContext(), "释放了" + (deletedSize / 1024L /1024L) + "MB", Toast.LENGTH_SHORT).show();
         }
         return true;
     }

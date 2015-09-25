@@ -2,7 +2,6 @@ package me.itangqi.buildingblocks.view.ui.activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,12 +18,13 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.domin.utils.PrefUtils;
-import me.itangqi.buildingblocks.presenters.WebActivityPresenter;
 import me.itangqi.buildingblocks.domin.utils.NetworkUtils;
+import me.itangqi.buildingblocks.domin.utils.PrefUtils;
+import me.itangqi.buildingblocks.domin.utils.ShareUtils;
+import me.itangqi.buildingblocks.model.entity.DailyGson;
+import me.itangqi.buildingblocks.presenters.WebActivityPresenter;
 import me.itangqi.buildingblocks.view.IWebView;
 import me.itangqi.buildingblocks.view.ui.activity.base.SwipeBackActivity;
-import me.itangqi.buildingblocks.domin.utils.ShareUtils;
 
 /*
  * Thanks to
@@ -37,11 +37,14 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
     private SwipeBackLayout mSwipeBackLayout;
     private WebActivityPresenter mPresenter;
 
-    @Bind(R.id.progressbar) ProgressBar mProgressbar;
-    @Bind(R.id.webView) WebView mWebView;
+    @Bind(R.id.progressbar)
+    ProgressBar mProgressbar;
+    @Bind(R.id.webView)
+    WebView mWebView;
 
     Context mContext;
     String mUrl;
+    int mId;
 
     @Override
     protected int getLayoutResource() {
@@ -56,11 +59,10 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = new WebActivityPresenter(this);
+        mPresenter = WebActivityPresenter.newInstance(this);
         ButterKnife.bind(this);
         mContext = this;
         mUrl = getIntent().getStringExtra(EXTRA_URL);
-
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         if (PrefUtils.isEnableCache()) {
@@ -73,10 +75,10 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
             webSettings.setDatabaseEnabled(true);
         }
         webSettings.setLoadWithOverviewMode(true);
+        webSettings.setDefaultTextEncodingName("utf-8");
         mWebView.setWebChromeClient(new ChromeClient());
         mWebView.setWebViewClient(new ViewClient());
         mWebView.loadUrl(mUrl);
-
         mSwipeBackLayout = getSwipeBackLayout();
         mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
     }
@@ -140,6 +142,17 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
         return this.getCacheDir();
     }
 
+    /**
+     * 读取gson数据里面的“body”，显示有问题
+     * @param dailyGson 又presenter传入的实例
+     */
+    @Deprecated
+    @Override
+    public void loadGsonNews(DailyGson dailyGson) {
+        String summery = dailyGson.getBody();
+        mWebView.loadData(summery, "text/html; charset=UTF-8", null);
+    }
+
     private class ChromeClient extends WebChromeClient {
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
@@ -150,6 +163,11 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
             } else if (newProgress != 100) {
                 mProgressbar.setVisibility(View.VISIBLE);
             }
+        }
+
+        @Override
+        public void onShowCustomView(View view, CustomViewCallback callback) {
+            super.onShowCustomView(view, callback);
         }
     }
 

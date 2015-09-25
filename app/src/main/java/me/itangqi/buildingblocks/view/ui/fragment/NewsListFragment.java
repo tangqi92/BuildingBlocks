@@ -27,7 +27,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
     private List<Daily> mNewsList = new ArrayList<>();
     private DailyListAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private String date;
+    private int date;
     private NewsListFragmentPresenter mPresenter;
 
     @Bind(R.id.cardList)
@@ -51,7 +51,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
             Bundle bundle = getArguments();
-            date = bundle.getString("date");
+            date = bundle.getInt("date");
             mPresenter = new NewsListFragmentPresenter(this, date);
             setRetainInstance(true);
         }

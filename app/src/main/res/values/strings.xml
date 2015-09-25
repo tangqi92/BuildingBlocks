@@ -64,4 +64,8 @@
     <string name="cache_is_enable">当前读取的是缓存</string>
     <string name="cache_is_disable">当前未设置缓存</string>
     <string name="delete_cache">清除缓存</string>
+    <string name="way_to_get_data">数据获取方式</string>
+    <string name="dialog_way_to_get_data">选择</string>
+    <string name="default_way_to_get_data">http</string>
+    <string name="activiy_gson_news_image">用来显示Gson里面的image属性</string>
 </resources>

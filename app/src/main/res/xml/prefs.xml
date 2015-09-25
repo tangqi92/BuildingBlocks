@@ -16,6 +16,13 @@
         <Preference
             android:key="delete_cache"
             android:title="@string/delete_cache"/>
+        <ListPreference
+            android:defaultValue="@string/default_way_to_get_data"
+            android:dialogTitle="@string/dialog_way_to_get_data"
+            android:entries="@array/way_to_get_data"
+            android:entryValues="@array/value_way_to_get_data"
+            android:key="gson_or_html"
+            android:title="@string/way_to_get_data"/>
     </PreferenceCategory>
 
     <PreferenceCategory

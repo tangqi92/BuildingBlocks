@@ -2,11 +2,12 @@ package me.itangqi.buildingblocks.presenters;
 
 import android.util.Log;
 
-import org.litepal.util.LogUtil;
-
 import java.io.File;
 
 import me.itangqi.buildingblocks.domin.application.App;
+import me.itangqi.buildingblocks.model.DailyModel;
+import me.itangqi.buildingblocks.model.IGsonCallBack;
+import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.view.IWebView;
 
 /**
@@ -14,39 +15,67 @@ import me.itangqi.buildingblocks.view.IWebView;
  */
 public class WebActivityPresenter {
 
-    IWebView mWebView;
-    File cacheDir;
+    private IWebView mWebView;
+    private File cacheDir;
+    private DailyModel mDailyModel;
+    private long mDeletedSize;
+    private static WebActivityPresenter mPresenter;
 
-    public WebActivityPresenter(IWebView webView) {
-        mWebView = webView;
-        cacheDir = mWebView.getWebViewCacheDir();
+    private IGsonCallBack mIGsonCallBack = new IGsonCallBack() {
+        @Override
+        public void onGsonItemFinish(DailyGson dailyGson) {
+            mWebView.loadGsonNews(dailyGson);
+        }
+    };
+
+    private WebActivityPresenter(IWebView webView) {
+        this.mWebView = webView;
+        this.cacheDir = mWebView.getWebViewCacheDir();
+        mDailyModel = DailyModel.newInstance(mIGsonCallBack);
     }
 
-    public WebActivityPresenter() {
-        cacheDir = App.getContext().getCacheDir();
+    private WebActivityPresenter() {
+        this.cacheDir = App.getContext().getCacheDir();
+    }
+
+    public static WebActivityPresenter newInstance() {
+        if (mPresenter == null) {
+            return new WebActivityPresenter();
+        } else {
+            return mPresenter;
+        }
+    }
+
+    public static WebActivityPresenter newInstance(IWebView webView) {
+        if (mPresenter == null || mPresenter.mWebView == null) {
+            return new WebActivityPresenter(webView);
+        } else {
+            return mPresenter;
+        }
     }
 
     public long clearCacheFolder() {
         Log.d("CachePath", "WebViewCachePath--->" + cacheDir.getAbsolutePath());
-        long deletedSize = 0;
         Log.d("canWrite?", "目录是否可写？--->" + (cacheDir.canWrite() ? "是" : "否"));
-        deletedSize += deleteFiles(cacheDir);
-        return deletedSize;
+        deleteFiles(cacheDir);
+        return mDeletedSize;
     }
 
-    private long deleteFiles(File file) {
-        long deletedSize = 0;
+    private void deleteFiles(File file) {
         for (File child : file.listFiles()) {
-            Log.d("fileName", child.getName());
             if (child.isDirectory()) {
                 deleteFiles(child);
-            } else {
-                deletedSize += child.length();
+            } else if (child.isFile()) {
+                Log.d("fileName", child.getName());
+                mDeletedSize += child.length();
                 boolean isDeleted = child.delete();
                 Log.d("isDeleted", isDeleted ? "删除成功" : "删除失败");
             }
         }
-        return deletedSize;
+    }
+
+    public void getDailyGson(int id) {
+        mDailyModel.getGsonNews(id);
     }
 
 }

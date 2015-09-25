@@ -19,7 +19,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.domin.api.ZhihuApi;
+import me.itangqi.buildingblocks.domin.application.App;
+import me.itangqi.buildingblocks.domin.utils.PrefUtils;
+import me.itangqi.buildingblocks.model.DailyModel;
 import me.itangqi.buildingblocks.model.entity.Daily;
+import me.itangqi.buildingblocks.model.entity.DailyGson;
+import me.itangqi.buildingblocks.view.ui.activity.GsonViewActivity;
 import me.itangqi.buildingblocks.view.ui.activity.WebActivity;
 
 /**
@@ -58,7 +63,6 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         switch (holder.getItemViewType()) {
             case ITEM_TYPE_TEXT:
                 ((ThemeViewHolder) holder).mTitle.setText(news.title);
-                ((ThemeViewHolder) holder).mFrom.setText("From " + news.theme.name);
                 break;
             case ITEM_TYPE_IMAGE:
                 ((ImageViewHolder) holder).mTitle.setText(news.title);
@@ -80,11 +84,28 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return mNewsList.size();
     }
 
-    public void gotoWebView(Daily news, View v) {
+    private void gotoWebView(Daily news, View v) {
+        Log.d("Daily", "id--->" + news.id);
         String news_url = ZhihuApi.getNewsContent(news.id);
         Intent intent = new Intent(v.getContext(), WebActivity.class);
         intent.putExtra(WebActivity.EXTRA_URL, news_url);
         v.getContext().startActivity(intent);
+    }
+
+    private void gotoGsonView(Daily news, View v) {
+        Log.d("Daily", "id--->" + news.id);
+        Intent intent = new Intent(v.getContext(), GsonViewActivity.class);
+        intent.putExtra(GsonViewActivity.EXTRA_ID, news.id);
+        intent.putExtra(GsonViewActivity.EXTRA_TITLE, news.title);
+        v.getContext().startActivity(intent);
+    }
+
+    private void startView(Daily news, View v) {
+        if (PrefUtils.isUsingGson()) {
+            gotoGsonView(news, v);
+        } else {
+            gotoWebView(news, v);
+        }
     }
 
     public class ImageViewHolder extends RecyclerView.ViewHolder {
@@ -100,7 +121,7 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         void onClick(View v) {
             // TODO do what you want :) you can use WebActivity to load
             Daily news = mNewsList.get(getLayoutPosition());
-            gotoWebView(news, v);
+            startView(news, v);
         }
     }
 
@@ -117,7 +138,7 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         void onClick(View v) {
             // TODO do what you want :) you can use WebActivity to load
             Daily news = mNewsList.get(getLayoutPosition());
-            gotoWebView(news, v);
+            startView(news, v);
         }
     }
 }
