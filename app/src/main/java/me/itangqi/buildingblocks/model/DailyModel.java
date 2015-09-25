@@ -195,7 +195,7 @@ public class DailyModel implements IDaily {
         ContentValues values = new ContentValues();
         values.put("id", daily.getId());
         values.put("title", daily.getTitle());
-        values.put("type", daily.getTitle());
+        values.put("type", daily.getType());
         values.put("image_source", daily.getImage_source());
         values.put("image", daily.getImage());
         values.put("share_url", daily.getShare_url());
