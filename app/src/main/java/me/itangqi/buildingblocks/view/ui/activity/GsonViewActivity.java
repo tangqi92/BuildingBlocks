@@ -159,11 +159,11 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
             Log.d("refreshUI", entry.getValue() + "--->" + entry.getKey());
             if (entry.getKey().equals("avatar")) {
                 Glide.with(App.getContext()).load(entry.getValue()).into(mImageView_avatar);
-            } else if (entry.getValue().equals("author")) {
+            } else if (entry.getKey().equals("author")) {
                 mTextView_author.setText(entry.getValue());
-            } else if (entry.getValue().equals("bio")) {
+            } else if (entry.getKey().equals("bio")) {
                 mTextView_bio.setText(entry.getValue());
-            } else if (entry.getValue().equals("p")) {
+            } else if (entry.getKey().equals("p")) {
                 TextView textView = new TextView(mContext);
                 textView.setPadding(0, 7, 0, 0);
                 ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
