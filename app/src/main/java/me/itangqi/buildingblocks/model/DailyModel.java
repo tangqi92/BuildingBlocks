@@ -331,16 +331,30 @@ public class DailyModel implements IDaily {
                 extra.put("bio", content.text());
                 Log.i("parsing", "bio--->" + content.text());
             } else if (content.hasClass("content")) {
+                extra.put("allcontent", content.html());
                 for (Element item : content.getAllElements()) {
-                    if (item.nodeName().equals("p") && item.getAllElements().size() == 1) {
+                    if (item.nodeName().equals("p")) {
+                        int childSize = item.childNodeSize();
+                        String data = item.data();
+                        String ownStr = item.ownText();
+                        if (item.childNodeSize() > 1 || item.ownText().equals("")) {
+                            String html = item.outerHtml().replaceAll("&nbsp;", " ");
+                            article.put(html, "p");
+                        }
                         article.put(item.text(), "p");
                     } else if (item.nodeName().equals("img")) {
                         String src = item.attr("src");
                         article.put(src, "img");
                     } else if (item.nodeName().equals("strong")) {
-                        article.put(item.text(), "strong");
+                        if (item.childNodeSize() == 0 && !item.parent().hasText()) {
+                            article.put(item.text(), "strong");
+                        }
                     } else if (item.nodeName().equals("blockquote")) {
                         article.put(item.text(), "blockquote");
+                    } else if (item.nodeName().equals("li")) {
+                        article.put(item.text(), "li");
+                    } else if (item.nodeName().equals("code")) {
+                        article.put(item.text(), "code");
                     }
                 }
             }
