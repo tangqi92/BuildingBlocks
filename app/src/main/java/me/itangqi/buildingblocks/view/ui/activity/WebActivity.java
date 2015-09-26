@@ -1,6 +1,5 @@
 package me.itangqi.buildingblocks.view.ui.activity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -37,14 +36,8 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
     private SwipeBackLayout mSwipeBackLayout;
     private WebActivityPresenter mPresenter;
 
-    @Bind(R.id.progressbar)
-    ProgressBar mProgressbar;
-    @Bind(R.id.webView)
-    WebView mWebView;
-
-    Context mContext;
-    String mUrl;
-    int mId;
+    @Bind(R.id.progressbar) ProgressBar mProgressbar;
+    @Bind(R.id.webView) WebView mWebView;
 
     @Override
     protected int getLayoutResource() {
@@ -52,17 +45,11 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
     }
 
     @Override
-    public boolean canBack() {
-        return true;
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = WebActivityPresenter.newInstance(this);
         ButterKnife.bind(this);
-        mContext = this;
-        mUrl = getIntent().getStringExtra(EXTRA_URL);
+        String mUrl = getIntent().getStringExtra(EXTRA_URL);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         if (PrefUtils.isEnableCache()) {
@@ -116,6 +103,11 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean canBack() {
+        return true;
     }
 
     @Override

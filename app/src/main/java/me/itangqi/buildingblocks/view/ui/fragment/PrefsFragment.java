@@ -12,8 +12,7 @@ import me.itangqi.buildingblocks.domin.utils.VersionUtils;
 import me.itangqi.buildingblocks.presenters.WebActivityPresenter;
 
 
-public class PrefsFragment extends PreferenceFragment
-        implements Preference.OnPreferenceClickListener {
+public class PrefsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
 
     private CheckBoxPreference mIsEnableCache;
     private Preference mCachePre, mVersionPre;

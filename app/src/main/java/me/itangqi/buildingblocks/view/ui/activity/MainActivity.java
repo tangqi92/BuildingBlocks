@@ -37,18 +37,12 @@ import me.itangqi.buildingblocks.domin.utils.Constants;
 
 public class MainActivity extends BaseActivity implements IMainActivity{
 
-    @Bind(R.id.drawer_layout)
-    DrawerLayout mDrawerLayout;
-    @Bind(R.id.coordinatorLayout)
-    CoordinatorLayout mContainer;
-    @Bind(R.id.navigation_view)
-    NavigationView mNavigationView;
-    @Bind(R.id.tabs)
-    TabLayout mTabLayout;
-    @Bind(R.id.pager)
-    ViewPager mViewPager;
-    @Bind(R.id.toolbar)
-    Toolbar mToolbar;
+    @Bind(R.id.drawer_layout) DrawerLayout mDrawerLayout;
+    @Bind(R.id.coordinatorLayout) CoordinatorLayout mContainer;
+    @Bind(R.id.navigation_view) NavigationView mNavigationView;
+    @Bind(R.id.tabs) TabLayout mTabLayout;
+    @Bind(R.id.pager) ViewPager mViewPager;
+    @Bind(R.id.toolbar) Toolbar mToolbar;
 
     private MainActivityPresenter mPresenter;
 
@@ -246,7 +240,7 @@ public class MainActivity extends BaseActivity implements IMainActivity{
         @Override
         public Fragment getItem(int i) {
             Bundle bundle = new Bundle();
-            Fragment newFragment = new NewsListFragment();
+            Fragment newFragment = NewsListFragment.newInstance();
 
             Calendar dateToGetUrl = Calendar.getInstance();
             dateToGetUrl.add(Calendar.DAY_OF_YEAR, 1 - i);

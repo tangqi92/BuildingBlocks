@@ -10,7 +10,7 @@ import me.itangqi.buildingblocks.R;
 
 public class BaseActivity extends AppCompatActivity {
 
-    @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.toolbar) Toolbar mToolbar;
     protected int layoutResID = R.layout.activity_base;
 
     @Override
@@ -23,6 +23,6 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(layoutResID);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(mToolbar);
     }
 }

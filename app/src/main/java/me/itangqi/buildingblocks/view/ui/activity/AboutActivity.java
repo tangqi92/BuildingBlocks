@@ -35,6 +35,12 @@ public class AboutActivity extends AppCompatActivity implements SwipeBackActivit
     private SwipeBackActivityHelper mHelper;
 
     @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mHelper.onPostCreate();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
@@ -49,12 +55,6 @@ public class AboutActivity extends AppCompatActivity implements SwipeBackActivit
         mThanksTo.setMovementMethod(LinkMovementMethod.getInstance());
         mHelper = new SwipeBackActivityHelper(this);
         mHelper.onActivityCreate();
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        mHelper.onPostCreate();
     }
 
     @Override
@@ -84,14 +84,6 @@ public class AboutActivity extends AppCompatActivity implements SwipeBackActivit
         return super.onOptionsItemSelected(item);
     }
 
-    public void onResume() {
-        super.onResume();
-    }
-
-    public void onPause() {
-        super.onPause();
-    }
-
     @Override
     public SwipeBackLayout getSwipeBackLayout() {
         return mHelper.getSwipeBackLayout();
@@ -106,5 +98,13 @@ public class AboutActivity extends AppCompatActivity implements SwipeBackActivit
     public void scrollToFinishActivity() {
         Utils.convertActivityToTranslucent(this);
         getSwipeBackLayout().scrollToFinishActivity();
+    }
+
+    public void onResume() {
+        super.onResume();
+    }
+
+    public void onPause() {
+        super.onPause();
     }
 }

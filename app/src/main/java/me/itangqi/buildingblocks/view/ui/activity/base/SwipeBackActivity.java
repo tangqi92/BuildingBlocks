@@ -9,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.Utils;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
@@ -20,20 +22,33 @@ import me.itangqi.buildingblocks.R;
  * Created by tangqi on 9/13/15.
  */
 public abstract class SwipeBackActivity extends AppCompatActivity implements SwipeBackActivityBase {
+
     private SwipeBackActivityHelper mHelper;
 
     abstract protected int getLayoutResource();
 
-    protected AppBarLayout mAppBar;
-    protected Toolbar mToolbar;
+    @Bind(R.id.app_bar_layout) AppBarLayout mAppBar;
+    @Bind(R.id.toolbar) Toolbar mToolbar;
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mHelper.onPostCreate();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());
-        mAppBar = (AppBarLayout) findViewById(R.id.app_bar_layout);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
 
+        initBar();
+
+        mHelper = new SwipeBackActivityHelper(this);
+        mHelper.onActivityCreate();
+    }
+
+    public void initBar() {
         if (mToolbar == null || mAppBar == null) {
             throw new IllegalStateException("no toolbar");
         }
@@ -48,14 +63,6 @@ public abstract class SwipeBackActivity extends AppCompatActivity implements Swi
         if (Build.VERSION.SDK_INT >= 21) {
             mAppBar.setElevation(10.6f);
         }
-        mHelper = new SwipeBackActivityHelper(this);
-        mHelper.onActivityCreate();
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        mHelper.onPostCreate();
     }
 
     @Override
@@ -82,10 +89,6 @@ public abstract class SwipeBackActivity extends AppCompatActivity implements Swi
         getSwipeBackLayout().scrollToFinishActivity();
     }
 
-    public boolean canBack() {
-        return false;
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -96,5 +99,7 @@ public abstract class SwipeBackActivity extends AppCompatActivity implements Swi
         }
     }
 
-
+    public boolean canBack() {
+        return false;
+    }
 }

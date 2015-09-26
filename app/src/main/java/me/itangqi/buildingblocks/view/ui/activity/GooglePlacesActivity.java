@@ -38,6 +38,7 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.itangqi.buildingblocks.R;
@@ -57,15 +58,15 @@ public class GooglePlacesActivity extends SwipeBackActivity
 
     private GooglePlacesAdapter mAdapter;
 
-    private AutoCompleteTextView mAutocompleteView;
-
-    private TextView mPlaceDetailsText;
-
-    private TextView mPlaceDetailsAttribution;
-
-    private Button mCurrentLocation;
-
     private SwipeBackLayout mSwipeBackLayout;
+
+    // Retrieve the AutoCompleteTextView that will display Place suggestions.
+    @Bind(R.id.autocomplete_places) AutoCompleteTextView mAutocompleteView;
+    // Retrieve the TextViews that will display details and attributions of the selected place.
+    @Bind(R.id.place_details) TextView mPlaceDetailsText;
+    @Bind(R.id.place_attribution) TextView mPlaceDetailsAttribution;
+    // CurrentLocation
+    @Bind(R.id.btn_current_location) Button mCurrentLocation;
 
     private static final LatLngBounds BOUNDS_GREATER_SYDNEY = new LatLngBounds(
             new LatLng(-34.041458, 150.790100), new LatLng(-33.682247, 151.383362));
@@ -83,6 +84,7 @@ public class GooglePlacesActivity extends SwipeBackActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
         // Construct a GoogleApiClient for the {@link Places#GEO_DATA_API} using AutoManage
         // functionality, which automatically sets up the API client to handle Activity lifecycle
         // events. If your activity does not extend FragmentActivity, make sure to call connect()
@@ -93,23 +95,11 @@ public class GooglePlacesActivity extends SwipeBackActivity
                 .addApi(Places.PLACE_DETECTION_API)
                 .build();
 
-        ButterKnife.bind(this);
-
         setTitle(getString(R.string.title_pick_place));
-
-        // Retrieve the AutoCompleteTextView that will display Place suggestions.
-        mAutocompleteView = (AutoCompleteTextView)
-                findViewById(R.id.autocomplete_places);
 
         // Register a listener that receives callbacks when a suggestion has been selected
         mAutocompleteView.setOnItemClickListener(mAutocompleteClickListener);
 
-        // Retrieve the TextViews that will display details and attributions of the selected place.
-        mPlaceDetailsText = (TextView) findViewById(R.id.place_details);
-        mPlaceDetailsAttribution = (TextView) findViewById(R.id.place_attribution);
-
-        // CurrentLocation
-        mCurrentLocation = (Button) findViewById(R.id.btn_current_location);
         mCurrentLocation.setOnClickListener(mOnClickListener);
 
         // Set up the adapter that will retrieve suggestions from the Places Geo Data API that cover

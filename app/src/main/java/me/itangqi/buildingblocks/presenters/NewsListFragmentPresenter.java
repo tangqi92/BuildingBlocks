@@ -2,12 +2,10 @@ package me.itangqi.buildingblocks.presenters;
 
 import java.util.List;
 
-import me.itangqi.buildingblocks.model.entity.Daily;
 import me.itangqi.buildingblocks.model.DailyModel;
 import me.itangqi.buildingblocks.model.IHttpCallBack;
+import me.itangqi.buildingblocks.model.entity.Daily;
 import me.itangqi.buildingblocks.view.IViewPager;
-import me.itangqi.buildingblocks.domin.utils.NetworkUtils;
-import me.itangqi.buildingblocks.domin.utils.PrefUtils;
 
 /**
  * Created by Troy on 2015/9/21.
