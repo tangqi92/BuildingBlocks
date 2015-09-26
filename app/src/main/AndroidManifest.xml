@@ -70,7 +70,8 @@
 
         <activity android:name=".view.ui.activity.GooglePlacesActivity"/>
 
-        <activity android:name=".view.ui.activity.GsonViewActivity"/>
+        <activity android:name=".view.ui.activity.GsonViewActivity"
+            android:theme="@style/GsonActivity.Theme.AppTheme"/>
 
     </application>
 </manifest>

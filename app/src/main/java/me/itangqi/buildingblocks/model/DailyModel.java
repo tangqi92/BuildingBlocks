@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -33,6 +34,7 @@ import java.util.Map;
 import me.itangqi.buildingblocks.domin.api.ZhihuApi;
 import me.itangqi.buildingblocks.domin.application.App;
 import me.itangqi.buildingblocks.domin.db.SQLiteHelper;
+import me.itangqi.buildingblocks.domin.utils.Constants;
 import me.itangqi.buildingblocks.domin.utils.NetworkUtils;
 import me.itangqi.buildingblocks.domin.utils.PrefUtils;
 import me.itangqi.buildingblocks.model.entity.Daily;
@@ -43,6 +45,8 @@ import me.itangqi.buildingblocks.model.entity.DailyResult;
  * Created by Troy on 2015/9/21.
  */
 public class DailyModel implements IDaily {
+
+    public static final String TAG = "DailyModel";
 
     private List<Daily> mDailiesFromNet;
     private List<Daily> mDailiesFromCache;
@@ -181,41 +185,18 @@ public class DailyModel implements IDaily {
         }
     }
 
-
-    //    "id smallint primary key,"
-//            "title text,"
-//            "image_source text,"
-//            "image text,"
-//            "share_url text,"
-//            "ga_prefix int,"
-//            "body text)";
-    @Deprecated
     private void saveDailyGsonDB(DailyGson daily) {
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("id", daily.getId());
         values.put("title", daily.getTitle());
-        values.put("type", daily.getTitle());
+        values.put("type", daily.getType());
         values.put("image_source", daily.getImage_source());
         values.put("image", daily.getImage());
         values.put("share_url", daily.getShare_url());
         values.put("ga_prefix", daily.getGa_Prefix());
         values.put("body", daily.getBody());
         database.insertWithOnConflict("daily", null, values, SQLiteDatabase.CONFLICT_IGNORE);
-        database.close();
-    }
-
-    private void insertDailyGsonDB(DailyGson dailyGson) {
-        SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
-        String sql = "INSERT OR IGNORE INTO daily(id, title, image_source, image, share_url, ga_prefix, body) values("
-                + dailyGson.getId() + ","
-                + "\"" + dailyGson.getTitle() + "\"" + ","
-                + "\"" + dailyGson.getImage_source() + "\"" + ","
-                + "\"" + dailyGson.getImage() + "\"" + ","
-                + "\"" + dailyGson.getShare_url() + "\"" + ","
-                + dailyGson.getGa_Prefix() + ","
-                + "\"" + dailyGson.getBody() + "\"" + ")";
-        database.execSQL(sql);
         database.close();
     }
 
@@ -241,7 +222,6 @@ public class DailyModel implements IDaily {
         return null;
     }
 
-    @Deprecated
     private void saveDailyStoriesDB(DailyResult dailyResult) {
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -253,27 +233,6 @@ public class DailyModel implements IDaily {
             values.put("type", story.type);
             values.put("ga_prefix", story.ga_prefix);
             database.insertWithOnConflict("dailyresult", null, values, SQLiteDatabase.CONFLICT_IGNORE);
-        }
-        database.close();
-    }
-
-    //    + "date SMALLINT,"
-//            + "id SMALLINT PRIMARY KEY,"
-//            + "title TEXT,"
-//            + "image TEXT NULL,"
-//            + "type SMALLINT,"
-//            + "ga_prefix SMALLINT)";
-    private void insertDailyStoriesDB(DailyResult dailyResult) {
-        SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
-        for (Daily story : dailyResult.stories) {
-            String sql = "INSERT OR IGNORE INTO dailyresult(date, id, title, image, type, ga_prefix) values("
-                    + dailyResult.date + ","
-                    + story.id + ","
-                    + "\"" + story.title + "\"" + ","
-                    + "\"" + story.images.get(0) + "\"" + ","
-                    + story.type + ","
-                    + story.ga_prefix + ")";
-            database.execSQL(sql);
         }
         database.close();
     }
@@ -325,13 +284,18 @@ public class DailyModel implements IDaily {
                 for (Element item : content.children()) {
                     String attr = item.attr("src");
                     String className = item.className();
-                    if (!hasImgNode(item)) {
+                    if (!hasImgNode(item) && item.text().length() > 20) {
                         String outerHtml = item.outerHtml().replaceAll("&nbsp;", " ");
                         article.put(outerHtml, "p");
                     } else if (hasImgNode(item)) {
-                        Element image = item.child(0);  //
+                        Element image = item.child(0);
                         String src = image.attr("src");
                         article.put(src, "img");
+                    } else if (item.hasText() && item.text().length() <= 5 && !hasImgNode(item)) {
+                        // <p> 标签内容为数字，或者其他简单的东西，传给TextView显示的时候不带标签，正常加粗显示
+                        article.put(item.text(), "simpleBoldP");
+                    }else if (item.hasText() && item.text().length() > 5 && item.text().length() <= 20 && !hasImgNode(item)) {
+                        article.put(item.text(), "simpleP");
                     }
                 }
             }
@@ -339,7 +303,7 @@ public class DailyModel implements IDaily {
         soup.put("extra", extra);
         soup.put("article", article);
         long after = System.currentTimeMillis();
-        Log.d("Parsing XML", "used time--->" + (after - before));
+        Log.d(TAG, "Parse XML used time--->" + (after - before));
         return soup;
     }
 
@@ -352,6 +316,76 @@ public class DailyModel implements IDaily {
         }
         return false;
     }
+
+    /**
+     * 清除指定日期前的数据，默认为7天之前
+     * @param beforedate 超过此日前的所有数据
+     * @return 被删除的数据总数
+     */
+    public int clearOutdateCache(int beforedate) {
+        SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
+        Cursor findId = database.rawQuery("SELECT * FROM dailyresult WHERE date <= ?", new String[]{beforedate + ""});
+        List<String> toDelete = new ArrayList<>();
+        while (findId.moveToNext()) {
+            toDelete.add(findId.getInt(findId.getColumnIndex("id")) + "");
+        }
+        if (findId.isAfterLast() && !findId.isClosed()) {
+            findId.close();
+        }
+        int deletedResult = database.delete("dailyresult", "date<=?", new String[]{beforedate + ""});
+        int size = toDelete.size();
+        String[] ids = toDelete.toArray(new String[size]);
+        for (String id : ids) {
+            database.execSQL("DELETE FROM daily where id =" + Integer.parseInt(id)); //使用delete()一次性删除，会提示参数过多
+        }
+        return deletedResult;
+    }
+
+    public long clearOutdatePhoto(int beforedate) {
+        long clearedSize = 0;
+        File cacheDir = Glide.getPhotoCacheDir(App.getContext());
+        File[] files = cacheDir.listFiles();
+        for (File child : files) {
+            if (Integer.parseInt(Constants.simpleDateFormat.format(child.lastModified())) <= beforedate) {
+                clearedSize += child.length();
+                //noinspection ResultOfMethodCallIgnored
+                child.delete();
+            }
+        }
+        return clearedSize;
+    }
+
+    @Deprecated
+    private void insertDailyGsonDB(DailyGson dailyGson) {
+        SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
+        String sql = "INSERT OR IGNORE INTO daily(id, title, image_source, image, share_url, ga_prefix, body) values("
+                + dailyGson.getId() + ","
+                + "\"" + dailyGson.getTitle() + "\"" + ","
+                + "\"" + dailyGson.getImage_source() + "\"" + ","
+                + "\"" + dailyGson.getImage() + "\"" + ","
+                + "\"" + dailyGson.getShare_url() + "\"" + ","
+                + dailyGson.getGa_Prefix() + ","
+                + "\"" + dailyGson.getBody() + "\"" + ")";
+        database.execSQL(sql);
+        database.close();
+    }
+
+    @Deprecated
+    private void insertDailyStoriesDB(DailyResult dailyResult) {
+        SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
+        for (Daily story : dailyResult.stories) {
+            String sql = "INSERT OR IGNORE INTO dailyresult(date, id, title, image, type, ga_prefix) values("
+                    + dailyResult.date + ","
+                    + story.id + ","
+                    + "\"" + story.title + "\"" + ","
+                    + "\"" + story.images.get(0) + "\"" + ","
+                    + story.type + ","
+                    + story.ga_prefix + ")";
+            database.execSQL(sql);
+        }
+        database.close();
+    }
+
 
     @Deprecated
     private void serializDaily(int date, List<Daily> dailyList) throws IOException {

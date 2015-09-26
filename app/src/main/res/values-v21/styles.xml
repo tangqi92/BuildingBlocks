@@ -11,4 +11,10 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+    <style name="GsonActivity.Theme.AppTheme" parent="Root.Theme.AppTheme">
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+        <item name="android:statusBarColor">@color/primary_dark</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
 </resources>
