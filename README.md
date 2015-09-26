@@ -44,7 +44,7 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
 
 ## Demo
 
-[Download](https://github.com/tangqi92/BuildingBlocks/releases/download/v0.5.1/buildingblocks_v0.5.1.apk)
+[Download](https://github.com/tangqi92/BuildingBlocks/releases/download/v0.6.0/buildingblocks_v0.6.0.apk)
 
 ## Screenshots
 <img src="/screenshots/s1.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s2.png" alt="screenshot" title="screenshot" width="270" height="486" />
@@ -56,9 +56,6 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
 <img src="/screenshots/s6.png" alt="screenshot" title="screenshot" width="270" height="486" /><img src="/screenshots/s7.png" alt="screenshot" title="screenshot" width="270" height="486" />  
 
 <img src="/screenshots/s8.png" alt="screenshot" title="screenshot" width="270" height="486" /><img src="/screenshots/s9.png" alt="screenshot" title="screenshot" width="270" height="486" />  
-
-<img src="/screenshots/s10.png" alt="screenshot" title="screenshot" width="270" height="486" />
-
 
 
 ## Dependencies
