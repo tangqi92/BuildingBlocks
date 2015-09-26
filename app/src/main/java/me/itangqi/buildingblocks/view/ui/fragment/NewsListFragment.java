@@ -17,10 +17,12 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.view.adapter.DailyListAdapter;
+import me.itangqi.buildingblocks.domin.utils.NetworkUtils;
+import me.itangqi.buildingblocks.domin.utils.PrefUtils;
 import me.itangqi.buildingblocks.model.entity.Daily;
 import me.itangqi.buildingblocks.presenters.NewsListFragmentPresenter;
 import me.itangqi.buildingblocks.view.IViewPager;
+import me.itangqi.buildingblocks.view.adapter.DailyListAdapter;
 import me.itangqi.buildingblocks.view.widget.SimpleDividerItemDecoration;
 
 public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, IViewPager {
@@ -76,8 +78,13 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
         mSwipeRefreshLayout.setColorSchemeResources(R.color.primary);
         mAdapter = new DailyListAdapter(getActivity(), mNewsList);
         mRecyclerView.setAdapter(mAdapter);
-        onRefresh();
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        onRefresh();  //Snackbar的显示依赖于当前View，所以在View创建之后刷新
     }
 
     @Override
@@ -123,15 +130,19 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
     @Override
     public void onRefresh() {
         mPresenter.getNews(date);
-        showProgress();
+        if (NetworkUtils.isNetworkConnected()) {
+            showProgress();
+        } else if (!NetworkUtils.isNetworkConnected() && PrefUtils.isEnableCache()) {
+            Snackbar.make(getView(), R.string.snack_network_error_load_cache, Snackbar.LENGTH_SHORT).show();
+        }else if (!NetworkUtils.isNetworkConnected() && !PrefUtils.isEnableCache()) {
+            Snackbar.make(getView(), R.string.snack_network_error, Snackbar.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public void loadData(List<Daily> dailies) {
         mNewsList.clear();
-        for (Daily daily : dailies) {
-            mNewsList.add(daily);
-        }
+        mNewsList.addAll(dailies);
         hideProgress();
         mAdapter.notifyDataSetChanged();
     }

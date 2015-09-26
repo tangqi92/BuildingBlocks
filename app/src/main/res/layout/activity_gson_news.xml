@@ -28,7 +28,7 @@
                 android:id="@+id/news_header"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="@string/activiy_gson_news_image"
+                android:contentDescription="@string/activity_gson_news_image"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax"/>
@@ -77,7 +77,7 @@
                     android:layout_marginStart="@dimen/margin_4dp"
                     android:layout_toEndOf="@+id/iv_avatar"
                     android:layout_toRightOf="@+id/iv_avatar"
-                    android:text="author"
+                    android:text="@string/activity_gson_news_author"
                     android:textSize="17sp"/>
 
                 <TextView
@@ -90,7 +90,7 @@
                     android:layout_toEndOf="@id/iv_avatar"
                     android:layout_toRightOf="@+id/iv_avatar"
                     android:ellipsize="end"
-                    android:text="bio....."
+                    android:text="@string/activity_gson_news_bio"
                     android:textSize="12sp"/>
             </RelativeLayout>
 
