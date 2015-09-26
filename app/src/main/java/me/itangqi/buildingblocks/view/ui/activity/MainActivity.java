@@ -29,11 +29,13 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.presenters.MainActivityPresenter;
+import me.itangqi.buildingblocks.view.IMainActivity;
 import me.itangqi.buildingblocks.view.ui.activity.base.BaseActivity;
 import me.itangqi.buildingblocks.view.ui.fragment.NewsListFragment;
 import me.itangqi.buildingblocks.domin.utils.Constants;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements IMainActivity{
 
     @Bind(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
@@ -47,6 +49,8 @@ public class MainActivity extends BaseActivity {
     ViewPager mViewPager;
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
+
+    private MainActivityPresenter mPresenter;
 
     @OnClick(R.id.fab)
     public void fabOnClick() {
@@ -70,6 +74,8 @@ public class MainActivity extends BaseActivity {
         if (mViewPager != null) {
             setupViewPager();
         }
+        mPresenter = new MainActivityPresenter(this);
+        mPresenter.clearCache();
     }
 
     private void setupDrawerContent() {
@@ -225,6 +231,11 @@ public class MainActivity extends BaseActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void showSnackBar(String data, int time) {
+        Snackbar.make(mContainer, data, time).show();
     }
 
     private class MyPagerAdapter extends FragmentStatePagerAdapter {

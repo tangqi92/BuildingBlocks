@@ -6,13 +6,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.text.Html;
+import android.text.TextPaint;
 import android.text.method.ScrollingMovementMethod;
+import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+
+import org.w3c.dom.Text;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -123,7 +127,7 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
                 TextView textView = new TextView(App.getContext());
                 textView.setMovementMethod(ScrollingMovementMethod.getInstance());
                 textView.setTextColor(Color.BLACK);
-                textView.setTextSize(16);
+                textView.setTextSize(17);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 textView.setLayoutParams(params);
                 textView.setText(Html.fromHtml(entry.getKey()));
@@ -133,6 +137,25 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 mLinearLayout.addView(imageView);
                 Glide.with(App.getContext()).load(entry.getKey()).crossFade().fitCenter().into(imageView);
+            }else if (entry.getValue().equals("simpleBoldP")) {
+                TextView textView = new TextView(App.getContext());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                textView.setLayoutParams(params);
+                textView.setTextSize(17);
+                textView.getPaint().setFakeBoldText(true);
+                textView.setTextColor(Color.BLACK);
+                textView.setGravity(Gravity.START);
+                textView.setText(entry.getKey());
+                mLinearLayout.addView(textView);
+            }else if (entry.getValue().equals("simpleP")) {
+                TextView textView = new TextView(App.getContext());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                textView.setLayoutParams(params);
+                textView.setTextSize(17);
+                textView.setTextColor(Color.BLACK);
+                textView.setGravity(Gravity.START);
+                textView.setText(entry.getKey());
+                mLinearLayout.addView(textView);
             }
         }
     }
