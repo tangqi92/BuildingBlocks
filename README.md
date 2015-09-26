@@ -51,11 +51,11 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
 
 <img src="/screenshots/s3.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s4.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
-<img src="/screenshots/s5.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s5-1.png" alt="screenshot" title="screenshot" width="270" height="486" />  
+<img src="/screenshots/s5.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s6.png" alt="screenshot" title="screenshot" width="270" height="486" />  
 
-<img src="/screenshots/s6.png" alt="screenshot" title="screenshot" width="270" height="486" /><img src="/screenshots/s7.png" alt="screenshot" title="screenshot" width="270" height="486" />  
+<img src="/screenshots/s7.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s8.png" alt="screenshot" title="screenshot" width="270" height="486" />  
 
-<img src="/screenshots/s8.png" alt="screenshot" title="screenshot" width="270" height="486" /><img src="/screenshots/s9.png" alt="screenshot" title="screenshot" width="270" height="486" />  
+<img src="/screenshots/s9.png" alt="screenshot" title="screenshot" width="270" height="486" /> 
 
 
 ## Dependencies
