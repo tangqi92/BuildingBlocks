@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -33,6 +34,7 @@ import java.util.Map;
 import me.itangqi.buildingblocks.domin.api.ZhihuApi;
 import me.itangqi.buildingblocks.domin.application.App;
 import me.itangqi.buildingblocks.domin.db.SQLiteHelper;
+import me.itangqi.buildingblocks.domin.utils.Constants;
 import me.itangqi.buildingblocks.domin.utils.NetworkUtils;
 import me.itangqi.buildingblocks.domin.utils.PrefUtils;
 import me.itangqi.buildingblocks.model.entity.Daily;
@@ -337,6 +339,20 @@ public class DailyModel implements IDaily {
             database.execSQL("DELETE FROM daily where id =" + Integer.parseInt(id)); //使用delete()一次性删除，会提示参数过多
         }
         return deletedResult;
+    }
+
+    public long clearOutdatePhoto(int beforedate) {
+        long clearedSize = 0;
+        File cacheDir = Glide.getPhotoCacheDir(App.getContext());
+        File[] files = cacheDir.listFiles();
+        for (File child : files) {
+            if (Integer.parseInt(Constants.simpleDateFormat.format(child.lastModified())) <= beforedate) {
+                clearedSize += child.length();
+                //noinspection ResultOfMethodCallIgnored
+                child.delete();
+            }
+        }
+        return clearedSize;
     }
 
     @Deprecated

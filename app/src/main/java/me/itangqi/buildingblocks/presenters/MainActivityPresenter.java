@@ -23,8 +23,9 @@ public class MainActivityPresenter {
         Calendar calendar = Calendar.getInstance();
         int today = Integer.parseInt(Constants.simpleDateFormat.format(calendar.getTime()));
         int totalDeleted = mDailyModel.clearOutdateCache(today - 7);
+        long deletedSize = mDailyModel.clearOutdatePhoto(today - 7);
         if (totalDeleted > 0) {
-            mMainActivity.showSnackBar("清理了" + totalDeleted + "条过期数据", 1500);
+            mMainActivity.showSnackBar("清理了" + totalDeleted + "条过期数据；" + "图片" + (deletedSize / 1024) + "KB", 1500);
         }
     }
 
