@@ -1,13 +1,19 @@
 package me.itangqi.buildingblocks.view.ui.activity;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.text.Editable;
 import android.text.Html;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
+import android.text.util.Linkify;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,6 +23,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import org.w3c.dom.Text;
+import org.xml.sax.XMLReader;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

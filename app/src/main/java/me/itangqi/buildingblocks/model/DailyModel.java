@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -73,7 +74,8 @@ public class DailyModel implements IDaily {
 
         @Override
         public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, DailyResult errorResponse) {
-
+            Toast.makeText(App.getContext(), "解析错误,状态码:" + statusCode, Toast.LENGTH_SHORT).show();
+            throwable.printStackTrace();
         }
 
         @Override
@@ -93,7 +95,8 @@ public class DailyModel implements IDaily {
 
         @Override
         public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, DailyGson errorResponse) {
-
+            Toast.makeText(App.getContext(), "解析错误,状态码:" + statusCode, Toast.LENGTH_SHORT).show();
+            throwable.printStackTrace();
         }
 
         @Override
@@ -294,7 +297,7 @@ public class DailyModel implements IDaily {
                     } else if (item.hasText() && item.text().length() <= 5 && !hasImgNode(item)) {
                         // <p> 标签内容为数字，或者其他简单的东西，传给TextView显示的时候不带标签，正常加粗显示
                         article.put(item.text(), "simpleBoldP");
-                    }else if (item.hasText() && item.text().length() > 5 && item.text().length() <= 20 && !hasImgNode(item)) {
+                    } else if (item.hasText() && item.text().length() > 5 && item.text().length() <= 20 && !hasImgNode(item)) {
                         article.put(item.text(), "simpleP");
                     }
                 }

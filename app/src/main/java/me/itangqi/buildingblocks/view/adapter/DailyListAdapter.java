@@ -32,6 +32,8 @@ import me.itangqi.buildingblocks.view.ui.activity.WebActivity;
  */
 public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    public static final String TAG = "DailyListAdapter";
+
     private List<Daily> mNewsList;
     private Context mContext;
     private LayoutInflater mLayoutInflater;
@@ -45,12 +47,13 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         // I hate it !!!
         // http://stackoverflow.com/questions/28787008/onbindviewholder-position-is-starting-again-at-0
         // setHasStableIds(true);
-        Log.d("mNewsList's Size: ", mNewsList.size() + "");
+        Log.d(TAG,"mNewsList's Size--->"+ mNewsList.size());
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == ITEM_TYPE_IMAGE) {
+            Log.d(TAG, "item view created");
             return new ImageViewHolder(mLayoutInflater.inflate(R.layout.item_daily_image_info, parent, false));
         } else {
             return new ThemeViewHolder(mLayoutInflater.inflate(R.layout.item_daily_text_info, parent, false));

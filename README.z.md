@@ -17,6 +17,22 @@ Building Blocks - 积木
 
 ## Update Log - 更新日志
 
+### v0.6.0
+
+- 新增 - FAB刷新
+- 新增 - html模式下的页面缓存
+- 新增 - json模式(速度更快，但部分文章显示有问题)
+- 新增 - 自动清理过期缓存
+- 新增 - SQLite数据储存
+- 重构 - 使用MVP进行重构
+- 新增 - 由[Mao](http://weibo.com/cat93/)提供的Logo
+- 修改 - 部分的UI
+
+##### 已知BUG
+
+- 刷新时，会短暂闪烁出现其他页面的原始布局
+- 部分文章显示有问题(使用`html`模式无影响)
+
 ### v0.5.1
 
 - 抛弃 - CardView，回归朴实，更符合设计规范
@@ -36,11 +52,13 @@ Building Blocks - 积木
 
 <img src="/screenshots/s3.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s4.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
-<img src="/screenshots/s5.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s6.png" alt="screenshot" title="screenshot" width="270" height="486" />
+<img src="/screenshots/s5.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s5-1.png" alt="screenshot" title="screenshot" width="270" height="486" />  
 
-<img src="/screenshots/s7.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s8.png" alt="screenshot" title="screenshot" width="270" height="486" />
+<img src="/screenshots/s6.png" alt="screenshot" title="screenshot" width="270" height="486" /><img src="/screenshots/s7.png" alt="screenshot" title="screenshot" width="270" height="486" />  
 
-<img src="/screenshots/s9.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s10.png" alt="screenshot" title="screenshot" width="270" height="486" />
+<img src="/screenshots/s8.png" alt="screenshot" title="screenshot" width="270" height="486" /><img src="/screenshots/s9.png" alt="screenshot" title="screenshot" width="270" height="486" />  
+
+<img src="/screenshots/s10.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
 
 ## Dependencies - 开源项目
@@ -50,6 +68,7 @@ Building Blocks - 积木
  - [android-crop](https://github.com/jdamcd/android-crop)
  - [android-async-http](https://github.com/loopj/android-async-http)
  - [SwipeBackLayout](https://github.com/ikew0ng/SwipeBackLayout)
+ - [Jsoup](http://http://jsoup.org/)
 
 ## Thanks - 感谢你们
 

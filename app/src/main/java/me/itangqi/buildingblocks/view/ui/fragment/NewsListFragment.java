@@ -52,9 +52,9 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
         if (savedInstanceState == null) {
             Bundle bundle = getArguments();
             date = bundle.getInt("date");
-            mPresenter = new NewsListFragmentPresenter(this, date);
             setRetainInstance(true);
         }
+        mPresenter = new NewsListFragmentPresenter(this, date);
     }
 
     @Override
