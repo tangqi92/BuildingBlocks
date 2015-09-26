@@ -294,7 +294,7 @@ public class DailyModel implements IDaily {
                     } else if (item.hasText() && item.text().length() <= 5 && !hasImgNode(item)) {
                         // <p> 标签内容为数字，或者其他简单的东西，传给TextView显示的时候不带标签，正常加粗显示
                         article.put(item.text(), "simpleBoldP");
-                    }else if (item.hasText() && item.text().length() > 5 && item.text().length() <= 20 && !hasImgNode(item)) {
+                    } else if (item.hasText() && item.text().length() > 5 && item.text().length() <= 20 && !hasImgNode(item)) {
                         article.put(item.text(), "simpleP");
                     }
                 }

@@ -16,6 +16,22 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
 
 ## Update Log
 
+### v0.6.0
+
+- New - use FAB to refresh
+- New - WebView cache at `html` mode
+- New - json mode(faster, but has some view bugs)
+- New - auto clear out of date cache
+- New - use SQLite to store data
+- Reconstruction - Refactoring with MVP
+- New - Logo Support by [Mao](http://weibo.com/cat93/)
+- Modify - part of UI
+
+##### Known Bugs
+
+- when you refresh, fragment will flicker and show some other layouts
+- problems with showing some article (`html` mode isn't influenced)
+
 ### v0.5.1
 
 - Abandon - CardView, return to simple, more in line with the design specifications
@@ -37,6 +53,8 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
 
 <img src="/screenshots/s5.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s6.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
+<img src="/screenshots/s5-1.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s6.png" alt="screenshot" title="screenshot" width="270" height="486" />
+
 <img src="/screenshots/s7.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s8.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
 <img src="/screenshots/s9.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s10.png" alt="screenshot" title="screenshot" width="270" height="486" />
@@ -50,6 +68,7 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
  - [android-crop](https://github.com/jdamcd/android-crop)
  - [android-async-http](https://github.com/loopj/android-async-http)
  - [SwipeBackLayout](https://github.com/ikew0ng/SwipeBackLayout)
+ - [Jsoup](http://http://jsoup.org/)
 
 ## Thanks
 
