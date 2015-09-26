@@ -10,6 +10,7 @@ import me.itangqi.buildingblocks.domin.application.App;
  * Created by tangqi on 9/10/15.
  */
 public class NetworkUtils {
+
     public static boolean isNetworkConnected() {
         Context context = App.getContext();
         if (context != null) {

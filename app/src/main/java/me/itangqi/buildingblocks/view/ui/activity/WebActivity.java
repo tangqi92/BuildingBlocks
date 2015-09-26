@@ -149,7 +149,7 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
     @Deprecated
     @Override
     public void loadGsonNews(DailyGson dailyGson) {
-        String summery = dailyGson.getBody();
+        String summery = dailyGson.body;
         mWebView.loadData(summery, "text/html; charset=UTF-8", null);
     }
 

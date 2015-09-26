@@ -30,10 +30,8 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
     private int date;
     private NewsListFragmentPresenter mPresenter;
 
-    @Bind(R.id.cardList)
-    RecyclerView mRecyclerView;
-    @Bind(R.id.swipe_refresh_layout)
-    SwipeRefreshLayout mSwipeRefreshLayout;
+    @Bind(R.id.cardList) RecyclerView mRecyclerView;
+    @Bind(R.id.swipe_refresh_layout) SwipeRefreshLayout mSwipeRefreshLayout;
 
     public static NewsListFragment newInstance() {
         NewsListFragment fragment = new NewsListFragment();

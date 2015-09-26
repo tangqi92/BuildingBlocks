@@ -12,5 +12,4 @@ public interface IWebView {
     File getWebViewCacheDir();
 
     void loadGsonNews(DailyGson dailyGson);
-
 }

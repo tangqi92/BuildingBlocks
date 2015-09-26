@@ -27,14 +27,10 @@ import me.itangqi.buildingblocks.domin.utils.VersionUtils;
 
 public class AboutActivity extends AppCompatActivity implements SwipeBackActivityBase {
 
-    @Bind(R.id.toolbar)
-    Toolbar mToolbar;
-    @Bind(R.id.tv_version)
-    TextView mVersionTextView;
-    @Bind(R.id.collapsing_toolbar)
-    CollapsingToolbarLayout mCollapsingToolbarLayout;
-    @Bind(R.id.about_thanks_to)
-    TextView mThanksTo;
+    @Bind(R.id.toolbar) Toolbar mToolbar;
+    @Bind(R.id.tv_version) TextView mVersionTextView;
+    @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout mCollapsingToolbarLayout;
+    @Bind(R.id.about_thanks_to) TextView mThanksTo;
 
     private SwipeBackActivityHelper mHelper;
 

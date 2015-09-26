@@ -5,10 +5,9 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.widget.Toast;
+import android.support.design.widget.Snackbar;
 
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.domin.application.App;
 import me.itangqi.buildingblocks.domin.utils.VersionUtils;
 import me.itangqi.buildingblocks.presenters.WebActivityPresenter;
 
@@ -37,7 +36,9 @@ public class PrefsFragment extends PreferenceFragment
         } else if (mCachePre == preference) {
             WebActivityPresenter presenter = WebActivityPresenter.newInstance();
             long deletedSize = presenter.clearCacheFolder();
-            Toast.makeText(App.getContext(), "释放了" + (deletedSize / 1024L /1024L) + "MB", Toast.LENGTH_SHORT).show();
+//            ToastUtils.showShort("释放了" + (deletedSize / 1024L / 1024L) + "MB");
+            Snackbar.make(getView(), "释放了 " + (deletedSize / 1024L / 1024L) + " MB", Snackbar.LENGTH_LONG).show();
+
         }
         return true;
     }
@@ -49,6 +50,4 @@ public class PrefsFragment extends PreferenceFragment
         mVersionPre = findPreference("version");
         mVersionPre.setTitle("版本：" + VersionUtils.setUpVersionName(getActivity()));
     }
-
-
 }

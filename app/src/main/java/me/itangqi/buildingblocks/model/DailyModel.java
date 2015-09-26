@@ -75,6 +75,7 @@ public class DailyModel implements IDaily {
         @Override
         public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, DailyResult errorResponse) {
             Toast.makeText(App.getContext(), "解析错误,状态码:" + statusCode, Toast.LENGTH_SHORT).show();
+
             throwable.printStackTrace();
         }
 
@@ -191,14 +192,14 @@ public class DailyModel implements IDaily {
     private void saveDailyGsonDB(DailyGson daily) {
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("id", daily.getId());
-        values.put("title", daily.getTitle());
-        values.put("type", daily.getType());
-        values.put("image_source", daily.getImage_source());
-        values.put("image", daily.getImage());
-        values.put("share_url", daily.getShare_url());
-        values.put("ga_prefix", daily.getGa_Prefix());
-        values.put("body", daily.getBody());
+        values.put("id", daily.id);
+        values.put("title", daily.title);
+        values.put("type", daily.type);
+        values.put("image_source", daily.image_source);
+        values.put("image", daily.image);
+        values.put("share_url", daily.share_url);
+        values.put("ga_prefix", daily.ga_prefix);
+        values.put("body", daily.body);
         database.insertWithOnConflict("daily", null, values, SQLiteDatabase.CONFLICT_IGNORE);
         database.close();
     }
@@ -208,14 +209,14 @@ public class DailyModel implements IDaily {
         Cursor cursor = database.rawQuery("SELECT * FROM daily where id = ?", new String[]{id + ""});
         DailyGson dailyGson = new DailyGson();
         if (cursor.moveToFirst()) {
-            dailyGson.setId(cursor.getInt(cursor.getColumnIndex("id")));
-            dailyGson.setTitle(cursor.getString(cursor.getColumnIndex("title")));
-            dailyGson.setType(cursor.getInt(cursor.getColumnIndex("type")));
-            dailyGson.setImage_source(cursor.getString(cursor.getColumnIndex("image_source")));
-            dailyGson.setImage(cursor.getString(cursor.getColumnIndex("image")));
-            dailyGson.setShare_url(cursor.getString(cursor.getColumnIndex("share_url")));
-            dailyGson.setGa_prefix(cursor.getInt(cursor.getColumnIndex("ga_prefix")));
-            dailyGson.setBody(cursor.getString(cursor.getColumnIndex("body")));
+            dailyGson.id = cursor.getInt(cursor.getColumnIndex("id"));
+            dailyGson.title = cursor.getString(cursor.getColumnIndex("title"));
+            dailyGson.type = cursor.getInt(cursor.getColumnIndex("type"));
+            dailyGson.image_source = cursor.getString(cursor.getColumnIndex("image_source"));
+            dailyGson.image= cursor.getString(cursor.getColumnIndex("image"));
+            dailyGson.share_url= cursor.getString(cursor.getColumnIndex("share_url"));
+            dailyGson.ga_prefix= cursor.getInt(cursor.getColumnIndex("ga_prefix"));
+            dailyGson.body = cursor.getString(cursor.getColumnIndex("body"));
             cursor.close();
             mIGsonCallBack.onGsonItemFinish(dailyGson);
             database.close();
@@ -264,7 +265,7 @@ public class DailyModel implements IDaily {
      */
     public Map<String, LinkedHashMap<String, String>> parseBody(DailyGson dailyGson) {
         long before = System.currentTimeMillis();
-        String xml = dailyGson.getBody();
+        String xml = dailyGson.body;
         Map<String, LinkedHashMap<String, String>> soup = new HashMap<String, LinkedHashMap<String, String>>();
         LinkedHashMap<String, String> extra = new LinkedHashMap<String, String>();
         LinkedHashMap<String, String> article = new LinkedHashMap<String, String>();
@@ -362,13 +363,13 @@ public class DailyModel implements IDaily {
     private void insertDailyGsonDB(DailyGson dailyGson) {
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
         String sql = "INSERT OR IGNORE INTO daily(id, title, image_source, image, share_url, ga_prefix, body) values("
-                + dailyGson.getId() + ","
-                + "\"" + dailyGson.getTitle() + "\"" + ","
-                + "\"" + dailyGson.getImage_source() + "\"" + ","
-                + "\"" + dailyGson.getImage() + "\"" + ","
-                + "\"" + dailyGson.getShare_url() + "\"" + ","
-                + dailyGson.getGa_Prefix() + ","
-                + "\"" + dailyGson.getBody() + "\"" + ")";
+                + dailyGson.id + ","
+                + "\"" + dailyGson.title + "\"" + ","
+                + "\"" + dailyGson.image_source + "\"" + ","
+                + "\"" + dailyGson.image + "\"" + ","
+                + "\"" + dailyGson.share_url + "\"" + ","
+                + dailyGson.ga_prefix + ","
+                + "\"" + dailyGson.body + "\"" + ")";
         database.execSQL(sql);
         database.close();
     }
@@ -388,7 +389,6 @@ public class DailyModel implements IDaily {
         }
         database.close();
     }
-
 
     @Deprecated
     private void serializDaily(int date, List<Daily> dailyList) throws IOException {
@@ -422,5 +422,4 @@ public class DailyModel implements IDaily {
         File file = new File(cachePath + "/daily/" + date);
         return file.exists();
     }
-
 }
