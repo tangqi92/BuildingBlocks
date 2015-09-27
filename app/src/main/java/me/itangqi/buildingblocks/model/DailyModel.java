@@ -26,6 +26,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -320,6 +322,39 @@ public class DailyModel implements IDaily {
             }
         }
         return false;
+    }
+
+    public Map<String,String> parseHtml(String htmlUrl) {
+        Map<String, String> htmlMap = new HashMap<>();
+        try {
+            URL url = new URL(htmlUrl);
+            Document document = Jsoup.connect(htmlUrl).userAgent("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8").get();
+            document.select("div[class=global-header]").remove();
+            document.select("div[class=header-for-mobile]").remove();
+            document.select("div[class=question]").get(1).remove();
+            document.select("div[class=qr]").remove();
+            document.select("div[class=bottom-wrap]").remove();
+            Element header = document.select("div[class=headline]").get(0);
+            Elements headerChildren = header.getAllElements();
+            for (Element child : headerChildren) {
+                if (child.className().equals("headline-title")) {
+                    String headline_title = child.text();
+                    htmlMap.put("headline_title", headline_title);
+                }else if (child.className().equals("img-source")) {
+                    String img_source = child.text();
+                    htmlMap.put("img_source", img_source);
+                }else if (child.nodeName().equals("img")) {
+                    String img = child.attr("src");
+                    htmlMap.put("img", img);
+                }
+            }
+            header.remove();
+            String content = document.outerHtml();
+            htmlMap.put("content", content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return htmlMap;
     }
 
     /**

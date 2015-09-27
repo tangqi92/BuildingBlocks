@@ -1,6 +1,9 @@
 package me.itangqi.buildingblocks.view.ui.activity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,14 +12,20 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.io.File;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.domin.application.App;
 import me.itangqi.buildingblocks.domin.utils.NetworkUtils;
 import me.itangqi.buildingblocks.domin.utils.PrefUtils;
 import me.itangqi.buildingblocks.domin.utils.ShareUtils;
@@ -32,12 +41,18 @@ import me.itangqi.buildingblocks.view.ui.activity.base.SwipeBackActivity;
 
 public class WebActivity extends SwipeBackActivity implements IWebView {
 
+    public static final String TAG = "WebActivity";
+
     public static final String EXTRA_URL = "extra_url";
     private SwipeBackLayout mSwipeBackLayout;
     private WebActivityPresenter mPresenter;
 
+    private String mUrl;
+
     @Bind(R.id.progressbar) ProgressBar mProgressbar;
     @Bind(R.id.webView) WebView mWebView;
+    @Bind(R.id.collapsing_toolbar_layout) CollapsingToolbarLayout mToolbarLayout;
+    @Bind(R.id.news_header) ImageView mHeaderImg;
 
     @Override
     protected int getLayoutResource() {
@@ -47,9 +62,9 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = WebActivityPresenter.newInstance(this);
+        mPresenter = new WebActivityPresenter(this);
         ButterKnife.bind(this);
-        String mUrl = getIntent().getStringExtra(EXTRA_URL);
+        mUrl = getIntent().getStringExtra(EXTRA_URL);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         if (PrefUtils.isEnableCache()) {
@@ -65,7 +80,7 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
         webSettings.setDefaultTextEncodingName("utf-8");
         mWebView.setWebChromeClient(new ChromeClient());
         mWebView.setWebViewClient(new ViewClient());
-        mWebView.loadUrl(mUrl);
+        mPresenter.getBetterHtml(mUrl);
         mSwipeBackLayout = getSwipeBackLayout();
         mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
     }
@@ -134,15 +149,38 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
         return this.getCacheDir();
     }
 
-    /**
-     * 读取gson数据里面的“body”，显示有问题
-     * @param dailyGson 又presenter传入的实例
-     */
-    @Deprecated
+    @SuppressWarnings("unchecked")
     @Override
-    public void loadGsonNews(DailyGson dailyGson) {
-        String summery = dailyGson.body;
-        mWebView.loadData(summery, "text/html; charset=UTF-8", null);
+    public void loadBetterHtml(Map<String, String> htmlMap) {
+        UIAsyncTask uiAsyncTask = new UIAsyncTask();
+        uiAsyncTask.execute(htmlMap);
+    }
+
+    private class UIAsyncTask extends AsyncTask<Map<String, String>, Map.Entry<String, String>, Void>{
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected Void doInBackground(Map<String, String>... params) {
+            Map<String, String> map = params[0];
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                publishProgress(entry);
+            }
+            return null;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void onProgressUpdate(Map.Entry<String, String>... values) {
+            Map.Entry<String, String> entry = values[0];
+            if (entry.getKey().equals("headline_title")) {
+                mToolbarLayout.setTitle(entry.getValue());
+            }else if (entry.getKey().equals("content")) {
+//                Log.d(TAG, entry.getValue());
+                mWebView.loadDataWithBaseURL(mUrl, entry.getValue(), "text/html; charset=UTF-8", "uft-8", null);
+            }else if (entry.getKey().equals("img")) {
+                Glide.with(App.getContext()).load(entry.getValue()).fitCenter().into(mHeaderImg);
+            }
+        }
     }
 
     private class ChromeClient extends WebChromeClient {

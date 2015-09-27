@@ -33,7 +33,7 @@ public class PrefsFragment extends PreferenceFragment implements Preference.OnPr
         if (mIsEnableCache == preference) {
             editor.putBoolean("enable_cache", mIsEnableCache.isChecked());
         } else if (mCachePre == preference) {
-            WebActivityPresenter presenter = WebActivityPresenter.newInstance();
+            WebActivityPresenter presenter = new WebActivityPresenter();
             long deletedSize = presenter.clearCacheFolder();
 //            ToastUtils.showShort("释放了" + (deletedSize / 1024L / 1024L) + "MB");
             Snackbar.make(getView(), "释放了 " + (deletedSize / 1024L / 1024L) + " MB", Snackbar.LENGTH_LONG).show();

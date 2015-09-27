@@ -3,10 +3,12 @@ package me.itangqi.buildingblocks.presenters;
 import android.util.Log;
 
 import java.io.File;
+import java.util.Map;
 
 import me.itangqi.buildingblocks.domin.application.App;
 import me.itangqi.buildingblocks.model.DailyModel;
 import me.itangqi.buildingblocks.model.IGsonCallBack;
+import me.itangqi.buildingblocks.model.IHtmlCallBack;
 import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.view.IWebView;
 
@@ -20,38 +22,22 @@ public class WebActivityPresenter {
     private DailyModel mDailyModel;
     private long mDeletedSize;
     private static WebActivityPresenter mPresenter;
+    private IHtmlCallBack mIHtmlCallBack;
 
-    private IGsonCallBack mIGsonCallBack = new IGsonCallBack() {
-        @Override
-        public void onGsonItemFinish(DailyGson dailyGson) {
-            mWebView.loadGsonNews(dailyGson);
-        }
-    };
-
-    private WebActivityPresenter(IWebView webView) {
+    public WebActivityPresenter(IWebView webView) {
         this.mWebView = webView;
         this.cacheDir = mWebView.getWebViewCacheDir();
-        mDailyModel = DailyModel.newInstance(mIGsonCallBack);
+        mDailyModel = DailyModel.newInstance();
+        this.mIHtmlCallBack = new IHtmlCallBack() {
+            @Override
+            public void onFinish(Map<String, String> map) {
+                mWebView.loadBetterHtml(map);
+            }
+        };
     }
 
-    private WebActivityPresenter() {
+    public WebActivityPresenter() {
         this.cacheDir = App.getContext().getCacheDir();
-    }
-
-    public static WebActivityPresenter newInstance() {
-        if (mPresenter == null) {
-            return new WebActivityPresenter();
-        } else {
-            return mPresenter;
-        }
-    }
-
-    public static WebActivityPresenter newInstance(IWebView webView) {
-        if (mPresenter == null || mPresenter.mWebView == null) {
-            return new WebActivityPresenter(webView);
-        } else {
-            return mPresenter;
-        }
     }
 
     public long clearCacheFolder() {
@@ -76,6 +62,16 @@ public class WebActivityPresenter {
 
     public void getDailyGson(int id) {
         mDailyModel.getGsonNews(id);
+    }
+
+    public void getBetterHtml(final String htmlUrl) {
+        new Thread(){
+            @Override
+            public void run() {
+                Map<String, String> map = mDailyModel.parseHtml(htmlUrl);
+                mIHtmlCallBack.onFinish(map);
+            }
+        }.start();
     }
 
 }

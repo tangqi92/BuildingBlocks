@@ -58,7 +58,8 @@
                 android:resource="@xml/searchable"/>
         </activity>
 
-        <activity android:name=".view.ui.activity.WebActivity"/>
+        <activity android:name=".view.ui.activity.WebActivity"
+            android:theme="@style/GsonActivity.Theme.AppTheme"/>
 
         <activity android:name=".view.ui.activity.AboutActivity"/>
 
