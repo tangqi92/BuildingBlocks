@@ -53,6 +53,7 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
     @Bind(R.id.webView) WebView mWebView;
     @Bind(R.id.collapsing_toolbar_layout) CollapsingToolbarLayout mToolbarLayout;
     @Bind(R.id.news_header) ImageView mHeaderImg;
+    @Bind(R.id.img_source) TextView mHeaderSource;
 
     @Override
     protected int getLayoutResource() {
@@ -179,6 +180,9 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
                 mWebView.loadDataWithBaseURL(mUrl, entry.getValue(), "text/html; charset=UTF-8", "uft-8", null);
             }else if (entry.getKey().equals("img")) {
                 Glide.with(App.getContext()).load(entry.getValue()).fitCenter().into(mHeaderImg);
+            }else if (entry.getKey().equals("img_source")) {
+                mHeaderSource.setText(entry.getValue());
+                mHeaderSource.setVisibility(View.VISIBLE);
             }
         }
     }
