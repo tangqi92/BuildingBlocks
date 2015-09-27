@@ -3,6 +3,7 @@ package me.itangqi.buildingblocks.view.ui.activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -13,10 +14,11 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.github.jorgecastilloprz.FABProgressCircle;
+import com.github.jorgecastilloprz.listeners.FABProgressListener;
 
 import java.io.File;
 import java.util.Map;
@@ -29,7 +31,6 @@ import me.itangqi.buildingblocks.domin.application.App;
 import me.itangqi.buildingblocks.domin.utils.NetworkUtils;
 import me.itangqi.buildingblocks.domin.utils.PrefUtils;
 import me.itangqi.buildingblocks.domin.utils.ShareUtils;
-import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.presenters.WebActivityPresenter;
 import me.itangqi.buildingblocks.view.IWebView;
 import me.itangqi.buildingblocks.view.ui.activity.base.SwipeBackActivity;
@@ -39,7 +40,7 @@ import me.itangqi.buildingblocks.view.ui.activity.base.SwipeBackActivity;
  * Author: drakeet
  */
 
-public class WebActivity extends SwipeBackActivity implements IWebView {
+public class WebActivity extends SwipeBackActivity implements IWebView, FABProgressListener {
 
     public static final String TAG = "WebActivity";
 
@@ -49,11 +50,12 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
 
     private String mUrl;
 
-    @Bind(R.id.progressbar) ProgressBar mProgressbar;
     @Bind(R.id.webView) WebView mWebView;
     @Bind(R.id.collapsing_toolbar_layout) CollapsingToolbarLayout mToolbarLayout;
     @Bind(R.id.news_header) ImageView mHeaderImg;
     @Bind(R.id.img_source) TextView mHeaderSource;
+    @Bind(R.id.fabProgressCircle) FABProgressCircle fabProgressCircle;
+    @Bind(R.id.fab) FloatingActionButton fab;
 
     @Override
     protected int getLayoutResource() {
@@ -84,6 +86,7 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
         mPresenter.getBetterHtml(mUrl);
         mSwipeBackLayout = getSwipeBackLayout();
         mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
+        fabProgressCircle.attachListener(this);
     }
 
     @Override
@@ -157,7 +160,12 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
         uiAsyncTask.execute(htmlMap);
     }
 
-    private class UIAsyncTask extends AsyncTask<Map<String, String>, Map.Entry<String, String>, Void>{
+    @Override
+    public void onFABProgressAnimationEnd() {
+        fabProgressCircle.setVisibility(View.GONE);
+    }
+
+    private class UIAsyncTask extends AsyncTask<Map<String, String>, Map.Entry<String, String>, Void> {
 
         @SuppressWarnings("unchecked")
         @Override
@@ -175,12 +183,12 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
             Map.Entry<String, String> entry = values[0];
             if (entry.getKey().equals("headline_title")) {
                 mToolbarLayout.setTitle(entry.getValue());
-            }else if (entry.getKey().equals("content")) {
+            } else if (entry.getKey().equals("content")) {
 //                Log.d(TAG, entry.getValue());
                 mWebView.loadDataWithBaseURL(mUrl, entry.getValue(), "text/html; charset=UTF-8", "uft-8", null);
-            }else if (entry.getKey().equals("img")) {
+            } else if (entry.getKey().equals("img")) {
                 Glide.with(App.getContext()).load(entry.getValue()).fitCenter().into(mHeaderImg);
-            }else if (entry.getKey().equals("img_source")) {
+            } else if (entry.getKey().equals("img_source")) {
                 mHeaderSource.setText(entry.getValue());
                 mHeaderSource.setVisibility(View.VISIBLE);
             }
@@ -191,11 +199,12 @@ public class WebActivity extends SwipeBackActivity implements IWebView {
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
-            mProgressbar.setProgress(newProgress);
+            Log.d("newProgress--->", newProgress + "");
+            // TODO load
             if (newProgress == 100) {
-                mProgressbar.setVisibility(View.GONE);
+                fabProgressCircle.beginFinalAnimation();
             } else if (newProgress != 100) {
-                mProgressbar.setVisibility(View.VISIBLE);
+                fabProgressCircle.show();
             }
         }
 

@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginStart="@dimen/margin_16dp"
+            app:expandedTitleMarginStart="@dimen/margin_48dp"
             app:expandedTitleTextAppearance="@style/CollapsingToolbarTitleStyle.GsonView"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -40,8 +40,8 @@
                 android:layout_gravity="end|bottom"
                 android:maxLines="1"
                 android:maxWidth="200dp"
-                android:visibility="invisible"
-                android:text="img_source"/>
+                android:text="img_source"
+                android:visibility="invisible"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -65,14 +65,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <ProgressBar
-                android:id="@+id/progressbar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:visibility="visible"/>
+            android:orientation="vertical"
+            android:paddingTop="8dp">
 
             <WebView
                 android:id="@+id/webView"
@@ -82,5 +76,21 @@
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
+
+    <com.github.jorgecastilloprz.FABProgressCircle
+        android:id="@+id/fabProgressCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:arcColor="@color/accent_dark"
+        app:layout_anchor="@id/app_bar_layout"
+        app:layout_anchorGravity="bottom|left|end">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@mipmap/ic_refresh_white_24dp"/>
+    </com.github.jorgecastilloprz.FABProgressCircle>
 
 </android.support.design.widget.CoordinatorLayout>
