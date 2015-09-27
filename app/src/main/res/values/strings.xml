@@ -30,12 +30,20 @@
     <string name="about_introduce_and_help">介绍与帮助</string>
     <string name="about_open_source_libraries_list">com.jakewharton:butterknife:7.0.1\ncom.soundcloud.android:android-crop:1.0.0@aar\ncom.loopj.android:android-async-http:1.4.8\ncom.github.bumptech.glide:glide:3.6.1\nme.imid.swipebacklayout.lib:library:1.0.0\norg.jsoup:jsoup:1.8.3</string>
 
+    <!-- 设置 -->
     <string name="settings_version">版本更新</string>
     <string name="settings_version_code">版本:</string>
     <string name="settings_auto_update">自动更新应用</string>
     <string name="settings_auto_push">推送精选内容</string>
     <string name="settings_general_settings">常规</string>
     <string name="settings_push_settings">推送</string>
+    <string name="setting_enable_cahce">允许缓存</string>
+    <string name="cache_is_enable">当前读取的是缓存</string>
+    <string name="cache_is_disable">当前未设置缓存</string>
+    <string name="delete_cache">清除缓存</string>
+    <string name="way_to_get_data">数据获取方式</string>
+    <string name="dialog_way_to_get_data">选择</string>
+    <string name="default_way_to_get_data">http</string>
 
     <string name="search_hint">搜索</string>
     <string name="search_result_title">搜索:</string>
@@ -48,7 +56,8 @@
     <string name="snack_exit_once_more">再按一次退出积木</string>
     <string name="snack_rest_over_to_you">剩下的就交给你了：）</string>
     <string name="snack_load_error">加载失败，请重试</string>
-    <string name="snack_network_error">网络错误</string>
+    <string name="snack_network_error">网络有问题</string>
+    <string name="snack_network_error_load_cache">网络有问题，尝试读取本地数据</string>
 
     <string name="drawer_item_home">首页</string>
     <string name="drawer_item_collection">我的收藏</string>
@@ -59,13 +68,8 @@
     <string name="drawer_item_settings">设置</string>
     <string name="drawer_item_about">关于</string>
 
-    <!-- 缓存相关 -->
-    <string name="setting_enable_cahce">允许缓存</string>
-    <string name="cache_is_enable">当前读取的是缓存</string>
-    <string name="cache_is_disable">当前未设置缓存</string>
-    <string name="delete_cache">清除缓存</string>
-    <string name="way_to_get_data">数据获取方式</string>
-    <string name="dialog_way_to_get_data">选择</string>
-    <string name="default_way_to_get_data">http</string>
-    <string name="activiy_gson_news_image">用来显示Gson里面的image属性</string>
+    <!-- GsonView -->
+    <string name="activity_gson_news_image">用来显示Gson里面的image属性</string>
+    <string name="activity_gson_news_author">作者</string>
+    <string name="activity_gson_news_bio">反正你又看不见我╮(╯▽╰)╭</string>
 </resources>

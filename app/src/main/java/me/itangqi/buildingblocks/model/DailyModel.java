@@ -254,6 +254,7 @@ public class DailyModel implements IDaily {
             daily.ga_prefix = cursor.getInt(cursor.getColumnIndex("ga_prefix"));
             dailyList.add(daily);
         }
+        cursor.close();
         mIHttpCallBack.onFinish(dailyList);
         database.close();
     }
