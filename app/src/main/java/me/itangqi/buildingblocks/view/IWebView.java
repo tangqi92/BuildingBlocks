@@ -1,6 +1,7 @@
 package me.itangqi.buildingblocks.view;
 
 import java.io.File;
+import java.util.Map;
 
 import me.itangqi.buildingblocks.model.entity.DailyGson;
 
@@ -11,5 +12,5 @@ public interface IWebView {
 
     File getWebViewCacheDir();
 
-    void loadGsonNews(DailyGson dailyGson);
+    void loadBetterHtml(Map<String, String> htmlMap);
 }

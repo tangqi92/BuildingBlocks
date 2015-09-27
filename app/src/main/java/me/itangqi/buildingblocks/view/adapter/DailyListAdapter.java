@@ -19,11 +19,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.domin.api.ZhihuApi;
-import me.itangqi.buildingblocks.domin.application.App;
 import me.itangqi.buildingblocks.domin.utils.PrefUtils;
-import me.itangqi.buildingblocks.model.DailyModel;
 import me.itangqi.buildingblocks.model.entity.Daily;
-import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.view.ui.activity.GsonViewActivity;
 import me.itangqi.buildingblocks.view.ui.activity.WebActivity;
 
@@ -104,7 +101,7 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void startView(Daily news, View v) {
-        if (PrefUtils.isUsingGson()) {
+        if (PrefUtils.wayToData().equals("gson")) {
             gotoGsonView(news, v);
         } else {
             gotoWebView(news, v);

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import me.itangqi.buildingblocks.domin.application.App;
 
 /**
+ * 用来快速获取相关的设置
  * Created by Troy on 2015/9/20.
  */
 public class PrefUtils {
@@ -15,10 +16,14 @@ public class PrefUtils {
         return preferences.getBoolean("enable_cache", false);
     }
 
-    public static boolean isUsingGson() {
+    /**
+     * 用来检测设置中“获取数据方式”的值
+     * @return 返回"http","http+"或者"gson"
+     */
+    public static String wayToData() {
         SharedPreferences preferences = getSharedPreferences();
         String tmp = preferences.getString("gson_or_html", "http");
-        return !tmp.equals("http");
+        return tmp;
     }
 
     private static SharedPreferences getSharedPreferences() {
