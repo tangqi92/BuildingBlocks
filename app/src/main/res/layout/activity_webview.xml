@@ -39,8 +39,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
                 android:maxLines="1"
-                android:maxWidth="200dp"
+                android:maxWidth="300dp"
                 android:text="img_source"
+                android:textSize="7sp"
                 android:visibility="invisible"/>
 
             <android.support.v7.widget.Toolbar
