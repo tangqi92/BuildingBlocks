@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -23,7 +22,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.domain.utils.Constants;
 
 /**
  * Created by Troy on 2015/10/2.
@@ -73,7 +71,6 @@ public class Updater extends IntentService {
             connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36");
             int responseCode = connection.getResponseCode();
             if (responseCode == 200) {
-                showStatus();
                 size = connection.getContentLength();
                 is = connection.getInputStream();
                 bis = new BufferedInputStream(is);
@@ -86,6 +83,7 @@ public class Updater extends IntentService {
                 bos = new BufferedOutputStream(fos);
                 byte[] buffer = new byte[1024];
                 int hasRead;
+                showStatus();
                 while ((hasRead = bis.read(buffer)) != -1) {
                     bos.write(buffer, 0, hasRead);
                     hasDown += hasRead;

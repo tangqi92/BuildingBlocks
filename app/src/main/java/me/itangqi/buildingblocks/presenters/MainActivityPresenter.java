@@ -62,7 +62,7 @@ public class MainActivityPresenter {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String urlStr = "http://7xk54v.com1.z0.glb.clouddn.com/app/bbupdate.xml";
+                String urlStr = "http://7xk54v.com1.z0.glb.clouddn.com/app/bbupdatetest.xml";
                 String name = null;
                 int versionCode = 0;
                 String versionName = null;
@@ -80,6 +80,9 @@ public class MainActivityPresenter {
                     InputStream inputStream = connection.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                     File tmp = new File(App.getContext().getCacheDir(), "update.xml");
+                    if (tmp.exists()) {
+                        tmp.delete();
+                    }
                     FileWriter writer = new FileWriter(tmp);
                     BufferedWriter bufferedWriter = new BufferedWriter(writer);
                     char[] buffer = new char[1024];
