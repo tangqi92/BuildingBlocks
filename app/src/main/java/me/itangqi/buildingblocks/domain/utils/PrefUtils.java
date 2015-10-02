@@ -1,9 +1,9 @@
-package me.itangqi.buildingblocks.domin.utils;
+package me.itangqi.buildingblocks.domain.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import me.itangqi.buildingblocks.domin.application.App;
+import me.itangqi.buildingblocks.domain.application.App;
 
 /**
  * 用来快速获取相关的设置

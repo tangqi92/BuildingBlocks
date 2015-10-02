@@ -19,7 +19,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.domin.application.App;
+import me.itangqi.buildingblocks.domain.application.App;
 import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.presenters.GsonNewsPresenter;
 import me.itangqi.buildingblocks.view.IGsonNews;

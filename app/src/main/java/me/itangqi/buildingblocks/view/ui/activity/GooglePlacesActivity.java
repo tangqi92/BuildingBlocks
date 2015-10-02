@@ -44,7 +44,7 @@ import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.view.adapter.GooglePlacesAdapter;
 import me.itangqi.buildingblocks.view.ui.activity.base.SwipeBackActivity;
-import me.itangqi.buildingblocks.domin.utils.ToastUtils;
+import me.itangqi.buildingblocks.domain.utils.ToastUtils;
 
 public class GooglePlacesActivity extends SwipeBackActivity
         implements GoogleApiClient.OnConnectionFailedListener {

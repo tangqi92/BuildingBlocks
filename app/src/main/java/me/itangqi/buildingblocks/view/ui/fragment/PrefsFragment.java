@@ -8,7 +8,7 @@ import android.preference.PreferenceFragment;
 import android.support.design.widget.Snackbar;
 
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.domin.utils.VersionUtils;
+import me.itangqi.buildingblocks.domain.utils.VersionUtils;
 import me.itangqi.buildingblocks.presenters.WebActivityPresenter;
 
 

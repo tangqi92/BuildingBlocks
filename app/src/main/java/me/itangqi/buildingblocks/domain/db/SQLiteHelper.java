@@ -1,10 +1,9 @@
-package me.itangqi.buildingblocks.domin.db;
+package me.itangqi.buildingblocks.domain.db;
 
-import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import me.itangqi.buildingblocks.domin.application.App;
+import me.itangqi.buildingblocks.domain.application.App;
 
 /**
  * Created by Troy on 2015/9/23.

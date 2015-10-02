@@ -1,4 +1,4 @@
-package me.itangqi.buildingblocks.domin.api;
+package me.itangqi.buildingblocks.domain.api;
 
 /*
  * Thanks to

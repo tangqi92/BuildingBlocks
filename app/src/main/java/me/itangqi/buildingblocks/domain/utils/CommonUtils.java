@@ -1,20 +1,16 @@
-package me.itangqi.buildingblocks.domin.utils;
+package me.itangqi.buildingblocks.domain.utils;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.Log;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.domin.application.App;
+import me.itangqi.buildingblocks.domain.application.App;
 
 public class CommonUtils {
 
