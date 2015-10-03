@@ -81,13 +81,14 @@ public class MainActivityPresenter {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                     File tmp = new File(App.getContext().getCacheDir(), "update.xml");
                     if (tmp.exists()) {
-                        tmp.delete();
+                        boolean hasDeleted = tmp.delete();
+                        Log.d(TAG, "旧的update.xml" + (hasDeleted ? "已被删除" : "删除失败"));
                     }
                     FileWriter writer = new FileWriter(tmp);
                     BufferedWriter bufferedWriter = new BufferedWriter(writer);
                     char[] buffer = new char[1024];
                     int hasRead;
-                    while ((hasRead=reader.read(buffer)) != -1) {
+                    while ((hasRead = reader.read(buffer)) != -1) {
                         bufferedWriter.write(buffer, 0, hasRead);
                         bufferedWriter.newLine();
                     }
@@ -107,7 +108,7 @@ public class MainActivityPresenter {
                     e.printStackTrace();
                 }
                 if (versionCode > VersionUtils.getVerisonCode()) {
-                    mMainActivity.showUpdate(versionCode, versionName, apkUrl,desc);
+                    mMainActivity.showUpdate(versionCode, versionName, apkUrl, desc);
                 }
             }
         }).start();

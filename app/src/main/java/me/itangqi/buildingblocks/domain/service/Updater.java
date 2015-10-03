@@ -119,7 +119,9 @@ public class Updater extends IntentService {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                int status = hasDown * 100 / size;
+                int status = (int) (((float) hasDown / size) * 100);
+                Log.d(TAG, "size--->" + size + "; hasDown--->" + hasDown);
+                Log.d(TAG, "status--->" + status);
                 mNotification.contentView.setProgressBar(R.id.update_progress, 100, status, false);
                 mNotificationManager.notify(ID, mNotification);
                 if (status >= 100) {
@@ -137,5 +139,6 @@ public class Updater extends IntentService {
         intent.setDataAndType(uri, "application/vnd.android.package-archive");
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        this.stopSelf();
     }
 }
