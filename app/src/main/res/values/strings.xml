@@ -72,4 +72,9 @@
     <string name="activity_gson_news_image">用来显示Gson里面的image属性</string>
     <string name="activity_gson_news_author">作者</string>
     <string name="activity_gson_news_bio">反正你又看不见我╮(╯▽╰)╭</string>
+    <string name="service_begin_update">开始下载更新</string>
+    <string name="service_updating">正在下载更新</string>
+    <string name="service_update_error">下载失败</string>
+    <string name="service_update_cancel">取消</string>
+    <string name="service_update_restart">重新开始</string>
 </resources>

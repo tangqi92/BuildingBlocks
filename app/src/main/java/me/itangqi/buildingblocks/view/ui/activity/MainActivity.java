@@ -1,10 +1,10 @@
 package me.itangqi.buildingblocks.view.ui.activity;
 
-import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
@@ -13,10 +13,12 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -32,6 +34,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.domain.receiver.UpdaterReceiver;
 import me.itangqi.buildingblocks.domain.service.Updater;
 import me.itangqi.buildingblocks.domain.utils.Constants;
 import me.itangqi.buildingblocks.domain.utils.VersionUtils;
@@ -52,6 +55,7 @@ public class MainActivity extends BaseActivity implements IMainActivity{
     @Bind(R.id.toolbar) Toolbar mToolbar;
 
     private MainActivityPresenter mPresenter;
+    private UpdaterReceiver mUpdaterReceiver;
 
     @OnClick(R.id.fab)
     public void fabOnClick() {
@@ -78,6 +82,10 @@ public class MainActivity extends BaseActivity implements IMainActivity{
         mPresenter = new MainActivityPresenter(this);
         mPresenter.clearCache();
         mPresenter.checkUpdate();
+        IntentFilter filter = new IntentFilter(Constants.BROADCAST_UPDATE_ACTION);
+        filter.addCategory(Constants.BROADCAST_UPDATE_CATEGORY);
+        mUpdaterReceiver = new UpdaterReceiver(this);
+        LocalBroadcastManager.getInstance(this).registerReceiver(mUpdaterReceiver, filter);
     }
 
     private void setupDrawerContent() {
@@ -306,6 +314,7 @@ public class MainActivity extends BaseActivity implements IMainActivity{
 
     @Override
     protected void onDestroy() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mUpdaterReceiver);
         super.onDestroy();
     }
 }
