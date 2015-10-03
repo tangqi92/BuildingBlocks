@@ -28,6 +28,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import me.itangqi.buildingblocks.domain.application.App;
 import me.itangqi.buildingblocks.domain.utils.Constants;
+import me.itangqi.buildingblocks.domain.utils.PrefUtils;
 import me.itangqi.buildingblocks.domain.utils.VersionUtils;
 import me.itangqi.buildingblocks.model.DailyModel;
 import me.itangqi.buildingblocks.view.IMainActivity;
@@ -58,60 +59,61 @@ public class MainActivityPresenter {
     }
 
     public void checkUpdate() {
-        Log.d(TAG, "checkUpdate()");
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String urlStr = "http://7xk54v.com1.z0.glb.clouddn.com/app/bbupdatetest.xml";
-                String name = null;
-                int versionCode = 0;
-                String versionName = null;
-                String apkUrl = null;
-                List<String> desc = new ArrayList<>();
-                try {
-                    URL url = new URL(urlStr);
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setConnectTimeout(3000);
-                    connection.setReadTimeout(3000);
-                    connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36");
-                    connection.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-                    connection.setRequestProperty("Upgrade-Insecure-Requests", "1");
-                    connection.setRequestMethod("GET");
-                    InputStream inputStream = connection.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                    File tmp = new File(App.getContext().getCacheDir(), "update.xml");
-                    if (tmp.exists()) {
-                        boolean hasDeleted = tmp.delete();
-                        Log.d(TAG, "旧的update.xml" + (hasDeleted ? "已被删除" : "删除失败"));
+        if (PrefUtils.isAutoUpdate()) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    String urlStr = "http://7xk54v.com1.z0.glb.clouddn.com/app/bbupdatetest.xml";
+                    String name = null;
+                    int versionCode = 0;
+                    String versionName = null;
+                    String apkUrl = null;
+                    List<String> desc = new ArrayList<>();
+                    try {
+                        URL url = new URL(urlStr);
+                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                        connection.setConnectTimeout(3000);
+                        connection.setReadTimeout(3000);
+                        connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36");
+                        connection.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                        connection.setRequestProperty("Upgrade-Insecure-Requests", "1");
+                        connection.setRequestMethod("GET");
+                        InputStream inputStream = connection.getInputStream();
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                        File tmp = new File(App.getContext().getCacheDir(), "update.xml");
+                        if (tmp.exists()) {
+                            boolean hasDeleted = tmp.delete();
+                            Log.d(TAG, "旧的update.xml" + (hasDeleted ? "已被删除" : "删除失败"));
+                        }
+                        FileWriter writer = new FileWriter(tmp);
+                        BufferedWriter bufferedWriter = new BufferedWriter(writer);
+                        char[] buffer = new char[1024];
+                        int hasRead;
+                        while ((hasRead = reader.read(buffer)) != -1) {
+                            bufferedWriter.write(buffer, 0, hasRead);
+                            bufferedWriter.newLine();
+                        }
+                        bufferedWriter.close();
+                        writer.close();
+                        inputStream.close();
+                        reader.close();
+                        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                        DocumentBuilder builder = factory.newDocumentBuilder();
+                        Document document = builder.parse(tmp);
+                        Element bb = (Element) document.getElementsByTagName("update").item(0);
+                        name = bb.getElementsByTagName("name").item(0).getFirstChild().getNodeValue();
+                        versionCode = Integer.parseInt(bb.getElementsByTagName("versionCode").item(0).getFirstChild().getNodeValue());
+                        versionName = bb.getElementsByTagName("versionName").item(0).getFirstChild().getNodeValue();
+                        apkUrl = bb.getElementsByTagName("url").item(0).getFirstChild().getNodeValue();
+                    } catch (IOException | ParserConfigurationException | SAXException e) {
+                        e.printStackTrace();
                     }
-                    FileWriter writer = new FileWriter(tmp);
-                    BufferedWriter bufferedWriter = new BufferedWriter(writer);
-                    char[] buffer = new char[1024];
-                    int hasRead;
-                    while ((hasRead = reader.read(buffer)) != -1) {
-                        bufferedWriter.write(buffer, 0, hasRead);
-                        bufferedWriter.newLine();
+                    if (versionCode > VersionUtils.getVerisonCode()) {
+                        mMainActivity.showUpdate(versionCode, versionName, apkUrl, desc);
                     }
-                    bufferedWriter.close();
-                    writer.close();
-                    inputStream.close();
-                    reader.close();
-                    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-                    DocumentBuilder builder = factory.newDocumentBuilder();
-                    Document document = builder.parse(tmp);
-                    Element bb = (Element) document.getElementsByTagName("update").item(0);
-                    name = bb.getElementsByTagName("name").item(0).getFirstChild().getNodeValue();
-                    versionCode = Integer.parseInt(bb.getElementsByTagName("versionCode").item(0).getFirstChild().getNodeValue());
-                    versionName = bb.getElementsByTagName("versionName").item(0).getFirstChild().getNodeValue();
-                    apkUrl = bb.getElementsByTagName("url").item(0).getFirstChild().getNodeValue();
-                } catch (IOException | ParserConfigurationException | SAXException e) {
-                    e.printStackTrace();
                 }
-                if (versionCode > VersionUtils.getVerisonCode()) {
-                    mMainActivity.showUpdate(versionCode, versionName, apkUrl, desc);
-                }
-            }
-        }).start();
+            }).start();
+        }
     }
 
 }
