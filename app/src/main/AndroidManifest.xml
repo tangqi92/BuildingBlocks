@@ -76,7 +76,5 @@
 
         <service android:name=".domain.service.Updater"/>
 
-        <receiver android:name=".domain.broadcast.UpdaterReceiver"/>
-
     </application>
 </manifest>

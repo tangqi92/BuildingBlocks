@@ -34,6 +34,8 @@ import me.itangqi.buildingblocks.model.DailyModel;
 import me.itangqi.buildingblocks.view.IMainActivity;
 
 /**
+ * MainActivity的Presenter， 主要完成app全局的事情，清理缓存，或者更新app
+ * 大部分方法只在app启动的时候调用一次
  * Created by Troy on 2015/9/26.
  */
 public class MainActivityPresenter {
@@ -58,6 +60,11 @@ public class MainActivityPresenter {
         }
     }
 
+    /**
+     * 识别服务器上的xml文件来确认是否有新版
+     * 相应的新版url写在xml里的<url>标签
+     * 通过替换自己的xml文件来达到替换相应的更新源
+     */
     public void checkUpdate() {
         if (PrefUtils.isAutoUpdate()) {
             new Thread(new Runnable() {

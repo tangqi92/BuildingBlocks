@@ -1,14 +1,11 @@
 package me.itangqi.buildingblocks.view.ui.activity;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Looper;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -16,14 +13,12 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,7 +32,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.domain.broadcast.UpdaterReceiver;
 import me.itangqi.buildingblocks.domain.service.Updater;
 import me.itangqi.buildingblocks.domain.utils.Constants;
 import me.itangqi.buildingblocks.domain.utils.VersionUtils;
@@ -58,7 +52,6 @@ public class MainActivity extends BaseActivity implements IMainActivity{
     @Bind(R.id.toolbar) Toolbar mToolbar;
 
     private MainActivityPresenter mPresenter;
-    private UpdaterReceiver mUpdaterReceiver;
 
     @OnClick(R.id.fab)
     public void fabOnClick() {
