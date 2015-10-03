@@ -17,7 +17,7 @@
         android:required="true"/>
 
     <application
-        android:name=".domin.application.App"
+        android:name=".domain.application.App"
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
@@ -73,6 +73,8 @@
 
         <activity android:name=".view.ui.activity.GsonViewActivity"
             android:theme="@style/GsonActivity.Theme.AppTheme"/>
+
+        <service android:name=".domain.service.Updater"/>
 
     </application>
 </manifest>

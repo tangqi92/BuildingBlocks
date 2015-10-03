@@ -8,13 +8,14 @@ import android.preference.PreferenceFragment;
 import android.support.design.widget.Snackbar;
 
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.domin.utils.VersionUtils;
+import me.itangqi.buildingblocks.domain.utils.VersionUtils;
 import me.itangqi.buildingblocks.presenters.WebActivityPresenter;
 
 
 public class PrefsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
 
     private CheckBoxPreference mIsEnableCache;
+    private CheckBoxPreference mIsAutoUpdate;
     private Preference mCachePre, mVersionPre;
 
     @Override
@@ -38,12 +39,15 @@ public class PrefsFragment extends PreferenceFragment implements Preference.OnPr
 //            ToastUtils.showShort("释放了" + (deletedSize / 1024L / 1024L) + "MB");
             Snackbar.make(getView(), "释放了 " + (deletedSize / 1024L / 1024L) + " MB", Snackbar.LENGTH_LONG).show();
 
+        }else if (mIsAutoUpdate == preference) {
+            editor.putBoolean("auto_update", mIsAutoUpdate.isChecked());
         }
         return true;
     }
 
     private void initPrefs() {
         mIsEnableCache = (CheckBoxPreference) findPreference("enable_cache");
+        mIsAutoUpdate = (CheckBoxPreference) findPreference("auto_update");
         mCachePre = findPreference("delete_cache");
         mCachePre.setOnPreferenceClickListener(this);
         mVersionPre = findPreference("version");

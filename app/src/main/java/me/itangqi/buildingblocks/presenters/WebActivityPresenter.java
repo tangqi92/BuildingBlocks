@@ -5,11 +5,9 @@ import android.util.Log;
 import java.io.File;
 import java.util.Map;
 
-import me.itangqi.buildingblocks.domin.application.App;
+import me.itangqi.buildingblocks.domain.application.App;
 import me.itangqi.buildingblocks.model.DailyModel;
-import me.itangqi.buildingblocks.model.IGsonCallBack;
 import me.itangqi.buildingblocks.model.IHtmlCallBack;
-import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.view.IWebView;
 
 /**

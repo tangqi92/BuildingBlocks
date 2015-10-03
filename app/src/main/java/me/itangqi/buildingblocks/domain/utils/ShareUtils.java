@@ -1,4 +1,4 @@
-package me.itangqi.buildingblocks.domin.utils;
+package me.itangqi.buildingblocks.domain.utils;
 
 import android.content.Context;
 import android.content.Intent;

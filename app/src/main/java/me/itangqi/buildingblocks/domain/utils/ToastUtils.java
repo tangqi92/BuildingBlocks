@@ -1,9 +1,9 @@
-package me.itangqi.buildingblocks.domin.utils;
+package me.itangqi.buildingblocks.domain.utils;
 
 import android.content.Context;
 import android.widget.Toast;
 
-import me.itangqi.buildingblocks.domin.application.App;
+import me.itangqi.buildingblocks.domain.application.App;
 
 
 public class ToastUtils {

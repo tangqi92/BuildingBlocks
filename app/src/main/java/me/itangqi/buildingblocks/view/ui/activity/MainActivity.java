@@ -1,7 +1,9 @@
 package me.itangqi.buildingblocks.view.ui.activity;
 
+import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -24,18 +26,23 @@ import android.view.View;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.domin.utils.Constants;
+import me.itangqi.buildingblocks.domain.service.Updater;
+import me.itangqi.buildingblocks.domain.utils.Constants;
+import me.itangqi.buildingblocks.domain.utils.VersionUtils;
 import me.itangqi.buildingblocks.presenters.MainActivityPresenter;
 import me.itangqi.buildingblocks.view.IMainActivity;
 import me.itangqi.buildingblocks.view.ui.activity.base.BaseActivity;
 import me.itangqi.buildingblocks.view.ui.fragment.NewsListFragment;
 
 public class MainActivity extends BaseActivity implements IMainActivity{
+
+    public static final String TAG = "MainActivity";
 
     @Bind(R.id.drawer_layout) DrawerLayout mDrawerLayout;
     @Bind(R.id.coordinatorLayout) CoordinatorLayout mContainer;
@@ -70,6 +77,7 @@ public class MainActivity extends BaseActivity implements IMainActivity{
         }
         mPresenter = new MainActivityPresenter(this);
         mPresenter.clearCache();
+        mPresenter.checkUpdate();
     }
 
     private void setupDrawerContent() {
@@ -232,6 +240,34 @@ public class MainActivity extends BaseActivity implements IMainActivity{
         Snackbar.make(mContainer, data, time).show();
     }
 
+    @Override
+    public void showUpdate(final int versionCode, String versionName, final String apkUrl, List<String> disc) {
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("发现新版本")
+                        .setIcon(R.drawable.icon)
+                        .setMessage("当前版本号为：" + VersionUtils.getVerisonCode() + "\n" + "新版本号为：" + versionCode)
+                        .setPositiveButton("下载", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(MainActivity.this, Updater.class);
+                                intent.putExtra("url", apkUrl);
+                                startService(intent);
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                builder.create().show();
+            }
+        });
+    }
+
     private class MyPagerAdapter extends FragmentStatePagerAdapter {
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -266,5 +302,10 @@ public class MainActivity extends BaseActivity implements IMainActivity{
 
             return DateFormat.getDateInstance().format(displayDate.getTime());
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

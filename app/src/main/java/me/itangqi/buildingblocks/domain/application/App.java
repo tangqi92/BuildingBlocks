@@ -1,4 +1,4 @@
-package me.itangqi.buildingblocks.domin.application;
+package me.itangqi.buildingblocks.domain.application;
 
 import android.app.Application;
 import android.content.Context;
