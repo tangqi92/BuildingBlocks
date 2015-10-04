@@ -171,16 +171,6 @@ public class DailyModel implements IDaily {
         getDailyStoriesDB(date);
     }
 
-
-    @Override
-    public void saveDailies(List<Daily> dailies, int date) {
-        try {
-            serializDaily(date, dailies);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void getGsonNews(int id) {
         if (getDailyGsonDB(id) == null) {
@@ -362,23 +352,24 @@ public class DailyModel implements IDaily {
      * @return 被删除的数据总数
      */
     public int clearOutdateCache(int beforedate) {
-        //TODO BUG: 不能准确删除
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
-        Cursor findId = database.rawQuery("SELECT id FROM dailyresult WHERE date <= ?", new String[]{beforedate + ""});
+        Cursor findId = database.query("dailyresult"
+                , new String[]{"id"}, "date<=?", new String[]{beforedate + ""}, null, null, null);
         List<String> toDelete = new ArrayList<>();
         while (findId.moveToNext()) {
-            toDelete.add(findId.getInt(findId.getColumnIndex("id")) + "");
+            int id = findId.getInt(findId.getColumnIndex("id"));
+            Log.d(TAG, "IDtoDelete in Result--->" + id);
+            toDelete.add(id + "");
         }
         if (findId.isAfterLast() && !findId.isClosed()) {
             findId.close();
         }
-        database.delete("dailyresult", "date<=?", new String[]{beforedate + ""});
-        int size = toDelete.size();
-        String[] ids = toDelete.toArray(new String[size]);
-        for (String id : ids) {
-            database.execSQL("DELETE FROM daily where id =" + Integer.parseInt(id)); //使用delete()一次性删除，会提示参数过多
+        int hasDeleted = database.delete("dailyresult", "date<=?", new String[]{beforedate + ""});
+        for (String id : toDelete) {
+            hasDeleted += database.delete("daily", "id=?", new String[]{id}); //使用delete()一次性删除，会提示参数过多
         }
-        return toDelete.size();
+        Log.d(TAG, "hasDeleted--->" + hasDeleted);
+        return hasDeleted;
     }
 
     public long clearOutdatePhoto(int beforedate) {
@@ -393,6 +384,16 @@ public class DailyModel implements IDaily {
             }
         }
         return clearedSize;
+    }
+
+    @Deprecated
+    @Override
+    public void saveDailies(List<Daily> dailies, int date) {
+        try {
+            serializDaily(date, dailies);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Deprecated
