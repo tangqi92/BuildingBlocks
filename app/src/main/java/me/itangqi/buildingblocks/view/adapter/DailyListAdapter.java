@@ -44,13 +44,11 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         // I hate it !!!
         // http://stackoverflow.com/questions/28787008/onbindviewholder-position-is-starting-again-at-0
         // setHasStableIds(true);
-        Log.d(TAG,"mNewsList's Size--->"+ mNewsList.size());
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == ITEM_TYPE_IMAGE) {
-            Log.d(TAG, "item view created");
             return new ImageViewHolder(mLayoutInflater.inflate(R.layout.item_daily_image_info, parent, false));
         } else {
             return new ThemeViewHolder(mLayoutInflater.inflate(R.layout.item_daily_text_info, parent, false));
@@ -66,7 +64,7 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 break;
             case ITEM_TYPE_IMAGE:
                 ((ImageViewHolder) holder).mTitle.setText(news.title);
-                Glide.with(mContext).load(news.images.get(0)).into(((ImageViewHolder) holder).mCover);
+                Glide.with(mContext).load(news.image).into(((ImageViewHolder) holder).mCover);
                 break;
         }
     }
@@ -76,7 +74,7 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         // add here your booleans or switch() to set viewType at your needed
         Daily news = mNewsList.get(position);
         // Depending on whether the presence of images to determine the type of load View
-        return (news.images == null || news.images.size() == 0) ? ITEM_TYPE_TEXT : ITEM_TYPE_IMAGE;
+        return (news.image == null || (news.images != null && news.images.size() == 0)) ? ITEM_TYPE_TEXT : ITEM_TYPE_IMAGE;
     }
 
     @Override

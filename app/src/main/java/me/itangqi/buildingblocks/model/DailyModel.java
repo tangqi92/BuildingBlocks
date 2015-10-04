@@ -27,7 +27,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -37,13 +39,13 @@ import me.itangqi.buildingblocks.domain.api.ZhihuApi;
 import me.itangqi.buildingblocks.domain.application.App;
 import me.itangqi.buildingblocks.domain.db.SQLiteHelper;
 import me.itangqi.buildingblocks.domain.utils.Constants;
-import me.itangqi.buildingblocks.domain.utils.NetworkUtils;
 import me.itangqi.buildingblocks.domain.utils.PrefUtils;
 import me.itangqi.buildingblocks.model.entity.Daily;
 import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.model.entity.DailyResult;
 
 /**
+ * 数据交换中枢，负责数据的存储和获取
  * Created by Troy on 2015/9/21.
  */
 public class DailyModel implements IDaily {
@@ -58,6 +60,8 @@ public class DailyModel implements IDaily {
     private SQLiteHelper mSQLiteHelper;
     private static DailyModel mDailyModel;
 
+    private boolean hasReadFromNet = false;
+
     //用来获取Daily集合
     AsyncHttpResponseHandler mAsyncHttpResponseHandler = new BaseJsonHttpResponseHandler<DailyResult>() {
         @Override
@@ -68,7 +72,7 @@ public class DailyModel implements IDaily {
                     mDailiesFromNet.add(daily);
 //                    mItems.put(daily.id, daily.title);   //待测试
                 }
-                mIHttpCallBack.onFinish(mDailiesFromNet);
+                hasReadFromNet = true;
                 saveDailyStoriesDB(response);
             }
         }
@@ -151,17 +155,25 @@ public class DailyModel implements IDaily {
     }
 
     public void getDailyResult(int date) {
-        if (PrefUtils.isEnableCache() && NetworkUtils.isNetworkConnected()) {
+        hasReadFromNet = false;
+        if (PrefUtils.isEnableCache()) {
             getFromCache(date);
+        } else {
             getFromNet(date);
-        } else if (!PrefUtils.isEnableCache() && NetworkUtils.isNetworkConnected()) {
-            getFromNet(date);
-        } else if (!NetworkUtils.isNetworkConnected()) {
-            getFromCache(date);
         }
     }
 
     private void getFromNet(int date) {
+        if (PrefUtils.isEnableCache()) {
+            Calendar calendar = Calendar.getInstance();
+            try {
+                calendar.setTime(Constants.simpleDateFormat.parse(date + ""));
+                calendar.add(Calendar.DAY_OF_MONTH, 1);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            date = Integer.parseInt(Constants.simpleDateFormat.format(calendar.getTime()));
+        }
         String url = ZhihuApi.getDailyNews(date);
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(url, mAsyncHttpResponseHandler);
@@ -230,9 +242,25 @@ public class DailyModel implements IDaily {
             database.insertWithOnConflict("dailyresult", null, values, SQLiteDatabase.CONFLICT_IGNORE);
         }
         database.close();
+        Calendar calendar = Calendar.getInstance();
+        try {
+            calendar.setTime(Constants.simpleDateFormat.parse(dailyResult.date+""));
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        getDailyStoriesDB(Integer.parseInt(Constants.simpleDateFormat.format(calendar.getTime())));
     }
 
     private void getDailyStoriesDB(int date) {
+        Calendar calendar = Calendar.getInstance();
+        try {
+            calendar.setTime(Constants.simpleDateFormat.parse(date + ""));
+            calendar.add(Calendar.DAY_OF_MONTH, -1);
+            date = Integer.parseInt(Constants.simpleDateFormat.format(calendar.getTime()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
         List<Daily> dailyList = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM dailyresult where date = ?", new String[]{date + ""});
@@ -246,8 +274,12 @@ public class DailyModel implements IDaily {
             dailyList.add(daily);
         }
         cursor.close();
-        mIHttpCallBack.onFinish(dailyList);
         database.close();
+        mIHttpCallBack.onFinish(dailyList);
+        if (!hasReadFromNet) {
+            hasReadFromNet = true;
+            getFromNet(date);
+        }
     }
 
     /**
@@ -263,7 +295,6 @@ public class DailyModel implements IDaily {
         LinkedHashMap<String, String> article = new LinkedHashMap<String, String>();
         Document document = Jsoup.parse(xml, "", new Parser(new XmlTreeBuilder()));
         Elements all = document.getAllElements();
-        Log.i("Parsing", "all.size--->" + all.size());
         for (Element content : all) {
             if (content.hasClass("avatar")) {
                 String src = content.attr("src");

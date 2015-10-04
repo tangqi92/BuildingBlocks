@@ -4,6 +4,8 @@ import android.util.Log;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
@@ -111,6 +113,10 @@ public class MainActivityPresenter {
                         versionCode = Integer.parseInt(bb.getElementsByTagName("versionCode").item(0).getFirstChild().getNodeValue());
                         versionName = bb.getElementsByTagName("versionName").item(0).getFirstChild().getNodeValue();
                         apkUrl = bb.getElementsByTagName("url").item(0).getFirstChild().getNodeValue();
+                        NodeList descNodes = bb.getElementsByTagName("description");
+                        for (int i = 0; i < descNodes.getLength(); i++) {
+                            desc.add(descNodes.item(i).getFirstChild().getNodeValue());
+                        }
                     } catch (IOException | ParserConfigurationException | SAXException e) {
                         e.printStackTrace();
                     }

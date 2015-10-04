@@ -21,12 +21,18 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.text.DateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -249,14 +255,18 @@ public class MainActivity extends BaseActivity implements IMainActivity{
     }
 
     @Override
-    public void showUpdate(final int versionCode, String versionName, final String apkUrl, List<String> disc) {
+    public void showUpdate(final int versionCode, String versionName, final String apkUrl, final List<String> desc) {
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                String detail = "";
+                for (String s : desc) {
+                    detail += "\n" + s;
+                }
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
                         .setTitle("发现新版本")
                         .setIcon(R.drawable.icon)
-                        .setMessage("当前版本号为：" + VersionUtils.getVerisonCode() + "\n" + "新版本号为：" + versionCode)
+                        .setMessage("当前版本号为：" + VersionUtils.getVerisonCode() + "\n" + "新版本号为：" + versionCode + "\n详情：" + detail)
                         .setPositiveButton("下载", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -271,6 +281,7 @@ public class MainActivity extends BaseActivity implements IMainActivity{
                                 dialog.dismiss();
                             }
                         });
+
                 builder.create().show();
             }
         });
