@@ -355,9 +355,18 @@ public class DailyModel implements IDaily {
         if (header_for_mobile != null && header_for_mobile.size() != 0) {
             header_for_mobile.remove();
         }
-        document.select("div[class=question]").get(1).remove();
-        document.select("div[class=qr]").remove();
-        document.select("div[class=bottom-wrap]").remove();
+        Elements question = document.select("div[class=question]");
+        if (question != null && question.size() == 2) {
+            question.get(1).remove();
+        }
+        Elements qr = document.select("div[class=qr]").remove();
+        if (qr != null && qr.size() == 0) {
+            qr.remove();
+        }
+        Elements bottom_wrap = document.select("div[class=bottom-wrap]");
+        if (bottom_wrap != null && bottom_wrap.size() != 0) {
+            bottom_wrap.remove();
+        }
     }
 
     /**
