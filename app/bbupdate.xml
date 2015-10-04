@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<update>
+    <name>Building Blocks</name>
+    <versionCode>85</versionCode>
+    <versionName>0.6.2</versionName>
+    <url>http://7xk54v.com1.z0.glb.clouddn.com/@/app/bb/0.6.2.apk</url>
+    <description>1. 增加了Toolbar颜色变化(萝莉炮以上)</description>
+    <description>2. 修复了数据库缓存删除错误的BUG</description>
+</update>

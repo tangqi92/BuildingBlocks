@@ -69,7 +69,7 @@ public class MainActivityPresenter {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    String urlStr = "http://7xk54v.com1.z0.glb.clouddn.com/app/bb/bbupdate.xmll";
+                    String urlStr = "https://raw.githubusercontent.com/troyliu0105/BuildingBlocks/dev/app/bbupdate.xml";
                     String name = null;
                     int versionCode = 0;
                     String versionName = null;
