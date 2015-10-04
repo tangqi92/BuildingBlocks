@@ -87,11 +87,7 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         if (PrefUtils.isEnableCache()) {
-            if (NetworkUtils.isNetworkConnected()) {
-                webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
-            } else {
-                webSettings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
-            }
+            webSettings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
             webSettings.setAppCacheEnabled(true);
             webSettings.setDatabaseEnabled(true);
         }
