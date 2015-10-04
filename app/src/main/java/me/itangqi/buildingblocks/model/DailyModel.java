@@ -45,8 +45,11 @@ import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.model.entity.DailyResult;
 
 /**
- * 数据交换中枢，负责数据的存储和获取
  * Created by Troy on 2015/9/21.
+ * <br/>
+ * 数据交换中枢，负责数据的存储和获取
+ * <br/>
+ * <b>通过API获取请求地址的时候，传入的日期时间要比当前时间大一天，而返回的数据里面的date属性又是当前时间，这样一来造成了，读取数据库数据与储存数据混乱</b>
  */
 public class DailyModel implements IDaily {
 
@@ -60,6 +63,7 @@ public class DailyModel implements IDaily {
     private SQLiteHelper mSQLiteHelper;
     private static DailyModel mDailyModel;
 
+    // 用来判断是否已从网上获取了数据，从而避免重复获取
     private boolean hasReadFromNet = false;
 
     //用来获取Daily集合
@@ -112,6 +116,11 @@ public class DailyModel implements IDaily {
         }
     };
 
+    /**
+     * 创建一个Model对象
+     * @param iHttpCallBack 用来实现实现数据(非GSON数据)完成后的回调接口，主要用于RecyclerView显示
+     * @return 返回Model对象
+     */
     public static DailyModel newInstance(IHttpCallBack iHttpCallBack) {
         if (mDailyModel == null) {
             return new DailyModel(iHttpCallBack);
@@ -120,6 +129,11 @@ public class DailyModel implements IDaily {
         }
     }
 
+    /**
+     * 创建一个Model对象
+     * @param iGsonCallBack 用来实现实现GSON数据获取完成后的回调接口，主要用于RecyclerView显示
+     * @return 返回Model对象
+     */
     public static DailyModel newInstance(IGsonCallBack iGsonCallBack) {
         if (mDailyModel == null) {
             return new DailyModel(iGsonCallBack);
@@ -154,6 +168,11 @@ public class DailyModel implements IDaily {
         this.mDailiesFromCache = new ArrayList<>();
     }
 
+    /**
+     * 只暴露了此方法给Presenter使用，根据Pref来判断数据获取的方式以及顺序
+     * 获取的数据供RecyclerView来显示
+     * @param date 当前的时间 <b>+1天</b>
+     */
     public void getDailyResult(int date) {
         hasReadFromNet = false;
         if (PrefUtils.isEnableCache()) {
@@ -183,6 +202,10 @@ public class DailyModel implements IDaily {
         getDailyStoriesDB(date);
     }
 
+    /**
+     * 获取在gson模式下的New数据
+     * @param id 获取gson数据的唯一id
+     */
     @Override
     public void getGsonNews(int id) {
         if (getDailyGsonDB(id) == null) {
@@ -284,7 +307,7 @@ public class DailyModel implements IDaily {
 
     /**
      * 使用Jsoup来对数据库里面的DaliyGson中的body字段进行解析
-     * @param dailyGson
+     * @param dailyGson 待解析的gson对象
      * @return 返回一个包含额外信息和正文的HashMap
      */
     public Map<String, LinkedHashMap<String, String>> parseBody(DailyGson dailyGson) {
@@ -344,6 +367,11 @@ public class DailyModel implements IDaily {
         return false;
     }
 
+    /**
+     * 在html+模式下，对获取到的html数据进行修改，去除不必要的数据
+     * @param htmlUrl 原始html字符串
+     * @return 之后的html数据
+     */
     public Map<String,String> parseHtml(String htmlUrl) {
         Map<String, String> htmlMap = new HashMap<>();
         try {
@@ -403,7 +431,7 @@ public class DailyModel implements IDaily {
     /**
      * 清除指定日期前的数据，默认为7天之前
      * @param beforedate 超过此日前的所有数据
-     * @return 被删除的数据总数
+     * @return 被删除的数据条数
      */
     public int clearOutdateCache(int beforedate) {
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
@@ -426,6 +454,11 @@ public class DailyModel implements IDaily {
         return hasDeleted;
     }
 
+    /**
+     * 删除过期的Glide缓存
+     * @param beforedate 过期时间
+     * @return 删除文件大小
+     */
     public long clearOutdatePhoto(int beforedate) {
         long clearedSize = 0;
         File cacheDir = Glide.getPhotoCacheDir(App.getContext());
@@ -450,6 +483,10 @@ public class DailyModel implements IDaily {
         }
     }
 
+    /**
+     * 使用SQL语句拼接的插入语句(性能更好)，<b>待测试</b>
+     * @param dailyGson 要保存的gson数据
+     */
     @Deprecated
     private void insertDailyGsonDB(DailyGson dailyGson) {
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
@@ -458,6 +495,10 @@ public class DailyModel implements IDaily {
         database.close();
     }
 
+    /**
+     * 使用SQL语句拼接的插入语句(性能更好)，<b>待测试</b>
+     * @param dailyResult 要保存的DailyResult数据
+     */
     @Deprecated
     private void insertDailyStoriesDB(DailyResult dailyResult) {
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
@@ -468,6 +509,12 @@ public class DailyModel implements IDaily {
         database.close();
     }
 
+    /**
+     * 序列化List为本地文件，已过时。已使用数据库替代
+     * @param date
+     * @param dailyList
+     * @throws IOException
+     */
     @Deprecated
     private void serializDaily(int date, List<Daily> dailyList) throws IOException {
         String itemParentPath = App.getContext().getCacheDir().getAbsolutePath() + "/daily";
@@ -484,6 +531,13 @@ public class DailyModel implements IDaily {
         oos.close();
     }
 
+    /**
+     * 反序列化本地文件为List，已过时。已使用数据库替代
+     * @param date
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     @Deprecated
     private List<Daily> deserializDaily(int date) throws IOException, ClassNotFoundException {
         String cachePath = App.getContext().getCacheDir().getAbsolutePath();

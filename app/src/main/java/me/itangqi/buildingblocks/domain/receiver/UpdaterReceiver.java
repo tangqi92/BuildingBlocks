@@ -15,12 +15,14 @@ import me.itangqi.buildingblocks.domain.service.Updater;
 
 /**
  * Created by Troy on 2015/10/3.
+ * 用来实现，在更新下载失败后的提醒
  */
 public class UpdaterReceiver extends BroadcastReceiver{
 
     public static final String TAG = "UpdaterReceiver";
 
     private NotificationManager mManager;
+    //Dialog的生成需要Activity的Context (需要窗体)
     private Activity mActivity;
 
     public UpdaterReceiver(Activity activity) {

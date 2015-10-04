@@ -1,23 +1,16 @@
 package me.itangqi.buildingblocks.domain.service;
 
-import android.app.Activity;
 import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.View;
-import android.widget.RemoteViews;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -32,10 +25,10 @@ import java.util.TimerTask;
 
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.domain.utils.Constants;
-import me.itangqi.buildingblocks.view.ui.activity.MainActivity;
 
 /**
  * Created by Troy on 2015/10/2.
+ * 用来实现下载功能，根据Pref的设置，是否每次在MainActivity启动时调用
  */
 public class Updater extends IntentService {
 
@@ -45,7 +38,6 @@ public class Updater extends IntentService {
     private int hasDown;
     private int size;
     private boolean isError = false;
-    private Activity mActivity;
 
     private NotificationManager mNotificationManager;
     private Notification.Builder mNotificationBuilder;
