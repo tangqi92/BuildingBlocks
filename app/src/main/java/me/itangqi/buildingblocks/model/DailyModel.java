@@ -318,11 +318,7 @@ public class DailyModel implements IDaily {
         try {
             URL url = new URL(htmlUrl);
             Document document = Jsoup.connect(htmlUrl).userAgent("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8").get();
-            document.select("div[class=global-header]").remove();
-            document.select("div[class=header-for-mobile]").remove();
-            document.select("div[class=question]").get(1).remove();
-            document.select("div[class=qr]").remove();
-            document.select("div[class=bottom-wrap]").remove();
+            removeElements(document);
             Element header = document.select("div[class=headline]").get(0);
             Elements headerChildren = header.getAllElements();
             for (Element child : headerChildren) {
@@ -344,6 +340,24 @@ public class DailyModel implements IDaily {
             e.printStackTrace();
         }
         return htmlMap;
+    }
+
+    /**
+     * 避免因为要移除的元素不存在，而造成的IndexOutOfBoundsException，先对元素进行判断
+     * @param document 从网页解析得到的Document对象
+     */
+    private void removeElements(Document document) {
+        Elements global_header = document.select("div[class=global-header]");
+        if (global_header != null && global_header.size() != 0) {
+            global_header.remove();
+        }
+        Elements header_for_mobile = document.select("div[class=header-for-mobile]");
+        if (header_for_mobile != null && header_for_mobile.size() != 0) {
+            header_for_mobile.remove();
+        }
+        document.select("div[class=question]").get(1).remove();
+        document.select("div[class=qr]").remove();
+        document.select("div[class=bottom-wrap]").remove();
     }
 
     /**
