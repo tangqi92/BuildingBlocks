@@ -15,8 +15,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public static String DATABASE_NAME = "zhihu.db";
 
     public static String CREATE_DAILYGSON_TABLE = "CREATE TABLE daily("
-            + "_id INTEGER PRIMARY KEY autoincrement, "
-            + "id SMALLINT NOT NULL,"
+            + "id SMALLINT PRIMARY KEY NOT NULL,"
             + "title TEXT NOT NULL,"
             + "type SMALLINT NOT NULL,"
             + "image_source TEXT NULL,"
@@ -27,9 +26,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             + "UNIQUE (id))";
 
     public static String CREATE_DAILYRESULT_TABLE = "CREATE TABLE dailyresult("
-            + "_id INTEGER PRIMARY KEY autoincrement, "
             + "date SMALLINT,"
-            + "id SMALLINT,"
+            + "id SMALLINT PRIMARY KEY,"
             + "title TEXT,"
             + "image TEXT NULL,"
             + "type SMALLINT,"
