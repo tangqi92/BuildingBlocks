@@ -24,6 +24,7 @@ import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.presenters.GsonNewsPresenter;
 import me.itangqi.buildingblocks.view.IGsonNews;
 import me.itangqi.buildingblocks.view.ui.activity.base.SwipeBackActivity;
+import me.itangqi.buildingblocks.view.widget.GlidePaletteListenerImp;
 
 /**
  * Created by Troy on 2015/9/24.
@@ -43,6 +44,7 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
     private ImageView mImageView_avatar;
     private TextView mTextView_author;
     private TextView mTextView_bio;
+    private GlidePaletteListenerImp mPaletteListenerImp;
 
     private DailyGson mDailyGson;
 
@@ -58,13 +60,14 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
         String title = getIntent().getStringExtra(EXTRA_TITLE);
         mPresenter = new GsonNewsPresenter(this);
         initView(title);
+        mPaletteListenerImp = new GlidePaletteListenerImp(mHeader, this, mCollapsingToolbarLayout);
         mPresenter.getGsonNews(id);
     }
 
     @Override
     public void loadGson(DailyGson dailyGson) {
         mDailyGson = dailyGson;
-        Glide.with(App.getContext()).load(dailyGson.image).fitCenter().into(mHeader);
+        Glide.with(App.getContext()).load(dailyGson.image).asBitmap().fitCenter().listener(mPaletteListenerImp).into(mHeader);
         UITask task = new UITask();
         task.execute(dailyGson);
     }

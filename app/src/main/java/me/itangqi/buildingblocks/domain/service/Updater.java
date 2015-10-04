@@ -1,13 +1,22 @@
 package me.itangqi.buildingblocks.domain.service;
 
+import android.app.Activity;
 import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.View;
 import android.widget.RemoteViews;
 
 import java.io.BufferedInputStream;
@@ -22,6 +31,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.domain.utils.Constants;
+import me.itangqi.buildingblocks.view.ui.activity.MainActivity;
 
 /**
  * Created by Troy on 2015/10/2.
@@ -30,11 +41,14 @@ public class Updater extends IntentService {
 
     public static final String TAG = "Updater";
 
+    private String urlStr = null;
     private int hasDown;
     private int size;
+    private boolean isError = false;
+    private Activity mActivity;
 
     private NotificationManager mNotificationManager;
-    private Notification mNotification;
+    private Notification.Builder mNotificationBuilder;
     public static final int ID = 0x123;
 
     public Updater() {
@@ -44,17 +58,21 @@ public class Updater extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotification = new Notification.Builder(this)
-                .setTicker("正在下载")
-                .setSmallIcon(R.drawable.icon)
-                .setContentTitle("当前下载进度")
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.icon);
+        mNotificationBuilder = new Notification.Builder(this)
+                .setContentTitle(getString(R.string.service_updating))
+                .setProgress(100, 0, false)
+                .setLargeIcon(bitmap)
                 .setWhen(System.currentTimeMillis())
-                .build();
-        RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.service_update_notification);
-        remoteViews.setProgressBar(R.id.update_progress, 100, 0, false);
-        mNotification.contentView = remoteViews;
-        mNotificationManager.notify(ID, mNotification);
-        String urlStr = intent.getStringExtra("url");
+                .setSmallIcon(R.drawable.icon)
+                .setVibrate(new long[]{500})
+                .setOngoing(true);
+        urlStr = intent.getStringExtra("url");
+        Log.d(TAG, "url--->" + urlStr);
+        download();
+    }
+
+    private void download() {
         String name = urlStr.substring(urlStr.lastIndexOf("/") + 1, urlStr.length());
         Uri uri = null;
         File apk = null;
@@ -94,6 +112,8 @@ public class Updater extends IntentService {
                 Log.d(TAG, "responseCode--->" + responseCode);
             }
         } catch (IOException e) {
+            isError = true;
+            showError();
             e.printStackTrace();
         } finally {
             try {
@@ -122,8 +142,12 @@ public class Updater extends IntentService {
                 int status = (int) (((float) hasDown / size) * 100);
                 Log.d(TAG, "size--->" + size + "; hasDown--->" + hasDown);
                 Log.d(TAG, "status--->" + status);
-                mNotification.contentView.setProgressBar(R.id.update_progress, 100, status, false);
-                mNotificationManager.notify(ID, mNotification);
+                if (!isError) {
+                    mNotificationManager.notify(ID, mNotificationBuilder.setProgress(100, status, false).build());
+                } else {
+                    mNotificationManager.cancel(ID);
+                    cancel();
+                }
                 if (status >= 100) {
                     mNotificationManager.cancel(ID);
                     cancel();
@@ -139,6 +163,14 @@ public class Updater extends IntentService {
         intent.setDataAndType(uri, "application/vnd.android.package-archive");
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        this.stopSelf();
+    }
+
+    private void showError() {
+        Intent intent = new Intent(Constants.BROADCAST_UPDATE_ACTION);
+        intent.addCategory(Constants.BROADCAST_UPDATE_CATEGORY);
+        intent.putExtra("url", urlStr);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
         this.stopSelf();
     }
 }

@@ -362,8 +362,9 @@ public class DailyModel implements IDaily {
      * @return 被删除的数据总数
      */
     public int clearOutdateCache(int beforedate) {
+        //TODO BUG: 不能准确删除
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
-        Cursor findId = database.rawQuery("SELECT * FROM dailyresult WHERE date <= ?", new String[]{beforedate + ""});
+        Cursor findId = database.rawQuery("SELECT id FROM dailyresult WHERE date <= ?", new String[]{beforedate + ""});
         List<String> toDelete = new ArrayList<>();
         while (findId.moveToNext()) {
             toDelete.add(findId.getInt(findId.getColumnIndex("id")) + "");
@@ -371,13 +372,13 @@ public class DailyModel implements IDaily {
         if (findId.isAfterLast() && !findId.isClosed()) {
             findId.close();
         }
-        int deletedResult = database.delete("dailyresult", "date<=?", new String[]{beforedate + ""});
+        database.delete("dailyresult", "date<=?", new String[]{beforedate + ""});
         int size = toDelete.size();
         String[] ids = toDelete.toArray(new String[size]);
         for (String id : ids) {
             database.execSQL("DELETE FROM daily where id =" + Integer.parseInt(id)); //使用delete()一次性删除，会提示参数过多
         }
-        return deletedResult;
+        return toDelete.size();
     }
 
     public long clearOutdatePhoto(int beforedate) {
@@ -397,15 +398,8 @@ public class DailyModel implements IDaily {
     @Deprecated
     private void insertDailyGsonDB(DailyGson dailyGson) {
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
-        String sql = "INSERT OR IGNORE INTO daily(id, title, image_source, image, share_url, ga_prefix, body) values("
-                + dailyGson.id + ","
-                + "\"" + dailyGson.title + "\"" + ","
-                + "\"" + dailyGson.image_source + "\"" + ","
-                + "\"" + dailyGson.image + "\"" + ","
-                + "\"" + dailyGson.share_url + "\"" + ","
-                + dailyGson.ga_prefix + ","
-                + "\"" + dailyGson.body + "\"" + ")";
-        database.execSQL(sql);
+        String sql = "INSERT OR IGNORE INTO daily(id, title, image_source, image, share_url, ga_prefix, body) values(?,?,?,?,?,?,?)";
+        database.execSQL(sql, new Object[]{dailyGson.id, dailyGson.title, dailyGson.image_source, dailyGson.image, dailyGson.share_url, dailyGson.ga_prefix, dailyGson.body});
         database.close();
     }
 
@@ -413,14 +407,8 @@ public class DailyModel implements IDaily {
     private void insertDailyStoriesDB(DailyResult dailyResult) {
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
         for (Daily story : dailyResult.stories) {
-            String sql = "INSERT OR IGNORE INTO dailyresult(date, id, title, image, type, ga_prefix) values("
-                    + dailyResult.date + ","
-                    + story.id + ","
-                    + "\"" + story.title + "\"" + ","
-                    + "\"" + story.images.get(0) + "\"" + ","
-                    + story.type + ","
-                    + story.ga_prefix + ")";
-            database.execSQL(sql);
+            String sql = "INSERT OR IGNORE INTO dailyresult(date, id, title, image, type, ga_prefix) values(?,?,?,?,?,?)";
+            database.execSQL(sql, new Object[]{dailyResult.date, story.id, story.title, story.image, story.type, story.ga_prefix});
         }
         database.close();
     }
