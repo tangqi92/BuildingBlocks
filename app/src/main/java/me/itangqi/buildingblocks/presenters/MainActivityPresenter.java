@@ -49,9 +49,11 @@ public class MainActivityPresenter {
 
     public void clearCache() {
         Calendar calendar = Calendar.getInstance();
-        int today = Integer.parseInt(Constants.simpleDateFormat.format(calendar.getTime()));
-        int totalDeleted = mDailyModel.clearOutdateCache(today - 7);
-        long deletedSize = mDailyModel.clearOutdatePhoto(today - 7);
+        calendar.add(Calendar.DAY_OF_MONTH, -Constants.PAGE_COUNT);
+        int before = Integer.parseInt(Constants.simpleDateFormat.format(calendar.getTime()));
+        int totalDeleted = mDailyModel.clearOutdateCache(before);
+        long deletedSize = mDailyModel.clearOutdatePhoto(before);
+        Log.d(TAG, "totalDeleted--->" + totalDeleted);
         if (totalDeleted > 0) {
             mMainActivity.showSnackBar("清理了" + totalDeleted + "条过期数据；" + "图片" + (deletedSize / 1024) + "KB", 1500);
         }
