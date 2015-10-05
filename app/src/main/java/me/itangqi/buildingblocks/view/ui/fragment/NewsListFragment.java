@@ -23,7 +23,7 @@ import me.itangqi.buildingblocks.model.entity.Daily;
 import me.itangqi.buildingblocks.presenters.NewsListFragmentPresenter;
 import me.itangqi.buildingblocks.view.IViewPager;
 import me.itangqi.buildingblocks.view.adapter.DailyListAdapter;
-import me.itangqi.buildingblocks.view.widget.SimpleDividerItemDecoration;
+import me.itangqi.buildingblocks.view.widget.RecyclerViewItemDecoration;
 
 public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, IViewPager {
     private List<Daily> mNewsList = new ArrayList<>();
@@ -70,7 +70,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(
+        mRecyclerView.addItemDecoration(new RecyclerViewItemDecoration(
                 getActivity()
         ));
 

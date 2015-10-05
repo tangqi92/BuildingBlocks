@@ -31,11 +31,6 @@ public class PrefUtils {
         return preferences.getBoolean("auto_update", false);
     }
 
-    public static boolean isLightOrDark() {
-        SharedPreferences preferences = getSharedPreferences();
-        return preferences.getBoolean("light_or_dark", true);
-    }
-
     public static SharedPreferences getSharedPreferences() {
         return App.getContext()
                 .getSharedPreferences("me.itangqi.buildingblocks_preferences", Context.MODE_PRIVATE);
