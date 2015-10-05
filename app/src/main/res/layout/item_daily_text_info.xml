@@ -13,8 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="今天是七夕节..."
-        android:textColor="@color/primary_text"
-        android:textSize="18sp"/>
+        android:textSize="18sp"
+        style="@style/TextAppearance.AppCompat.Body1"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="然并卵..."
-        android:textColor="@color/secondary_text"
-        android:textSize="10sp"/>
+        android:textSize="10sp"
+        style="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"/>
 
 </LinearLayout>

@@ -12,6 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerInside"
-        android:background="@drawable/texture" />
+        android:background="@drawable/bg_pick_photo" />
 
 </LinearLayout>

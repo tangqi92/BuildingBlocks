@@ -3,7 +3,6 @@ package me.itangqi.buildingblocks.view.widget;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -20,7 +19,7 @@ public class SimpleDividerItemDecoration extends RecyclerView.ItemDecoration {
     public SimpleDividerItemDecoration(Context context) {
         if (PrefUtils.isLightOrDark())
             mDivider = context.getResources().getDrawable(R.drawable.item_divider_black);
-        else mDivider = ContextCompat.getDrawable(context, R.drawable.item_divider_white);
+        else mDivider = context.getResources().getDrawable(R.drawable.item_divider_white);
     }
 
     @Override
