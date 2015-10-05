@@ -5,17 +5,14 @@
 
         <item
             android:id="@+id/nav_home"
-            android:checked="false"
             android:icon="@drawable/drawer_action_share"
             android:title="@string/drawer_item_home"/>
         <item
             android:id="@+id/nav_collection"
-            android:checked="false"
             android:icon="@drawable/drawer_action_collection"
             android:title="@string/drawer_item_collection"/>
         <item
             android:id="@+id/nav_read"
-            android:checked="false"
             android:icon="@drawable/drawer_action_read"
             android:title="@string/drawer_item_read"/>
 

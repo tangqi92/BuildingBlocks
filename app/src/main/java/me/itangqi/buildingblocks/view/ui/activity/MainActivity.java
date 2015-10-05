@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -37,13 +40,14 @@ import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.domain.receiver.UpdaterReceiver;
 import me.itangqi.buildingblocks.domain.service.Updater;
 import me.itangqi.buildingblocks.domain.utils.Constants;
+import me.itangqi.buildingblocks.domain.utils.PrefUtils;
 import me.itangqi.buildingblocks.domain.utils.VersionUtils;
 import me.itangqi.buildingblocks.presenters.MainActivityPresenter;
 import me.itangqi.buildingblocks.view.IMainActivity;
 import me.itangqi.buildingblocks.view.ui.activity.base.BaseActivity;
 import me.itangqi.buildingblocks.view.ui.fragment.NewsListFragment;
 
-public class MainActivity extends BaseActivity implements IMainActivity{
+public class MainActivity extends BaseActivity implements IMainActivity {
 
     public static final String TAG = "MainActivity";
 
@@ -56,6 +60,7 @@ public class MainActivity extends BaseActivity implements IMainActivity{
 
     private MainActivityPresenter mPresenter;
     private UpdaterReceiver mUpdaterReceiver;
+    private static boolean isLightTheme = true;
 
     @OnClick(R.id.fab)
     public void fabOnClick() {
@@ -66,6 +71,11 @@ public class MainActivity extends BaseActivity implements IMainActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        if (isLightTheme)
+            setTheme(R.style.Theme_AppTheme_Light);
+        else
+            setTheme(R.style.Theme_AppTheme_Dark);
         layoutResID = R.layout.activity_main;
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
@@ -210,6 +220,22 @@ public class MainActivity extends BaseActivity implements IMainActivity{
         switch (item.getItemId()) {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            case R.id.men_action_read_mode:
+                if (isLightTheme)
+                    isLightTheme = false;
+                else isLightTheme = true;
+                SharedPreferences.Editor editor = PrefUtils.getSharedPreferences().edit();
+                editor.putBoolean("light_or_dark", isLightTheme);
+                Intent i = this.getBaseContext().getPackageManager().getLaunchIntentForPackage(this.getBaseContext().getPackageName());
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                return true;
+            case R.id.menu_action_feedback:
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri data = Uri.parse("mailto:imtangqi@gmail.com");
+                intent.setData(data);
+                startActivity(intent);
                 return true;
             default:
                 Snackbar.make(mContainer, R.string.snack_rest_over_to_you, Snackbar.LENGTH_LONG).show();

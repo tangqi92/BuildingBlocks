@@ -4,6 +4,7 @@
         <item>http+</item>
         <item>gson</item>
     </string-array>
+
     <string-array name="value_way_to_get_data">
         <item>http+</item>
         <item>gson</item>

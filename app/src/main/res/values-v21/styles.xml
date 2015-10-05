@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Base.Theme.AppTheme" parent="Theme.AppTheme">
+    <style name="Base.Theme.AppTheme" parent="Theme.AppTheme.Light">
         <item name="android:windowIsTranslucent">true</item>
     </style>
 

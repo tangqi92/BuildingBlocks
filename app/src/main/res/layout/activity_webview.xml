@@ -84,14 +84,17 @@
         android:layout_height="wrap_content"
         app:arcColor="@color/accent_dark"
         app:layout_anchor="@id/app_bar_layout"
-        app:layout_anchorGravity="bottom|left|end">
+        app:layout_anchorGravity="bottom|left|end"
+        app:layout_behavior="me.itangqi.buildingblocks.view.widget.FABProgressCircleBehavior">
 
-        <android.support.design.widget.FloatingActionButton
+    <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            android:src="@mipmap/ic_refresh_white_24dp"/>
+            android:src="@mipmap/ic_refresh_white_24dp"
+            app:layout_anchor="@id/app_bar_layout"
+            app:layout_anchorGravity="bottom|left|end"/>
     </com.github.jorgecastilloprz.FABProgressCircle>
 
 </android.support.design.widget.CoordinatorLayout>

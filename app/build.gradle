@@ -8,8 +8,8 @@ android {
         applicationId "me.itangqi.buildingblocks"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 83
-        versionName "0.6.1"
+        versionCode 84
+        versionName "0.6.2"
     }
     buildTypes {
         release {
@@ -37,5 +37,5 @@ dependencies {
     compile 'me.imid.swipebacklayout.lib:library:1.0.0'
     compile 'org.jsoup:jsoup:1.8.3'
     compile 'com.github.jorgecastilloprz:fabprogresscircle:1.01@aar'
-    compile 'com.android.support:palette-v7:23.0.1'
+    compile 'com.android.support:palette-v7:22.2.1'
 }
