@@ -50,7 +50,7 @@
 
     <string name="menu_action_feedback">用户反馈</string>
     <string name="men_action_refresh">刷新</string>
-    <string name="men_action_read_mode">夜间模式</string>
+    <string name="men_action_read_mode">切换模式</string>
     <string name="menu_action_pick_photo">选取</string>
 
     <string name="snack_exit_once_more">再按一次退出积木</string>

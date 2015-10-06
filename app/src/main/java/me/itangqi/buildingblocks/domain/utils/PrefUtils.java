@@ -31,7 +31,7 @@ public class PrefUtils {
         return preferences.getBoolean("auto_update", false);
     }
 
-    private static SharedPreferences getSharedPreferences() {
+    public static SharedPreferences getSharedPreferences() {
         return App.getContext()
                 .getSharedPreferences("me.itangqi.buildingblocks_preferences", Context.MODE_PRIVATE);
     }

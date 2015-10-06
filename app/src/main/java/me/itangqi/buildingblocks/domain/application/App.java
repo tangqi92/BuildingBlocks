@@ -3,6 +3,8 @@ package me.itangqi.buildingblocks.domain.application;
 import android.app.Application;
 import android.content.Context;
 
+import me.itangqi.buildingblocks.domain.utils.ThemeUtils;
+
 /**
  * Created by tangqi on 7/20/15.
  */

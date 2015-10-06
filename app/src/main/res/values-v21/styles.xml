@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Base.Theme.AppTheme" parent="Theme.AppTheme">
+    <style name="Base.Theme.AppTheme.Light" parent="Theme.AppTheme.Light">
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
-    <style name="Root.Theme.AppTheme" parent="Base.Theme.AppTheme">
+    <style name="Base.Theme.AppTheme.Dark" parent="Theme.AppTheme.Dark">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="Root.Theme.AppTheme.Light" parent="Theme.AppTheme.Light">
         <!-- 解决activity切换时的黑屏问题 -->
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="GsonActivity.Theme.AppTheme" parent="Root.Theme.AppTheme">
-        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
-        <item name="android:statusBarColor">@color/primary_dark</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowTranslucentStatus">true</item>
+    <style name="Root.Theme.AppTheme.Dark" parent="Theme.AppTheme.Dark">
+        <!-- 解决activity切换时的黑屏问题 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
 </resources>

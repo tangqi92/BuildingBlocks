@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/group1"
+        android:checkableBehavior="single">
 
         <item
             android:id="@+id/nav_home"
-            android:checked="false"
             android:icon="@drawable/drawer_action_share"
             android:title="@string/drawer_item_home"/>
         <item
             android:id="@+id/nav_collection"
-            android:checked="false"
             android:icon="@drawable/drawer_action_collection"
             android:title="@string/drawer_item_collection"/>
         <item
             android:id="@+id/nav_read"
-            android:checked="false"
             android:icon="@drawable/drawer_action_read"
             android:title="@string/drawer_item_read"/>
-
-        <item android:title="@string/drawer_item_additional">
-            <menu>
-                <item
-                    android:id="@+id/nav_pick_photo"
-                    android:checked="false"
-                    android:title="@string/drawer_item_pick_photo"/>
-                <item
-                    android:id="@+id/nav_pick_place"
-                    android:checked="false"
-                    android:title="@string/drawer_item_pick_place"/>
-                <item
-                    android:id="@+id/nav_settings"
-                    android:checked="false"
-                    android:title="@string/drawer_item_settings"/>
-                <item
-                    android:id="@+id/nav_about"
-                    android:checked="false"
-                    android:title="@string/drawer_item_about"/>
-            </menu>
-        </item>
     </group>
+
+    <group
+        android:id="@+id/group2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_pick_photo"
+            android:checked="false"
+            android:title="@string/drawer_item_pick_photo"/>
+        <item
+            android:id="@+id/nav_pick_place"
+            android:checked="false"
+            android:title="@string/drawer_item_pick_place"/>
+        <item
+            android:id="@+id/nav_settings"
+            android:checked="false"
+            android:title="@string/drawer_item_settings"/>
+        <item
+            android:id="@+id/nav_about"
+            android:checked="false"
+            android:title="@string/drawer_item_about"/>
+    </group>
+
 </menu>

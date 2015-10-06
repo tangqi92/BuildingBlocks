@@ -16,6 +16,7 @@ import me.imid.swipebacklayout.lib.Utils;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.domain.utils.ThemeUtils;
 
 /**
  * 手势右划返回
@@ -38,6 +39,7 @@ public abstract class SwipeBackActivity extends AppCompatActivity implements Swi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeUtils.changeTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());
         ButterKnife.bind(this);

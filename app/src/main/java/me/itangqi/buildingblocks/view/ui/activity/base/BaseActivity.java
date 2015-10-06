@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.domain.utils.ThemeUtils;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -20,6 +21,7 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeUtils.changeTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(layoutResID);
         ButterKnife.bind(this);

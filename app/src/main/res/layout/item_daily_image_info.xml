@@ -5,7 +5,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/md_white_1000"
     android:orientation="horizontal"
     android:padding="@dimen/margin_16dp">
 
@@ -21,7 +20,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/abc_list_item_padding_horizontal_material"
         android:text="今天是七夕节..."
-        android:textColor="@color/primary_text"
+        style="@style/TextAppearance.AppCompat.Body1"
         android:textSize="18sp"/>
 
 </LinearLayout>

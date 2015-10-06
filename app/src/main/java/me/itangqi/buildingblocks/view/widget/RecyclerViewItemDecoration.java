@@ -7,16 +7,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.domain.utils.ThemeUtils;
 
 /**
  * Simple RecyclerView Divider
  * Created by tangqi on 9/16/15.
  */
-public class SimpleDividerItemDecoration extends RecyclerView.ItemDecoration {
+public class RecyclerViewItemDecoration extends RecyclerView.ItemDecoration {
     private Drawable mDivider;
 
-    public SimpleDividerItemDecoration(Context context) {
-        mDivider = context.getResources().getDrawable(R.drawable.line_divider);
+    public RecyclerViewItemDecoration(Context context) {
+        if (ThemeUtils.isLight)
+            mDivider = context.getResources().getDrawable(R.drawable.item_divider_white);
+        else mDivider = context.getResources().getDrawable(R.drawable.item_divider_black);
     }
 
     @Override
