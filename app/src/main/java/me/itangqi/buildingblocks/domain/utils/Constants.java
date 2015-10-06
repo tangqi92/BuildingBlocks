@@ -12,5 +12,6 @@ public final class Constants {
     public static final String BROADCAST_UPDATE_ACTION = "me.itangqi.buildingblocks.broadcast.update.action";
 
     public static final String BROADCAST_STATUS = "me.itangqi.buildingblocks.broadcast.update.status";
+
     public static final String BROADCAST_UPDATE_CATEGORY = "me.itangqi.buildingblocks.broadcast.update.category";
 }

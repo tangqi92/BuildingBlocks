@@ -4,6 +4,7 @@
     <attr format="reference" name="iconColor"/>
     <attr format="reference" name="windowBackground"/>
     <attr format="reference" name="stateSelector" />
+    <attr format="reference" name="fabCircleColor" />
 
     <declare-styleable name="CircleImageView">
         <attr name="border_width" format="dimension" />

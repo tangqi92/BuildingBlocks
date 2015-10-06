@@ -83,7 +83,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_card_nopic"
                 android:padding="16dp">
 
                 <TextView
@@ -114,7 +113,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_card_nopic"
                 android:padding="16dp">
 
                 <TextView
@@ -145,7 +143,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_card_nopic"
                 android:padding="16dp">
 
                 <ImageView
@@ -232,7 +229,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_16dp"
-                android:background="@drawable/bg_card_nopic"
                 android:padding="16dp">
 
                 <TextView
