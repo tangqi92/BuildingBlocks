@@ -76,7 +76,7 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         if (PrefUtils.isEnableCache()) {
-            webSettings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
+            webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
             webSettings.setAppCacheEnabled(true);
             webSettings.setDatabaseEnabled(true);
         }
@@ -190,7 +190,11 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
 //                Log.d(TAG, entry.getValue());
                 mWebView.loadDataWithBaseURL(mUrl, entry.getValue(), "text/html; charset=UTF-8", "uft-8", null);
             } else if (entry.getKey().equals("img")) {
-                Glide.with(App.getContext()).load(entry.getValue()).asBitmap().centerCrop().listener(mPaletteListenerImp).into(mHeaderImg);
+                if (ThemeUtils.isLight) {
+                    Glide.with(App.getContext()).load(entry.getValue()).asBitmap().centerCrop().listener(mPaletteListenerImp).into(mHeaderImg);
+                }else {
+                    Glide.with(App.getContext()).load(entry.getValue()).asBitmap().centerCrop().into(mHeaderImg);
+                }
             } else if (entry.getKey().equals("img_source")) {
                 mHeaderSource.setText(entry.getValue());
                 mHeaderSource.setVisibility(View.VISIBLE);
@@ -208,6 +212,9 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
                 fabProgressCircle.beginFinalAnimation();
             } else if (newProgress != 100) {
                 fabProgressCircle.show();
+            }
+            if (fabProgressCircle.isHovered()) {
+                fabProgressCircle.setVisibility(View.INVISIBLE);
             }
         }
 
@@ -230,5 +237,7 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
                 view.setBackgroundColor(WebActivity.this.getResources().getColor(R.color.window_background_dark));
             }
         }
+
+
     }
 }
