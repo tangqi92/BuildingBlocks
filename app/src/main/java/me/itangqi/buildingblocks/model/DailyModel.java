@@ -40,6 +40,7 @@ import me.itangqi.buildingblocks.domain.application.App;
 import me.itangqi.buildingblocks.domain.db.SQLiteHelper;
 import me.itangqi.buildingblocks.domain.utils.Constants;
 import me.itangqi.buildingblocks.domain.utils.PrefUtils;
+import me.itangqi.buildingblocks.domain.utils.ThemeUtils;
 import me.itangqi.buildingblocks.model.entity.Daily;
 import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.model.entity.DailyResult;
@@ -118,6 +119,7 @@ public class DailyModel implements IDaily {
 
     /**
      * 创建一个Model对象
+     *
      * @param iHttpCallBack 用来实现实现数据(非GSON数据)完成后的回调接口，主要用于RecyclerView显示
      * @return 返回Model对象
      */
@@ -131,6 +133,7 @@ public class DailyModel implements IDaily {
 
     /**
      * 创建一个Model对象
+     *
      * @param iGsonCallBack 用来实现实现GSON数据获取完成后的回调接口，主要用于RecyclerView显示
      * @return 返回Model对象
      */
@@ -171,6 +174,7 @@ public class DailyModel implements IDaily {
     /**
      * 只暴露了此方法给Presenter使用，根据Pref来判断数据获取的方式以及顺序
      * 获取的数据供RecyclerView来显示
+     *
      * @param date 当前的时间 <b>+1天</b>
      */
     public void getDailyResult(int date) {
@@ -204,6 +208,7 @@ public class DailyModel implements IDaily {
 
     /**
      * 获取在gson模式下的New数据
+     *
      * @param id 获取gson数据的唯一id
      */
     @Override
@@ -239,9 +244,9 @@ public class DailyModel implements IDaily {
             dailyGson.title = cursor.getString(cursor.getColumnIndex("title"));
             dailyGson.type = cursor.getInt(cursor.getColumnIndex("type"));
             dailyGson.image_source = cursor.getString(cursor.getColumnIndex("image_source"));
-            dailyGson.image= cursor.getString(cursor.getColumnIndex("image"));
-            dailyGson.share_url= cursor.getString(cursor.getColumnIndex("share_url"));
-            dailyGson.ga_prefix= cursor.getInt(cursor.getColumnIndex("ga_prefix"));
+            dailyGson.image = cursor.getString(cursor.getColumnIndex("image"));
+            dailyGson.share_url = cursor.getString(cursor.getColumnIndex("share_url"));
+            dailyGson.ga_prefix = cursor.getInt(cursor.getColumnIndex("ga_prefix"));
             dailyGson.body = cursor.getString(cursor.getColumnIndex("body"));
             cursor.close();
             mIGsonCallBack.onGsonItemFinish(dailyGson);
@@ -267,7 +272,7 @@ public class DailyModel implements IDaily {
         database.close();
         Calendar calendar = Calendar.getInstance();
         try {
-            calendar.setTime(Constants.simpleDateFormat.parse(dailyResult.date+""));
+            calendar.setTime(Constants.simpleDateFormat.parse(dailyResult.date + ""));
             calendar.add(Calendar.DAY_OF_MONTH, 1);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -307,6 +312,7 @@ public class DailyModel implements IDaily {
 
     /**
      * 使用Jsoup来对数据库里面的DaliyGson中的body字段进行解析
+     *
      * @param dailyGson 待解析的gson对象
      * @return 返回一个包含额外信息和正文的HashMap
      */
@@ -369,10 +375,11 @@ public class DailyModel implements IDaily {
 
     /**
      * 在html+模式下，对获取到的html数据进行修改，去除不必要的数据
+     *
      * @param htmlUrl 原始html字符串
      * @return 之后的html数据
      */
-    public Map<String,String> parseHtml(String htmlUrl) {
+    public Map<String, String> parseHtml(String htmlUrl) {
         Map<String, String> htmlMap = new HashMap<>();
         try {
             URL url = new URL(htmlUrl);
@@ -384,15 +391,19 @@ public class DailyModel implements IDaily {
                 if (child.className().equals("headline-title")) {
                     String headline_title = child.text();
                     htmlMap.put("headline_title", headline_title);
-                }else if (child.className().equals("img-source")) {
+                } else if (child.className().equals("img-source")) {
                     String img_source = child.text();
                     htmlMap.put("img_source", img_source);
-                }else if (child.nodeName().equals("img")) {
+                } else if (child.nodeName().equals("img")) {
                     String img = child.attr("src");
                     htmlMap.put("img", img);
                 }
             }
             header.remove();
+            Log.d(TAG, "isLight--->" + ThemeUtils.isLight);
+            if (!ThemeUtils.isLight) {
+                darkHtml(document);
+            }
             String content = document.outerHtml();
             htmlMap.put("content", content);
         } catch (IOException e) {
@@ -402,7 +413,48 @@ public class DailyModel implements IDaily {
     }
 
     /**
+     * 通过添加style元素来达到“夜间模式”效果
+     *
+     * @param document 要修改的Document对象
+     */
+    private void darkHtml(Document document) {
+        String deepDarkFantasy = "";
+        String dark = "#403f4d";
+        deepDarkFantasy = "<style>\n" +
+                "        body{\n" +
+                "            background-color:" + dark + " ;\n" +
+                "        }\n" +
+                "        .main-wrap{\n" +
+                "            background-color:" + dark + ";\n" +
+                "        }\n" +
+                "        .question-title{\n" +
+                "            background-color:" + dark + ";\n" +
+                "            color: #999;\n" +
+                "        }\n" +
+                "        .meta .author{\n" +
+                "            background-color:" + dark + ";\n" +
+                "            color: #999;\n" +
+                "        }\n" +
+                "        .content{\n" +
+                "            background-color:" + dark + ";\n" +
+                "            color: #999;\n" +
+                "        }\n" +
+                "         .question{\n" +
+                "            background-color: " + dark + ";\n" +
+                "        }\n" +
+                "        .footer{\n" +
+                "            background-color: " + dark + ";\n" +
+                "        }\n" +
+                ".question + .question{\n" +
+                "            border-top: 5px solid #999;\n" +
+                "        }\n" +
+                "    </style>";
+        document.head().append(deepDarkFantasy);
+    }
+
+    /**
      * 避免因为要移除的元素不存在，而造成的IndexOutOfBoundsException，先对元素进行判断
+     *
      * @param document 从网页解析得到的Document对象
      */
     private void removeElements(Document document) {
@@ -430,6 +482,7 @@ public class DailyModel implements IDaily {
 
     /**
      * 清除指定日期前的数据，默认为7天之前
+     *
      * @param beforedate 超过此日前的所有数据
      * @return 被删除的数据条数
      */
@@ -456,6 +509,7 @@ public class DailyModel implements IDaily {
 
     /**
      * 删除过期的Glide缓存
+     *
      * @param beforedate 过期时间
      * @return 删除文件大小
      */
@@ -485,6 +539,7 @@ public class DailyModel implements IDaily {
 
     /**
      * 使用SQL语句拼接的插入语句(性能更好)，<b>待测试</b>
+     *
      * @param dailyGson 要保存的gson数据
      */
     @Deprecated
@@ -497,6 +552,7 @@ public class DailyModel implements IDaily {
 
     /**
      * 使用SQL语句拼接的插入语句(性能更好)，<b>待测试</b>
+     *
      * @param dailyResult 要保存的DailyResult数据
      */
     @Deprecated
@@ -511,6 +567,7 @@ public class DailyModel implements IDaily {
 
     /**
      * 序列化List为本地文件，已过时。已使用数据库替代
+     *
      * @param date
      * @param dailyList
      * @throws IOException
@@ -533,6 +590,7 @@ public class DailyModel implements IDaily {
 
     /**
      * 反序列化本地文件为List，已过时。已使用数据库替代
+     *
      * @param date
      * @return
      * @throws IOException

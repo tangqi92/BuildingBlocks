@@ -22,18 +22,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import java.text.DateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
