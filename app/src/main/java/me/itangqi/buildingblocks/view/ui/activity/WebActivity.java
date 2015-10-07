@@ -1,5 +1,6 @@
 package me.itangqi.buildingblocks.view.ui.activity;
 
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -71,6 +72,7 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
         super.onCreate(savedInstanceState);
         mPresenter = new WebActivityPresenter(this);
         ButterKnife.bind(this);
+        fabProgressCircle.setVisibility(View.INVISIBLE);
         ThemeUtils.changeTheme(this);
         if (!ThemeUtils.isLight) {
             mNestedScrollView.setBackgroundColor(getResources().getColor(R.color.window_background_dark));
@@ -218,9 +220,6 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
             } else if (newProgress != 100) {
                 fabProgressCircle.show();
             }
-            if (fabProgressCircle.isHovered()) {
-                fabProgressCircle.setVisibility(View.INVISIBLE);
-            }
         }
 
         @Override
@@ -233,6 +232,12 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             if (url != null) view.loadUrl(url);
             return true;
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            fabProgressCircle.setVisibility(View.VISIBLE);
+            super.onPageStarted(view, url, favicon);
         }
     }
 }

@@ -47,7 +47,7 @@ public class WebActivityPresenter {
     }
 
     public long clearCacheFolder(int before) {
-        File webCache = new File(cacheDir, "org.chromium.android.webview");
+        File webCache = new File(cacheDir, "org.chromium.android_webview");
         File[] files = webCache.listFiles();
         long clearedSize = 0;
         for (File child : files) {
