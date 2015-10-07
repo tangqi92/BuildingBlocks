@@ -27,7 +27,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -37,14 +39,19 @@ import me.itangqi.buildingblocks.domain.api.ZhihuApi;
 import me.itangqi.buildingblocks.domain.application.App;
 import me.itangqi.buildingblocks.domain.db.SQLiteHelper;
 import me.itangqi.buildingblocks.domain.utils.Constants;
-import me.itangqi.buildingblocks.domain.utils.NetworkUtils;
 import me.itangqi.buildingblocks.domain.utils.PrefUtils;
+import me.itangqi.buildingblocks.domain.utils.ThemeUtils;
 import me.itangqi.buildingblocks.model.entity.Daily;
 import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.model.entity.DailyResult;
+import me.itangqi.buildingblocks.presenters.WebActivityPresenter;
 
 /**
  * Created by Troy on 2015/9/21.
+ * <br/>
+ * 数据交换中枢，负责数据的存储和获取
+ * <br/>
+ * <b>通过API获取请求地址的时候，传入的日期时间要比当前时间大一天，而返回的数据里面的date属性又是当前时间，这样一来造成了，读取数据库数据与储存数据混乱</b>
  */
 public class DailyModel implements IDaily {
 
@@ -58,6 +65,9 @@ public class DailyModel implements IDaily {
     private SQLiteHelper mSQLiteHelper;
     private static DailyModel mDailyModel;
 
+    // 用来判断是否已从网上获取了数据，从而避免重复获取
+    private boolean hasReadFromNet = false;
+
     //用来获取Daily集合
     AsyncHttpResponseHandler mAsyncHttpResponseHandler = new BaseJsonHttpResponseHandler<DailyResult>() {
         @Override
@@ -68,7 +78,7 @@ public class DailyModel implements IDaily {
                     mDailiesFromNet.add(daily);
 //                    mItems.put(daily.id, daily.title);   //待测试
                 }
-                mIHttpCallBack.onFinish(mDailiesFromNet);
+                hasReadFromNet = true;
                 saveDailyStoriesDB(response);
             }
         }
@@ -108,6 +118,12 @@ public class DailyModel implements IDaily {
         }
     };
 
+    /**
+     * 创建一个Model对象
+     *
+     * @param iHttpCallBack 用来实现实现数据(非GSON数据)完成后的回调接口，主要用于RecyclerView显示
+     * @return 返回Model对象
+     */
     public static DailyModel newInstance(IHttpCallBack iHttpCallBack) {
         if (mDailyModel == null) {
             return new DailyModel(iHttpCallBack);
@@ -116,6 +132,12 @@ public class DailyModel implements IDaily {
         }
     }
 
+    /**
+     * 创建一个Model对象
+     *
+     * @param iGsonCallBack 用来实现实现GSON数据获取完成后的回调接口，主要用于RecyclerView显示
+     * @return 返回Model对象
+     */
     public static DailyModel newInstance(IGsonCallBack iGsonCallBack) {
         if (mDailyModel == null) {
             return new DailyModel(iGsonCallBack);
@@ -150,18 +172,32 @@ public class DailyModel implements IDaily {
         this.mDailiesFromCache = new ArrayList<>();
     }
 
+    /**
+     * 只暴露了此方法给Presenter使用，根据Pref来判断数据获取的方式以及顺序
+     * 获取的数据供RecyclerView来显示
+     *
+     * @param date 当前的时间 <b>+1天</b>
+     */
     public void getDailyResult(int date) {
-        if (PrefUtils.isEnableCache() && NetworkUtils.isNetworkConnected()) {
+        hasReadFromNet = false;
+        if (PrefUtils.isEnableCache()) {
             getFromCache(date);
+        } else {
             getFromNet(date);
-        } else if (!PrefUtils.isEnableCache() && NetworkUtils.isNetworkConnected()) {
-            getFromNet(date);
-        } else if (!NetworkUtils.isNetworkConnected()) {
-            getFromCache(date);
         }
     }
 
     private void getFromNet(int date) {
+        if (PrefUtils.isEnableCache()) {
+            Calendar calendar = Calendar.getInstance();
+            try {
+                calendar.setTime(Constants.simpleDateFormat.parse(date + ""));
+                calendar.add(Calendar.DAY_OF_MONTH, 1);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            date = Integer.parseInt(Constants.simpleDateFormat.format(calendar.getTime()));
+        }
         String url = ZhihuApi.getDailyNews(date);
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(url, mAsyncHttpResponseHandler);
@@ -171,16 +207,11 @@ public class DailyModel implements IDaily {
         getDailyStoriesDB(date);
     }
 
-
-    @Override
-    public void saveDailies(List<Daily> dailies, int date) {
-        try {
-            serializDaily(date, dailies);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * 获取在gson模式下的New数据
+     *
+     * @param id 获取gson数据的唯一id
+     */
     @Override
     public void getGsonNews(int id) {
         if (getDailyGsonDB(id) == null) {
@@ -214,9 +245,9 @@ public class DailyModel implements IDaily {
             dailyGson.title = cursor.getString(cursor.getColumnIndex("title"));
             dailyGson.type = cursor.getInt(cursor.getColumnIndex("type"));
             dailyGson.image_source = cursor.getString(cursor.getColumnIndex("image_source"));
-            dailyGson.image= cursor.getString(cursor.getColumnIndex("image"));
-            dailyGson.share_url= cursor.getString(cursor.getColumnIndex("share_url"));
-            dailyGson.ga_prefix= cursor.getInt(cursor.getColumnIndex("ga_prefix"));
+            dailyGson.image = cursor.getString(cursor.getColumnIndex("image"));
+            dailyGson.share_url = cursor.getString(cursor.getColumnIndex("share_url"));
+            dailyGson.ga_prefix = cursor.getInt(cursor.getColumnIndex("ga_prefix"));
             dailyGson.body = cursor.getString(cursor.getColumnIndex("body"));
             cursor.close();
             mIGsonCallBack.onGsonItemFinish(dailyGson);
@@ -240,9 +271,25 @@ public class DailyModel implements IDaily {
             database.insertWithOnConflict("dailyresult", null, values, SQLiteDatabase.CONFLICT_IGNORE);
         }
         database.close();
+        Calendar calendar = Calendar.getInstance();
+        try {
+            calendar.setTime(Constants.simpleDateFormat.parse(dailyResult.date + ""));
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        getDailyStoriesDB(Integer.parseInt(Constants.simpleDateFormat.format(calendar.getTime())));
     }
 
     private void getDailyStoriesDB(int date) {
+        Calendar calendar = Calendar.getInstance();
+        try {
+            calendar.setTime(Constants.simpleDateFormat.parse(date + ""));
+            calendar.add(Calendar.DAY_OF_MONTH, -1);
+            date = Integer.parseInt(Constants.simpleDateFormat.format(calendar.getTime()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
         List<Daily> dailyList = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM dailyresult where date = ?", new String[]{date + ""});
@@ -256,13 +303,18 @@ public class DailyModel implements IDaily {
             dailyList.add(daily);
         }
         cursor.close();
-        mIHttpCallBack.onFinish(dailyList);
         database.close();
+        mIHttpCallBack.onFinish(dailyList);
+        if (!hasReadFromNet) {
+            hasReadFromNet = true;
+            getFromNet(date);
+        }
     }
 
     /**
      * 使用Jsoup来对数据库里面的DaliyGson中的body字段进行解析
-     * @param dailyGson
+     *
+     * @param dailyGson 待解析的gson对象
      * @return 返回一个包含额外信息和正文的HashMap
      */
     public Map<String, LinkedHashMap<String, String>> parseBody(DailyGson dailyGson) {
@@ -273,7 +325,6 @@ public class DailyModel implements IDaily {
         LinkedHashMap<String, String> article = new LinkedHashMap<String, String>();
         Document document = Jsoup.parse(xml, "", new Parser(new XmlTreeBuilder()));
         Elements all = document.getAllElements();
-        Log.i("Parsing", "all.size--->" + all.size());
         for (Element content : all) {
             if (content.hasClass("avatar")) {
                 String src = content.attr("src");
@@ -323,31 +374,37 @@ public class DailyModel implements IDaily {
         return false;
     }
 
-    public Map<String,String> parseHtml(String htmlUrl) {
+    /**
+     * 在html+模式下，对获取到的html数据进行修改，去除不必要的数据
+     *
+     * @param htmlUrl 原始html字符串
+     * @return 之后的html数据
+     */
+    public Map<String, String> parseHtml(String htmlUrl) {
         Map<String, String> htmlMap = new HashMap<>();
         try {
             URL url = new URL(htmlUrl);
             Document document = Jsoup.connect(htmlUrl).userAgent("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8").get();
-            document.select("div[class=global-header]").remove();
-            document.select("div[class=header-for-mobile]").remove();
-            document.select("div[class=question]").get(1).remove();
-            document.select("div[class=qr]").remove();
-            document.select("div[class=bottom-wrap]").remove();
+            removeElements(document);
             Element header = document.select("div[class=headline]").get(0);
             Elements headerChildren = header.getAllElements();
             for (Element child : headerChildren) {
                 if (child.className().equals("headline-title")) {
                     String headline_title = child.text();
                     htmlMap.put("headline_title", headline_title);
-                }else if (child.className().equals("img-source")) {
+                } else if (child.className().equals("img-source")) {
                     String img_source = child.text();
                     htmlMap.put("img_source", img_source);
-                }else if (child.nodeName().equals("img")) {
+                } else if (child.nodeName().equals("img")) {
                     String img = child.attr("src");
                     htmlMap.put("img", img);
                 }
             }
             header.remove();
+            Log.d(TAG, "isLight--->" + ThemeUtils.isLight);
+            if (!ThemeUtils.isLight) {
+                darkHtml(document);
+            }
             String content = document.outerHtml();
             htmlMap.put("content", content);
         } catch (IOException e) {
@@ -357,44 +414,140 @@ public class DailyModel implements IDaily {
     }
 
     /**
-     * 清除指定日期前的数据，默认为7天之前
-     * @param beforedate 超过此日前的所有数据
-     * @return 被删除的数据总数
+     * 通过添加style元素来达到“夜间模式”效果
+     *
+     * @param document 要修改的Document对象
      */
-    public int clearOutdateCache(int beforedate) {
-        //TODO BUG: 不能准确删除
+    private void darkHtml(Document document) {
+        String deepDarkFantasy = "";
+        String dark = "#403f4d";
+        deepDarkFantasy = "<style>\n" +
+                "        body{\n" +
+                "            background-color:" + dark + " ;\n" +
+                "        }\n" +
+                "        .main-wrap{\n" +
+                "            background-color:" + dark + ";\n" +
+                "        }\n" +
+                "        .question-title{\n" +
+                "            background-color:" + dark + ";\n" +
+                "            color: #999;\n" +
+                "        }\n" +
+                "        .meta .author{\n" +
+                "            background-color:" + dark + ";\n" +
+                "            color: #999;\n" +
+                "        }\n" +
+                "        .content{\n" +
+                "            background-color:" + dark + ";\n" +
+                "            color: #999;\n" +
+                "        }\n" +
+                "         .question{\n" +
+                "            background-color: " + dark + ";\n" +
+                "        }\n" +
+                "        .footer{\n" +
+                "            background-color: " + dark + ";\n" +
+                "        }\n" +
+                ".question + .question{\n" +
+                "            border-top: 5px solid #999;\n" +
+                "        }\n" +
+                "    </style>";
+        document.head().append(deepDarkFantasy);
+    }
+
+    /**
+     * 避免因为要移除的元素不存在，而造成的IndexOutOfBoundsException，先对元素进行判断
+     *
+     * @param document 从网页解析得到的Document对象
+     */
+    private void removeElements(Document document) {
+        Elements global_header = document.select("div[class=global-header]");
+        if (global_header != null && global_header.size() != 0) {
+            global_header.remove();
+        }
+        Elements header_for_mobile = document.select("div[class=header-for-mobile]");
+        if (header_for_mobile != null && header_for_mobile.size() != 0) {
+            header_for_mobile.remove();
+        }
+        Elements question = document.select("div[class=question]");
+        if (question != null && question.size() == 2) {
+            question.get(1).remove();
+        }
+        Elements qr = document.select("div[class=qr]").remove();
+        if (qr != null && qr.size() == 0) {
+            qr.remove();
+        }
+        Elements bottom_wrap = document.select("div[class=bottom-wrap]");
+        if (bottom_wrap != null && bottom_wrap.size() != 0) {
+            bottom_wrap.remove();
+        }
+    }
+
+    /**
+     * 清除指定日期前的数据，默认为7天之前
+     *
+     * @param beforedate 超过此日前的所有数据
+     * @return 被删除的数据条数
+     */
+    public int clearOutdateDB(int beforedate) {
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
-        Cursor findId = database.rawQuery("SELECT id FROM dailyresult WHERE date <= ?", new String[]{beforedate + ""});
+        Cursor findId = database.query("dailyresult"
+                , new String[]{"id"}, "date<=?", new String[]{beforedate + ""}, null, null, null);
         List<String> toDelete = new ArrayList<>();
         while (findId.moveToNext()) {
-            toDelete.add(findId.getInt(findId.getColumnIndex("id")) + "");
+            int id = findId.getInt(findId.getColumnIndex("id"));
+            Log.d(TAG, "IDtoDelete in Result--->" + id);
+            toDelete.add(id + "");
         }
         if (findId.isAfterLast() && !findId.isClosed()) {
             findId.close();
         }
-        database.delete("dailyresult", "date<=?", new String[]{beforedate + ""});
-        int size = toDelete.size();
-        String[] ids = toDelete.toArray(new String[size]);
-        for (String id : ids) {
-            database.execSQL("DELETE FROM daily where id =" + Integer.parseInt(id)); //使用delete()一次性删除，会提示参数过多
+        int hasDeleted = database.delete("dailyresult", "date<=?", new String[]{beforedate + ""});
+        for (String id : toDelete) {
+            hasDeleted += database.delete("daily", "id=?", new String[]{id}); //使用delete()一次性删除，会提示参数过多
         }
-        return toDelete.size();
+        Log.d(TAG, "hasDeleted--->" + hasDeleted);
+        return hasDeleted;
     }
 
-    public long clearOutdatePhoto(int beforedate) {
-        long clearedSize = 0;
-        File cacheDir = Glide.getPhotoCacheDir(App.getContext());
-        File[] files = cacheDir.listFiles();
-        for (File child : files) {
-            if (Integer.parseInt(Constants.simpleDateFormat.format(child.lastModified())) <= beforedate) {
-                clearedSize += child.length();
-                //noinspection ResultOfMethodCallIgnored
-                child.delete();
+    /**
+     * 删除过期的Glide缓存
+     *
+     * @param beforedate 过期时间
+     * @return 删除文件大小
+     */
+    public void clearOutdatePhoto(final int beforedate) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                File cacheDir = Glide.getPhotoCacheDir(App.getContext());
+                File[] files = cacheDir.listFiles();
+                for (File child : files) {
+                    if (Integer.parseInt(Constants.simpleDateFormat.format(child.lastModified())) <= beforedate) {
+                        //noinspection ResultOfMethodCallIgnored
+                        child.delete();
+                    }
+                }
+                WebActivityPresenter presenter = new WebActivityPresenter();
+                presenter.clearCacheFolder(beforedate);
             }
-        }
-        return clearedSize;
+        });
+        thread.start();
     }
 
+    @Deprecated
+    @Override
+    public void saveDailies(List<Daily> dailies, int date) {
+        try {
+            serializDaily(date, dailies);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 使用SQL语句拼接的插入语句(性能更好)，<b>待测试</b>
+     *
+     * @param dailyGson 要保存的gson数据
+     */
     @Deprecated
     private void insertDailyGsonDB(DailyGson dailyGson) {
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
@@ -403,6 +556,11 @@ public class DailyModel implements IDaily {
         database.close();
     }
 
+    /**
+     * 使用SQL语句拼接的插入语句(性能更好)，<b>待测试</b>
+     *
+     * @param dailyResult 要保存的DailyResult数据
+     */
     @Deprecated
     private void insertDailyStoriesDB(DailyResult dailyResult) {
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
@@ -413,6 +571,13 @@ public class DailyModel implements IDaily {
         database.close();
     }
 
+    /**
+     * 序列化List为本地文件，已过时。已使用数据库替代
+     *
+     * @param date
+     * @param dailyList
+     * @throws IOException
+     */
     @Deprecated
     private void serializDaily(int date, List<Daily> dailyList) throws IOException {
         String itemParentPath = App.getContext().getCacheDir().getAbsolutePath() + "/daily";
@@ -429,6 +594,14 @@ public class DailyModel implements IDaily {
         oos.close();
     }
 
+    /**
+     * 反序列化本地文件为List，已过时。已使用数据库替代
+     *
+     * @param date
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     @Deprecated
     private List<Daily> deserializDaily(int date) throws IOException, ClassNotFoundException {
         String cachePath = App.getContext().getCacheDir().getAbsolutePath();

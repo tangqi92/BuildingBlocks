@@ -59,7 +59,8 @@
                 android:resource="@xml/searchable"/>
         </activity>
 
-        <activity android:name=".view.ui.activity.WebActivity"/>
+        <activity android:name=".view.ui.activity.WebActivity"
+            android:hardwareAccelerated="true"/>
 
         <activity android:name=".view.ui.activity.GsonViewActivity"/>
 

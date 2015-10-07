@@ -23,6 +23,9 @@
             android:entryValues="@array/value_way_to_get_data"
             android:key="gson_or_html"
             android:title="@string/way_to_get_data"/>
+        <Preference
+            android:key="send_log"
+            android:title="@string/send_log"/>
     </PreferenceCategory>
 
     <PreferenceCategory

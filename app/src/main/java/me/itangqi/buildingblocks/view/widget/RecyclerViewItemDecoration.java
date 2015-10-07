@@ -17,7 +17,7 @@ public class RecyclerViewItemDecoration extends RecyclerView.ItemDecoration {
     private Drawable mDivider;
 
     public RecyclerViewItemDecoration(Context context) {
-        if (ThemeUtils.isLight)
+        if (!ThemeUtils.isLight)
             mDivider = context.getResources().getDrawable(R.drawable.item_divider_white);
         else mDivider = context.getResources().getDrawable(R.drawable.item_divider_black);
     }

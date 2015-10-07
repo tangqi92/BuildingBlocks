@@ -1,6 +1,6 @@
 package me.itangqi.buildingblocks.view.ui.activity;
 
- import android.app.SearchManager;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,6 +35,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.domain.application.App;
 import me.itangqi.buildingblocks.domain.receiver.UpdaterReceiver;
 import me.itangqi.buildingblocks.domain.service.Updater;
 import me.itangqi.buildingblocks.domain.utils.Constants;
@@ -69,6 +70,7 @@ public class MainActivity extends BaseActivity implements IMainActivity {
     protected void onCreate(Bundle savedInstanceState) {
         layoutResID = R.layout.activity_main;
         super.onCreate(savedInstanceState);
+        App.addActivity(this);
         ButterKnife.bind(this);
 
         if (mNavigationView != null) {
@@ -83,6 +85,7 @@ public class MainActivity extends BaseActivity implements IMainActivity {
         mPresenter = new MainActivityPresenter(this);
         mPresenter.clearCache();
         mPresenter.checkUpdate();
+        mPresenter.handleCrashLog();
         IntentFilter filter = new IntentFilter(Constants.BROADCAST_UPDATE_ACTION);
         filter.addCategory(Constants.BROADCAST_UPDATE_CATEGORY);
         mUpdaterReceiver = new UpdaterReceiver(this);
@@ -213,11 +216,7 @@ public class MainActivity extends BaseActivity implements IMainActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.men_action_read_mode:
-                if (ThemeUtils.isLight) {
-                    ThemeUtils.isLight = false;
-                } else {
-                    ThemeUtils.isLight = true;
-                }
+                ThemeUtils.isLight = !ThemeUtils.isLight;
                 MainActivity.this.recreate();//重新创建当前Activity实例
                 return true;
             case R.id.menu_action_feedback:
@@ -264,14 +263,35 @@ public class MainActivity extends BaseActivity implements IMainActivity {
     }
 
     @Override
-    public void showUpdate(final int versionCode, String versionName, final String apkUrl, List<String> disc) {
+    public void showSnackBarWithAction(String data, int time, final Uri uri) {
+        Snackbar.make(mContainer,data,time).setAction("发送日志", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendTo = new Intent(Intent.ACTION_SEND);
+                String[] developers = new String[]{"imtangqi@gmail.com", "troyliu0105@outlook.com"};
+                sendTo.putExtra(Intent.EXTRA_EMAIL, developers);
+                sendTo.putExtra(Intent.EXTRA_SUBJECT, "BuildingBlocks崩溃日志");
+                sendTo.putExtra(Intent.EXTRA_TEXT, "请写下留言:\n");
+                sendTo.putExtra(Intent.EXTRA_STREAM, uri);
+                sendTo.setType("text/plain");
+                startActivity(Intent.createChooser(sendTo, "请发送邮件"));
+            }
+        }).show();
+    }
+
+    @Override
+    public void showUpdate(final int versionCode, String versionName, final String apkUrl, final List<String> desc) {
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                String detail = "";
+                for (String s : desc) {
+                    detail += "\n" + s;
+                }
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
                         .setTitle("发现新版本")
                         .setIcon(R.drawable.icon)
-                        .setMessage("当前版本号为：" + VersionUtils.getVerisonCode() + "\n" + "新版本号为：" + versionCode)
+                        .setMessage("当前版本号为：" + VersionUtils.getVerisonCode() + "\n" + "新版本号为：" + versionCode + "\n详情：" + detail)
                         .setPositiveButton("下载", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -286,6 +306,7 @@ public class MainActivity extends BaseActivity implements IMainActivity {
                                 dialog.dismiss();
                             }
                         });
+
                 builder.create().show();
             }
         });

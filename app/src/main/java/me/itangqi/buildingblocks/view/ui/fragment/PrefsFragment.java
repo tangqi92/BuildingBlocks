@@ -1,13 +1,18 @@
 package me.itangqi.buildingblocks.view.ui.fragment;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.design.widget.Snackbar;
 
+import java.io.File;
+
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.domain.utils.PrefUtils;
 import me.itangqi.buildingblocks.domain.utils.VersionUtils;
 import me.itangqi.buildingblocks.presenters.WebActivityPresenter;
 
@@ -16,7 +21,7 @@ public class PrefsFragment extends PreferenceFragment implements Preference.OnPr
 
     private CheckBoxPreference mIsEnableCache;
     private CheckBoxPreference mIsAutoUpdate;
-    private Preference mCachePre, mVersionPre;
+    private Preference mCachePre, mVersionPre, mLogPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,17 @@ public class PrefsFragment extends PreferenceFragment implements Preference.OnPr
 
         }else if (mIsAutoUpdate == preference) {
             editor.putBoolean("auto_update", mIsAutoUpdate.isChecked());
+        }else if (mLogPref == preference) {
+            String uriStr = PrefUtils.getCrashUri();
+            Uri uri = Uri.fromFile(new File(uriStr));
+            Intent sendTo = new Intent(Intent.ACTION_SEND);
+            String[] developers = new String[]{"imtangqi@gmail.com", "troyliu0105@outlook.com"};
+            sendTo.putExtra(Intent.EXTRA_EMAIL, developers);
+            sendTo.putExtra(Intent.EXTRA_SUBJECT, "BuildingBlocks崩溃日志");
+            sendTo.putExtra(Intent.EXTRA_TEXT, "请写下留言:\n");
+            sendTo.putExtra(Intent.EXTRA_STREAM, uri);
+            sendTo.setType("text/plain");
+            startActivity(Intent.createChooser(sendTo, "请发送邮件"));
         }
         return true;
     }
@@ -50,6 +66,8 @@ public class PrefsFragment extends PreferenceFragment implements Preference.OnPr
         mIsAutoUpdate = (CheckBoxPreference) findPreference("auto_update");
         mCachePre = findPreference("delete_cache");
         mCachePre.setOnPreferenceClickListener(this);
+        mLogPref = findPreference("send_log");
+        mLogPref.setOnPreferenceClickListener(this);
         mVersionPre = findPreference("version");
         mVersionPre.setTitle("版本：" + VersionUtils.setUpVersionName(getActivity()));
     }

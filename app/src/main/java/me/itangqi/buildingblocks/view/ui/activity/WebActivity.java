@@ -1,24 +1,16 @@
 package me.itangqi.buildingblocks.view.ui.activity;
 
-import android.animation.Animator;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.graphics.Palette;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.animation.Animation;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -27,9 +19,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.github.jorgecastilloprz.FABProgressCircle;
 import com.github.jorgecastilloprz.listeners.FABProgressListener;
 
@@ -41,9 +30,9 @@ import butterknife.ButterKnife;
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.domain.application.App;
-import me.itangqi.buildingblocks.domain.utils.NetworkUtils;
 import me.itangqi.buildingblocks.domain.utils.PrefUtils;
 import me.itangqi.buildingblocks.domain.utils.ShareUtils;
+import me.itangqi.buildingblocks.domain.utils.ThemeUtils;
 import me.itangqi.buildingblocks.presenters.WebActivityPresenter;
 import me.itangqi.buildingblocks.view.IWebView;
 import me.itangqi.buildingblocks.view.ui.activity.base.SwipeBackActivity;
@@ -71,6 +60,7 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
     @Bind(R.id.img_source) TextView mHeaderSource;
     @Bind(R.id.fabProgressCircle) FABProgressCircle fabProgressCircle;
     @Bind(R.id.fab) FloatingActionButton fab;
+    @Bind(R.id.nsv_content) NestedScrollView mNestedScrollView;
 
     @Override
     protected int getLayoutResource() {
@@ -82,21 +72,24 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
         super.onCreate(savedInstanceState);
         mPresenter = new WebActivityPresenter(this);
         ButterKnife.bind(this);
+        App.addActivity(this);
+        fabProgressCircle.setVisibility(View.INVISIBLE);
+        ThemeUtils.changeTheme(this);
+        if (!ThemeUtils.isLight) {
+            mNestedScrollView.setBackgroundColor(getResources().getColor(R.color.window_background_dark));
+        }
         mPaletteListenerImp = new GlidePaletteListenerImp(mHeaderImg, this, mToolbarLayout);
         mUrl = getIntent().getStringExtra(EXTRA_URL);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         if (PrefUtils.isEnableCache()) {
-            if (NetworkUtils.isNetworkConnected()) {
-                webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
-            } else {
-                webSettings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
-            }
+            webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
             webSettings.setAppCacheEnabled(true);
             webSettings.setDatabaseEnabled(true);
         }
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setDefaultTextEncodingName("utf-8");
+        webSettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
         mWebView.setWebChromeClient(new ChromeClient());
         mWebView.setWebViewClient(new ViewClient());
         mPresenter.getBetterHtml(mUrl);
@@ -205,7 +198,11 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
 //                Log.d(TAG, entry.getValue());
                 mWebView.loadDataWithBaseURL(mUrl, entry.getValue(), "text/html; charset=UTF-8", "uft-8", null);
             } else if (entry.getKey().equals("img")) {
-                Glide.with(App.getContext()).load(entry.getValue()).asBitmap().centerCrop().listener(mPaletteListenerImp).into(mHeaderImg);
+                if (ThemeUtils.isLight) {
+                    Glide.with(App.getContext()).load(entry.getValue()).asBitmap().centerCrop().listener(mPaletteListenerImp).into(mHeaderImg);
+                }else {
+                    Glide.with(App.getContext()).load(entry.getValue()).asBitmap().centerCrop().into(mHeaderImg);
+                }
             } else if (entry.getKey().equals("img_source")) {
                 mHeaderSource.setText(entry.getValue());
                 mHeaderSource.setVisibility(View.VISIBLE);
@@ -236,6 +233,12 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             if (url != null) view.loadUrl(url);
             return true;
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            fabProgressCircle.setVisibility(View.VISIBLE);
+            super.onPageStarted(view, url, favicon);
         }
     }
 }

@@ -1,9 +1,13 @@
 package me.itangqi.buildingblocks.presenters;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.util.Log;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
@@ -49,11 +53,13 @@ public class MainActivityPresenter {
 
     public void clearCache() {
         Calendar calendar = Calendar.getInstance();
-        int today = Integer.parseInt(Constants.simpleDateFormat.format(calendar.getTime()));
-        int totalDeleted = mDailyModel.clearOutdateCache(today - 7);
-        long deletedSize = mDailyModel.clearOutdatePhoto(today - 7);
+        calendar.add(Calendar.DAY_OF_MONTH, -Constants.PAGE_COUNT);
+        int before = Integer.parseInt(Constants.simpleDateFormat.format(calendar.getTime()));
+        int totalDeleted = mDailyModel.clearOutdateDB(before);
+        mDailyModel.clearOutdatePhoto(before);
+        Log.d(TAG, "totalDeleted--->" + totalDeleted);
         if (totalDeleted > 0) {
-            mMainActivity.showSnackBar("清理了" + totalDeleted + "条过期数据；" + "图片" + (deletedSize / 1024) + "KB", 1500);
+            mMainActivity.showSnackBar("清理了" + totalDeleted + "条过期数据", 1500);
         }
     }
 
@@ -67,7 +73,7 @@ public class MainActivityPresenter {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    String urlStr = "http://7xk54v.com1.z0.glb.clouddn.com/app/bbupdatetest.xml";
+                    String urlStr = "https://raw.githubusercontent.com/troyliu0105/BuildingBlocks/dev/app/bbupdate.xml";
                     String name = null;
                     int versionCode = 0;
                     String versionName = null;
@@ -109,6 +115,10 @@ public class MainActivityPresenter {
                         versionCode = Integer.parseInt(bb.getElementsByTagName("versionCode").item(0).getFirstChild().getNodeValue());
                         versionName = bb.getElementsByTagName("versionName").item(0).getFirstChild().getNodeValue();
                         apkUrl = bb.getElementsByTagName("url").item(0).getFirstChild().getNodeValue();
+                        NodeList descNodes = bb.getElementsByTagName("description");
+                        for (int i = 0; i < descNodes.getLength(); i++) {
+                            desc.add(descNodes.item(i).getFirstChild().getNodeValue());
+                        }
                     } catch (IOException | ParserConfigurationException | SAXException e) {
                         e.printStackTrace();
                     }
@@ -117,6 +127,18 @@ public class MainActivityPresenter {
                     }
                 }
             }).start();
+        }
+    }
+
+    public void handleCrashLog() {
+        if (PrefUtils.isCrashedLastTime()) {
+            String fileStr = PrefUtils.getCrashUri();
+            Uri uri = Uri.fromFile(new File(fileStr));
+            Log.d(TAG, "crash uri--->" + uri);
+            mMainActivity.showSnackBarWithAction("上次我好像坏掉了ಥ_ಥ", 3000, uri);
+            SharedPreferences.Editor editor = App.getContext().getSharedPreferences("crash", Context.MODE_PRIVATE).edit();
+            editor.putBoolean("isLastTimeCrashed", false);
+            editor.apply();
         }
     }
 

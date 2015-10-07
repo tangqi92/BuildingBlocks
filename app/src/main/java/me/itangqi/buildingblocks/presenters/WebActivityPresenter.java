@@ -6,6 +6,7 @@ import java.io.File;
 import java.util.Map;
 
 import me.itangqi.buildingblocks.domain.application.App;
+import me.itangqi.buildingblocks.domain.utils.Constants;
 import me.itangqi.buildingblocks.model.DailyModel;
 import me.itangqi.buildingblocks.model.IHtmlCallBack;
 import me.itangqi.buildingblocks.view.IWebView;
@@ -45,6 +46,22 @@ public class WebActivityPresenter {
         return mDeletedSize;
     }
 
+    public long clearCacheFolder(int before) {
+        File webCache = new File(cacheDir, "org.chromium.android_webview");
+        File[] files = webCache.listFiles();
+        long clearedSize = 0;
+        if (files != null && files.length != 0) {
+            for (File child : files) {
+                if (Integer.parseInt(Constants.simpleDateFormat.format(child.lastModified())) <= before) {
+                    clearedSize += child.length();
+                    //noinspection ResultOfMethodCallIgnored
+                    child.delete();
+                }
+            }
+        }
+        return clearedSize;
+    }
+
     private void deleteFiles(File file) {
         for (File child : file.listFiles()) {
             if (child.isDirectory()) {
@@ -63,7 +80,7 @@ public class WebActivityPresenter {
     }
 
     public void getBetterHtml(final String htmlUrl) {
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 Map<String, String> map = mDailyModel.parseHtml(htmlUrl);

@@ -8,6 +8,7 @@ import android.view.Menu;
 import butterknife.ButterKnife;
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.domain.application.App;
 import me.itangqi.buildingblocks.view.ui.activity.base.SwipeBackActivity;
 
 public class SearchResultActivity extends SwipeBackActivity {
@@ -26,6 +27,7 @@ public class SearchResultActivity extends SwipeBackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        App.addActivity(this);
         ButterKnife.bind(this);
         mSwipeBackLayout = getSwipeBackLayout();
         mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);

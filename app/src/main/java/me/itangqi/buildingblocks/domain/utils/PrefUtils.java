@@ -31,8 +31,16 @@ public class PrefUtils {
         return preferences.getBoolean("auto_update", false);
     }
 
-    public static SharedPreferences getSharedPreferences() {
+    private static SharedPreferences getSharedPreferences() {
         return App.getContext()
                 .getSharedPreferences("me.itangqi.buildingblocks_preferences", Context.MODE_PRIVATE);
+    }
+
+    public static boolean isCrashedLastTime() {
+        return App.getContext().getSharedPreferences("crash", Context.MODE_PRIVATE).getBoolean("isLastTimeCrashed", false);
+    }
+
+    public static String getCrashUri() {
+        return App.getContext().getSharedPreferences("crash", Context.MODE_PRIVATE).getString("crashUri", null);
     }
 }
