@@ -67,6 +67,7 @@ public class PrefsFragment extends PreferenceFragment implements Preference.OnPr
         mCachePre = findPreference("delete_cache");
         mCachePre.setOnPreferenceClickListener(this);
         mLogPref = findPreference("send_log");
+        mLogPref.setOnPreferenceClickListener(this);
         mVersionPre = findPreference("version");
         mVersionPre.setTitle("版本：" + VersionUtils.setUpVersionName(getActivity()));
     }
