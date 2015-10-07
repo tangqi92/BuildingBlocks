@@ -196,7 +196,7 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
                 mToolbarLayout.setTitle(entry.getValue());
             } else if (entry.getKey().equals("content")) {
 //                Log.d(TAG, entry.getValue());
-                mWebView.loadDataWithBaseURL(mUrl, entry.getValue(), "text/html; charset=UTF-8", "uft-8", null);
+                mWebView.loadDataWithBaseURL(mUrl, entry.getValue(), "text/html", "uft-8", null);
             } else if (entry.getKey().equals("img")) {
                 if (ThemeUtils.isLight) {
                     Glide.with(App.getContext()).load(entry.getValue()).asBitmap().centerCrop().listener(mPaletteListenerImp).into(mHeaderImg);

@@ -15,10 +15,6 @@ import android.view.animation.Interpolator;
 
 import com.github.jorgecastilloprz.FABProgressCircle;
 
-import me.itangqi.buildingblocks.R;
-import me.itangqi.buildingblocks.domain.application.App;
-import me.itangqi.buildingblocks.domain.utils.CommonUtils;
-
 /**
  * 方法来自 [issue10](https://github.com/JorgeCastilloPrz/FABProgressCircle/issues/10)
  * Created by Troy on 2015/10/4.
@@ -43,9 +39,10 @@ public class FABCircleProgressBehavior extends CoordinatorLayout.Behavior {
         super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
         if (dyConsumed > 0 && !this.mIsAnimatingOut && child.getVisibility() == View.VISIBLE) {
             animateOut(child);
-        } else if (dyConsumed < CommonUtils.getToolbarHeight(App.getContext()) && child.getVisibility() != View.VISIBLE) {
-            animateIn(child);
         }
+//        else if (dyConsumed < CommonUtils.getToolbarHeight(App.getContext()) && child.getVisibility() != View.VISIBLE) {
+//            animateIn(child);
+//        }
     }
 
     // Same animation that FloatingActionButton.Behavior uses to hide the FAB when the AppBarLayout exits
@@ -93,7 +90,7 @@ public class FABCircleProgressBehavior extends CoordinatorLayout.Behavior {
     // Same animation that FloatingActionButton.Behavior uses to show the FAB when the AppBarLayout enters
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private void animateIn(View button) {
-        if (((FABProgressCircle) button).isLaidOut()) {
+        if (((FABProgressCircle) button).getVisibility() == View.INVISIBLE) {
             if (Build.VERSION.SDK_INT >= 14) {
                 ViewCompat.animate(button).scaleX(1.0F).scaleY(1.0F).alpha(1.0F)
                         .setInterpolator(INTERPOLATOR).withLayer().setListener(null)

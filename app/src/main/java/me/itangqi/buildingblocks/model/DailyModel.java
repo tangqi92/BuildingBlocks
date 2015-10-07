@@ -26,7 +26,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -57,8 +56,6 @@ public class DailyModel implements IDaily {
 
     public static final String TAG = "DailyModel";
 
-    private List<Daily> mDailiesFromNet;
-    private List<Daily> mDailiesFromCache;
     private IHttpCallBack mIHttpCallBack;
     private IGsonCallBack mIGsonCallBack;
     //    private SparseArray<String> mItems = new SparseArray<>();  //待测试
@@ -73,11 +70,6 @@ public class DailyModel implements IDaily {
         @Override
         public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, DailyResult response) {
             if (response != null && response.stories.size() != 0) {
-                mDailiesFromNet.clear();
-                for (Daily daily : response.stories) {
-                    mDailiesFromNet.add(daily);
-//                    mItems.put(daily.id, daily.title);   //待测试
-                }
                 hasReadFromNet = true;
                 saveDailyStoriesDB(response);
             }
@@ -161,15 +153,11 @@ public class DailyModel implements IDaily {
     private DailyModel(IHttpCallBack IHttpCallBack) {
         this();
         this.mIHttpCallBack = IHttpCallBack;
-        this.mDailiesFromNet = new ArrayList<>();
-        this.mDailiesFromCache = new ArrayList<>();
     }
 
     private DailyModel(IGsonCallBack IGsonCallBack) {
         this();
         this.mIGsonCallBack = IGsonCallBack;
-        this.mDailiesFromNet = new ArrayList<>();
-        this.mDailiesFromCache = new ArrayList<>();
     }
 
     /**
@@ -339,8 +327,6 @@ public class DailyModel implements IDaily {
             } else if (content.hasClass("content")) {
                 extra.put("allcontent", content.html());
                 for (Element item : content.children()) {
-                    String attr = item.attr("src");
-                    String className = item.className();
                     if (!hasImgNode(item) && item.text().length() > 20) {
                         String outerHtml = item.outerHtml().replaceAll("&nbsp;", " ");
                         article.put(outerHtml, "p");
@@ -365,8 +351,8 @@ public class DailyModel implements IDaily {
     }
 
     private boolean hasImgNode(Element element) {
-        Elements childen = element.children();
-        for (Element child : childen) {
+        Elements children = element.children();
+        for (Element child : children) {
             if (child.nodeName().equals("img")) {
                 return true;
             }
@@ -383,7 +369,6 @@ public class DailyModel implements IDaily {
     public Map<String, String> parseHtml(String htmlUrl) {
         Map<String, String> htmlMap = new HashMap<>();
         try {
-            URL url = new URL(htmlUrl);
             Document document = Jsoup.connect(htmlUrl).userAgent("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8").get();
             removeElements(document);
             Element header = document.select("div[class=headline]").get(0);
@@ -484,13 +469,13 @@ public class DailyModel implements IDaily {
     /**
      * 清除指定日期前的数据，默认为7天之前
      *
-     * @param beforedate 超过此日前的所有数据
+     * @param before 超过此日前的所有数据
      * @return 被删除的数据条数
      */
-    public int clearOutdateDB(int beforedate) {
+    public int clearOutdatedDB(int before) {
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
         Cursor findId = database.query("dailyresult"
-                , new String[]{"id"}, "date<=?", new String[]{beforedate + ""}, null, null, null);
+                , new String[]{"id"}, "date<=?", new String[]{before + ""}, null, null, null);
         List<String> toDelete = new ArrayList<>();
         while (findId.moveToNext()) {
             int id = findId.getInt(findId.getColumnIndex("id"));
@@ -500,7 +485,7 @@ public class DailyModel implements IDaily {
         if (findId.isAfterLast() && !findId.isClosed()) {
             findId.close();
         }
-        int hasDeleted = database.delete("dailyresult", "date<=?", new String[]{beforedate + ""});
+        int hasDeleted = database.delete("dailyresult", "date<=?", new String[]{before + ""});
         for (String id : toDelete) {
             hasDeleted += database.delete("daily", "id=?", new String[]{id}); //使用delete()一次性删除，会提示参数过多
         }
@@ -511,23 +496,22 @@ public class DailyModel implements IDaily {
     /**
      * 删除过期的Glide缓存
      *
-     * @param beforedate 过期时间
-     * @return 删除文件大小
+     * @param before 过期时间
      */
-    public void clearOutdatePhoto(final int beforedate) {
+    public void clearOutdatedPhoto(final int before) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 File cacheDir = Glide.getPhotoCacheDir(App.getContext());
                 File[] files = cacheDir.listFiles();
                 for (File child : files) {
-                    if (Integer.parseInt(Constants.simpleDateFormat.format(child.lastModified())) <= beforedate) {
+                    if (Integer.parseInt(Constants.simpleDateFormat.format(child.lastModified())) <= before) {
                         //noinspection ResultOfMethodCallIgnored
                         child.delete();
                     }
                 }
                 WebActivityPresenter presenter = new WebActivityPresenter();
-                presenter.clearCacheFolder(beforedate);
+                presenter.clearCacheFolder(before);
             }
         });
         thread.start();
