@@ -72,6 +72,7 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
         super.onCreate(savedInstanceState);
         mPresenter = new WebActivityPresenter(this);
         ButterKnife.bind(this);
+        App.addActivity(this);
         fabProgressCircle.setVisibility(View.INVISIBLE);
         ThemeUtils.changeTheme(this);
         if (!ThemeUtils.isLight) {

@@ -56,6 +56,7 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        App.addActivity(this);
         int id = getIntent().getIntExtra(EXTRA_ID, 0);
         String title = getIntent().getStringExtra(EXTRA_TITLE);
         mPresenter = new GsonNewsPresenter(this);

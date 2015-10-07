@@ -17,6 +17,7 @@ import me.imid.swipebacklayout.lib.Utils;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.domain.application.App;
 import me.itangqi.buildingblocks.domain.utils.ShareUtils;
 import me.itangqi.buildingblocks.domain.utils.ThemeUtils;
 import me.itangqi.buildingblocks.domain.utils.VersionUtils;
@@ -45,6 +46,7 @@ public class AboutActivity extends AppCompatActivity implements SwipeBackActivit
     protected void onCreate(Bundle savedInstanceState) {
         ThemeUtils.changeTheme(this);
         super.onCreate(savedInstanceState);
+        App.addActivity(this);
         setContentView(R.layout.activity_about);
         ButterKnife.bind(this);
 

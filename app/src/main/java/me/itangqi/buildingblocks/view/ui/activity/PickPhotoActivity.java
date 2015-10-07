@@ -16,6 +16,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.domain.application.App;
 import me.itangqi.buildingblocks.view.ui.activity.base.SwipeBackActivity;
 
 public class PickPhotoActivity extends SwipeBackActivity {
@@ -37,6 +38,7 @@ public class PickPhotoActivity extends SwipeBackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        App.addActivity(this);
         ButterKnife.bind(this);
         setTitle(getString(R.string.title_pick_photo));
         mSwipeBackLayout = getSwipeBackLayout();

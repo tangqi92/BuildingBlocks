@@ -50,11 +50,13 @@ public class WebActivityPresenter {
         File webCache = new File(cacheDir, "org.chromium.android_webview");
         File[] files = webCache.listFiles();
         long clearedSize = 0;
-        for (File child : files) {
-            if (Integer.parseInt(Constants.simpleDateFormat.format(child.lastModified())) <= before) {
-                clearedSize += child.length();
-                //noinspection ResultOfMethodCallIgnored
-                child.delete();
+        if (files != null && files.length != 0) {
+            for (File child : files) {
+                if (Integer.parseInt(Constants.simpleDateFormat.format(child.lastModified())) <= before) {
+                    clearedSize += child.length();
+                    //noinspection ResultOfMethodCallIgnored
+                    child.delete();
+                }
             }
         }
         return clearedSize;
@@ -78,7 +80,7 @@ public class WebActivityPresenter {
     }
 
     public void getBetterHtml(final String htmlUrl) {
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 Map<String, String> map = mDailyModel.parseHtml(htmlUrl);

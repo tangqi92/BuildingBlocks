@@ -1,5 +1,8 @@
 package me.itangqi.buildingblocks.presenters;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.util.Log;
 
 import org.w3c.dom.Document;
@@ -124,6 +127,18 @@ public class MainActivityPresenter {
                     }
                 }
             }).start();
+        }
+    }
+
+    public void handleCrashLog() {
+        if (PrefUtils.isCrashedLastTime()) {
+            String fileStr = PrefUtils.getCrashUri();
+            Uri uri = Uri.fromFile(new File(fileStr));
+            Log.d(TAG, "crash uri--->" + uri);
+            mMainActivity.showSnackBarWithAction("上次我好像坏掉了ಥ_ಥ", 3000, uri);
+            SharedPreferences.Editor editor = App.getContext().getSharedPreferences("crash", Context.MODE_PRIVATE).edit();
+            editor.putBoolean("isLastTimeCrashed", false);
+            editor.apply();
         }
     }
 
