@@ -13,7 +13,4 @@ public interface IGsonNews {
 
     Handler getHandler();
 
-    void showProgress();
-
-    void hideProgress();
 }

@@ -19,7 +19,7 @@ public final class Constants {
     public static final String ROOT_DIR = Environment.getExternalStorageDirectory() + File.separator + "BB";
     public static final String LOG_DIR = ROOT_DIR + File.separator + "log";
     public static final String DOWNLOAD_DIR = ROOT_DIR + File.separator + "download";
-
+    public static final String CACHE_DIR = ROOT_DIR + File.separator + "cache";
 
     public static final String LOG_NAME = "crash.log";
 

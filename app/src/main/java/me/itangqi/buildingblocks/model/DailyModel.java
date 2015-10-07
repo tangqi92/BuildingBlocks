@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -40,6 +39,7 @@ import me.itangqi.buildingblocks.domain.db.SQLiteHelper;
 import me.itangqi.buildingblocks.domain.utils.Constants;
 import me.itangqi.buildingblocks.domain.utils.PrefUtils;
 import me.itangqi.buildingblocks.domain.utils.ThemeUtils;
+import me.itangqi.buildingblocks.domain.utils.ToastUtils;
 import me.itangqi.buildingblocks.model.entity.Daily;
 import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.model.entity.DailyResult;
@@ -77,8 +77,7 @@ public class DailyModel implements IDaily {
 
         @Override
         public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, DailyResult errorResponse) {
-            Toast.makeText(App.getContext(), "解析错误,状态码:" + statusCode, Toast.LENGTH_SHORT).show();
-
+            ToastUtils.showShort("解析错误,状态码:" + statusCode);
             throwable.printStackTrace();
         }
 
@@ -99,7 +98,7 @@ public class DailyModel implements IDaily {
 
         @Override
         public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, DailyGson errorResponse) {
-            Toast.makeText(App.getContext(), "解析错误,状态码:" + statusCode, Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort("解析错误,状态码:" + statusCode);
             throwable.printStackTrace();
         }
 

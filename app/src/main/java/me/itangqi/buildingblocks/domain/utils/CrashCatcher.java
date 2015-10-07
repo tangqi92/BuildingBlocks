@@ -53,7 +53,7 @@ public class CrashCatcher implements Thread.UncaughtExceptionHandler {
             }
         }).start();
         try {
-            Thread.sleep(3500);
+            Thread.sleep(3000);
             App.exitAll();
         } catch (InterruptedException e) {
             e.printStackTrace();

@@ -15,7 +15,4 @@ public interface IViewPager {
 
     void hideProgress();
 
-    void failload();
-
-    void networkunavaiable();
 }
