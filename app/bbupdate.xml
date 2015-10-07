@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <update>
     <name>Building Blocks</name>
-    <versionCode>95</versionCode>
-    <versionName>0.6.9</versionName>
-    <url>http://7xk54v.com1.z0.glb.clouddn.com/app/bb/0.6.9.apk</url>
+    <versionCode>96</versionCode>
+    <versionName>0.7.0</versionName>
+    <url>http://7xk54v.com1.z0.glb.clouddn.com/app/bb/0.7.0.apk</url>
     <description>1. 增加了夜间模式</description>
     <description>2. 增加了程序崩溃日志收集</description>
     <description>3. 修复了主界面刷新时闪烁的BUG</description>
+    <description>4. html+模式（其实就是修改了html标签==）</description>
+    <description>5. 修复了自动清理功能的错误</description>
 </update>
