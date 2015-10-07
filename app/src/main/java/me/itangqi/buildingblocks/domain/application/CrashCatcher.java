@@ -127,6 +127,6 @@ public class CrashCatcher implements Thread.UncaughtExceptionHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new Uri.Builder().encodedPath(crash.getAbsolutePath()).build();
+        return Uri.fromFile(crash);
     }
 }

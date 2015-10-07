@@ -17,6 +17,20 @@ Building Blocks - 积木
 
 ## Update Log - 更新日志
 
+### 0.7.0
+
+- 新增 - 夜间模式
+- 新增 - 程序崩溃日志收集
+- 新增 - 自动更新
+- 新增 - `html+`模式（其实就是修改了html标签==）
+- 修复 - 自动清理功能的错误
+- 修复 - 主界面刷新闪烁BUG
+- 修改 - 部分UI
+
+##### 已知BUG
+
+- 部分文章显示有问题(使用`html+`模式无影响)
+
 ### v0.6.0
 
 - 新增 - FAB刷新
@@ -27,11 +41,6 @@ Building Blocks - 积木
 - 重构 - 使用MVP进行重构
 - 新增 - 由[Mao](http://weibo.com/cat93/)提供的Logo
 - 修改 - 部分的UI
-
-##### 已知BUG
-
-- 刷新时，会短暂闪烁出现其他页面的原始布局
-- 部分文章显示有问题(使用`html`模式无影响)
 
 ### v0.5.1
 
@@ -48,13 +57,17 @@ Building Blocks - 积木
 [快速下载](https://github.com/tangqi92/BuildingBlocks/releases/download/v0.6.0/buildingblocks_v0.6.0.apk)
 
 ## Screenshots - 预览
-<img src="/screenshots/s1.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s2.png" alt="screenshot" title="screenshot" width="270" height="486" />
+<img src="/screenshots/s1.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s1-1.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
-<img src="/screenshots/s3.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s4.png" alt="screenshot" title="screenshot" width="270" height="486" />
+<img src="/screenshots/s1-2.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s2.png" alt="screenshot" title="screenshot" width="270" height="486" />
+
+<img src="/screenshots/s3.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s4.png" alt="screenshot" title="screenshot" width="270" height="486" />  
 
 <img src="/screenshots/s5.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s6.png" alt="screenshot" title="screenshot" width="270" height="486" />  
 
-<img src="/screenshots/s7.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s8.png" alt="screenshot" title="screenshot" width="270" height="486" />  
+<img src="/screenshots/s7.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s8.png" alt="screenshot" title="screenshot" width="270" height="486" />
+
+<img src="/screenshots/s9.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s9-1.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
 ## Dependencies - 开源项目
 

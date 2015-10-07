@@ -132,8 +132,7 @@ public class MainActivityPresenter {
 
     public void handleCrashLog() {
         if (PrefUtils.isCrashedLastTime()) {
-            String fileStr = PrefUtils.getCrashUri();
-            Uri uri = Uri.fromFile(new File(fileStr));
+            Uri uri = Uri.parse(PrefUtils.getCrashUri());
             Log.d(TAG, "crash uri--->" + uri);
             mMainActivity.showSnackBarWithAction("上次我好像坏掉了ಥ_ಥ", 3000, uri);
             SharedPreferences.Editor editor = App.getContext().getSharedPreferences("crash", Context.MODE_PRIVATE).edit();
