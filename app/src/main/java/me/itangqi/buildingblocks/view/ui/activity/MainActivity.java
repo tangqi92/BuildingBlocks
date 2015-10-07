@@ -220,11 +220,14 @@ public class MainActivity extends BaseActivity implements IMainActivity {
                 MainActivity.this.recreate();//重新创建当前Activity实例
                 return true;
             case R.id.menu_action_feedback:
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                Uri data = Uri.parse("mailto:imtangqi@gmail.com");
-                intent.setData(data);
-                startActivity(intent);
-                return true;
+                Intent sendTo = new Intent(Intent.ACTION_SEND);
+                String[] developers = new String[]{"imtangqi@gmail.com", "troyliu0105@outlook.com"};
+                sendTo.putExtra(Intent.EXTRA_EMAIL, developers);
+                sendTo.putExtra(Intent.EXTRA_SUBJECT, "BuildingBlocks用户反馈");
+                sendTo.putExtra(Intent.EXTRA_TEXT, "请写下留言:\n");
+                sendTo.setType("text/plain");
+                startActivity(Intent.createChooser(sendTo, "请选择邮件客户端"));
+                    return true;
             default:
                 Snackbar.make(mContainer, R.string.snack_rest_over_to_you, Snackbar.LENGTH_LONG).show();
         }

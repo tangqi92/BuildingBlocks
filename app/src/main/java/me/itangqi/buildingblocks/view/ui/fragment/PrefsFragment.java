@@ -59,7 +59,6 @@ public class PrefsFragment extends PreferenceFragment implements Preference.OnPr
             } else {
                 ToastUtils.showShort("现在一切正常哦");
             }
-
         }
         return true;
     }

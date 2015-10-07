@@ -1,13 +1,8 @@
-package me.itangqi.buildingblocks.domain.application;
+package me.itangqi.buildingblocks.domain.utils;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Looper;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,18 +10,16 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+
+import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.domain.application.App;
 
 /**
  * 进行错误收集，并由用户选择是否发送回来
  * Created by Troy on 2015/10/7.
  */
 public class CrashCatcher implements Thread.UncaughtExceptionHandler {
-
-    public static final String TAG = "CrashCatcher";
 
     private static CrashCatcher crashCatcher;
     private Context mContext;
@@ -50,49 +43,21 @@ public class CrashCatcher implements Thread.UncaughtExceptionHandler {
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
         Uri uri = saveToSDCard(ex);
-        SharedPreferences.Editor editor = mContext.getSharedPreferences("crash", Context.MODE_PRIVATE).edit();
-        editor.putBoolean("isLastTimeCrashed", true);
-        editor.putString("crashUri", uri.toString());
-        editor.commit();
+        PrefUtils.setCrash(true, uri.toString());
         new Thread(new Runnable() {
             @Override
             public void run() {
                 Looper.prepare();
-                Toast.makeText(mContext, "我好像坏掉了，但是我记下了细节≧︿≦", Toast.LENGTH_LONG).show();
+                ToastUtils.showLong(R.string.crash_toast);
                 Looper.loop();
             }
         }).start();
         try {
             Thread.sleep(3500);
-            App.exit();
+            App.exitAll();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    private List<String> getDeviceMsg() {
-        List<String> deviceInfo = new ArrayList<>();
-        PackageManager manager = mContext.getPackageManager();
-        PackageInfo info = null;
-        try {
-            info = manager.getPackageInfo(mContext.getPackageName(), PackageManager.GET_ACTIVITIES);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        if (info != null) {
-            deviceInfo.add("=====\tDevice Info\t=====");
-            deviceInfo.add("manufacture:" + Build.MANUFACTURER);
-            deviceInfo.add("product:" + Build.PRODUCT);
-            deviceInfo.add("model:" + Build.MODEL);
-            deviceInfo.add("version.release:" + Build.VERSION.RELEASE);
-            deviceInfo.add("version:"+ Build.DISPLAY);
-            deviceInfo.add("=====\tBB Info\t=====");
-            deviceInfo.add("versionCode:" + info.versionCode + "");
-            deviceInfo.add("versionName:" + info.versionName);
-            deviceInfo.add("lastUpdateTime:" + new SimpleDateFormat("yyyy年MM月dd日HH点mm分ss秒", Locale.CHINA).format(info.lastUpdateTime));
-
-        }
-        return deviceInfo;
     }
 
     private String catchErrors(Throwable throwable) {
@@ -105,18 +70,18 @@ public class CrashCatcher implements Thread.UncaughtExceptionHandler {
 
     private Uri saveToSDCard(Throwable throwable) {
         StringBuilder buffer = new StringBuilder();
-        List<String> info = getDeviceMsg();
+        List<String> info = DeviceUtils.getDeviceMsg(mContext);
         for (String s : info) {
             buffer.append(s).append("\n");
         }
         buffer.append("=====\tError Log\t=====\n");
         String errorMsgs = catchErrors(throwable);
         buffer.append(errorMsgs);
-        File dir = new File(mContext.getExternalCacheDir(), "log");
+        File dir = new File(Constants.LOG_DIR);
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        File crash = new File(dir, "crash.log");
+        File crash = new File(dir, Constants.LOG_NAME);
         try {
             FileOutputStream fos = new FileOutputStream(crash);
             OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");

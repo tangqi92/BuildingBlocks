@@ -1,5 +1,8 @@
 package me.itangqi.buildingblocks.domain.utils;
 
+import android.os.Environment;
+
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -11,7 +14,13 @@ public final class Constants {
 
     public static final String BROADCAST_UPDATE_ACTION = "me.itangqi.buildingblocks.broadcast.update.action";
 
-    public static final String BROADCAST_STATUS = "me.itangqi.buildingblocks.broadcast.update.status";
-
     public static final String BROADCAST_UPDATE_CATEGORY = "me.itangqi.buildingblocks.broadcast.update.category";
+
+    public static final String ROOT_DIR = Environment.getExternalStorageDirectory() + File.separator + "BB";
+    public static final String LOG_DIR = ROOT_DIR + File.separator + "log";
+    public static final String DOWNLOAD_DIR = ROOT_DIR + File.separator + "download";
+
+
+    public static final String LOG_NAME = "crash.log";
+
 }

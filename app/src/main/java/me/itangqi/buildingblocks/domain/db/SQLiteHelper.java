@@ -12,7 +12,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     public static int VERSION = 1;
 
-    public static String DATABASE_NAME = "zhihu.db";
+    public static String DATABASE_NAME = "bb.db";
 
     public static String CREATE_DAILYGSON_TABLE = "CREATE TABLE daily("
             + "id SMALLINT PRIMARY KEY NOT NULL,"

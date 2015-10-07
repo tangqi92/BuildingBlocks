@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Environment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
@@ -84,7 +83,7 @@ public class Updater extends IntentService {
                 size = connection.getContentLength();
                 is = connection.getInputStream();
                 bis = new BufferedInputStream(is);
-                File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "/Download");
+                File dir = new File(Constants.DOWNLOAD_DIR);
                 if (!dir.exists()) {
                     dir.mkdir();
                 }
