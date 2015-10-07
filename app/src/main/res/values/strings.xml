@@ -43,7 +43,7 @@
     <string name="delete_cache">清除缓存</string>
     <string name="way_to_get_data">数据获取方式</string>
     <string name="dialog_way_to_get_data">选择</string>
-    <string name="default_way_to_get_data">http</string>
+    <string name="default_way_to_get_data">http+</string>
 
     <string name="search_hint">搜索</string>
     <string name="search_result_title">搜索:</string>
