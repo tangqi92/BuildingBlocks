@@ -86,6 +86,7 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
         }
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setDefaultTextEncodingName("utf-8");
+        webSettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
         mWebView.setWebChromeClient(new ChromeClient());
         mWebView.setWebViewClient(new ViewClient());
         mPresenter.getBetterHtml(mUrl);

@@ -44,6 +44,7 @@ import me.itangqi.buildingblocks.domain.utils.ThemeUtils;
 import me.itangqi.buildingblocks.model.entity.Daily;
 import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.model.entity.DailyResult;
+import me.itangqi.buildingblocks.presenters.WebActivityPresenter;
 
 /**
  * Created by Troy on 2015/9/21.
@@ -486,7 +487,7 @@ public class DailyModel implements IDaily {
      * @param beforedate 超过此日前的所有数据
      * @return 被删除的数据条数
      */
-    public int clearOutdateCache(int beforedate) {
+    public int clearOutdateDB(int beforedate) {
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
         Cursor findId = database.query("dailyresult"
                 , new String[]{"id"}, "date<=?", new String[]{beforedate + ""}, null, null, null);
@@ -513,18 +514,23 @@ public class DailyModel implements IDaily {
      * @param beforedate 过期时间
      * @return 删除文件大小
      */
-    public long clearOutdatePhoto(int beforedate) {
-        long clearedSize = 0;
-        File cacheDir = Glide.getPhotoCacheDir(App.getContext());
-        File[] files = cacheDir.listFiles();
-        for (File child : files) {
-            if (Integer.parseInt(Constants.simpleDateFormat.format(child.lastModified())) <= beforedate) {
-                clearedSize += child.length();
-                //noinspection ResultOfMethodCallIgnored
-                child.delete();
+    public void clearOutdatePhoto(final int beforedate) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                File cacheDir = Glide.getPhotoCacheDir(App.getContext());
+                File[] files = cacheDir.listFiles();
+                for (File child : files) {
+                    if (Integer.parseInt(Constants.simpleDateFormat.format(child.lastModified())) <= beforedate) {
+                        //noinspection ResultOfMethodCallIgnored
+                        child.delete();
+                    }
+                }
+                WebActivityPresenter presenter = new WebActivityPresenter();
+                presenter.clearCacheFolder(beforedate);
             }
-        }
-        return clearedSize;
+        });
+        thread.start();
     }
 
     @Deprecated
