@@ -8,9 +8,6 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.design.widget.Snackbar;
-import android.text.TextUtils;
-
-import java.io.File;
 
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.domain.utils.PrefUtils;
@@ -49,9 +46,8 @@ public class PrefsFragment extends PreferenceFragment implements Preference.OnPr
         }else if (mIsAutoUpdate == preference) {
             editor.putBoolean("auto_update", mIsAutoUpdate.isChecked());
         }else if (mLogPref == preference) {
-            String uriStr = PrefUtils.getCrashUri();
-            if (!TextUtils.isEmpty(uriStr)) {
-                Uri uri = Uri.fromFile(new File(uriStr));
+            Uri uri = Uri.parse(PrefUtils.getCrashUri());
+            if (uri != null) {
                 Intent sendTo = new Intent(Intent.ACTION_SEND);
                 String[] developers = new String[]{"imtangqi@gmail.com", "troyliu0105@outlook.com"};
                 sendTo.putExtra(Intent.EXTRA_EMAIL, developers);

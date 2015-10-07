@@ -16,6 +16,20 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
 
 ## Update Log
 
+### 0.7.0
+
+- New - night mode
+- New - crash log collect
+- New - auto update
+- New - `html+`mode（actually we just modified the html）
+- FIX - auto clear bug
+- FIX - MainActivity flicker bug
+- Modify - parts of UI
+
+##### Known Bugs
+
+- problems with showing some article (`html+` mode isn't influenced)
+
 ### v0.6.0
 
 - New - use FAB to refresh
@@ -25,12 +39,7 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
 - New - use SQLite to store data
 - Reconstruction - Refactoring with MVP
 - New - Logo Support by [Mao](http://weibo.com/cat93/)
-- Modify - part of UI
-
-##### Known Bugs
-
-- when you refresh, fragment will flicker and show some other layouts
-- problems with showing some article (`html` mode isn't influenced)
+- Modify - parts of UI
 
 ### v0.5.1
 
@@ -47,13 +56,17 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
 [Download](https://github.com/tangqi92/BuildingBlocks/releases/download/v0.6.0/buildingblocks_v0.6.0.apk)
 
 ## Screenshots
-<img src="/screenshots/s1.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s2.png" alt="screenshot" title="screenshot" width="270" height="486" />
+<img src="/screenshots/s1.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s1-1.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
-<img src="/screenshots/s3.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s4.png" alt="screenshot" title="screenshot" width="270" height="486" />
+<img src="/screenshots/s1-2.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s2.png" alt="screenshot" title="screenshot" width="270" height="486" />
+
+<img src="/screenshots/s3.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s4.png" alt="screenshot" title="screenshot" width="270" height="486" />  
 
 <img src="/screenshots/s5.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s6.png" alt="screenshot" title="screenshot" width="270" height="486" />  
 
-<img src="/screenshots/s7.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s8.png" alt="screenshot" title="screenshot" width="270" height="486" />  
+<img src="/screenshots/s7.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s8.png" alt="screenshot" title="screenshot" width="270" height="486" />
+
+<img src="/screenshots/s9.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s9-1.png" alt="screenshot" title="screenshot" width="270" height="486" /> 
 
 ## Dependencies
 

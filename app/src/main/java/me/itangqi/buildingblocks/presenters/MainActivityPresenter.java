@@ -74,7 +74,6 @@ public class MainActivityPresenter {
                 @Override
                 public void run() {
                     String urlStr = "https://raw.githubusercontent.com/troyliu0105/BuildingBlocks/dev/app/bbupdate.xml";
-                    String name = null;
                     int versionCode = 0;
                     String versionName = null;
                     String apkUrl = null;
@@ -111,7 +110,6 @@ public class MainActivityPresenter {
                         DocumentBuilder builder = factory.newDocumentBuilder();
                         Document document = builder.parse(tmp);
                         Element bb = (Element) document.getElementsByTagName("update").item(0);
-                        name = bb.getElementsByTagName("name").item(0).getFirstChild().getNodeValue();
                         versionCode = Integer.parseInt(bb.getElementsByTagName("versionCode").item(0).getFirstChild().getNodeValue());
                         versionName = bb.getElementsByTagName("versionName").item(0).getFirstChild().getNodeValue();
                         apkUrl = bb.getElementsByTagName("url").item(0).getFirstChild().getNodeValue();
@@ -132,8 +130,7 @@ public class MainActivityPresenter {
 
     public void handleCrashLog() {
         if (PrefUtils.isCrashedLastTime()) {
-            String fileStr = PrefUtils.getCrashUri();
-            Uri uri = Uri.fromFile(new File(fileStr));
+            Uri uri = Uri.parse(PrefUtils.getCrashUri());
             Log.d(TAG, "crash uri--->" + uri);
             mMainActivity.showSnackBarWithAction("上次我好像坏掉了ಥ_ಥ", 3000, uri);
             SharedPreferences.Editor editor = App.getContext().getSharedPreferences("crash", Context.MODE_PRIVATE).edit();
