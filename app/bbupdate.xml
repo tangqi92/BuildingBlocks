@@ -4,7 +4,7 @@
     <versionCode>95</versionCode>
     <versionName>0.6.9</versionName>
     <url>http://7xk54v.com1.z0.glb.clouddn.com/app/bb/0.6.9.apk</url>
-    <description>1. 增加了Toolbar颜色变化(萝莉炮以上)</description>
-    <description>2. 修复了数据库缓存删除错误的BUG</description>
+    <description>1. 增加了夜间模式</description>
+    <description>2. 增加了程序崩溃日志收集</description>
     <description>3. 修复了主界面刷新时闪烁的BUG</description>
 </update>
