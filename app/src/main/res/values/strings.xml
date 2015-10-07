@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <string name="app_name">积木</string>
 
@@ -77,4 +77,5 @@
     <string name="service_update_error">下载失败</string>
     <string name="service_update_cancel">取消</string>
     <string name="service_update_restart">重新开始</string>
+    <string name="send_log">发送日志</string>
 </resources>
