@@ -1,10 +1,10 @@
 package me.itangqi.buildingblocks.view.ui.activity;
 
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -59,6 +59,7 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
     @Bind(R.id.img_source) TextView mHeaderSource;
     @Bind(R.id.fabProgressCircle) FABProgressCircle fabProgressCircle;
     @Bind(R.id.fab) FloatingActionButton fab;
+    @Bind(R.id.nsv_content) NestedScrollView mNestedScrollView;
 
     @Override
     protected int getLayoutResource() {
@@ -71,6 +72,9 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
         mPresenter = new WebActivityPresenter(this);
         ButterKnife.bind(this);
         ThemeUtils.changeTheme(this);
+        if (!ThemeUtils.isLight) {
+            mNestedScrollView.setBackgroundColor(getResources().getColor(R.color.window_background_dark));
+        }
         mPaletteListenerImp = new GlidePaletteListenerImp(mHeaderImg, this, mToolbarLayout);
         mUrl = getIntent().getStringExtra(EXTRA_URL);
         WebSettings webSettings = mWebView.getSettings();
@@ -229,15 +233,5 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
             if (url != null) view.loadUrl(url);
             return true;
         }
-
-        @Override
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            super.onPageStarted(view, url, favicon);
-            if (!ThemeUtils.isLight) {
-                view.setBackgroundColor(WebActivity.this.getResources().getColor(R.color.window_background_dark));
-            }
-        }
-
-
     }
 }
