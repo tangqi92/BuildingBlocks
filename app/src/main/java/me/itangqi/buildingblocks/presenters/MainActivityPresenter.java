@@ -55,8 +55,8 @@ public class MainActivityPresenter {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, -Constants.PAGE_COUNT);
         int before = Integer.parseInt(Constants.simpleDateFormat.format(calendar.getTime()));
-        int totalDeleted = mDailyModel.clearOutdateDB(before);
-        mDailyModel.clearOutdatePhoto(before);
+        int totalDeleted = mDailyModel.clearOutdatedDB(before);
+        mDailyModel.clearOutdatedPhoto(before);
         Log.d(TAG, "totalDeleted--->" + totalDeleted);
         if (totalDeleted > 0) {
             mMainActivity.showSnackBar("清理了" + totalDeleted + "条过期数据", 1500);
