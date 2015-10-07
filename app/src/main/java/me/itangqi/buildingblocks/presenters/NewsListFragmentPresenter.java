@@ -34,5 +34,4 @@ public class NewsListFragmentPresenter {
     public void loadData(List<Daily> dailies) {
         mIViewPager.loadData(dailies);
     }
-
 }

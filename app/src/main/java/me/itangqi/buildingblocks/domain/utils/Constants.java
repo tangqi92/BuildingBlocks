@@ -22,5 +22,4 @@ public final class Constants {
     public static final String CACHE_DIR = ROOT_DIR + File.separator + "cache";
 
     public static final String LOG_NAME = "crash.log";
-
 }

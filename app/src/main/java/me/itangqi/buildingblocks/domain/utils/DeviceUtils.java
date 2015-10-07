@@ -35,7 +35,6 @@ public class DeviceUtils {
             deviceInfo.add("versionCode:" + info.versionCode + "");
             deviceInfo.add("versionName:" + info.versionName);
             deviceInfo.add("lastUpdateTime:" + new SimpleDateFormat("yyyy年MM月dd日HH点mm分ss秒", Locale.CHINA).format(info.lastUpdateTime));
-
         }
         return deviceInfo;
     }

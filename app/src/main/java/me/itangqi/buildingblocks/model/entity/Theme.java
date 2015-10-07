@@ -14,5 +14,4 @@ public class Theme implements Serializable {
     public int id;
     @SerializedName("name")
     public String name;
-
 }

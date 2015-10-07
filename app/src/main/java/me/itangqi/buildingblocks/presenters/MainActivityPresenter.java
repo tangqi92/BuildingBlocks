@@ -1,7 +1,5 @@
 package me.itangqi.buildingblocks.presenters;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.util.Log;
 
@@ -133,10 +131,7 @@ public class MainActivityPresenter {
             Uri uri = Uri.parse(PrefUtils.getCrashUri());
             Log.d(TAG, "crash uri--->" + uri);
             mMainActivity.showSnackBarWithAction("上次我好像坏掉了ಥ_ಥ", 3000, uri);
-            SharedPreferences.Editor editor = App.getContext().getSharedPreferences("crash", Context.MODE_PRIVATE).edit();
-            editor.putBoolean("isLastTimeCrashed", false);
-            editor.apply();
+            PrefUtils.setCrash(false);
         }
     }
-
 }

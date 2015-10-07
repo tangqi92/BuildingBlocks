@@ -10,16 +10,17 @@ import me.itangqi.buildingblocks.domain.application.App;
  * Created by Troy on 2015/9/20.
  */
 public class PrefUtils {
+
     private static final String PRE_NAME = "me.itangqi.buildingblocks_preferences";
 
-    private static final String PRE_CRASH_ISLASTTIMECRASHED = "isLastTimeCrashed";
-    private static final String PRE_CRASH_URI = "crashUri";
+    public static final String PRE_CRASH_ISLASTTIMECRASHED = "isLastTimeCrashed";
+    public static final String PRE_CRASH_URI = "crashUri";
 
-    private static final String PRE_CACHE_ENABLE = "enable_cache";
+    public static final String PRE_CACHE_ENABLE = "enable_cache";
 
-    private static final String PRE_GSON_OR_HTML = "gson_or_html";
+    public static final String PRE_GSON_OR_HTML = "gson_or_html";
 
-    private static final String PRE_AUTO_UPDATE = "auto_update";
+    public static final String PRE_AUTO_UPDATE = "auto_update";
 
 
     private static SharedPreferences getSharedPreferences() {
@@ -57,5 +58,11 @@ public class PrefUtils {
         editor.putBoolean(PRE_CRASH_ISLASTTIMECRASHED, isLastTimeCrashed);
         editor.putString(PRE_CRASH_URI, crashUri);
         editor.commit();
+    }
+
+    public static void setCrash(boolean isLastTimeCrashed) {
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putBoolean(PRE_CRASH_ISLASTTIMECRASHED, isLastTimeCrashed);
+        editor.apply();
     }
 }

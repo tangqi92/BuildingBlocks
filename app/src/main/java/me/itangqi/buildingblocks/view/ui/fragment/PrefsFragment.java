@@ -15,7 +15,6 @@ import me.itangqi.buildingblocks.domain.utils.ToastUtils;
 import me.itangqi.buildingblocks.domain.utils.VersionUtils;
 import me.itangqi.buildingblocks.presenters.WebActivityPresenter;
 
-
 public class PrefsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
 
     private CheckBoxPreference mIsEnableCache;
@@ -36,7 +35,7 @@ public class PrefsFragment extends PreferenceFragment implements Preference.OnPr
         // TODO the rest over to you :)
         SharedPreferences.Editor editor = preference.getEditor();
         if (mIsEnableCache == preference) {
-            editor.putBoolean("enable_cache", mIsEnableCache.isChecked());
+            editor.putBoolean(PrefUtils.PRE_CACHE_ENABLE, mIsEnableCache.isChecked());
         } else if (mCachePre == preference) {
             WebActivityPresenter presenter = new WebActivityPresenter();
             long deletedSize = presenter.clearCacheFolder();
@@ -44,7 +43,7 @@ public class PrefsFragment extends PreferenceFragment implements Preference.OnPr
             Snackbar.make(getView(), "释放了 " + (deletedSize / 1024L / 1024L) + " MB", Snackbar.LENGTH_LONG).show();
 
         }else if (mIsAutoUpdate == preference) {
-            editor.putBoolean("auto_update", mIsAutoUpdate.isChecked());
+            editor.putBoolean(PrefUtils.PRE_AUTO_UPDATE, mIsAutoUpdate.isChecked());
         }else if (mLogPref == preference) {
             Uri uri = Uri.parse(PrefUtils.getCrashUri());
             if (uri != null) {
@@ -52,12 +51,12 @@ public class PrefsFragment extends PreferenceFragment implements Preference.OnPr
                 String[] developers = new String[]{"imtangqi@gmail.com", "troyliu0105@outlook.com"};
                 sendTo.putExtra(Intent.EXTRA_EMAIL, developers);
                 sendTo.putExtra(Intent.EXTRA_SUBJECT, "BuildingBlocks崩溃日志");
-                sendTo.putExtra(Intent.EXTRA_TEXT, "请写下留言:\n");
+                sendTo.putExtra(Intent.EXTRA_TEXT, "欢迎吐槽:\n");
                 sendTo.putExtra(Intent.EXTRA_STREAM, uri);
                 sendTo.setType("text/plain");
                 startActivity(Intent.createChooser(sendTo, "请发送邮件"));
             } else {
-                ToastUtils.showShort("现在一切正常哦");
+                ToastUtils.showShort("我好着呢~");
             }
         }
         return true;

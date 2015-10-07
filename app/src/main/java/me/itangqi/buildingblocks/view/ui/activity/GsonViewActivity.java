@@ -78,17 +78,6 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
         return null;
     }
 
-
-    @Override
-    public void showProgress() {
-
-    }
-
-    @Override
-    public void hideProgress() {
-
-    }
-
     private void initView(String title) {
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_layout);
         mLinearLayout = (LinearLayout) findViewById(R.id.ll_content);
@@ -160,5 +149,4 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
             }
         }
     }
-
 }

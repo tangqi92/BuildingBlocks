@@ -14,5 +14,4 @@ public interface IViewPager {
     void showProgress();
 
     void hideProgress();
-
 }

@@ -12,5 +12,4 @@ public interface IGsonNews {
     void loadGson(DailyGson dailyGson);
 
     Handler getHandler();
-
 }

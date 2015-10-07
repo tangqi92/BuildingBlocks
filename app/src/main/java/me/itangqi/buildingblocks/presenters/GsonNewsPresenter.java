@@ -40,6 +40,7 @@ public class GsonNewsPresenter {
 
     /**
      * 使用AsyncTask来更新UI
+     *
      * @param dailyGson
      * @return
      */
@@ -49,6 +50,7 @@ public class GsonNewsPresenter {
 
     /**
      * 使用Handler来更新UI
+     *
      * @param dailyGson
      */
     public void startInflater(DailyGson dailyGson) {
@@ -74,9 +76,9 @@ public class GsonNewsPresenter {
             for (Map.Entry<String, String> entry : extra.entrySet()) {
                 if (entry.getKey().equals("avatar")) {
                     extraBundle.putString("avatar", entry.getValue());
-                }else if (entry.getKey().equals("author")) {
+                } else if (entry.getKey().equals("author")) {
                     extraBundle.putString("author", entry.getValue());
-                }else if (entry.getKey().equals("bio")) {
+                } else if (entry.getKey().equals("bio")) {
                     extraBundle.putString("bio", entry.getValue());
                 }
             }
@@ -85,5 +87,4 @@ public class GsonNewsPresenter {
             mHandler.sendMessage(extraMsg);
         }
     }
-
 }

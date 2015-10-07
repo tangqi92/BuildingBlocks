@@ -17,6 +17,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.domain.utils.IntentKeys;
 import me.itangqi.buildingblocks.domain.utils.NetworkUtils;
 import me.itangqi.buildingblocks.domain.utils.PrefUtils;
 import me.itangqi.buildingblocks.model.entity.Daily;
@@ -26,10 +27,10 @@ import me.itangqi.buildingblocks.view.adapter.DailyListAdapter;
 import me.itangqi.buildingblocks.view.widget.RecyclerViewItemDecoration;
 
 public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, IViewPager {
+    private int date;
     private List<Daily> mNewsList = new ArrayList<>();
     private DailyListAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private int date;
     private NewsListFragmentPresenter mPresenter;
 
     @Bind(R.id.cardList) RecyclerView mRecyclerView;
@@ -51,7 +52,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
             Bundle bundle = getArguments();
-            date = bundle.getInt("date");
+            date = bundle.getInt(IntentKeys.DATE);
             setRetainInstance(true);
         }
         mPresenter = new NewsListFragmentPresenter(this, date);
@@ -134,7 +135,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
             showProgress();
         } else if (!NetworkUtils.isNetworkConnected() && PrefUtils.isEnableCache()) {
             Snackbar.make(getView(), R.string.snack_network_error_load_cache, Snackbar.LENGTH_SHORT).show();
-        }else if (!NetworkUtils.isNetworkConnected() && !PrefUtils.isEnableCache()) {
+        } else if (!NetworkUtils.isNetworkConnected() && !PrefUtils.isEnableCache()) {
             Snackbar.make(getView(), R.string.snack_network_error, Snackbar.LENGTH_SHORT).show();
         }
     }
@@ -155,15 +156,5 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
     @Override
     public void hideProgress() {
         mSwipeRefreshLayout.setRefreshing(false);
-    }
-
-    @Override
-    public void failload() {
-        Snackbar.make(getView(), R.string.snack_load_error, Snackbar.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void networkunavaiable() {
-        Snackbar.make(getView(), R.string.snack_network_error, Snackbar.LENGTH_LONG).show();
     }
 }

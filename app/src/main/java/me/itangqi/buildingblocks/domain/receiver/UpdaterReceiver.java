@@ -17,7 +17,7 @@ import me.itangqi.buildingblocks.domain.service.Updater;
  * Created by Troy on 2015/10/3.
  * 用来实现，在更新下载失败后的提醒
  */
-public class UpdaterReceiver extends BroadcastReceiver{
+public class UpdaterReceiver extends BroadcastReceiver {
 
     public static final String TAG = "UpdaterReceiver";
 
@@ -26,7 +26,7 @@ public class UpdaterReceiver extends BroadcastReceiver{
     private Activity mActivity;
 
     public UpdaterReceiver(Activity activity) {
-       this.mActivity = activity;
+        this.mActivity = activity;
     }
 
     @Override
