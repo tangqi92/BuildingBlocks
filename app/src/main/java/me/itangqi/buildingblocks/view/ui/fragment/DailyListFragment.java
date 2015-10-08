@@ -26,7 +26,7 @@ import me.itangqi.buildingblocks.view.IViewPager;
 import me.itangqi.buildingblocks.view.adapter.DailyListAdapter;
 import me.itangqi.buildingblocks.view.widget.RecyclerViewItemDecoration;
 
-public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, IViewPager {
+public class DailyListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, IViewPager {
     private int date;
     private List<Daily> mNewsList = new ArrayList<>();
     private DailyListAdapter mAdapter;
@@ -36,8 +36,8 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
     @Bind(R.id.cardList) RecyclerView mRecyclerView;
     @Bind(R.id.swipe_refresh_layout) SwipeRefreshLayout mSwipeRefreshLayout;
 
-    public static NewsListFragment newInstance() {
-        NewsListFragment fragment = new NewsListFragment();
+    public static DailyListFragment newInstance() {
+        DailyListFragment fragment = new DailyListFragment();
         // TODO you can use bundle to transfer data
         return fragment;
     }

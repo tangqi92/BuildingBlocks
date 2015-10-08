@@ -77,6 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/about_introduce_and_help"
+                android:textColor="@color/primary_text"
                 android:textSize="@dimen/about_text_size"/>
 
             <RelativeLayout
@@ -106,6 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="@string/about_thanks_to"
+                android:textColor="@color/primary_text"
                 android:textSize="@dimen/about_text_size"/>
 
             <RelativeLayout
@@ -135,6 +137,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="@string/about_developers"
+                android:textColor="@color/primary_text"
                 android:textSize="@dimen/about_text_size"/>
 
             <RelativeLayout
@@ -157,7 +160,7 @@
                     android:layout_toEndOf="@id/ig_avatar_tangqi"
                     android:layout_toRightOf="@id/ig_avatar_tangqi"
                     android:text="汤奇"
-                    android:textColor="@color/primary_text"
+                    android:textColor="@color/secondary_text"
                     tools:ignore="HardcodedText"/>
 
                 <TextView
@@ -178,7 +181,7 @@
                     android:layout_below="@id/ig_avatar_tangqi"
                     android:layout_marginTop="@dimen/margin_8dp"
                     android:text="Blog: "
-                    android:textColor="@color/primary_text"/>
+                    android:textColor="@color/secondary_text"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -196,7 +199,7 @@
                     android:layout_alignLeft="@id/tv_avator_blog"
                     android:layout_below="@id/tv_avator_blog"
                     android:text="GitHub: "
-                    android:textColor="@color/primary_text"/>
+                    android:textColor="@color/secondary_text"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -220,6 +223,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="@string/about_open_source_lis"
+                android:textColor="@color/primary_text"
                 android:textSize="@dimen/about_text_size"/>
 
             <RelativeLayout

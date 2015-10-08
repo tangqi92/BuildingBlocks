@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.domain.api.ZhihuApi;
+import me.itangqi.buildingblocks.domain.utils.IntentKeys;
 import me.itangqi.buildingblocks.domain.utils.PrefUtils;
 import me.itangqi.buildingblocks.model.entity.Daily;
 import me.itangqi.buildingblocks.view.ui.activity.GsonViewActivity;
@@ -86,15 +87,15 @@ public class DailyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         Log.d("Daily", "id--->" + news.id);
         String news_url = ZhihuApi.getNewsContent(news.id);
         Intent intent = new Intent(v.getContext(), WebActivity.class);
-        intent.putExtra(WebActivity.EXTRA_URL, news_url);
+        intent.putExtra(IntentKeys.EXTRA_URL, news_url);
         v.getContext().startActivity(intent);
     }
 
     private void gotoGsonView(Daily news, View v) {
         Log.d("Daily", "id--->" + news.id);
         Intent intent = new Intent(v.getContext(), GsonViewActivity.class);
-        intent.putExtra(GsonViewActivity.EXTRA_ID, news.id);
-        intent.putExtra(GsonViewActivity.EXTRA_TITLE, news.title);
+        intent.putExtra(IntentKeys.EXTRA_ID, news.id);
+        intent.putExtra(IntentKeys.EXTRA_TITLE, news.title);
         v.getContext().startActivity(intent);
     }
 

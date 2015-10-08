@@ -44,7 +44,7 @@ import me.itangqi.buildingblocks.domain.utils.VersionUtils;
 import me.itangqi.buildingblocks.presenters.MainActivityPresenter;
 import me.itangqi.buildingblocks.view.IMainActivity;
 import me.itangqi.buildingblocks.view.ui.activity.base.BaseActivity;
-import me.itangqi.buildingblocks.view.ui.fragment.NewsListFragment;
+import me.itangqi.buildingblocks.view.ui.fragment.DailyListFragment;
 
 public class MainActivity extends BaseActivity implements IMainActivity {
     public static final String TAG = "MainActivity";
@@ -62,7 +62,7 @@ public class MainActivity extends BaseActivity implements IMainActivity {
     @OnClick(R.id.fab)
     public void fabOnClick() {
         FragmentStatePagerAdapter adapter = (FragmentStatePagerAdapter) mViewPager.getAdapter();
-        NewsListFragment fragment = (NewsListFragment) adapter.instantiateItem(mViewPager, mViewPager.getCurrentItem());
+        DailyListFragment fragment = (DailyListFragment) adapter.instantiateItem(mViewPager, mViewPager.getCurrentItem());
         fragment.onRefresh();
     }
 
@@ -323,7 +323,7 @@ public class MainActivity extends BaseActivity implements IMainActivity {
         @Override
         public Fragment getItem(int i) {
             Bundle bundle = new Bundle();
-            Fragment newFragment = NewsListFragment.newInstance();
+            Fragment newFragment = DailyListFragment.newInstance();
 
             Calendar dateToGetUrl = Calendar.getInstance();
             dateToGetUrl.add(Calendar.DAY_OF_YEAR, 1 - i);

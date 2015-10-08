@@ -20,6 +20,7 @@ import java.util.Map;
 
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.domain.application.App;
+import me.itangqi.buildingblocks.domain.utils.IntentKeys;
 import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.presenters.GsonNewsPresenter;
 import me.itangqi.buildingblocks.view.IGsonNews;
@@ -30,10 +31,6 @@ import me.itangqi.buildingblocks.view.widget.GlidePaletteListenerImp;
  * Created by Troy on 2015/9/24.
  */
 public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
-
-    public static final String EXTRA_ID = "id";
-    public static final String EXTRA_IMG = "img";
-    public static final String EXTRA_TITLE = "title";
 
     public static final int EXTRA = 0x123;
 
@@ -57,8 +54,8 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.addActivity(this);
-        int id = getIntent().getIntExtra(EXTRA_ID, 0);
-        String title = getIntent().getStringExtra(EXTRA_TITLE);
+        int id = getIntent().getIntExtra(IntentKeys.EXTRA_ID, 0);
+        String title = getIntent().getStringExtra(IntentKeys.EXTRA_TITLE);
         mPresenter = new GsonNewsPresenter(this);
         initView(title);
         mPaletteListenerImp = new GlidePaletteListenerImp(mHeader, this, mCollapsingToolbarLayout);

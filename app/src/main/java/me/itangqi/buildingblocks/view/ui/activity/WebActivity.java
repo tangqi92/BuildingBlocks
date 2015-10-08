@@ -30,6 +30,7 @@ import butterknife.ButterKnife;
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.domain.application.App;
+import me.itangqi.buildingblocks.domain.utils.IntentKeys;
 import me.itangqi.buildingblocks.domain.utils.PrefUtils;
 import me.itangqi.buildingblocks.domain.utils.ShareUtils;
 import me.itangqi.buildingblocks.domain.utils.ThemeUtils;
@@ -47,7 +48,6 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
 
     public static final String TAG = "WebActivity";
 
-    public static final String EXTRA_URL = "extra_url";
     private SwipeBackLayout mSwipeBackLayout;
     private WebActivityPresenter mPresenter;
     private GlidePaletteListenerImp mPaletteListenerImp;
@@ -79,7 +79,7 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
             mNestedScrollView.setBackgroundColor(getResources().getColor(R.color.window_background_dark));
         }
         mPaletteListenerImp = new GlidePaletteListenerImp(mHeaderImg, this, mToolbarLayout);
-        mUrl = getIntent().getStringExtra(EXTRA_URL);
+        mUrl = getIntent().getStringExtra(IntentKeys.EXTRA_URL);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         if (PrefUtils.isEnableCache()) {
