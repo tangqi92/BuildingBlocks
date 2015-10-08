@@ -58,7 +58,6 @@ public class DailyModel implements IDaily {
 
     private IHttpCallBack mIHttpCallBack;
     private IGsonCallBack mIGsonCallBack;
-    //    private SparseArray<String> mItems = new SparseArray<>();  //待测试
     private SQLiteHelper mSQLiteHelper;
     private static DailyModel mDailyModel;
 
@@ -279,7 +278,7 @@ public class DailyModel implements IDaily {
         }
         SQLiteDatabase database = mSQLiteHelper.getWritableDatabase();
         List<Daily> dailyList = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT * FROM dailyresult where date = ?", new String[]{date + ""});
+        Cursor cursor = database.rawQuery("SELECT * FROM dailyresult WHERE date = ?", new String[]{date + ""});
         while (cursor.moveToNext()) {
             Daily daily = new Daily();
             daily.id = cursor.getInt(cursor.getColumnIndex("id"));
