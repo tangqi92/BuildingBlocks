@@ -111,4 +111,10 @@ public class AboutActivity extends AppCompatActivity implements SwipeBackActivit
     public void onPause() {
         super.onPause();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        App.removeActivity(this);
+    }
 }

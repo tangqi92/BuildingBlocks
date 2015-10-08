@@ -224,4 +224,10 @@ public class GooglePlacesActivity extends SwipeBackActivity
         ToastUtils.showShort("Could not connect to Google API Client: Error " + connectionResult.getErrorCode());
         GooglePlacesActivity.this.finish();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        App.removeActivity(this);
+    }
 }

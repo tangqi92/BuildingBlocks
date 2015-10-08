@@ -355,5 +355,7 @@ public class MainActivity extends BaseActivity implements IMainActivity {
     protected void onDestroy() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mUpdaterReceiver);
         super.onDestroy();
+        ButterKnife.unbind(this);
+        App.removeActivity(this);
     }
 }

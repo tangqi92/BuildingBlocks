@@ -51,4 +51,10 @@ public class SearchResultActivity extends SwipeBackActivity {
             //use the query to search
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        App.removeActivity(this);
+    }
 }

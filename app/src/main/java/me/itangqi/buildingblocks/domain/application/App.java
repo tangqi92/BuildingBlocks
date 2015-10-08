@@ -33,6 +33,10 @@ public class App extends Application {
         mActivities.add(activity);
     }
 
+    public static void removeActivity(Activity activity) {
+        mActivities.remove(activity);
+    }
+
     public static void exitAll() {
         for (Activity activity : mActivities) {
             activity.finish();
