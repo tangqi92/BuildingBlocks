@@ -5,6 +5,7 @@
 
     <dimen name="margin_4dp">4dp</dimen>
     <dimen name="margin_8dp">8dp</dimen>
+    <dimen name="margin_12dp">12dp</dimen>
     <dimen name="margin_16dp">16dp</dimen>
     <dimen name="margin_24dp">24dp</dimen>
     <dimen name="margin_32dp">32dp</dimen>
@@ -38,6 +39,7 @@
     <dimen name="about_header_height">230dp</dimen>
     <dimen name="avatar_size">38dp</dimen>
     <dimen name="open_source_lis_text_size">14sp</dimen>
+    <dimen name="about_text_size">16sp</dimen>
 
     <dimen name="fab_margin_right">0dp</dimen>
     <dimen name="fab_margin_bottom">0dp</dimen>

@@ -9,7 +9,10 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.design.widget.Snackbar;
 
+import java.io.File;
+
 import me.itangqi.buildingblocks.R;
+import me.itangqi.buildingblocks.domain.utils.Constants;
 import me.itangqi.buildingblocks.domain.utils.PrefUtils;
 import me.itangqi.buildingblocks.domain.utils.ToastUtils;
 import me.itangqi.buildingblocks.domain.utils.VersionUtils;
@@ -39,14 +42,13 @@ public class PrefsFragment extends PreferenceFragment implements Preference.OnPr
         } else if (mCachePre == preference) {
             WebActivityPresenter presenter = new WebActivityPresenter();
             long deletedSize = presenter.clearCacheFolder();
-//            ToastUtils.showShort("释放了" + (deletedSize / 1024L / 1024L) + "MB");
             Snackbar.make(getView(), "释放了 " + (deletedSize / 1024L / 1024L) + " MB", Snackbar.LENGTH_LONG).show();
-
-        }else if (mIsAutoUpdate == preference) {
+        } else if (mIsAutoUpdate == preference) {
             editor.putBoolean(PrefUtils.PRE_AUTO_UPDATE, mIsAutoUpdate.isChecked());
-        }else if (mLogPref == preference) {
-            Uri uri = Uri.parse(PrefUtils.getCrashUri());
-            if (uri != null) {
+        } else if (mLogPref == preference) {
+            String logUri = PrefUtils.getCrashUri();
+            if (logUri != null && isCrashLogExit()) {
+                Uri uri = Uri.parse(logUri);
                 Intent sendTo = new Intent(Intent.ACTION_SEND);
                 String[] developers = new String[]{"imtangqi@gmail.com", "troyliu0105@outlook.com"};
                 sendTo.putExtra(Intent.EXTRA_EMAIL, developers);
@@ -54,9 +56,9 @@ public class PrefsFragment extends PreferenceFragment implements Preference.OnPr
                 sendTo.putExtra(Intent.EXTRA_TEXT, "欢迎吐槽:\n");
                 sendTo.putExtra(Intent.EXTRA_STREAM, uri);
                 sendTo.setType("text/plain");
-                startActivity(Intent.createChooser(sendTo, "请发送邮件"));
+                startActivity(Intent.createChooser(sendTo, "请选择邮件客户端"));
             } else {
-                ToastUtils.showShort("我好着呢~");
+                ToastUtils.showShort("我现在好着呢~");
             }
         }
         return true;
@@ -71,5 +73,17 @@ public class PrefsFragment extends PreferenceFragment implements Preference.OnPr
         mLogPref.setOnPreferenceClickListener(this);
         mVersionPre = findPreference("version");
         mVersionPre.setTitle("版本：" + VersionUtils.setUpVersionName(getActivity()));
+    }
+
+    public static boolean isCrashLogExit() {
+        try {
+            File crash = new File(Constants.LOG_DIR + File.separator + Constants.LOG_NAME);
+            if (!crash.exists()) {
+                return false;
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return true;
     }
 }

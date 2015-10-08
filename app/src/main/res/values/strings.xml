@@ -28,7 +28,7 @@
     <string name="about_thanks_to">特别鸣谢</string>
     <string name="about_thanks_to_detail">感谢 <a href="http://weibo.com/cat93/">Mao</a> 提供应用图标\n\n感谢 <a href="http://weibo.com/rainynow">Troy和陌生人</a> 参与 dev 版本的开发</string>
     <string name="about_introduce_and_help">介绍与帮助</string>
-    <string name="about_open_source_libraries_list">com.jakewharton:butterknife:7.0.1\ncom.soundcloud.android:android-crop:1.0.0@aar\ncom.loopj.android:android-async-http:1.4.8\ncom.github.bumptech.glide:glide:3.6.1\nme.imid.swipebacklayout.lib:library:1.0.0\norg.jsoup:jsoup:1.8.3</string>
+    <string name="about_open_source_libraries_list">com.jakewharton:butterknife:7.0.1\ncom.soundcloud.android:android-crop:1.0.0@aar\ncom.loopj.android:android-async-http:1.4.8\ncom.github.bumptech.glide:glide:3.6.1\nme.imid.swipebacklayout.lib:library:1.0.0\norg.jsoup:jsoup:1.8.3\ncom.github.jorgecastilloprz:fabprogresscircle:1.01@aar\n</string>
 
     <!-- 设置 -->
     <string name="settings_version">版本更新</string>

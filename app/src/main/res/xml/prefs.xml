@@ -8,6 +8,13 @@
             android:enabled="true"
             android:key="auto_update"
             android:title="@string/settings_auto_update"/>
+        <ListPreference
+            android:defaultValue="@string/default_way_to_get_data"
+            android:dialogTitle="@string/dialog_way_to_get_data"
+            android:entries="@array/way_to_get_data"
+            android:entryValues="@array/value_way_to_get_data"
+            android:key="gson_or_html"
+            android:title="@string/way_to_get_data"/>
         <CheckBoxPreference
             android:defaultValue="false"
             android:enabled="true"
@@ -16,13 +23,6 @@
         <Preference
             android:key="delete_cache"
             android:title="@string/delete_cache"/>
-        <ListPreference
-            android:defaultValue="@string/default_way_to_get_data"
-            android:dialogTitle="@string/dialog_way_to_get_data"
-            android:entries="@array/way_to_get_data"
-            android:entryValues="@array/value_way_to_get_data"
-            android:key="gson_or_html"
-            android:title="@string/way_to_get_data"/>
         <Preference
             android:key="send_log"
             android:title="@string/send_log"/>

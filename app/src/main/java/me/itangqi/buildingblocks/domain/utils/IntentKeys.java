@@ -6,4 +6,5 @@ package me.itangqi.buildingblocks.domain.utils;
 public class IntentKeys {
 
     public final static String DATE = "date";
+    public final static String URL = "url";
 }

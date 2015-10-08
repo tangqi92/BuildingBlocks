@@ -24,6 +24,7 @@ import java.util.TimerTask;
 
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.domain.utils.Constants;
+import me.itangqi.buildingblocks.domain.utils.IntentKeys;
 
 /**
  * Created by Troy on 2015/10/2.
@@ -58,7 +59,7 @@ public class Updater extends IntentService {
                 .setSmallIcon(R.drawable.icon)
                 .setVibrate(new long[]{500})
                 .setOngoing(true);
-        urlStr = intent.getStringExtra("url");
+        urlStr = intent.getStringExtra(IntentKeys.URL);
         Log.d(TAG, "url--->" + urlStr);
         download();
     }

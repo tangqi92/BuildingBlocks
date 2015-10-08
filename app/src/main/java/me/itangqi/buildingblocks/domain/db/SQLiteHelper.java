@@ -34,7 +34,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             + "ga_prefix SMALLINT,"
             + "UNIQUE (id))";
 
-
     public SQLiteHelper() {
         super(App.getContext(), DATABASE_NAME, null, VERSION);
     }

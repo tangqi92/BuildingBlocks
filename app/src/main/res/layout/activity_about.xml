@@ -76,14 +76,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
                 android:text="@string/about_introduce_and_help"
-                android:textColor="@color/secondary_text"/>
+                android:textSize="@dimen/about_text_size"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp">
+                android:padding="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -105,15 +104,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
                 android:layout_marginTop="12dp"
                 android:text="@string/about_thanks_to"
-                android:textColor="@color/secondary_text"/>
+                android:textSize="@dimen/about_text_size"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp">
+                android:padding="8dp">
 
                 <TextView
                     android:id="@+id/about_thanks_to"
@@ -135,15 +133,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
                 android:layout_marginTop="12dp"
                 android:text="@string/about_developers"
-                android:textColor="@color/secondary_text"/>
+                android:textSize="@dimen/about_text_size"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp">
+                android:padding="8dp">
 
                 <ImageView
                     android:id="@+id/ig_avatar_tangqi"
@@ -156,10 +153,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/ig_avatar_tangqi"
+                    android:layout_marginLeft="@dimen/margin_8dp"
                     android:layout_toEndOf="@id/ig_avatar_tangqi"
                     android:layout_toRightOf="@id/ig_avatar_tangqi"
                     android:text="汤奇"
-                    android:layout_marginLeft="@dimen/margin_4dp"
                     android:textColor="@color/primary_text"
                     tools:ignore="HardcodedText"/>
 
@@ -167,10 +164,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_tangqi"
+                    android:layout_marginLeft="@dimen/margin_8dp"
                     android:layout_toEndOf="@id/ig_avatar_tangqi"
                     android:layout_toRightOf="@id/ig_avatar_tangqi"
                     android:text="@string/about_developer_description"
-                    android:layout_marginLeft="@dimen/margin_4dp"
                     android:textColor="@color/secondary_text"/>
 
                 <TextView
@@ -179,6 +176,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@id/ig_avatar_tangqi"
                     android:layout_below="@id/ig_avatar_tangqi"
+                    android:layout_marginTop="@dimen/margin_8dp"
                     android:text="Blog: "
                     android:textColor="@color/primary_text"/>
 
@@ -220,16 +218,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
                 android:layout_marginTop="12dp"
                 android:text="@string/about_open_source_lis"
-                android:textColor="@color/secondary_text"/>
+                android:textSize="@dimen/about_text_size"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_16dp"
-                android:padding="16dp">
+                android:padding="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"

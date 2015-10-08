@@ -12,6 +12,7 @@ import android.util.Log;
 
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.domain.service.Updater;
+import me.itangqi.buildingblocks.domain.utils.IntentKeys;
 
 /**
  * Created by Troy on 2015/10/3.
@@ -31,7 +32,7 @@ public class UpdaterReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, final Intent intent) {
-        final String url = intent.getStringExtra("url");
+        final String url = intent.getStringExtra(IntentKeys.URL);
         Log.d(TAG, "url--->" + url);
         mManager = (NotificationManager) mActivity.getSystemService(Context.NOTIFICATION_SERVICE);
         AlertDialog.Builder builder;
@@ -53,7 +54,7 @@ public class UpdaterReceiver extends BroadcastReceiver {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent service = new Intent(context, Updater.class);
-                service.putExtra("url", url);
+                service.putExtra(IntentKeys.URL, url);
                 context.startService(service);
             }
         });
