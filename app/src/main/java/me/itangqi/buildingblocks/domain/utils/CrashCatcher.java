@@ -42,6 +42,7 @@ public class CrashCatcher implements Thread.UncaughtExceptionHandler {
 
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
+        ex.printStackTrace();
         Uri uri = saveToSDCard(ex);
         PrefUtils.setCrash(true, uri.toString());
         new Thread(new Runnable() {

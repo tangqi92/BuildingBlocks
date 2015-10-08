@@ -35,4 +35,10 @@ public class PrefsActivity extends SwipeBackActivity {
         mSwipeBackLayout = getSwipeBackLayout();
         mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        App.removeActivity(this);
+    }
 }

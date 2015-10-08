@@ -142,6 +142,7 @@ public class WebActivity extends SwipeBackActivity implements IWebView, FABProgr
     protected void onDestroy() {
         super.onDestroy();
         if (mWebView != null) mWebView.destroy();
+        App.removeActivity(this);
         ButterKnife.unbind(this);
     }
 

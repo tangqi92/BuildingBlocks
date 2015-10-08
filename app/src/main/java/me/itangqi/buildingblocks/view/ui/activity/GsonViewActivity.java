@@ -149,4 +149,10 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
             }
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        App.removeActivity(this);
+    }
 }

@@ -82,4 +82,10 @@ public class PickPhotoActivity extends SwipeBackActivity {
             Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        App.removeActivity(this);
+    }
 }
