@@ -62,7 +62,7 @@
         <activity android:name=".view.ui.activity.WebActivity"
             android:hardwareAccelerated="true"/>
 
-        <activity android:name=".view.ui.activity.GsonViewActivity"/>
+        <activity android:name=".view.ui.activity.GsonViewActivity" android:hardwareAccelerated="true"/>
 
         <activity android:name=".view.ui.activity.PickPhotoActivity"/>
 

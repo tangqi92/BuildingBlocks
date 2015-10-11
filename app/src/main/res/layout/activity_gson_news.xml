@@ -18,9 +18,9 @@
             android:id="@+id/collapsing_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginStart="@dimen/margin_16dp"
-            android:fitsSystemWindows="true"
             app:expandedTitleTextAppearance="@style/CollapsingToolbarTitleStyle.GsonView"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -53,54 +53,15 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
+            android:id="@+id/ll_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <WebView
+                android:id="@+id/webView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/md_grey_50"
-                android:padding="12dp">
-
-                <me.itangqi.buildingblocks.view.widget.CircleImageView
-                    android:id="@+id/iv_avatar"
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/icon"/>
-
-                <TextView
-                    android:id="@+id/tv_author"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_4dp"
-                    android:layout_marginStart="@dimen/margin_4dp"
-                    android:layout_toEndOf="@+id/iv_avatar"
-                    android:layout_toRightOf="@+id/iv_avatar"
-                    android:text="@string/activity_gson_news_author"
-                    android:textSize="17sp"/>
-
-                <TextView
-                    android:id="@+id/tv_bio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_author"
-                    android:layout_marginLeft="@dimen/margin_4dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_toEndOf="@id/iv_avatar"
-                    android:layout_toRightOf="@+id/iv_avatar"
-                    android:ellipsize="end"
-                    android:text="@string/activity_gson_news_bio"
-                    android:textSize="12sp"/>
-            </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="@dimen/margin_16dp">
-            </LinearLayout>
+                android:layout_height="match_parent"/>
 
         </LinearLayout>
 
