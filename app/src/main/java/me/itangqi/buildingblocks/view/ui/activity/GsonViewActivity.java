@@ -9,6 +9,8 @@ import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import java.util.Map;
 import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.domain.application.App;
 import me.itangqi.buildingblocks.domain.utils.IntentKeys;
+import me.itangqi.buildingblocks.domain.utils.PrefUtils;
 import me.itangqi.buildingblocks.model.entity.DailyGson;
 import me.itangqi.buildingblocks.presenters.GsonNewsPresenter;
 import me.itangqi.buildingblocks.view.IGsonNews;
@@ -38,9 +41,8 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
     private LinearLayout mLinearLayout;
     private GsonNewsPresenter mPresenter;
     private ImageView mHeader;
-    private ImageView mImageView_avatar;
-    private TextView mTextView_author;
-    private TextView mTextView_bio;
+    private WebView mWebView;
+
     private GlidePaletteListenerImp mPaletteListenerImp;
 
     private DailyGson mDailyGson;
@@ -66,8 +68,18 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
     public void loadGson(DailyGson dailyGson) {
         mDailyGson = dailyGson;
         Glide.with(App.getContext()).load(dailyGson.image).asBitmap().fitCenter().listener(mPaletteListenerImp).into(mHeader);
-        UITask task = new UITask();
-        task.execute(dailyGson);
+        String head = "<head>\n" +
+                "<meta charset=\"utf-8\">\n" +
+                "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\n" +
+                "<title>" + dailyGson.title + "</title>\n" +
+                "<meta name=\"viewport\" content=\"user-scalable=no, width=device-width\">\n" +
+                "<link rel=\"stylesheet\" href=\"" + "http://7xk54v.com1.z0.glb.clouddn.com/app/bb/css/zhihu.css" + "\">\n" +
+                "<style type=\"text/css\"></style>\n" +
+                "<base target=\"_blank\">\n" +
+                "</head>";
+        String bodyStart = "<body>";
+        String bodyEnd = "</body>";
+        mWebView.loadData(head + bodyStart + dailyGson.body.replaceAll("<div class=\"img-place-holder\"></div>", "") + bodyEnd, "text/html; charset=uft-8", "utf-8");
     }
 
     @Override
@@ -79,72 +91,17 @@ public class GsonViewActivity extends SwipeBackActivity implements IGsonNews {
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_layout);
         mLinearLayout = (LinearLayout) findViewById(R.id.ll_content);
         mHeader = (ImageView) findViewById(R.id.news_header);
-        mImageView_avatar = (ImageView) findViewById(R.id.iv_avatar);
-        mTextView_author = (TextView) findViewById(R.id.tv_author);
-        mTextView_bio = (TextView) findViewById(R.id.tv_bio);
+        mWebView = (WebView) findViewById(R.id.webView);
         mCollapsingToolbarLayout.setTitle(title);
-    }
-
-    private class UITask extends AsyncTask<DailyGson, Map.Entry<String, String>, Integer> {
-
-        @Override
-        protected Integer doInBackground(DailyGson... params) {
-            Map<String, LinkedHashMap<String, String>> soup = mPresenter.getContentMap(params[0]);
-            LinkedHashMap<String, String> extra = soup.get("extra");
-            LinkedHashMap<String, String> article = soup.get("article");
-            for (Map.Entry<String, String> entry : extra.entrySet()) {
-                publishProgress(entry);
-            }
-            for (Map.Entry<String, String> entry : article.entrySet()) {
-                publishProgress(entry);
-            }
-            return 1;
+        WebSettings webSettings = mWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        if (PrefUtils.isEnableCache()) {
+            webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+            webSettings.setAppCacheEnabled(true);
+            webSettings.setDatabaseEnabled(true);
         }
-
-        @Override
-        protected void onProgressUpdate(Map.Entry<String, String>... values) {
-            Map.Entry<String, String> entry = values[0];
-            if (entry.getKey().equals("avatar")) {
-                Glide.with(App.getContext()).load(entry.getValue()).into(mImageView_avatar);
-            } else if (entry.getKey().equals("author")) {
-                mTextView_author.setText(entry.getValue());
-            } else if (entry.getKey().equals("bio")) {
-                mTextView_bio.setText(entry.getValue());
-            } else if (entry.getValue().equals("p")) {
-                TextView textView = new TextView(App.getContext());
-                textView.setMovementMethod(ScrollingMovementMethod.getInstance());
-                textView.setTextColor(Color.BLACK);
-                textView.setTextSize(17);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                textView.setLayoutParams(params);
-                textView.setText(Html.fromHtml(entry.getKey()));
-                mLinearLayout.addView(textView);
-            }else if (entry.getValue().equals("img")) {
-                ImageView imageView = new ImageView(App.getContext());
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                mLinearLayout.addView(imageView);
-                Glide.with(App.getContext()).load(entry.getKey()).crossFade().fitCenter().into(imageView);
-            }else if (entry.getValue().equals("simpleBoldP")) {
-                TextView textView = new TextView(App.getContext());
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                textView.setLayoutParams(params);
-                textView.setTextSize(17);
-                textView.getPaint().setFakeBoldText(true);
-                textView.setTextColor(Color.BLACK);
-                textView.setGravity(Gravity.START);
-                textView.setText(entry.getKey());
-                mLinearLayout.addView(textView);
-            }else if (entry.getValue().equals("simpleP")) {
-                TextView textView = new TextView(App.getContext());
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                textView.setLayoutParams(params);
-                textView.setTextSize(17);
-                textView.setTextColor(Color.BLACK);
-                textView.setGravity(Gravity.START);
-                textView.setText(entry.getKey());
-                mLinearLayout.addView(textView);
-            }
-        }
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setDefaultTextEncodingName("utf-8");
     }
 
     @Override
