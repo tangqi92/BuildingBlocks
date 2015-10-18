@@ -161,7 +161,7 @@ public class Updater extends IntentService {
     private void showError() {
         Intent intent = new Intent(Constants.BROADCAST_UPDATE_ACTION);
         intent.addCategory(Constants.BROADCAST_UPDATE_CATEGORY);
-        intent.putExtra("url", urlStr);
+        intent.putExtra(IntentKeys.URL, urlStr);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
         this.stopSelf();
     }

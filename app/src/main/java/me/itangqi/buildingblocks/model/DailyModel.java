@@ -33,6 +33,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import me.itangqi.buildingblocks.R;
 import me.itangqi.buildingblocks.domain.api.ZhihuApi;
 import me.itangqi.buildingblocks.domain.application.App;
 import me.itangqi.buildingblocks.domain.db.SQLiteHelper;
@@ -76,7 +77,12 @@ public class DailyModel implements IDaily {
 
         @Override
         public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, DailyResult errorResponse) {
-            ToastUtils.showShort("解析错误,状态码:" + statusCode);
+            Log.d(TAG, "解析错误,状态码:" + statusCode);
+            if (statusCode == 0){
+//                ToastUtils.showShort(R.string.network_error_toast);
+            } else {
+                ToastUtils.showShort(R.string.others_error_toast);
+            }
             throwable.printStackTrace();
         }
 
@@ -97,7 +103,12 @@ public class DailyModel implements IDaily {
 
         @Override
         public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, DailyGson errorResponse) {
-            ToastUtils.showShort("解析错误,状态码:" + statusCode);
+            Log.d(TAG, "解析错误,状态码:" + statusCode);
+            if (statusCode == 0){
+                ToastUtils.showShort(R.string.network_error_toast);
+            } else {
+                ToastUtils.showShort(R.string.others_error_toast);
+            }
             throwable.printStackTrace();
         }
 

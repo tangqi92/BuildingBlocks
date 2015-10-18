@@ -80,4 +80,6 @@
     <string name="send_log">发送日志</string>
 
     <string name="crash_toast">我好像坏掉了，但是我记下了细节≧︿≦"</string>
+    <string name="others_error_toast">好像出了什么问题，请重试下</string>
+    <string name="network_error_toast">网络出现问题啦，请检查下你的网络连接</string>
 </resources>

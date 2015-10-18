@@ -23,7 +23,7 @@ public class UpdaterReceiver extends BroadcastReceiver {
     public static final String TAG = "UpdaterReceiver";
 
     private NotificationManager mManager;
-    //Dialog的生成需要Activity的Context (需要窗体)
+    // Dialog的生成需要Activity的Context (需要窗体)
     private Activity mActivity;
 
     public UpdaterReceiver(Activity activity) {
