@@ -3,7 +3,7 @@ Building Blocks - 积木
 
 ![logo](http://7xk54v.com1.z0.glb.clouddn.com/images/logo/icon.png)
 
->**积木** - 一个以知乎日报作为数据展现内容；以抽屉菜单作为功能扩展入口；依循 Material Design 作为主导设计 UI 的应用；我知道，这听起来就很酷！
+>**积木** - 一个以知乎日报作为数据展现内容；以抽屉菜单作为功能扩展入口；遵循 Material Design 设计规范的应用；好吧，我知道，这听起来就很酷！
 
 ### How to use - 如何使用
 
@@ -29,6 +29,7 @@ Building Blocks - 积木
 
 ##### 已知BUG
 
+- **位置获取**功能在 Android 6.0 上导致崩溃（一加1实测）
 - 部分文章显示有问题(使用`html+`模式无影响)
 
 ### v0.6.0

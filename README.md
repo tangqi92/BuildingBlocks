@@ -4,11 +4,11 @@
 
 ![logo](http://7xk54v.com1.z0.glb.clouddn.com/images/logo/icon.png)
 
->**Building Blocks** with Zhihu Daily API as a source of data; OptionsMenu as extensions of the entry; Design Support Library as UI design leader.I know, it sounds cool！
+> **Building Blocks** with Zhihu Daily API as a source of data; OptionsMenu as extensions of the entry; Design Support Library as UI design leader.I know, it sounds cool！
 
 ### How to use
 
->dev branch is currently maintained by [troyliu0105](https://github.com/troyliu0105), he will continue to reconstruct the building blocks and increase the fun of the function, if you also like, then welcome **Star** and **Fork** this branch!
+> dev branch is currently maintained by [troyliu0105](https://github.com/troyliu0105), he will continue to reconstruct the building blocks and increase the fun of the function, if you also like, then welcome **Star** and **Fork** this branch!
 
 Well, actually, I have to help you complete the overall framework set up, you need to do is just based on actual demand, simply replace data at source, and modify UI, you can quickly complete a new application development！
 
@@ -27,6 +27,9 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
 - Modify - parts of UI
 
 ##### Known Bugs
+
+- **Location** in Android 6.0 will crash
+
 
 - problems with showing some article (`html+` mode isn't influenced)
 
@@ -56,6 +59,7 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
 [Download](http://7xk54v.com1.z0.glb.clouddn.com/app/bb/0.7.0.apk)
 
 ## Screenshots
+
 <img src="/screenshots/s1.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s1-1.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
 <img src="/screenshots/s1-2.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s2.png" alt="screenshot" title="screenshot" width="270" height="486" />
@@ -70,17 +74,16 @@ Think about it, it is not very exciting? So hurry **Star** and **Fork** it! Your
 
 ## Dependencies
 
- - [glide](https://github.com/bumptech/glide)
- - [butterknife](https://github.com/JakeWharton/butterknife)
- - [android-crop](https://github.com/jdamcd/android-crop)
- - [android-async-http](https://github.com/loopj/android-async-http)
- - [SwipeBackLayout](https://github.com/ikew0ng/SwipeBackLayout)
- - [Jsoup](http://http://jsoup.org/)
+- [glide](https://github.com/bumptech/glide)
+- [butterknife](https://github.com/JakeWharton/butterknife)
+- [android-crop](https://github.com/jdamcd/android-crop)
+- [android-async-http](https://github.com/loopj/android-async-http)
+- [SwipeBackLayout](https://github.com/ikew0ng/SwipeBackLayout)
+- [Jsoup](http://http://jsoup.org/)
 
 ## Thanks
 
 - Thank [drakeet](https://github.com/drakeet) and his [妹纸&gank.io](https://github.com/drakeet/Meizhi), the code he wrote is very beautiful：）, I learned a lot and applied to the project.
-
 - Thank [Izzy Leung](https://github.com/izzyleung) and his [知乎日报·净化](https://github.com/izzyleung/ZhihuDailyPurify)，the initial prototype project will come from this.
 
 ## Contributors
