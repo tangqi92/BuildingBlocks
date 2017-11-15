@@ -1,6 +1,4 @@
-# Building Blocks
-
-## This project is no longer maintained.
+# This project is no longer maintained.
 
 [中文介绍](README.z.md)
 
