@@ -1,5 +1,7 @@
 # Building Blocks
 
+## This project is no longer maintained.
+
 [中文介绍](README.z.md)
 
 ![logo](http://7xk54v.com1.z0.glb.clouddn.com/images/logo/icon.png)
@@ -101,7 +103,7 @@ If you have any questions or want to make friends with me, please feel free to c
 
 ## Project Home
 
-[http://itangqi.me/2015/09/03/building-blocks/](http://itangqi.me/2015/09/03/building-blocks/)
+[http://imtangqi.com/2015/09/03/building-blocks/](http://imtangqi.com/2015/09/03/building-blocks/)
 
 ## License
 
